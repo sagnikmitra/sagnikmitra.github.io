@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Spectral by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 
 <head>
@@ -14,6 +9,12 @@
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
+<style>
+	<style>#rem-udl {
+		text-decoration: none;
+	}
+</style>
+</style>
 
 <body class="landing is-preload">
 
@@ -22,7 +23,7 @@
 
 		<!-- Header -->
 		<header id="header" class="alt">
-			<h1><a href="index.html">ABOUT SAGNIK</a></h1>
+			<h1><a href="index.html">ABOUT ME</a></h1>
 			<nav id="nav">
 				<ul>
 					<li class="special">
@@ -32,41 +33,56 @@
 								<li><a href="index.html">Home</a></li>
 								<li><a href="generic.html">Projects</a></li>
 								<li><a href="elements.html">Blog</a></li>
-								<li><a href="#">Connect With Me</a></li>
-								<li><a href="#">Learn More</a></li>
+								<li><a href="#">Skills</a></li>
+								<li><a href="#">Resume</a></li>
 							</ul>
 						</div>
 					</li>
 				</ul>
 			</nav>
 		</header>
+		<script>
+			var els = document.getElementsByTagName('a');
 
+			for (var el = 0; el < els.length; el++) {
+				els[el].style["text-decoration"] = "none";
+			}
+		</script>
+		<style>
+			a {
+				text-decoration: none !important;
+			}
+		</style>
 		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
 				<h2>Sagnik Mitra</h2>
-				<p>Summer Trainee, Machine Learning<br /><a href="https://industrialtraining.wiki/about-ieta">Indian
-						engineering Teachers' Association</a>
-					<br /><br />
-					B.tech, computer science & business systems</br><a href="http://snuniv.ac.in">Sister Nivedita
-						University</a>, Techno India Group</p>
+				<p>Campus Ambassador<br><a href="https://industrialtraining.wiki/about-ieta" id="rem-udl">&nbsp;Coding
+						Blocks<br>&nbsp;</a>
+					&nbsp;<br>Summer Trainee, Machine Learning &nbsp;<br><a
+						href="https://industrialtraining.wiki/about-ieta" id="rem-udl">&nbsp;Indian
+						engineering Teachers' Association<br>&nbsp;</a>
+					&nbsp;<br>
+					B.tech, computer science & business systems &nbsp;<br><a href="http://snuniv.ac.in"
+						style="text-decoration:none;">&nbsp;Sister Nivedita
+						University, Techno India Group</a></p>
 				<ul class="actions special">
 					<li><a href="Aerial/contactme.html" class="button primary">Let's Connect</a></li>
 				</ul>
 			</div>
-			<a href="#one" class="more scrolly">Down the Lane</a>
+			<a href="#one" class="more scrolly">Know More</a>
 		</section>
 
 		<!-- One -->
 		<section id="one" class="wrapper style1 special">
 			<div class="inner">
 				<header class="major">
-					<h2>pursuing B.tech in Computer Science Engineering<br />I am an AI & Machine
-						Learning Enthusiast and<br />a
-						Certified Microsoft Technology Associate in Python</h2>
-					<p>I am also an Independent Desk Designer & Video Editor with working proficiency in<br />
+					<h2>pursuing B.tech in Computer Science Engineering<br>I am an AI & Machine
+						Learning Enthusiast and<br>a
+						Certified Microsoft Technology Associate in Pyhton</h2>
+					<p>I am also an Independent Desk Designer & Video Editor with working proficiency in<br>
 						Illustrator, XD & Wondershare Filmora. I am currently Co-organizing Decov
-						Megahackathon<br />being the Lead Designer & Content Manager of Code Tigers, Techno India Group
+						Megahackathon<br>being the Lead Designer & Content Manager of Code Tigers, Techno India Group
 					</p>
 				</header>
 				<ul class="icons major">
@@ -82,30 +98,33 @@
 			<section class="spotlight">
 				<div class="image"><img src="images/vist.jpg" alt="" /></div>
 				<div class="content">
-					<h2>VISTARA AIRBUS QUEUE<br />
+					<h2>VISTARA AIRBUS QUEUE<br>
 						MANAGEMENT SYSTEM</h2>
 					<p>A Self-paced project based on managing the Check-in Queue & Boarding Queue for Vistara Airlines.
-						<br />Medium: VSCode Language: C++</p>
+						<br>Medium: VSCode Language: C++</p>
 				</div>
 			</section>
 			<section class="spotlight">
-				<div class="image"><img src="images/decov-min.jpg" alt="" /></div>
+				<div class="image"><img src="images/decov.jpg" alt="" /></div>
 				<div class="content">
 					<h2>DECOV MEGAHACKTAHON<br />
 						ANDROID APPLICATION DESIGN</h2>
-					<p>Code Tigers Android <a href="https://play.google.com/store/apps/details?id=codetigers.decov">Application</a> & <a href="https://codetigers.org/">Website</a> Theme
-					Design for DECOV 2020 Online Megahackathon powered by Techno India Group.<br /> Medium: Illustrator, Powerpoint
+					<p>Code Tigers Android <a
+							href="https://play.google.com/store/apps/details?id=codetigers.decov">Application</a> & <a
+							href="https://codetigers.org/">Website</a> Theme
+						Design for DECOV 2020 Online Megahackathon powered by Techno India Group.<br /> Medium:
+						Illustrator, Powerpoint
 					</p>
 				</div>
 			</section>
 			<section class="spotlight">
 				<div class="image"><img src="images/ml.jpg" alt="" /></div>
 				<div class="content">
-					<h2>Deployment of Prediction Models <br />
+					<h2>Deployment of Prediction Models <br>
 						& Data Visualization </h2>
 					<p>Worked on different Regression Models and trained dataset with Random Forest Classifier & SVM to
 						get accuracy upto 99 percent along with Data Visualization with Matplotlib, Seaborn, Bokeh,
-						Cufflinks, iPlot.<br />Medium: VSCode & Google Colab Language: Python3</p>
+						Cufflinks, iPlot.<br>Medium: VSCode & Google Colab Language: Python3</p>
 				</div>
 			</section>
 		</section>
@@ -117,40 +136,39 @@
 					<h2>Experience & Positions of Responsibilities</h2>
 				</header>
 				<ul class="features">
+					<li class="icon fa-flag">
+						<h3>Campus Ambassador</h3>
+						<p>I am currently the Campus Ambassador & Branding Representative in Coding Blocks and represent them in my Institution<br>June 2020 - Present</p>
+					</li>
 					<li class="icon fa-paper-plane">
 						<h3>Lead Designer</h3>
 						<p>I am currently the Lead Designer at <a href="https://www.codetigers.org/">Code Tigers</a> and
-							designed the Website Graphics & Android Application as a Core Member of the Team.<br />
+							designed Website Graphics & Android Application as a Core Member of the Team.<br>
 							April 2020 - Present</p>
 					</li>
 					<li class="icon solid fa-laptop">
 						<h3>Video Editing Lead</h3>
 						<p>I am currenly leading the Video Editing Team at School of Engineering, Sister Nivedita
-							University as a part of the Core Social Media Management Team. <br /> March 2020 - Present
+							University as a part of the Core Social Media Management Team. <br> March 2020 - Present
 						</p>
 					</li>
 					<li class="icon solid fa-code">
 						<h3>Summer Trainee in ML </h3>
-						<p>I have been doing my Summer Training in Basic & Advanced Machine Learning and Deep Learning with
-							Python from Indian Enginnering Teachers' Association.<br />April 2020 - Present</p>
+						<p>I have been doing my Summer Training Basic & Advanced Machine Learning and Deep Learning with
+							Python from Indian Enginnering Teachers' Association.<br>April 2020 - Present</p>
 					</li>
 					<li class="icon solid fa-star">
 						<h3>Convener</h3>
 						<p>I am currrently the Departmental Convener & Student Representative at Sister Nivedita
-							University and represented my department at Ojass 2019, NIT Jamshedpur.<br />January 2019 -
+							University and represented my department at Ojass 2019, NIT Jamshedpur.<br>January 2019 -
 							Present</p>
 					</li>
 					<li class="icon solid fa-users">
 						<h3>Organizer</h3>
 						<p>I have Co-organized the Technical Fest of School of Engineering at Sister Nivedita University
-							with events like FIFA, NFS, RoboSoccer, TechQuiz etc.<br />February 2020</p>
+							with events like FIFA, NFS, RoboSoccer, TechQuiz etc.<br>February 2020</p>
 					</li>
-					<li class="icon fa-flag">
-						<h3>Event Co-ordinator</h3>
-						<p>Co-organized the first ever Mathematical Outreach Program from Department of Mathematics,
-							Presidency University and managed the Participants as Co-ordinator<br />September 2017 -
-							April 2018</p>
-					</li>
+					
 				</ul>
 				<br /><br />
 				<header class="major">
@@ -196,7 +214,7 @@
 			<div class="inner">
 				<header>
 					<h2>feedbacks would be great.</h2>
-					<p>Found any Bug?<br /> Please Report me with the button on the right.</p>
+					<p>Found any Bug?<br> Please Report me with the button on the right.</p>
 				</header>
 				<ul class="actions stacked">
 					<li><a href="#" class="button fit primary">Feedback</a></li>
@@ -221,7 +239,7 @@
 			</ul>
 			<ul class="copyright">
 				<li>&copy; Sagnik Mitra 2020</li>
-				<li>Website Building Medium: VSCode with Live Server</a></li><br />
+				<li>Website Building Medium: VSCode with Live Server</a></li><br>
 				<p>Thank you htmlup for the base of the site</p>
 			</ul>
 		</footer>
