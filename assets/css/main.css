@@ -3511,7 +3511,7 @@ input, select, textarea {
 	max-width: 100%;
 	overflow-y: auto;
 	/* padding: 3em 2em; */
-	padding-left: 80%;
+	padding-left: 78%;
 	padding-top: 8%;
 	position: fixed;
 	right: 0;
@@ -3523,8 +3523,12 @@ input, select, textarea {
 	#menu ul {
 		list-style: none;
 		padding: 0;
+		/* width: 80px; */
 	}
-
+	#menu ul li
+	{
+		margin-top: 7px;
+	}
 	#menu ul li:before 
 	{
 		content: attr(data-text);
@@ -3543,7 +3547,7 @@ input, select, textarea {
 	}
 	#menu ul li:hover:before 
 {
-opacity: 0.20;
+opacity: 0.3;
 letter-spacing: 2px;
 
 }
@@ -3552,7 +3556,9 @@ letter-spacing: 2px;
 {
 position: relative;
 display: inline-block;
-padding: 6px 15px;
+width: 140px;
+text-align: center;
+padding: 6px 20px;
 text-decoration: none;
 background: #2196f3;
 color: azure;
@@ -3564,7 +3570,7 @@ z-index: 1;
 }
 #menu ul:hover li a
 {
-opacity: 0;
+opacity: 0.5;
 
 }
 #menu ul li a:hover
