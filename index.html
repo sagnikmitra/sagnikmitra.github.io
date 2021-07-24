@@ -14,9 +14,18 @@
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+    <link disabled id="dark-reader" rel="stylesheet" href="/css/dark.css">
     <link href="assets/vendor/venobox/venobox.css" rel="stylesheet" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.0.3/js/vendor/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.0.3/js/foundation.min.js"></script>
+    <script src="assets/js/dark.js"></script>
+    <script>
+        if (localStorage.getItem("darkreader") == "enabled") {
+            document.getElementById("dark-reader").disabled = false;
+        } else {
+            document.getElementById("dark-reader").disabled = true;
+        }
+    </script>
 </head>
 
 
@@ -47,6 +56,10 @@
                                 </div>
                                 <!--contact-info end-->
                             </li>
+                            <a href="javascript:void(0)" onclick="dark_toggle();return false;"
+                                title="Toggle night mode">
+                                Dark
+                            </a>
                             <li>
                                 <div class="contact-info">
                                     <img src="assets/img/ro2-min.png" height="21px" width="21px" alt="">
