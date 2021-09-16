@@ -243,7 +243,7 @@
                                 <div class="abt-col wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
                                     <img src="assets/about-me/tcs1.png" height="60px" width="150px" alt="">
                                     <!-- <img src="https://via.placeholder.com/175x60" alt=""> -->
-                                    <h3>Project Intern,<br>Tata Consultancy Services</h3>
+                                    <h3>Project Engineer <br>Intern, TCS</h3>
                                     <p>Scrapping an Automated Amazon Price Tracker bot platform</p>
                                 </div>
                                 <!--abt-col end-->
@@ -1016,29 +1016,29 @@
                         <div class="col-lg-4 ">
                             <div class="newsz-ltr-text ">
                                 <h2>Leave me a <br />Message!</h2>
-                                <a href="contacts.html " title=" " class="btn-default ">Submit Message <i
+                                <a title=" " class="btn-default ">It means a lot &#10084;&#65039;<i
                                         class="fa fa-long-arrow-alt-right "></i></a>
                             </div>
                             <!--newsz-ltr-text end-->
                         </div>
                         <div class="col-lg-8 ">
-                            <form class="newsletter-form ">
+                            <form class="newsletter-form" id="newsletter-form" name="newsletter-form" method="post" role="form" class="php-email-form">
                                 <div class="row ">
                                     <div class="col-md-4 ">
                                         <div class="form-group ">
-                                            <input type="text " name="name " placeholder="Name ">
+                                            <input type="text " name="name" placeholder="Name ">
                                         </div>
                                         <!--form-group end-->
                                     </div>
                                     <div class="col-md-4 ">
                                         <div class="form-group ">
-                                            <input type="email " name="email " placeholder="Email ">
+                                            <input type="email " name="email" placeholder="Email ">
                                         </div>
                                         <!--form-group end-->
                                     </div>
                                     <div class="col-md-4 ">
                                         <div class="form-group select-tg ">
-                                            <select>
+                                            <select name=feedback_type>
                                                 <option>Feedback</option>
                                                 <option>Issues/Bugs</option>
                                                 <option>Connect</option>
@@ -1050,12 +1050,36 @@
                                     </div>
                                     <div class="col-md-12 ">
                                         <div class="form-group ">
-                                            <textarea name="message " placeholder="Message "></textarea>
+                                            <textarea name="message" placeholder="Message "></textarea>
                                         </div>
                                         <!--form-group end-->
                                     </div>
+                                    <div class="btn-default newsz-ltr-text" style="margin-left: 10px;"><button type="submit" style="background: transparent; color: white">Send
+                                            Feedback</button></div>
                                 </div>
                             </form>
+                            <script>
+                                const scriptURL = 'https://script.google.com/macros/s/AKfycbymvDXJ3GGZww5kTTnfq2B59TzRXPWCKKW6_p_o0FmfvzX2Zq8LCSkHDwf9TsfSujhg/exec'
+                                const form = document.forms['newsletter-form']
+
+                                form.addEventListener('submit', e => {
+                                        e.preventDefault()
+                                        alert("Thank You for Submitting your Feedback.");
+                                        fetch(scriptURL, {
+                                                    method: 'POST',
+                                                    body: new FormData(form)
+                                                }
+
+                                            )
+                                            .then(response => console.log('Success!', response))
+                                            .catch(error => console.error('Error!', error.message))
+                                        form.reset();
+
+                                    }
+
+                                )
+                            </script>
+
                             <!--newsletter-form end-->
                         </div>
                     </div>
