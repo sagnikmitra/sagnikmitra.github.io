@@ -42,11 +42,14 @@
                         But it's home to me, and I walk alone
                     </span>
                     <span>
-                        <audio id="player" controls autoplay style="margin-left: 67%; margin-top:-100px;">
+                        <audio id="myaudio" controls autoplay style="margin-left: 67%; margin-top:-100px;">
                             <source src="bobd.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var audio = document.getElementById("myaudio");
+                            audio.volume = 0.2;
+                        </script>
                     </span>
                 </p>
 
