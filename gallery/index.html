@@ -7,7 +7,7 @@
 <html>
 
 <head>
-    <title>Summit - A Sagnik Mitra Gallery</title>
+    <title>A Sagnik Mitra Gallery</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -15,6 +15,13 @@
         <link rel="stylesheet" href="assets/css/noscript.css" />
     </noscript>
 </head>
+<script>
+    var myAudio = document.getElementById("myAudio");
+
+    function togglePlay() {
+        return myAudio.paused ? myAudio.play() : myAudio.pause();
+    };
+</script>
 
 <body class="is-preload">
 
@@ -23,9 +30,12 @@
 
         <!-- Header -->
         <header id="header">
-            <h1><a href="index.html"><strong>Summit</strong> - A gallery by Sagnik Mitra</a></h1>
+            <h1><a href="index.html"><strong>Summit</strong> by Sagnik Mitra</a></h1>
             <nav>
                 <ul>
+                    <li><button class="icon solid fa-pause" style="width: 10px; border-radius: 10px;"
+                            onClick="togglePlay()"></button>
+                    </li>
                     <li><a href="#footer" class="icon solid fa-info-circle">About</a></li>
                 </ul>
             </nav>
@@ -40,14 +50,15 @@
                         the only one that I have ever known&nbsp;&nbsp;&nbsp;
                     </span>
                     <span>
-                        <audio id="myaudio" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="bobd.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                         <script>
-                            var audio = document.getElementById("myaudio");
-                            audio.volume = 0.2;
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
                         </script>
+
                     </span>
                 </p>
 
@@ -61,10 +72,14 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </span>
                     <span>
-                        <audio controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="sth.mpeg" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
 
@@ -78,11 +93,14 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="amay.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -93,11 +111,14 @@
                         makes me happy
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="soms.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -107,25 +128,31 @@
                 <p><span>Does it ever drive you crazy<br>
                         Just how fast the night changes? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="night.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
             <article class="thumb">
                 <a href="images/fulls/6.png" class="image"><img src="images/thumbs/6.png" alt="" /></a>
-                <h2>মাঝিরে ও মাঝিরে দেখেছ কি তুমি তারে</h2>
+                <h2>মাঝিরে ও মাঝিরে</h2>
                 <p><span>মাঝিরে ও মাঝিরে দেখেছ কি তুমি তারে?
                         <br>নৌকো আমার ছেলেবেলার কাগজের &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="majhi.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -135,11 +162,14 @@
                 <p><span>Hello darkness, my old friend<br>
                         I've come to talk with you again &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="sos.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -150,11 +180,14 @@
                         Younger than the mountains<br> growin' like a breeze
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="country.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -165,27 +198,31 @@
                         পর্দা ঠেলে সরিয়ে
                         হাওয়া দিলো ভাসিয়ে &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span>
-                            <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                            <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                                 <source src="aloshyo.mp3" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>
-
+                            <script>
+                                var x = document.getElementById("myAudio");
+                                x.volume = 0.2;
+                            </script>
                         </span>
                 </p>
             </article>
             <article class="thumb">
                 <a href="images/fulls/10.png" class="image"><img src="images/thumbs/10.png" alt="" /></a>
                 <h2>ধরো যদি হঠাৎ সন্ধ্যে</h2>
-                <p><span>ধরো যদি হঠাৎ সন্ধ্যে
-                        তোমার দেখা আমার সঙ্গে<br>
-                        মুখোমুখি আমরা দু'জন
-                        মাঝখানে অনেক বারণ &nbsp;&nbsp;</span>
+                <p><span>ধরো যদি হঠাৎ সন্ধ্যে<br>
+                        তোমার দেখা আমার সঙ্গে &nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="dhoro.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -195,11 +232,14 @@
                 <p><span>শিবের সনে কার্তিক, গণেশ, লক্ষ্মী, সরস্বতী<br>
                         আশ্বিন মাসে বাপের বাড়ি আসে ভগবতী। &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="gouri.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -209,11 +249,14 @@
                 <p><span>দেখো আলোয় আলো আকাশ<br>
                         দেখো আকাশ তারায় ভরা&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="alo.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -225,11 +268,14 @@
                         Like a walk in the rain
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="annie.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -240,11 +286,14 @@
                 <p><span>নিয়ে সুটকেস ভর্তি শুণ্যতা<br>
                         হাতছানি দেয় অন্য শহর.. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="dec.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -256,11 +305,14 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="janla.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
@@ -271,11 +323,14 @@
                         You're so self satisfied I don't need you
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                     <span>
-                        <audio id="player" controls autoplay style="width: 20px;margin-top:-100px;">
+                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
                             <source src="break.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
-
+                        <script>
+                            var x = document.getElementById("myAudio");
+                            x.volume = 0.2;
+                        </script>
                     </span>
                 </p>
             </article>
