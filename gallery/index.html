@@ -85,7 +85,7 @@
                     </span>
                     <span>
                         <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="amay (mp3cut.net).mp3" type="audio/mpeg">
+                            <source src="amay (mp3cut.net).mp3" id="mySource" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                         <script>
@@ -377,7 +377,7 @@
                                 </div>
                             </div>
                             <ul class="actions">
-                                <li><input type="submit" value="Send" class="primary" /></li>
+                                <li><input type="submit" value="Send" class="primary" onclick="sent();" /></li>
                                 <li><input type="reset" value="Reset" /></li>
                             </ul>
                         </form>
@@ -388,10 +388,14 @@
 
     </div>
     <script>
+        function sent() {
+            alert("Thank you for your message. I will get back to you soon.");
+        }
         var myAudio = document.getElementById("myAudio");
-
+        var mySource = document.getElementById("mySource");
         function togglePlay() {
             myAudio.pause();
+            mySource.pause();
         };
     </script>
     <!-- Scripts -->
