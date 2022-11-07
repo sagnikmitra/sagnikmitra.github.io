@@ -1,410 +1,441 @@
-<!DOCTYPE HTML>
-<!--
-	Multiverse by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>A Sagnik Mitra Gallery</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript>
-        <link rel="stylesheet" href="assets/css/noscript.css" />
-    </noscript>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>A Sagnik Mitra Gallery</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: PhotoFolio - v1.1.1
+  * Template URL: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
+<body>
 
-<body class="is-preload">
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
 
-    <!-- Wrapper -->
-    <div id="wrapper">
+      <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <i class="bi bi-camera"></i>
+        <h1>PhotoFolio</h1>
+      </a>
 
-        <!-- Header -->
-        <header id="header">
-            <h1><a href="index.html"><strong>Summit</strong> by Sagnik Mitra</a></h1>
-            <nav>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown"><a href="#"><span>Gallery</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="gallery.html">Nature</a></li>
+              <li><a href="gallery.html">People</a></li>
+              <li><a href="gallery.html">Architecture</a></li>
+              <li><a href="gallery.html">Animals</a></li>
+              <li><a href="gallery.html">Sports</a></li>
+              <li><a href="gallery.html">Travel</a></li>
+              <li class="dropdown"><a href="#"><span>Sub Menu</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul>
-                    <li><button class="icon solid fa-pause" style="width: 10px; border-radius: 10px;"
-                            onClick="togglePlay()"></button>
-                    </li>
-
-                    <li><a href="#footer" class="icon solid fa-info-circle">About</a></li>
+                  <li><a href="#">Sub Menu 1</a></li>
+                  <li><a href="#">Sub Menu 2</a></li>
+                  <li><a href="#">Sub Menu 3</a></li>
                 </ul>
-            </nav>
-        </header>
+              </li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav><!-- .navbar -->
 
-        <!-- Main -->
-        <div id="main">
-            <article class="thumb">
-                <a href="images/fulls/1.png" class="image"><img src="images/thumbs/1.png" alt="" /></a>
-                <h2>Boulevard of Broken Dreams</h2>
-                <p><span>I walk a lonely road, <br>
-                        the only one that I have ever known&nbsp;&nbsp;&nbsp;
-                    </span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="bobd.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-
-                    </span>
-                </p>
-
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/2.png" class="image"><img src="images/thumbs/2.png" alt="" /></a>
-                <h2>Stairway to Heaven</h2>
-                <p><span>There's a lady who's sure
-                        <br>
-                        All that glitters is gold
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="sth.mpeg" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-
-
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/3.png" class="image"><img src="images/thumbs/3.png" alt="" /></a>
-                <h2>আমায় ভাসাইলিরে</h2>
-                <p><span>আমায় ডুবাইলিরে আমায় ভাসাইলিরে<br>
-                        অকুল দরীয়ায় বুঝি কুল নাইরে। &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="amay (mp3cut.net).mp3" id="mySource" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/4.png" class="image"><img src="images/thumbs/4.png" alt="" /></a>
-                <h2>Sunshine on my Shoulders</h2>
-                <p><span>Sunshine on my shoulders<br>
-                        makes me happy
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="soms.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/5.png" class="image"><img src="images/thumbs/5.png" alt="" /></a>
-                <h2>Night Changes</h2>
-                <p><span>Does it ever drive you crazy<br>
-                        Just how fast the night changes? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="night (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/6.png" class="image"><img src="images/thumbs/6.png" alt="" /></a>
-                <h2>মাঝিরে ও মাঝিরে</h2>
-                <p><span>মাঝিরে ও মাঝিরে দেখেছ কি তুমি তারে?
-                        <br>নৌকো আমার ছেলেবেলার কাগজের &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="majhi (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/7.png" class="image"><img src="images/thumbs/7.png" alt="" /></a>
-                <h2>Sounds of Silence</h2>
-                <p><span>Hello darkness, my old friend<br>
-                        I've come to talk with you again &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="sos (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/8.png" class="image"><img src="images/thumbs/8.png" alt="" /></a>
-                <h2>country roads take me home</h2>
-                <p><span>
-                        Younger than the mountains<br> growin' like a breeze
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="country (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/9.png" class="image"><img src="images/thumbs/9.png" alt="" /></a>
-                <h2>আলস্য</h2>
-                <p><span>সেই গ্রীষ্মের সকাল গুলো তেই<br>
-                        পর্দা ঠেলে সরিয়ে
-                        হাওয়া দিলো ভাসিয়ে &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span>
-                            <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                                <source src="aloshyo (mp3cut.net).mp3" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-                            <script>
-                                var x = document.getElementById("myAudio");
-                                x.volume = 0.2;
-                            </script>
-                        </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/10.png" class="image"><img src="images/thumbs/10.png" alt="" /></a>
-                <h2>ধরো যদি হঠাৎ সন্ধ্যে</h2>
-                <p><span>ধরো যদি হঠাৎ সন্ধ্যে<br>
-                        তোমার দেখা আমার সঙ্গে &nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="dhoro (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/11.png" class="image"><img src="images/thumbs/11.png" alt="" /></a>
-                <h2>গৌরী এল, দেখে যা লো</h2>
-                <p><span>শিবের সনে কার্তিক, গণেশ, লক্ষ্মী, সরস্বতী<br>
-                        আশ্বিন মাসে বাপের বাড়ি আসে ভগবতী। &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="gouri (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/12.png" class="image"><img src="images/thumbs/12.png" alt="" /></a>
-                <h2>দেখো আলোয় আলো আকাশ</h2>
-                <p><span>দেখো আলোয় আলো আকাশ<br>
-                        দেখো আকাশ তারায় ভরা&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="alo (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/13.png" class="image"><img src="images/thumbs/13.png" alt="" /></a>
-                <h2>Annie's song</h2>
-                <p><span>
-                        Like the mountains in springtime<br>
-                        Like a walk in the rain
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="annie (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/14.png" class="image"><img src="images/thumbs/14.png" alt="" /></a>
-                <h2>ডিসেম্বর এর শহরে
-                </h2>
-                <p><span>নিয়ে সুটকেস ভর্তি শুণ্যতা<br>
-                        হাতছানি দেয় অন্য শহর.. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="dec (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/15.png" class="image"><img src="images/thumbs/15.png" alt="" /></a>
-                <h2>আমার জানলা দিয়ে</h2>
-                <p><span>আমার জানলা দিয়ে একটুখানি আকাশ দেখা যায়<br>
-                        একটু বর্ষা একটু গ্রীষ্ম একটুখানি শীত, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="janla (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-            <article class="thumb">
-                <a href="images/fulls/16.png" class="image"><img src="images/thumbs/16.png" alt="" /></a>
-                <h2>I want to break free</h2>
-                <p><span>I want to break free from your lies<br>
-                        You're so self satisfied I don't need you
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <audio id="myAudio" controls autoplay style="width: 20px;margin-top:-100px;">
-                            <source src="break (mp3cut.net).mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <script>
-                            var x = document.getElementById("myAudio");
-                            x.volume = 0.2;
-                        </script>
-                    </span>
-                </p>
-            </article>
-        </div>
-
-        <!-- Footer -->
-        <footer id="footer" class="panel">
-            <div class="inner split">
-                <div>
-                    <section>
-                        <h2>Sagnik Mitra</h2>
-                        <p>I have always wondered how beautifully pictures and music have an untold collboration
-                            whatsoever the context. Tried a bit of attaching music and making the photos real. Hope you
-                            would love viewing/hearing them. Adios Amigo :)</p>
-                    </section>
-                    <section>
-                        <h2>Follow me on </h2>
-                        <ul class="icons">
-                            <li><a href="https://twitter.com/mitrasagnik" class="icon brands fa-twitter"><span
-                                        class="label">Twitter</span></a></li>
-                            <li><a href="https://facebook.com/sagnik.mitra.562" class="icon brands fa-facebook-f"><span
-                                        class="label">Facebook</span></a>
-                            </li>
-                            <li><a href="https://instagram.com/artimkingas" class="icon brands fa-instagram"><span
-                                        class="label">Instagram</span></a>
-                            </li>
-                            <li><a href="https://github.com/sagnikmitra" class="icon brands fa-github"><span
-                                        class="label">GitHub</span></a></li>
-                            <li><a href="https://sagnikmitra.com" class="icon brands fa-dribbble"><span
-                                        class="label">Website</span></a></li>
-                            <li><a href="https://linkedin.com/in/sagnikmitra" class="icon brands fa-linkedin-in"><span
-                                        class="label">LinkedIn</span></a>
-                            </li>
-                        </ul>
-                    </section>
-                    <p class="copyright">
-                        &copy; Sagnik Mitra</a>.
-                    </p>
-                </div>
-                <div>
-                    <section>
-                        <h2>Get in touch</h2>
-                        <form method="post" action="#">
-                            <div class="fields">
-                                <div class="field half">
-                                    <input type="text" name="name" id="name" placeholder="Name" />
-                                </div>
-                                <div class="field half">
-                                    <input type="text" name="email" id="email" placeholder="Email" />
-                                </div>
-                                <div class="field">
-                                    <textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
-                                </div>
-                            </div>
-                            <ul class="actions">
-                                <li><input type="submit" value="Send" class="primary" onclick="sent();" /></li>
-                                <li><input type="reset" value="Reset" /></li>
-                            </ul>
-                        </form>
-                    </section>
-                </div>
-            </div>
-        </footer>
+      <div class="header-social-links">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
     </div>
-    <script>
-        function sent() {
-            alert("Thank you for your message. I will get back to you soon.");
-        }
-        var myAudio = document.getElementById("myAudio");
-        var mySource = document.getElementById("mySource");
-        function togglePlay() {
-            myAudio.pause();
-            mySource.pause();
-        };
-    </script>
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.poptrox.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+          <h2>I'm <span>Sagnik Mitra</span><br>Welcome to my Gallery</h2>
+          <p>Each picture brings a story. But sometimes it's hard to know what's actually being told.</p>
+          <a href="contact.html" class="btn-get-started">Available for hire</a>
+        </div>
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+
+  <main id="main" data-aos="fade" data-aos-delay="1500">
+
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+      <div class="container-fluid">
+
+        <div class="row gy-4 justify-content-center">
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/1.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/1.png" title="Gallery 1" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/2.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/2.png" title="Gallery 2" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/3.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/3.png" title="Gallery 3" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/4.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/4.png" title="Gallery 4" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/5.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/5.png" title="Gallery 5" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/6.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/6.png" title="Gallery 6" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/7.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/7.png" title="Gallery 7" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/8.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/8.png" title="Gallery 8" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/9.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/9.png" title="Gallery 9" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/10.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/10.png" title="Gallery 10" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/11.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/11.png" title="Gallery 11" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/12.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/12.png" title="Gallery 12" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/13.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/13.png" title="Gallery 13" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/14.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/14.png" title="Gallery 14" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/15.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/15.png" title="Gallery 15" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/16.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/16.png" title="Gallery 16" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/17.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/17.jpg" title="Gallery 1" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/18.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/18.jpg" title="Gallery 2" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/19.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/19.jpg" title="Gallery 3" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/20.png" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/20.png" title="Gallery 4" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/21.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/21.jpg" title="Gallery 5" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/22.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/22.jpg" title="Gallery 6" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/23.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/23.jpg" title="Gallery 7" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/24.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/24.jpg" title="Gallery 8" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/25.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/25.jpg" title="Gallery 9" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/26.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/26.jpg" title="Gallery 10" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/27.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/27.jpg" title="Gallery 11" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/29.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/29.jpg" title="Gallery 13" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/28.jpg" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/28.jpg" title="Gallery 12" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/30.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/30.jpg" title="Gallery 14" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/31.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/31.jpg" title="Gallery 15" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="assets/img/gallery/32.jpg" height="683px" width="1024px" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="assets/img/gallery/32.jpg" title="Gallery 16" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- End Gallery Item -->
+
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>PhotoFolio</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader">
+    <div class="line"></div>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
 
 </body>
 
