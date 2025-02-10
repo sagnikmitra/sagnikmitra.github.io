@@ -1,0 +1,9 @@
+<meta property="og:type" content="website" />
+    <meta property="og:title" content="Sagnik Mitra Designs" />
+    <meta property="og:description" content="Sagnik Mitra crafts impactful brandings and seamless UI & UX. Let’s create something remarkable!" />
+    <meta property="og:image" content="https://framerusercontent.com/images/Ya20UBO0RPlcMoN9QuiAl8zBIE.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sagnik Mitra Designs" />
+    <meta name="twitter:description" content="Sagnik Mitra crafts impactful brandings and seamless UI & UX. Let’s create something remarkable!" />
+    <meta name="twitter:image" content="https://framerusercontent.com/images/Ya20UBO0RPlcMoN9QuiAl8zBIE.png" />
