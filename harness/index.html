@@ -27,7 +27,9 @@
 <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,600,700,800&display=swap" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23fff'/%3E%3Cg fill='%231a5cff'%3E%3Crect x='2' y='2' width='2' height='2'/%3E%3Crect x='6' y='2' width='2' height='2'/%3E%3Crect x='10' y='2' width='2' height='2'/%3E%3Crect x='4' y='4' width='2' height='2'/%3E%3Crect x='8' y='4' width='2' height='2'/%3E%3Crect x='12' y='4' width='2' height='2'/%3E%3Crect x='2' y='6' width='2' height='2'/%3E%3Crect x='6' y='6' width='2' height='2'/%3E%3Crect x='10' y='6' width='2' height='2'/%3E%3Crect x='4' y='8' width='2' height='2'/%3E%3Crect x='8' y='8' width='2' height='2'/%3E%3Crect x='12' y='8' width='2' height='2'/%3E%3Crect x='2' y='10' width='2' height='2'/%3E%3Crect x='6' y='10' width='2' height='2'/%3E%3Crect x='10' y='10' width='2' height='2'/%3E%3C/g%3E%3C/svg%3E" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" href="/favicon.png" />
 
 <style>
   :root {
@@ -81,37 +83,22 @@
     padding-left: 12px; border-left: 1px solid var(--grey-line);
   }
   .topbar .tagline b { color: var(--blue); font-weight: 600; }
-  .topbar nav { display: flex; gap: 22px; }
+  .topbar nav { display: flex; gap: 22px; align-items: center; }
+  .topbar .logo-link { display: inline-flex; align-items: center; border-bottom: none; }
+  .topbar .logo-link img { height: 22px; width: auto; display: block; transition: opacity .15s ease; }
+  .topbar .logo-link:hover img { opacity: .6; }
   @media (max-width: 820px) { .topbar .tagline { display: none; } }
-  @media (max-width: 640px) { .topbar nav { gap: 14px; } .topbar nav a:not(.cta) { display: none; } }
+  @media (max-width: 640px) { .topbar .logo-link img { height: 18px; } }
   .topbar .cta {
     padding: 6px 14px; background: var(--blue); color: var(--white) !important;
     font-size: 12px; border-radius: 999px;
   }
   .topbar .cta:hover { background: var(--ink); }
 
-  /* ===== Hero three-panel ===== */
-  .hero-triptych {
-    display: grid; grid-template-columns: 1fr 1fr 1fr;
-    height: 280px;
+  /* ===== Hero image ===== */
+  .hero-img {
+    display: block; width: 100%; height: auto;
     border-bottom: 1px solid var(--grey-line);
-  }
-  .hero-triptych > div {
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; font-size: clamp(28px, 6vw, 56px); letter-spacing: .06em;
-  }
-  .panel-white { background: var(--white); color: var(--ink); }
-  .panel-white .blue { color: var(--blue); }
-  .panel-blue { background: var(--blue); color: var(--blue); position: relative; }
-  .panel-blue::before {
-    content: 's   gn   k'; color: var(--black); white-space: pre;
-  }
-  .panel-black { background: var(--black); color: var(--black); position: relative; }
-  .panel-black::before {
-    content: 'a   i'; color: var(--blue); white-space: pre;
-  }
-  @media (max-width: 640px) {
-    .hero-triptych { height: 160px; }
   }
 
   /* ===== Header ===== */
@@ -319,17 +306,12 @@
     <span class="tagline">Craft. <b>Harness.</b> Deploy.</span>
   </div>
   <nav>
-    <a href="/">home</a>
-    <a href="/harness" class="cta">the harness</a>
+    <a class="logo-link" href="https://sgnk.ai" aria-label="sgnk.ai"><img src="sgnk.png" alt="sgnk" /></a>
   </nav>
 </div>
 
 <!-- ===== HERO TRIPTYCH ===== -->
-<div class="hero-triptych">
-  <div class="panel-white">sagn<span class="blue">i</span>k</div>
-  <div class="panel-blue"></div>
-  <div class="panel-black"></div>
-</div>
+<img class="hero-img" src="sgnk-lightrail.png" alt="sagnik → sgnk · ai" />
 
 <!-- ===== PAPER HEADER ===== -->
 <header class="paper">
