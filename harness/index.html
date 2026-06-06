@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Harness — Multi-Agent Harnessing Architecture · sgnk</title>
+<meta name="description" content="A practical architecture for harnessed multi-agent autonomy: control planes, task graphs, agent contracts, orchestration patterns, verification loops, and product-grade workflows. By Sagnik Mitra (sgnk), May 2026." />
+<meta name="author" content="Sagnik Mitra" />
+<meta name="theme-color" content="#1a5cff" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="The Harness — Multi-Agent Harnessing Architecture" />
+<meta property="og:description" content="Agents may be autonomous inside their lane, but the system must never be uncontrolled as a whole. A reference architecture for industry-grade agentic systems." />
+<meta property="og:url" content="https://sgnk.ai/harness" />
+<meta property="og:site_name" content="sgnk.ai" />
+<meta property="article:author" content="Sagnik Mitra" />
+<meta property="article:published_time" content="2026-05-01" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The Harness — Multi-Agent Harnessing Architecture" />
+<meta name="twitter:description" content="The harness matters more than the agents. A reference architecture for industry-grade agentic systems by Sagnik Mitra (sgnk)." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,600,700,800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23fff'/%3E%3Cg fill='%231a5cff'%3E%3Crect x='2' y='2' width='2' height='2'/%3E%3Crect x='6' y='2' width='2' height='2'/%3E%3Crect x='10' y='2' width='2' height='2'/%3E%3Crect x='4' y='4' width='2' height='2'/%3E%3Crect x='8' y='4' width='2' height='2'/%3E%3Crect x='12' y='4' width='2' height='2'/%3E%3Crect x='2' y='6' width='2' height='2'/%3E%3Crect x='6' y='6' width='2' height='2'/%3E%3Crect x='10' y='6' width='2' height='2'/%3E%3Crect x='4' y='8' width='2' height='2'/%3E%3Crect x='8' y='8' width='2' height='2'/%3E%3Crect x='12' y='8' width='2' height='2'/%3E%3Crect x='2' y='10' width='2' height='2'/%3E%3Crect x='6' y='10' width='2' height='2'/%3E%3Crect x='10' y='10' width='2' height='2'/%3E%3C/g%3E%3C/svg%3E" />
+
+<style>
+  :root {
+    --blue: #1a5cff;
+    --blue-soft: #e8efff;
+    --black: #000;
+    --white: #fff;
+    --ink: #0a0a0a;
+    --ink-soft: #3a3a3a;
+    --grey: #6b6b6b;
+    --grey-soft: #b8b8b8;
+    --grey-bg: #f5f5f5;
+    --grey-line: #e5e5e5;
+    --code-bg: #0a0a0a;
+    --code-fg: #e8efff;
+    --max: 760px;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    margin: 0;
+    font-family: 'Google Sans', 'Product Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  ::selection { background: var(--blue); color: var(--white); }
+
+  a { color: var(--blue); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s ease; }
+  a:hover { border-bottom-color: var(--blue); }
+
+  /* ===== Top bar ===== */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px;
+    background: rgba(255,255,255,.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--grey-line);
+  }
+  .topbar a { color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: .02em; border-bottom: none; }
+  .topbar a:hover { color: var(--blue); }
+  .topbar .brand { font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; font-size: 18px; letter-spacing: .04em; }
+  .topbar .brand b { color: var(--blue); }
+  .topbar .brand-group { display: flex; align-items: baseline; gap: 12px; }
+  .topbar .tagline {
+    font-size: 12px; font-weight: 600; letter-spacing: .02em; color: var(--grey);
+    padding-left: 12px; border-left: 1px solid var(--grey-line);
+  }
+  .topbar .tagline b { color: var(--blue); font-weight: 600; }
+  .topbar nav { display: flex; gap: 22px; }
+  @media (max-width: 820px) { .topbar .tagline { display: none; } }
+  @media (max-width: 640px) { .topbar nav { gap: 14px; } .topbar nav a:not(.cta) { display: none; } }
+  .topbar .cta {
+    padding: 6px 14px; background: var(--blue); color: var(--white) !important;
+    font-size: 12px; border-radius: 999px;
+  }
+  .topbar .cta:hover { background: var(--ink); }
+
+  /* ===== Hero three-panel ===== */
+  .hero-triptych {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    height: 280px;
+    border-bottom: 1px solid var(--grey-line);
+  }
+  .hero-triptych > div {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; font-size: clamp(28px, 6vw, 56px); letter-spacing: .06em;
+  }
+  .panel-white { background: var(--white); color: var(--ink); }
+  .panel-white .blue { color: var(--blue); }
+  .panel-blue { background: var(--blue); color: var(--blue); position: relative; }
+  .panel-blue::before {
+    content: 's   gn   k'; color: var(--black); white-space: pre;
+  }
+  .panel-black { background: var(--black); color: var(--black); position: relative; }
+  .panel-black::before {
+    content: 'a   i'; color: var(--blue); white-space: pre;
+  }
+  @media (max-width: 640px) {
+    .hero-triptych { height: 160px; }
+  }
+
+  /* ===== Header ===== */
+  header.paper {
+    max-width: var(--max); margin: 0 auto; padding: 72px 24px 48px;
+  }
+  .eyebrow {
+    font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; font-size: 12px; letter-spacing: .14em;
+    color: var(--blue); text-transform: uppercase; margin-bottom: 24px;
+  }
+  h1.title {
+    font-size: clamp(32px, 5vw, 52px); line-height: 1.08; letter-spacing: -.02em;
+    font-weight: 800; margin: 0 0 16px;
+  }
+  .subtitle {
+    font-size: 18px; color: var(--ink-soft); margin: 0 0 36px; max-width: 620px;
+    line-height: 1.5;
+  }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; color: var(--grey);
+    border-top: 1px solid var(--grey-line); border-bottom: 1px solid var(--grey-line);
+    padding: 18px 0; margin-bottom: 24px;
+  }
+  .meta div span { color: var(--ink); font-weight: 600; }
+  .meta b { color: var(--ink); }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; font-size: 13px; font-weight: 600;
+    border: 1px solid var(--ink); background: var(--white); color: var(--ink);
+    border-radius: 0; cursor: pointer; transition: all .15s ease;
+    font-family: inherit;
+    border-bottom: 1px solid var(--ink);
+  }
+  .btn:hover { background: var(--ink); color: var(--white); }
+  .btn.primary { background: var(--blue); color: var(--white); border-color: var(--blue); }
+  .btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+  .btn-copy-feedback { color: var(--blue); }
+
+  /* ===== Main column ===== */
+  main { max-width: var(--max); margin: 0 auto; padding: 0 24px 96px; }
+
+  h2 {
+    font-size: 28px; line-height: 1.2; letter-spacing: -.01em; font-weight: 800;
+    margin: 64px 0 18px; padding-top: 12px; border-top: 2px solid var(--ink);
+  }
+  h2 .num {
+    font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; font-size: 14px; color: var(--blue);
+    display: block; margin-bottom: 8px; letter-spacing: .08em;
+  }
+  h3 {
+    font-size: 18px; font-weight: 700; margin: 36px 0 10px; letter-spacing: -.005em;
+  }
+  h3 .num { font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; color: var(--blue); margin-right: 8px; font-weight: 500; }
+
+  p { margin: 0 0 18px; }
+  p + p { margin-top: -4px; }
+
+  ul, ol { padding-left: 22px; margin: 0 0 18px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--blue); }
+
+  strong { font-weight: 700; color: var(--ink); }
+
+  /* ===== Pull quotes / Hard truths ===== */
+  .pull {
+    border-left: 4px solid var(--blue); background: var(--blue-soft);
+    padding: 22px 28px; margin: 28px 0; font-size: 17px; line-height: 1.55;
+  }
+  .pull .label {
+    font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: .14em;
+    color: var(--blue); text-transform: uppercase; display: block; margin-bottom: 6px;
+  }
+
+  /* ===== Code blocks ===== */
+  pre {
+    background: var(--code-bg); color: var(--code-fg);
+    padding: 20px 22px; margin: 18px 0; overflow-x: auto;
+    font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; line-height: 1.6;
+    border-left: 4px solid var(--blue);
+  }
+  code {
+    font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+    background: var(--grey-bg); padding: 2px 6px; border-radius: 2px;
+  }
+  pre code { background: none; padding: 0; color: inherit; font-size: 13px; }
+
+  figure.code .caption {
+    font-size: 12px; color: var(--grey); margin-top: -10px; margin-bottom: 24px;
+    font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  figure.code .caption b { color: var(--ink); }
+
+  /* ===== Figure boxes (architecture diagrams) ===== */
+  figure.diagram {
+    margin: 28px 0; padding: 28px 20px; background: var(--grey-bg);
+    border: 1px solid var(--grey-line);
+  }
+  figure.diagram .caption {
+    font-size: 12px; color: var(--grey); margin-top: 16px;
+    font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; text-align: center;
+  }
+  figure.diagram .caption b { color: var(--ink); }
+  .flow {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center;
+    font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+  }
+  .node {
+    background: var(--white); border: 1.5px solid var(--ink); padding: 8px 12px;
+    text-align: center; min-width: 120px;
+  }
+  .node.blue { border-color: var(--blue); color: var(--blue); }
+  .node.alt { background: var(--ink); color: var(--white); }
+  .arrow { color: var(--blue); font-weight: 700; font-size: 16px; }
+  .flow-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  /* ===== Tables ===== */
+  table {
+    width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 14px;
+  }
+  th, td {
+    text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--grey-line);
+    vertical-align: top;
+  }
+  th {
+    font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--ink); border-bottom: 2px solid var(--ink);
+    background: var(--white);
+  }
+  tbody tr:hover { background: var(--blue-soft); }
+  caption {
+    caption-side: bottom; padding-top: 12px; font-size: 12px; color: var(--grey);
+    font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; text-align: left;
+  }
+  caption b { color: var(--ink); }
+
+  /* ===== TOC ===== */
+  .toc {
+    background: var(--grey-bg); padding: 28px 28px; margin: 32px 0 48px;
+    border-left: 4px solid var(--blue);
+  }
+  .toc h4 {
+    font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; font-size: 12px; letter-spacing: .14em;
+    color: var(--blue); text-transform: uppercase; margin: 0 0 14px;
+  }
+  .toc ol {
+    columns: 2; column-gap: 32px; padding-left: 20px; margin: 0;
+    font-size: 14px;
+  }
+  .toc li { break-inside: avoid; margin-bottom: 6px; }
+  .toc a { color: var(--ink); }
+  .toc a:hover { color: var(--blue); }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+
+  /* ===== References ===== */
+  .refs { font-size: 14px; }
+  .refs ol { padding-left: 28px; }
+  .refs li { margin-bottom: 12px; }
+  .refs a { word-break: break-all; }
+
+  /* ===== Cite block ===== */
+  .cite-block {
+    background: var(--ink); color: var(--blue-soft); padding: 22px 24px;
+    font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; line-height: 1.7;
+    position: relative; margin: 18px 0;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .cite-block .copy {
+    position: absolute; top: 14px; right: 14px;
+    background: var(--blue); color: var(--white); border: none;
+    padding: 6px 12px; font-family: inherit; font-size: 11px; cursor: pointer;
+    letter-spacing: .04em;
+  }
+  .cite-block .copy:hover { background: var(--white); color: var(--ink); }
+
+  /* ===== Footer ===== */
+  footer {
+    border-top: 1px solid var(--grey-line); margin-top: 80px; padding: 48px 24px;
+    text-align: center; color: var(--grey); font-size: 13px;
+  }
+  footer .brand { font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; font-size: 24px; color: var(--ink); margin-bottom: 16px; letter-spacing: .04em; }
+  footer .brand b { color: var(--blue); }
+  footer nav { display: flex; gap: 22px; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+  footer nav a { color: var(--ink-soft); font-weight: 500; }
+  footer .small { font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--grey-soft); margin-top: 24px; }
+
+  /* ===== Section divider ===== */
+  .divider {
+    text-align: center; margin: 48px 0; color: var(--grey-soft);
+    font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; font-size: 14px; letter-spacing: .4em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div class="brand-group">
+    <a class="brand" href="/"><b>sgnk</b>.ai</a>
+    <span class="tagline">Craft. <b>Harness.</b> Deploy.</span>
+  </div>
+  <nav>
+    <a href="/">home</a>
+    <a href="/work">work</a>
+    <a href="/writing">writing</a>
+    <a href="/harness" class="cta">the harness</a>
+  </nav>
+</div>
+
+<!-- ===== HERO TRIPTYCH ===== -->
+<div class="hero-triptych">
+  <div class="panel-white">sagn<span class="blue">i</span>k</div>
+  <div class="panel-blue"></div>
+  <div class="panel-black"></div>
+</div>
+
+<!-- ===== PAPER HEADER ===== -->
+<header class="paper">
+  <div class="eyebrow">Research · May 2026</div>
+  <h1 class="title">The Harness.</h1>
+  <p class="subtitle">
+    Multi-Agent Harnessing Architecture and Orchestration Patterns in Specialized Autonomous Systems —
+    with applications to agentic coding for industry-grade SaaS, B2B, and D2C products.
+  </p>
+
+  <div class="meta">
+    <div><span>Author</span> Sagnik Mitra <b>· sgnk</b></div>
+    <div><span>Published</span> May 2026</div>
+    <div><span>Reading time</span> ~22 min</div>
+    <div><span>Status</span> Original research</div>
+  </div>
+
+  <div class="actions">
+    <a href="multi_agent_harnessing_sgnk.pdf" class="btn primary" download>↓ Download PDF</a>
+    <a href="#cite" class="btn">⌘ Cite this work</a>
+    <a href="#abstract" class="btn">→ Read abstract</a>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main>
+
+<!-- ===== TOC ===== -->
+<div class="toc">
+  <h4>Contents</h4>
+  <ol>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#s1">The Problem</a></li>
+    <li><a href="#s2">Core Definitions</a></li>
+    <li><a href="#s3">Reference Architecture</a></li>
+    <li><a href="#s4">Five Architectural Planes</a></li>
+    <li><a href="#s5">Agent Role Contracts</a></li>
+    <li><a href="#s6">Orchestration Patterns</a></li>
+    <li><a href="#s7">Mission-to-Commit Workflow</a></li>
+    <li><a href="#s8">Harness Layer Deep Dive</a></li>
+    <li><a href="#s9">Verification Workflow</a></li>
+    <li><a href="#s10">State & Memory</a></li>
+    <li><a href="#s11">Observability</a></li>
+    <li><a href="#s12">Failure & Recovery</a></li>
+    <li><a href="#s13">Human-in-the-Loop</a></li>
+    <li><a href="#s14">Agentic Coding</a></li>
+    <li><a href="#s15">Implementation Stack</a></li>
+    <li><a href="#s16">Autonomy Maturity</a></li>
+    <li><a href="#s17">Design Rules</a></li>
+    <li><a href="#s18">Conclusion</a></li>
+    <li><a href="#refs">References</a></li>
+    <li><a href="#cite">How to cite</a></li>
+  </ol>
+</div>
+
+<!-- ===== ABSTRACT ===== -->
+<h2 id="abstract"><span class="num">§ Abstract</span>The harness, not the agent.</h2>
+<p>
+  Multi-agent systems are becoming the default architecture for complex autonomous software, robotics, cyberdefense,
+  financial operations, and AI-native product engineering. Yet most implementations fail because they multiply
+  agents without designing the harness that controls authority, state, verification, memory, observability, and
+  failure recovery.
+</p>
+<p>
+  This paper presents a practical architecture for harnessed multi-agent autonomy: control planes, task graphs,
+  agent contracts, orchestration patterns, runtime guardrails, verification loops, and product-grade workflows.
+  It also maps these concepts to agentic coding teams that can build reliable SaaS, B2B, and D2C products using
+  specialized agents for product, design, architecture, backend, frontend, security, QA, DevOps, observability,
+  and release governance.
+</p>
+<p>
+  <strong>The core claim is simple: agents may be autonomous inside their lane, but the system must never be uncontrolled as a whole.</strong>
+</p>
+<p style="font-size: 13px; color: var(--grey); margin-top: 24px;">
+  <strong style="color: var(--ink);">Keywords:</strong>
+  multi-agent systems, agent orchestration, autonomous systems, agent harness, agentic coding, SaaS architecture,
+  B2B products, D2C products, observability, verification, AI governance.
+</p>
+
+<!-- ===== SECTION 1 ===== -->
+<h2 id="s1"><span class="num">§ 01</span>More agents are not architecture.</h2>
+<p>
+  The current industry mistake is predictable: teams add a planner agent, a researcher agent, a coder agent,
+  a reviewer agent, and an executor agent, then assume they have a multi-agent system. They do not. They have
+  <em>distributed prompt choreography</em>.
+</p>
+<p>
+  A specialized autonomous system requires a stronger discipline. It must define who has authority, who owns
+  state, who may use which tool, who verifies outputs, when humans enter the loop, and what happens when the
+  system becomes uncertain. NIST describes AI risk management as a lifecycle problem involving the design,
+  development, use, and evaluation of AI systems, not merely a model selection problem [<a href="#ref1">1</a>].
+  That framing matters: agentic systems act over time, across tools, and across changing state.
+</p>
+
+<div class="pull">
+  <span class="label">Hard truth</span>
+  The harness matters more than the agents. Agents are replaceable cognitive workers. The harness is the
+  operating system that makes them safe, inspectable, and commercially deployable.
+</div>
+
+<!-- ===== SECTION 2 ===== -->
+<h2 id="s2"><span class="num">§ 02</span>Core definitions.</h2>
+<p><strong>Agent.</strong> A bounded actor that can observe context, reason over a task, produce artifacts, and optionally invoke tools.</p>
+<p><strong>Harness.</strong> The runtime control envelope around agents: policy, permissions, budgets, schemas, memory, verification, observability, and recovery.</p>
+<p><strong>Orchestration.</strong> The mechanism that decomposes goals, routes work, schedules execution, merges artifacts, and coordinates state transitions.</p>
+<p><strong>Specialized autonomous system.</strong> A system where multiple bounded agents perform domain-specific work under explicit governance to achieve a mission with limited human intervention.</p>
+<p><strong>Agentic coding.</strong> The use of AI agents as structured software delivery workers: product analyst, solution architect, designer, developer, tester, security reviewer, release manager, and site reliability observer.</p>
+
+<!-- ===== SECTION 3 ===== -->
+<h2 id="s3"><span class="num">§ 03</span>Reference architecture.</h2>
+<p>
+  A production-grade multi-agent system should be read as a controlled runtime, not a chatroom. The minimum
+  viable architecture contains mission intake, governance, orchestration, specialist agents, state, tools,
+  verification, and observability.
+</p>
+<p>
+  The reference architecture deliberately separates cognition from authority. The system may use probabilistic
+  agents, but its commits, permissions, traces, and risk gates should be deterministic enough to audit.
+</p>
+
+<figure class="diagram">
+  <div class="flow flow-grid">
+    <div class="node">Mission / User / Environment</div>
+    <div class="node blue">Strategic Orchestrator</div>
+    <div class="node blue">Tactical Coordinator</div>
+    <div class="node">Task Queue / Scheduler</div>
+    <div class="node alt">Specialist Agents</div>
+    <div class="node">Tools / APIs / Actuators</div>
+    <div class="node">Policy + Risk + Budget</div>
+    <div class="node">Verifier + Approval Gateway</div>
+    <div class="node blue">Canonical State + Memory</div>
+    <div class="node">Traces + Logs + Metrics + Evidence</div>
+  </div>
+  <div class="caption"><b>Figure 1.</b> Reference architecture for a harnessed specialized autonomous system. The control loop is explicit: mission intake, policy, orchestration, bounded execution, independent verification, state commit, and observability.</div>
+</figure>
+
+<!-- ===== SECTION 4 ===== -->
+<h2 id="s4"><span class="num">§ 04</span>The five architectural planes.</h2>
+<p>Serious agent systems need five planes. Weak systems mix all of them inside prompts.</p>
+
+<h3><span class="num">4.1</span> Control Plane</h3>
+<p>The control plane owns authority. It decides delegation, cancellation, escalation, approval, and recovery.</p>
+
+<h3><span class="num">4.2</span> Data Plane</h3>
+<p>The data plane moves events, messages, retrieved documents, tool outputs, telemetry, and artifacts between services.</p>
+
+<h3><span class="num">4.3</span> State Plane</h3>
+<p>The state plane owns truth: task status, locks, memory snapshots, customer records, deployment state, runbooks, and audit trails.</p>
+
+<h3><span class="num">4.4</span> Execution Plane</h3>
+<p>The execution plane performs work: LLM calls, code edits, browser automation, database queries, API calls, shell execution, and robotic motion.</p>
+
+<h3><span class="num">4.5</span> Assurance Plane</h3>
+<p>
+  The assurance plane constrains risk: policy, verification, adversarial testing, sandboxing, observability,
+  rollback, and human approval. OWASP explicitly recommends least privilege, validated output formats, human
+  approval for high-risk operations, and adversarial testing for prompt injection risk [<a href="#ref4">4</a>].
+</p>
+
+<figure class="diagram">
+  <div class="flow" style="flex-direction: column; gap: 14px;">
+    <div class="node blue" style="min-width: 200px;">Control Plane</div>
+    <div style="display:flex; gap: 14px;">
+      <div class="node">Data Plane</div>
+      <div class="node">State Plane</div>
+    </div>
+    <div style="display:flex; gap: 14px;">
+      <div class="node">Execution Plane</div>
+      <div class="node alt">Assurance Plane</div>
+    </div>
+  </div>
+  <div class="caption"><b>Figure 2.</b> The five planes of agentic autonomy.</div>
+</figure>
+
+<!-- ===== SECTION 5 ===== -->
+<h2 id="s5"><span class="num">§ 05</span>Agent role contracts.</h2>
+<p>Agents should not be defined by motivational personality prompts. They should be defined by contracts.</p>
+
+<figure class="code">
+<pre><code>agent:
+  id: verifier.payment_policy.v1
+  role: independent_verifier
+  allowed_inputs:
+    - proposed_action
+    - policy_context
+    - state_snapshot
+  allowed_tools:
+    - policy_lookup
+    - transaction_limit_checker
+  forbidden_tools:
+    - payment_execute
+    - database_write
+  output_schema:
+    decision: approve | reject | repair | escalate
+    reasons: string[]
+    risk_score: number
+    human_approval_required: boolean</code></pre>
+<div class="caption"><b>Listing 1.</b> Example agent contract.</div>
+</figure>
+
+<p>
+  The contract should declare allowed tools, forbidden tools, input schemas, output schemas, budget limits,
+  retry limits, verification rules, and escalation thresholds. <strong>The narrower the agent boundary, the easier
+  the system is to debug.</strong>
+</p>
+
+<!-- ===== SECTION 6 ===== -->
+<h2 id="s6"><span class="num">§ 06</span>Core orchestration patterns.</h2>
+<p>
+  No single orchestration pattern solves every domain. Mature systems combine patterns based on risk, latency,
+  auditability, and resource constraints.
+</p>
+
+<h3><span class="num">6.1</span> Hierarchical Supervisor</h3>
+<p>
+  The hierarchical pattern uses a supervisor to decompose the mission and assign bounded tasks to specialists.
+  Safest default for SaaS, finance, legal-tech, healthcare, cybersecurity, and B2B workflow automation.
+</p>
+<figure class="diagram">
+  <div class="flow" style="flex-direction: column;">
+    <div class="node blue">Supervisor / Orchestrator</div>
+    <div style="display:flex; gap: 14px;">
+      <div class="node">Planner</div>
+      <div class="node">Researcher</div>
+      <div class="node">Executor</div>
+    </div>
+    <div class="node alt">Verifier</div>
+  </div>
+  <div class="caption"><b>Figure 3.</b> Hierarchical supervisor pattern.</div>
+</figure>
+<p><strong>Strengths:</strong> clear accountability, strong auditability, simple failure containment. <strong>Weaknesses:</strong> central bottleneck and reduced adaptability.</p>
+
+<h3><span class="num">6.2</span> Blackboard Pattern</h3>
+<p>Agents contribute to a shared structured workspace. Useful for diagnostics, research synthesis, threat analysis, scientific reasoning, product discovery, and UX decision-making.</p>
+
+<figure class="code">
+<pre><code>blackboard_entry:
+  id: string
+  author_agent: string
+  claim: string
+  evidence_refs: string[]
+  confidence: number
+  expiry: timestamp
+  state_version: string
+  verification_status: unverified | verified | rejected</code></pre>
+<div class="caption"><b>Listing 2.</b> Blackboard entry schema.</div>
+</figure>
+
+<p>Without schemas, blackboards rot into noisy group chats. Every claim must have evidence, author, confidence, expiry, and verification status.</p>
+
+<h3><span class="num">6.3</span> Event-Driven Mesh</h3>
+<p>
+  Event-driven systems use an event bus to decouple producers and consumers. They scale well, but causal
+  reasoning becomes difficult unless traces are mandatory. OpenTelemetry frames observability around signals
+  such as traces, metrics, logs, baggage, and profiles [<a href="#ref2">2</a>]; those concepts map directly to
+  multi-agent runtime instrumentation.
+</p>
+
+<figure class="code">
+<pre><code>{
+  "event_id": "evt_123",
+  "event_type": "task.completed",
+  "mission_id": "mission_456",
+  "trace_id": "trace_789",
+  "source_agent": "execution_agent.v1",
+  "state_version": "state_88",
+  "risk_level": "medium",
+  "payload": {}
+}</code></pre>
+<div class="caption"><b>Listing 3.</b> Agent event envelope.</div>
+</figure>
+
+<p>Event-driven agent systems require idempotency, schema versioning, dead-letter queues, causal tracing, retry budgets, and loop prevention.</p>
+
+<h3><span class="num">6.4</span> Market / Auction-Based Allocation</h3>
+<p>
+  Auction-based allocation is useful when agents have different capabilities, cost, latency, risk, availability,
+  or location. Common in robot fleets and distributed work scheduling. Recent robot fleet work emphasizes
+  shared world state, planning, scheduling, execution, and replanning across heterogeneous robots [<a href="#ref6">6</a>].
+</p>
+<pre style="text-align: center; background: var(--white); color: var(--ink); border: 1.5px solid var(--ink); border-left: 4px solid var(--blue);"><code>Score = 0.30·C + 0.20·Q − 0.20·K − 0.15·L − 0.15·R</code></pre>
+<p style="font-size: 13px; color: var(--grey); margin-top: -10px;">
+  Where <code>C</code> = capability match, <code>Q</code> = confidence, <code>K</code> = normalized cost,
+  <code>L</code> = latency, <code>R</code> = risk. Do not select agents only on speed or cost. That creates unsafe shortcuts.
+</p>
+
+<h3><span class="num">6.5</span> Hybrid Pattern</h3>
+<p>Serious systems usually end up hybrid: hierarchical control for governance, auction allocation for dynamic work, blackboard memory for shared reasoning, and event streams for tool results and telemetry.</p>
+
+<table>
+  <thead>
+    <tr><th>Function</th><th>Best pattern</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mission control</td><td>Hierarchical supervisor</td></tr>
+    <tr><td>Dynamic allocation</td><td>Auction / market</td></tr>
+    <tr><td>Shared reasoning</td><td>Blackboard</td></tr>
+    <tr><td>Tool propagation</td><td>Event-driven mesh</td></tr>
+    <tr><td>Safety approval</td><td>Verifier + human gate</td></tr>
+    <tr><td>Recovery</td><td>Supervisor + event replay</td></tr>
+    <tr><td>Memory</td><td>Canonical state + event log</td></tr>
+  </tbody>
+  <caption><b>Table 1.</b> Pattern selection by system function.</caption>
+</table>
+
+<!-- ===== SECTION 7 ===== -->
+<h2 id="s7"><span class="num">§ 07</span>Mission-to-commit workflow.</h2>
+<p>The central workflow is not "agent talks to agent." It is mission intake, policy check, task graph creation, execution, verification, and state commit.</p>
+
+<figure class="diagram">
+  <div class="flow flow-grid">
+    <div class="node">Mission Intake</div>
+    <div class="node">Policy Check</div>
+    <div class="node">Task Graph</div>
+    <div class="node blue">Specialist Agent Work</div>
+    <div class="node">Tool / API Call</div>
+    <div class="node alt">Independent Verification</div>
+    <div class="node blue">Commit State</div>
+    <div class="node">Trace + Audit</div>
+  </div>
+  <div class="caption"><b>Figure 4.</b> Mission-to-commit workflow. State is committed only after explicit verification.</div>
+</figure>
+
+<!-- ===== SECTION 8 ===== -->
+<h2 id="s8"><span class="num">§ 08</span>The harness layer, in depth.</h2>
+<p>The harness is the runtime control envelope. It makes probabilistic agents behave inside deterministic boundaries. A harness should include:</p>
+<ul>
+  <li>Identity and access control</li>
+  <li>Tool whitelists, data egress controls, prompt and content isolation</li>
+  <li>Output validation</li>
+  <li>Risk scoring, budget ceilings, approval gates</li>
+  <li>Sandboxed execution, rollback</li>
+  <li>Immutable audit logs</li>
+</ul>
+<p>
+  LangGraph's public documentation emphasizes durable execution, persistence, human-in-the-loop control,
+  and runtime visibility as core orchestration capabilities [<a href="#ref3">3</a>].
+</p>
+
+<figure class="diagram">
+  <div class="flow" style="flex-direction: column;">
+    <div class="node blue">Incoming Goal / Action</div>
+    <div class="node">Schema Check</div>
+    <div class="node">Permission Check</div>
+    <div class="node">Risk + Budget</div>
+    <div style="display:flex; gap:14px;">
+      <div class="node">Execute (low)</div>
+      <div class="node">Verify (med)</div>
+      <div class="node alt">Human Gate (high)</div>
+    </div>
+    <div class="node blue">Commit / Block / Repair</div>
+  </div>
+  <div class="caption"><b>Figure 5.</b> Runtime harness gate.</div>
+</figure>
+
+<!-- ===== SECTION 9 ===== -->
+<h2 id="s9"><span class="num">§ 09</span>Verification workflow.</h2>
+<p>The executor must not verify itself. Verification should be independent and risk-weighted.</p>
+
+<table>
+  <thead><tr><th>Action</th><th>Required verification</th></tr></thead>
+  <tbody>
+    <tr><td>Read-only retrieval</td><td>Provenance + schema</td></tr>
+    <tr><td>Internal planning</td><td>Logical consistency</td></tr>
+    <tr><td>Database write</td><td>Schema + permission + state version</td></tr>
+    <tr><td>Code execution</td><td>Sandbox + tests + static analysis</td></tr>
+    <tr><td>Payment or trade</td><td>Policy + risk + human approval</td></tr>
+    <tr><td>Customer message</td><td>Factuality + tone + compliance</td></tr>
+    <tr><td>Production deploy</td><td>CI + security + rollback plan</td></tr>
+  </tbody>
+  <caption><b>Table 2.</b> Risk-weighted verification matrix.</caption>
+</table>
+
+<p>Verification includes schema verification, policy verification, factual verification, logical verification, tool verification, security verification, and human verification.</p>
+
+<!-- ===== SECTION 10 ===== -->
+<h2 id="s10"><span class="num">§ 10</span>State & memory architecture.</h2>
+<p>Multi-agent systems fail when state becomes vague. Use three layers: local working memory, shared mission workspace, and canonical state.</p>
+<p>Agents should not directly mutate canonical state. They submit proposed state transitions.</p>
+
+<figure class="code">
+<pre><code>state_transition:
+  transition_id: string
+  proposed_by: agent_id
+  previous_state_version: string
+  operation: create | update | delete | reserve | release
+  target_resource: string
+  payload: object
+  verification_status: pending</code></pre>
+<div class="caption"><b>Listing 4.</b> State transition proposal.</div>
+</figure>
+
+<figure class="diagram">
+  <div class="flow" style="flex-direction: column;">
+    <div class="node">Agent Working Memory</div>
+    <div class="arrow">↓</div>
+    <div class="node blue">Shared Workspace</div>
+    <div class="arrow">↓</div>
+    <div class="node alt">Canonical State</div>
+    <div class="arrow">↓</div>
+    <div class="node">Event Log</div>
+  </div>
+  <div class="caption"><b>Figure 6.</b> Memory and state layers.</div>
+</figure>
+
+<!-- ===== SECTION 11 ===== -->
+<h2 id="s11"><span class="num">§ 11</span>Observability requirements.</h2>
+<p>Once agents act asynchronously, explainability becomes a distributed-systems problem. Every mission, task, tool call, agent decision, verification decision, human approval, and state transition needs a trace ID.</p>
+
+<figure class="code">
+<pre><code>{
+  "trace_id": "trace_abc",
+  "mission_id": "mission_001",
+  "task_id": "task_009",
+  "agent_id": "planner.v2",
+  "state_version": "state_104",
+  "tool_name": "database.write",
+  "policy_bundle": "policy.finance.v3",
+  "risk_score": 0.72,
+  "decision": "request_human_approval",
+  "latency_ms": 1200,
+  "tokens_used": 3400,
+  "retry_count": 1
+}</code></pre>
+<div class="caption"><b>Listing 5.</b> Minimum trace record.</div>
+</figure>
+
+<p>Track agent failure rate, verifier rejection rate, retry count, human escalation rate, state conflict rate, dead-letter events, tool error correlation, budget burn, and mean time to recovery.</p>
+
+<!-- ===== SECTION 12 ===== -->
+<h2 id="s12"><span class="num">§ 12</span>Failure & recovery workflows.</h2>
+<p>A serious system must design the unhappy path before celebrating autonomy.</p>
+
+<table>
+  <thead><tr><th>Failure</th><th>Recovery</th></tr></thead>
+  <tbody>
+    <tr><td>Hallucinated output</td><td>Verifier rejects; repair or reassign</td></tr>
+    <tr><td>Tool timeout</td><td>Retry with backoff; fallback tool</td></tr>
+    <tr><td>State conflict</td><td>Lock reconcile; reload state</td></tr>
+    <tr><td>Infinite loop</td><td>Retry budget kill switch</td></tr>
+    <tr><td>Prompt injection</td><td>Isolate content; block tool call</td></tr>
+    <tr><td>Unsafe action</td><td>Policy stop + human review</td></tr>
+    <tr><td>Compromised agent</td><td>Revoke identity and tools</td></tr>
+  </tbody>
+  <caption><b>Table 3.</b> Common failure modes and recovery paths.</caption>
+</table>
+
+<figure class="diagram">
+  <div class="flow flow-grid">
+    <div class="node alt">Failure Detected</div>
+    <div class="node">Classify Type</div>
+    <div class="node">Reassign Agent</div>
+    <div class="node">Retry Tool</div>
+    <div class="node alt">Safe Stop</div>
+    <div class="node">Resume from Checkpoint</div>
+    <div class="node blue">Verify Recovered State</div>
+  </div>
+  <div class="caption"><b>Figure 7.</b> Failure recovery workflow.</div>
+</figure>
+
+<!-- ===== SECTION 13 ===== -->
+<h2 id="s13"><span class="num">§ 13</span>Human-in-the-loop design.</h2>
+<p>Human approval is not a vague "Should I continue?" prompt. It is a structured decision packet.</p>
+
+<div class="pull">
+  <span class="label">Review packet minimum</span>
+  mission ID, task ID, proposed action, expected impact, risk score, passed/failed policy checks, evidence
+  references, alternatives, recommendation, and rollback plan.
+</div>
+
+<p>Humans should approve actions with known blast radius, evidence, impact, rollback plan, and alternatives. Anything less is fake consent.</p>
+
+<!-- ===== SECTION 14 ===== -->
+<h2 id="s14"><span class="num">§ 14</span>Agentic coding for industry-grade products.</h2>
+<p>
+  Agentic coding is where these concepts become commercially useful. But the goal is not faster code
+  generation. The goal is faster product delivery without collapsing quality, security, maintainability,
+  or user trust.
+</p>
+<p>
+  A real SaaS, B2B, or D2C product requires far more than screens and endpoints. It needs authentication,
+  authorization, tenant isolation, billing, onboarding, analytics, observability, support workflows, data
+  privacy, audit logs, CI/CD, rollback, cost control, and a product feedback loop.
+</p>
+
+<h3><span class="num">14.1</span> The Agentic Product Factory</h3>
+<p>A strong agentic coding setup turns the software team into a harnessed product factory.</p>
+
+<h3><span class="num">14.2</span> Agent Roles in Product Engineering</h3>
+<table>
+  <thead><tr><th>Agent</th><th>Responsibility</th></tr></thead>
+  <tbody>
+    <tr><td>Product Agent</td><td>PRD, use cases, acceptance criteria, prioritization</td></tr>
+    <tr><td>Research Agent</td><td>Competitor review, user pain, market evidence</td></tr>
+    <tr><td>UX Agent</td><td>Flows, IA, wireframes, design system mapping</td></tr>
+    <tr><td>Architecture Agent</td><td>System design, data model, service boundaries</td></tr>
+    <tr><td>Backend Agent</td><td>APIs, database, jobs, integrations, domain logic</td></tr>
+    <tr><td>Frontend Agent</td><td>UI, state management, accessibility, responsiveness</td></tr>
+    <tr><td>QA Agent</td><td>Test plan, unit/integration/e2e tests, edge cases</td></tr>
+    <tr><td>Security Agent</td><td>Threat model, auth, RBAC, secret handling, dependency risk</td></tr>
+    <tr><td>DevOps Agent</td><td>CI/CD, environment config, preview deploys, rollback</td></tr>
+    <tr><td>Verifier Agent</td><td>Cross-checks requirements, diff, tests, risk, release gates</td></tr>
+  </tbody>
+  <caption><b>Table 4.</b> Specialized coding agents mapped to product delivery.</caption>
+</table>
+
+<h3><span class="num">14.3</span> B2B SaaS Pattern</h3>
+<p>B2B SaaS is governance-heavy. The agentic system must prioritize tenant isolation, RBAC, auditability, data export, admin controls, integration reliability, and contractual workflows.</p>
+
+<h3><span class="num">14.4</span> D2C Product Pattern</h3>
+<p>D2C products are conversion-heavy. The agentic system must prioritize onboarding, activation, payments, retention, recommendations, funnel analytics, performance, mobile UX, and trust signals.</p>
+
+<h3><span class="num">14.5</span> Industry-Grade Gates</h3>
+<p>Agentic coding must use quality gates. Otherwise it only produces faster technical debt.</p>
+
+<table>
+  <thead><tr><th>Gate</th><th>Release standard</th></tr></thead>
+  <tbody>
+    <tr><td>Requirement gate</td><td>PRD, edge cases, measurable acceptance criteria</td></tr>
+    <tr><td>Architecture gate</td><td>Data model, API contract, scalability assumptions</td></tr>
+    <tr><td>Security gate</td><td>Auth, RBAC, secrets, dependency scan, threat model</td></tr>
+    <tr><td>Quality gate</td><td>Tests, lint, type checks, performance budgets</td></tr>
+    <tr><td>UX gate</td><td>Accessibility, responsive design, error states</td></tr>
+    <tr><td>Ops gate</td><td>Logs, traces, metrics, alerts, rollback</td></tr>
+    <tr><td>Business gate</td><td>Pricing, onboarding, support, analytics, retention</td></tr>
+  </tbody>
+  <caption><b>Table 5.</b> Release gates for agentic product engineering.</caption>
+</table>
+
+<h3><span class="num">14.6</span> The Agentic Coding Control Loop</h3>
+<figure class="diagram">
+  <div class="flow flow-grid">
+    <div class="node">Market / User Problem</div>
+    <div class="node blue">Product Agent</div>
+    <div class="node blue">UX + Design Agent</div>
+    <div class="node blue">Architecture Agent</div>
+    <div class="node blue">Backend + Frontend Agents</div>
+    <div class="node">QA + Security Agents</div>
+    <div class="node alt">Verifier + Release Gate</div>
+    <div class="node">Telemetry + Feedback</div>
+  </div>
+  <div class="caption"><b>Figure 8.</b> Agentic product factory for SaaS, B2B, and D2C delivery. The loop does not end at code. It ends at telemetry-backed product learning.</div>
+</figure>
+
+<h3><span class="num">14.7</span> What Agentic Coding Should Never Do</h3>
+<p>
+  An agentic coding system should not let the same agent define requirements, write code, approve the diff,
+  disable tests, deploy to production, and interpret production failures. That is not autonomy. That is
+  concentrated unchecked risk.
+</p>
+<p>The secure model is separation of duties:</p>
+<ul>
+  <li>Builder agents create artifacts.</li>
+  <li>Verifier agents challenge artifacts.</li>
+  <li>Policy services define allowed actions.</li>
+  <li>CI systems enforce deterministic checks.</li>
+  <li>Humans approve high-risk production transitions.</li>
+</ul>
+<p>
+  MCP can help standardize how coding agents connect to external systems such as files, databases, tools,
+  and workflows [<a href="#ref5">5</a>], but standard connectivity increases the importance of least
+  privilege and tool isolation.
+</p>
+
+<!-- ===== SECTION 15 ===== -->
+<h2 id="s15"><span class="num">§ 15</span>Implementation stack.</h2>
+<p>A practical implementation can use the following stack.</p>
+<table>
+  <thead><tr><th>Layer</th><th>Typical choices</th></tr></thead>
+  <tbody>
+    <tr><td>Orchestration</td><td>LangGraph, Temporal, custom DAG runtime</td></tr>
+    <tr><td>Agent workers</td><td>Containerized Python/Node workers</td></tr>
+    <tr><td>State</td><td>Postgres, Redis, event store</td></tr>
+    <tr><td>Memory</td><td>pgvector, Qdrant, object store</td></tr>
+    <tr><td>Messaging</td><td>Kafka, NATS, RabbitMQ, Redis streams</td></tr>
+    <tr><td>Policy</td><td>OPA, Cedar, custom policy service</td></tr>
+    <tr><td>Observability</td><td>OpenTelemetry, Prometheus, Grafana, Jaeger</td></tr>
+    <tr><td>Execution sandbox</td><td>Docker, Firecracker, gVisor</td></tr>
+    <tr><td>Product repo</td><td>GitHub, CI, protected branches, preview deployments</td></tr>
+    <tr><td>Human gate</td><td>GitHub PR, Slack approval, internal console</td></tr>
+  </tbody>
+  <caption><b>Table 6.</b> Practical stack for harnessed agentic systems.</caption>
+</table>
+
+<!-- ===== SECTION 16 ===== -->
+<h2 id="s16"><span class="num">§ 16</span>Autonomy maturity model.</h2>
+<p>
+  Most teams claim L4 while operating at L2 with extra prompts. The difference is not the number of agents;
+  it is governance, verification, state, observability, and recovery.
+</p>
+<table>
+  <thead><tr><th>Level</th><th>Capability</th></tr></thead>
+  <tbody>
+    <tr><td><b>L0</b></td><td>Human uses tools manually</td></tr>
+    <tr><td><b>L1</b></td><td>Single assistant suggests actions</td></tr>
+    <tr><td><b>L2</b></td><td>Agent uses tools under human control</td></tr>
+    <tr><td><b>L3</b></td><td>Multiple agents coordinate tasks</td></tr>
+    <tr><td><b>L4</b></td><td>Harnessed autonomy with verification and state</td></tr>
+    <tr><td><b>L5</b></td><td>Adaptive governed autonomy with self-repair</td></tr>
+  </tbody>
+  <caption><b>Table 7.</b> Agentic autonomy maturity levels.</caption>
+</table>
+
+<!-- ===== SECTION 17 ===== -->
+<h2 id="s17"><span class="num">§ 17</span>Design rules.</h2>
+<ol>
+  <li>Start hierarchical before adding swarm behavior.</li>
+  <li>Define canonical state before building agent memory.</li>
+  <li>Define agent contracts before writing prompts.</li>
+  <li>Add verification before adding more agents.</li>
+  <li>Separate planning, execution, and approval.</li>
+  <li>Use traces for every agent and tool call.</li>
+  <li>Treat external content as untrusted.</li>
+  <li>Sandbox code execution and browser automation.</li>
+  <li>Use human gates for high-impact actions.</li>
+  <li>Optimize for recoverability, not demo magic.</li>
+</ol>
+
+<!-- ===== SECTION 18 ===== -->
+<h2 id="s18"><span class="num">§ 18</span>Conclusion.</h2>
+<p>
+  Multi-agent systems are not powerful because they contain many agents. They are powerful when responsibilities
+  are partitioned, autonomy is bounded, authority is explicit, state is coherent, tools are constrained,
+  verification is independent, failures are recoverable, and observability is complete.
+</p>
+<p>
+  For agentic coding, the same principle applies. The goal is not to make one AI write an entire product in a
+  burst. The goal is to create a controlled product engineering system where specialized agents collaborate
+  under contracts and gates to ship reliable SaaS, B2B, and D2C products.
+</p>
+
+<div class="pull">
+  <span class="label">Final principle</span>
+  Agents should be autonomous inside their lane, but the system must never be uncontrolled as a whole.
+  That is the difference between an industry-grade autonomous system and a distributed hallucination machine.
+</div>
+
+<!-- ===== REFERENCES ===== -->
+<h2 id="refs"><span class="num">§ References</span>Cited works.</h2>
+<div class="refs">
+  <ol>
+    <li id="ref1">National Institute of Standards and Technology. <em>AI Risk Management Framework</em>. NIST states that AI RMF is intended for voluntary use and for incorporating trustworthiness into the design, development, use, and evaluation of AI products, services, and systems. <a href="https://www.nist.gov/itl/ai-risk-management-framework">nist.gov/itl/ai-risk-management-framework</a></li>
+    <li id="ref2">OpenTelemetry. <em>Signals</em>. Official documentation describing observability signals including traces, metrics, logs, baggage, and profiles. <a href="https://opentelemetry.io/docs/concepts/signals/">opentelemetry.io/docs/concepts/signals/</a></li>
+    <li id="ref3">LangChain. <em>LangGraph Overview</em>. Documentation describing LangGraph as an orchestration runtime for long-running, stateful agents with durable execution, streaming, human-in-the-loop, and persistence. <a href="https://docs.langchain.com/oss/python/langgraph/overview">docs.langchain.com/oss/python/langgraph/overview</a></li>
+    <li id="ref4">OWASP GenAI Security Project. <em>LLM01:2025 Prompt Injection</em>. Official guidance on direct and indirect prompt injection, prevention, least privilege, output validation, human approval, and adversarial testing. <a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">genai.owasp.org/llmrisk/llm01-prompt-injection/</a></li>
+    <li id="ref5">Model Context Protocol. <em>What is the Model Context Protocol?</em>. Official documentation defining MCP as an open-source standard for connecting AI applications to external systems, data sources, tools, and workflows. <a href="https://modelcontextprotocol.io/docs/getting-started/intro">modelcontextprotocol.io/docs/getting-started/intro</a></li>
+    <li id="ref6">Gupta, R., Asbery, T., Merchant, Z., Anwar, A., and Thomason, J. <em>RobotFleet: An Open-Source Framework for Centralized Multi-Robot Task Planning</em>. arXiv, 2025. <a href="https://arxiv.org/abs/2510.10379">arxiv.org/abs/2510.10379</a></li>
+    <li id="ref7">Datta, S., Nahin, S. K., Chhabra, A., and Mohapatra, P. <em>Agentic AI Security: Threats, Defenses, Evaluation and Open Challenges</em>. arXiv, 2025. <a href="https://arxiv.org/abs/2510.23883">arxiv.org/abs/2510.23883</a></li>
+  </ol>
+</div>
+
+<!-- ===== CITE ===== -->
+<h2 id="cite"><span class="num">§ Cite</span>How to cite this work.</h2>
+<p>If this work informed your thinking, cite it as:</p>
+
+<div class="cite-block" id="bibtex">@misc{mitra2026harnessing,
+  author       = {Mitra, Sagnik},
+  title        = {Multi-Agent Harnessing Architecture and
+                  Orchestration Patterns in Specialized
+                  Autonomous Systems},
+  year         = {2026},
+  month        = {May},
+  howpublished = {\url{https://sgnk.ai/harness}},
+  note         = {sgnk research}
+}<button class="copy" onclick="copyCite(this)">Copy BibTeX</button></div>
+
+<p style="margin-top: 24px;"><strong>Plain text:</strong></p>
+<div class="cite-block" id="plaintext">Mitra, Sagnik. (2026). Multi-Agent Harnessing
+Architecture and Orchestration Patterns in
+Specialized Autonomous Systems. sgnk research.
+https://sgnk.ai/harness<button class="copy" onclick="copyCite(this)">Copy</button></div>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="brand"><b>sgnk</b>.ai</div>
+  <div>Craft. Harness. Deploy.</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/work">Work</a>
+    <a href="/writing">Writing</a>
+    <a href="/harness">The Harness</a>
+    <a href="mailto:sagnik@sgnk.ai">sagnik@sgnk.ai</a>
+  </nav>
+  <div class="small">© 2026 Sagnik Mitra · sgnk · all rights reserved</div>
+</footer>
+
+<script>
+  function copyCite(btn) {
+    const block = btn.parentElement;
+    const text = block.innerText.replace(btn.innerText, '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      const original = btn.innerText;
+      btn.innerText = '✓ Copied';
+      btn.style.background = '#fff';
+      btn.style.color = '#000';
+      setTimeout(() => {
+        btn.innerText = original;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 1600);
+    });
+  }
+</script>
+
+</body>
+</html>
