@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>The Harness — Multi-Agent Harnessing Architecture · sgnk</title>
-<meta name="description" content="A practical architecture for harnessed multi-agent autonomy: control planes, task graphs, agent contracts, orchestration patterns, verification loops, and product-grade workflows. By Sagnik Mitra (sgnk), May 2026." />
+<title>The Harness — Your Multi-Agent Setup is Not Architecture · sgnk</title>
+<meta name="description" content="A deep dive into why adding more agents is the fastest way to ship a confident, expensive nothing — and the harness (control, state, verification, recovery) that actually makes agentic systems production-grade. By Sagnik Mitra (sgnk)." />
 <meta name="author" content="Sagnik Mitra" />
 <meta name="theme-color" content="#1a5cff" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="article" />
-<meta property="og:title" content="The Harness — Multi-Agent Harnessing Architecture" />
-<meta property="og:description" content="Agents may be autonomous inside their lane, but the system must never be uncontrolled as a whole. A reference architecture for industry-grade agentic systems." />
+<meta property="og:title" content="The Harness — Your Multi-Agent Setup is Not Architecture" />
+<meta property="og:description" content="Agents may be autonomous inside their lane, but the system must never be uncontrolled as a whole. The harness, said out loud." />
 <meta property="og:url" content="https://sgnk.ai/harness" />
 <meta property="og:site_name" content="sgnk.ai" />
 <meta property="article:author" content="Sagnik Mitra" />
@@ -19,8 +19,8 @@
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="The Harness — Multi-Agent Harnessing Architecture" />
-<meta name="twitter:description" content="The harness matters more than the agents. A reference architecture for industry-grade agentic systems by Sagnik Mitra (sgnk)." />
+<meta name="twitter:title" content="The Harness — Your Multi-Agent Setup is Not Architecture" />
+<meta name="twitter:description" content="The agents were never the hard part. Build the harness. By Sagnik Mitra (sgnk)." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -163,6 +163,7 @@
   li::marker { color: var(--blue); }
 
   strong { font-weight: 700; color: var(--ink); }
+  em { color: var(--ink-soft); }
 
   /* ===== Pull quotes / Hard truths ===== */
   .pull {
@@ -310,29 +311,29 @@
   </nav>
 </div>
 
-<!-- ===== HERO TRIPTYCH ===== -->
+<!-- ===== HERO ===== -->
 <img class="hero-img" src="/harness/sgnk-lightrail.png" alt="sagnik → sgnk · ai" />
 
-<!-- ===== PAPER HEADER ===== -->
+<!-- ===== HEADER ===== -->
 <header class="paper">
-  <div class="eyebrow">Research · May 2026</div>
-  <h1 class="title">The Harness.</h1>
+  <div class="eyebrow">The Harness · field notes · 2026</div>
+  <h1 class="title">Your multi-agent setup is not architecture.</h1>
   <p class="subtitle">
-    Multi-Agent Harnessing Architecture and Orchestration Patterns in Specialized Autonomous Systems —
-    with applications to agentic coding for industry-grade SaaS, B2B, and D2C products.
+    A deep dive into why "just add more agents" is the fastest way to ship a very confident, very
+    expensive nothing — and the harness that actually makes the thing production-grade.
   </p>
 
   <div class="meta">
     <div><span>Author</span> Sagnik Mitra <b>· sgnk</b></div>
-    <div><span>Published</span> May 2026</div>
-    <div><span>Reading time</span> ~22 min</div>
+    <div><span>Published</span> 2026</div>
+    <div><span>Reading time</span> ~12 min</div>
     <div><span>Status</span> Original research</div>
   </div>
 
   <div class="actions">
-    <a href="/harness/multi_agent_harnessing_sgnk.pdf" class="btn primary" download>↓ Download PDF</a>
+    <a href="/harness/multi_agent_harnessing_sgnk.pdf" class="btn primary" download>↓ Download the paper (PDF)</a>
     <a href="#cite" class="btn">⌘ Cite this work</a>
-    <a href="#abstract" class="btn">→ Read abstract</a>
+    <a href="#s1" class="btn">→ Start reading</a>
   </div>
 </header>
 
@@ -341,135 +342,79 @@
 
 <!-- ===== TOC ===== -->
 <div class="toc">
-  <h4>Contents</h4>
+  <h4>What's inside</h4>
   <ol>
-    <li><a href="#abstract">Abstract</a></li>
-    <li><a href="#s1">The Problem</a></li>
-    <li><a href="#s2">Core Definitions</a></li>
-    <li><a href="#s3">Reference Architecture</a></li>
-    <li><a href="#s4">Five Architectural Planes</a></li>
-    <li><a href="#s5">Agent Role Contracts</a></li>
-    <li><a href="#s6">Orchestration Patterns</a></li>
-    <li><a href="#s7">Mission-to-Commit Workflow</a></li>
-    <li><a href="#s8">Harness Layer Deep Dive</a></li>
-    <li><a href="#s9">Verification Workflow</a></li>
-    <li><a href="#s10">State & Memory</a></li>
-    <li><a href="#s11">Observability</a></li>
-    <li><a href="#s12">Failure & Recovery</a></li>
-    <li><a href="#s13">Human-in-the-Loop</a></li>
-    <li><a href="#s14">Agentic Coding</a></li>
-    <li><a href="#s15">Implementation Stack</a></li>
-    <li><a href="#s16">Autonomy Maturity</a></li>
-    <li><a href="#s17">Design Rules</a></li>
-    <li><a href="#s18">Conclusion</a></li>
+    <li><a href="#s1">The one line that matters</a></li>
+    <li><a href="#s2">A few definitions</a></li>
+    <li><a href="#s3">The five planes</a></li>
+    <li><a href="#s4">Contracts, not personalities</a></li>
+    <li><a href="#s5">Orchestration patterns</a></li>
+    <li><a href="#s6">The harness layer</a></li>
+    <li><a href="#s7">Verification</a></li>
+    <li><a href="#s8">State, memory & failure</a></li>
+    <li><a href="#s9">The maturity ladder</a></li>
+    <li><a href="#s10">Agentic coding</a></li>
+    <li><a href="#s11">The ten rules</a></li>
+    <li><a href="#s12">So, the takeaway</a></li>
     <li><a href="#refs">References</a></li>
     <li><a href="#cite">How to cite</a></li>
   </ol>
 </div>
 
-<!-- ===== ABSTRACT ===== -->
-<h2 id="abstract"><span class="num">§ Abstract</span>The harness, not the agent.</h2>
+<!-- ===== 1 ===== -->
+<h2 id="s1"><span class="num">§ 01</span>Your multi-agent setup is not architecture.</h2>
 <p>
-  Multi-agent systems are becoming the default architecture for complex autonomous software, robotics, cyberdefense,
-  financial operations, and AI-native product engineering. Yet most implementations fail because they multiply
-  agents without designing the harness that controls authority, state, verification, memory, observability, and
-  failure recovery.
+  Hey there. So somewhere in the last year, "multi-agent system" became the thing everyone has and almost
+  nobody can explain. You know the setup — a planner agent, a researcher agent, a coder agent, a reviewer
+  agent, and one executor agent that quietly does the work of all four while the others take credit
+  (we've all built this, no judgment).
 </p>
 <p>
-  This paper presents a practical architecture for harnessed multi-agent autonomy: control planes, task graphs,
-  agent contracts, orchestration patterns, runtime guardrails, verification loops, and product-grade workflows.
-  It also maps these concepts to agentic coding teams that can build reliable SaaS, B2B, and D2C products using
-  specialized agents for product, design, architecture, backend, frontend, security, QA, DevOps, observability,
-  and release governance.
+  Here's the uncomfortable part: <strong>that's not a system. That's distributed prompt choreography in a trench
+  coat.</strong> Five language models taking turns is not architecture, the same way five people in a WhatsApp
+  group is not a company.
 </p>
 <p>
-  <strong>The core claim is simple: agents may be autonomous inside their lane, but the system must never be uncontrolled as a whole.</strong>
-</p>
-<p style="font-size: 13px; color: var(--grey); margin-top: 24px;">
-  <strong style="color: var(--ink);">Keywords:</strong>
-  multi-agent systems, agent orchestration, autonomous systems, agent harness, agentic coding, SaaS architecture,
-  B2B products, D2C products, observability, verification, AI governance.
-</p>
-
-<!-- ===== SECTION 1 ===== -->
-<h2 id="s1"><span class="num">§ 01</span>More agents are not architecture.</h2>
-<p>
-  The current industry mistake is predictable: teams add a planner agent, a researcher agent, a coder agent,
-  a reviewer agent, and an executor agent, then assume they have a multi-agent system. They do not. They have
-  <em>distributed prompt choreography</em>.
+  And before anyone @'s me — I'm not saying agents are bad. I'm saying the agents are the <em>easy</em> part.
+  They're replaceable cognitive workers. The hard part — the part that decides whether your thing survives
+  contact with production — is the <strong>harness</strong>: the boring control layer wrapped around the agents
+  that decides who's allowed to do what, who owns the truth, and what happens when everything catches fire at
+  2 AM (and it will, my god, it will).
 </p>
 <p>
-  A specialized autonomous system requires a stronger discipline. It must define who has authority, who owns
-  state, who may use which tool, who verifies outputs, when humans enter the loop, and what happens when the
-  system becomes uncertain. NIST describes AI risk management as a lifecycle problem involving the design,
-  development, use, and evaluation of AI systems, not merely a model selection problem [<a href="#ref1">1</a>].
-  That framing matters: agentic systems act over time, across tools, and across changing state.
+  NIST frames AI risk as a <em>lifecycle</em> problem — design, development, use, evaluation — not a "which model
+  did you pick" problem [<a href="#ref1">1</a>]. That matters here, because agentic systems act over
+  <strong>time</strong>, across <strong>tools</strong>, and across <strong>changing state</strong>. Three things a
+  single clever prompt has never had to deal with.
 </p>
 
 <div class="pull">
-  <span class="label">Hard truth</span>
-  The harness matters more than the agents. Agents are replaceable cognitive workers. The harness is the
-  operating system that makes them safe, inspectable, and commercially deployable.
+  <span class="label">The one line that matters</span>
+  Agents may be autonomous inside their lane. The system must never be uncontrolled as a whole. Print it,
+  frame it, tattoo it on your CI pipeline. Everything below is just engineering that sentence into something
+  you can deploy.
 </div>
 
-<!-- ===== SECTION 2 ===== -->
-<h2 id="s2"><span class="num">§ 02</span>Core definitions.</h2>
-<p><strong>Agent.</strong> A bounded actor that can observe context, reason over a task, produce artifacts, and optionally invoke tools.</p>
-<p><strong>Harness.</strong> The runtime control envelope around agents: policy, permissions, budgets, schemas, memory, verification, observability, and recovery.</p>
-<p><strong>Orchestration.</strong> The mechanism that decomposes goals, routes work, schedules execution, merges artifacts, and coordinates state transitions.</p>
-<p><strong>Specialized autonomous system.</strong> A system where multiple bounded agents perform domain-specific work under explicit governance to achieve a mission with limited human intervention.</p>
-<p><strong>Agentic coding.</strong> The use of AI agents as structured software delivery workers: product analyst, solution architect, designer, developer, tester, security reviewer, release manager, and site reliability observer.</p>
-
-<!-- ===== SECTION 3 ===== -->
-<h2 id="s3"><span class="num">§ 03</span>Reference architecture.</h2>
+<!-- ===== 2 ===== -->
+<h2 id="s2"><span class="num">§ 02</span>A few definitions, so we're on the same page.</h2>
+<p><strong>Agent</strong> — a bounded actor that observes context, reasons over a task, produces artifacts, and <em>maybe</em> calls a tool. Bounded. Write that down.</p>
+<p><strong>Harness</strong> — the runtime control envelope around the agents: policy, permissions, budgets, schemas, memory, verification, observability, recovery. The unsexy stuff. The stuff that works.</p>
+<p><strong>Orchestration</strong> — how you decompose goals, route work, schedule it, merge it, and move state forward without losing your mind.</p>
 <p>
-  A production-grade multi-agent system should be read as a controlled runtime, not a chatroom. The minimum
-  viable architecture contains mission intake, governance, orchestration, specialist agents, state, tools,
-  verification, and observability.
-</p>
-<p>
-  The reference architecture deliberately separates cognition from authority. The system may use probabilistic
-  agents, but its commits, permissions, traces, and risk gates should be deterministic enough to audit.
+  Notice the harness has nothing to do with how smart your model is. That's the point. <strong>You make
+  probabilistic agents behave by putting them inside deterministic boundaries.</strong>
 </p>
 
-<figure class="diagram">
-  <div class="flow flow-grid">
-    <div class="node">Mission / User / Environment</div>
-    <div class="node blue">Strategic Orchestrator</div>
-    <div class="node blue">Tactical Coordinator</div>
-    <div class="node">Task Queue / Scheduler</div>
-    <div class="node alt">Specialist Agents</div>
-    <div class="node">Tools / APIs / Actuators</div>
-    <div class="node">Policy + Risk + Budget</div>
-    <div class="node">Verifier + Approval Gateway</div>
-    <div class="node blue">Canonical State + Memory</div>
-    <div class="node">Traces + Logs + Metrics + Evidence</div>
-  </div>
-  <div class="caption"><b>Figure 1.</b> Reference architecture for a harnessed specialized autonomous system. The control loop is explicit: mission intake, policy, orchestration, bounded execution, independent verification, state commit, and observability.</div>
-</figure>
-
-<!-- ===== SECTION 4 ===== -->
-<h2 id="s4"><span class="num">§ 04</span>The five architectural planes.</h2>
-<p>Serious agent systems need five planes. Weak systems mix all of them inside prompts.</p>
-
-<h3><span class="num">4.1</span> Control Plane</h3>
-<p>The control plane owns authority. It decides delegation, cancellation, escalation, approval, and recovery.</p>
-
-<h3><span class="num">4.2</span> Data Plane</h3>
-<p>The data plane moves events, messages, retrieved documents, tool outputs, telemetry, and artifacts between services.</p>
-
-<h3><span class="num">4.3</span> State Plane</h3>
-<p>The state plane owns truth: task status, locks, memory snapshots, customer records, deployment state, runbooks, and audit trails.</p>
-
-<h3><span class="num">4.4</span> Execution Plane</h3>
-<p>The execution plane performs work: LLM calls, code edits, browser automation, database queries, API calls, shell execution, and robotic motion.</p>
-
-<h3><span class="num">4.5</span> Assurance Plane</h3>
-<p>
-  The assurance plane constrains risk: policy, verification, adversarial testing, sandboxing, observability,
-  rollback, and human approval. OWASP explicitly recommends least privilege, validated output formats, human
-  approval for high-risk operations, and adversarial testing for prompt injection risk [<a href="#ref4">4</a>].
-</p>
+<!-- ===== 3 ===== -->
+<h2 id="s3"><span class="num">§ 03</span>The five planes (where most systems quietly fail).</h2>
+<p>Serious agent systems separate five planes. Weak systems mash all five inside one giant system prompt and then act surprised.</p>
+<ol>
+  <li><strong>Control plane</strong> — owns <em>authority</em>. Delegation, cancellation, escalation, approval, recovery. Who's the boss.</li>
+  <li><strong>Data plane</strong> — moves events, messages, retrieved docs, tool outputs, telemetry between services. The plumbing.</li>
+  <li><strong>State plane</strong> — owns <em>truth</em>. Task status, locks, memory, customer records, audit trails. The single source of "what actually happened."</li>
+  <li><strong>Execution plane</strong> — does the work. LLM calls, code edits, browser automation, DB queries, shell commands.</li>
+  <li><strong>Assurance plane</strong> — constrains <em>risk</em>. Policy, verification, sandboxing, rollback, human approval. OWASP straight-up recommends least privilege, validated output formats, human approval for high-risk actions, and adversarial testing for prompt injection [<a href="#ref4">4</a>]. Non-negotiable.</li>
+</ol>
 
 <figure class="diagram">
   <div class="flow" style="flex-direction: column; gap: 14px;">
@@ -483,173 +428,76 @@
       <div class="node alt">Assurance Plane</div>
     </div>
   </div>
-  <div class="caption"><b>Figure 2.</b> The five planes of agentic autonomy.</div>
+  <div class="caption"><b>Figure 1.</b> The five planes of agentic autonomy.</div>
 </figure>
 
-<!-- ===== SECTION 5 ===== -->
-<h2 id="s5"><span class="num">§ 05</span>Agent role contracts.</h2>
-<p>Agents should not be defined by motivational personality prompts. They should be defined by contracts.</p>
+<p>
+  If your "multi-agent system" has all five of these living inside the prompt of one supervisor agent — and be
+  honest — that's not five planes. That's one plane wearing five hats and hoping.
+</p>
+
+<!-- ===== 4 ===== -->
+<h2 id="s4"><span class="num">§ 04</span>Agents should have contracts, not personalities.</h2>
+<p>This is the hill I'll gently die on.</p>
+<p>
+  Stop defining agents with motivational prompts. "You are a brilliant, meticulous senior engineer who cares
+  deeply about quality" — that's not an engineering spec, that's a horoscope. Define them with
+  <strong>contracts</strong>:
+</p>
 
 <figure class="code">
 <pre><code>agent:
   id: verifier.payment_policy.v1
   role: independent_verifier
-  allowed_inputs:
-    - proposed_action
-    - policy_context
-    - state_snapshot
-  allowed_tools:
-    - policy_lookup
-    - transaction_limit_checker
-  forbidden_tools:
-    - payment_execute
-    - database_write
+  allowed_tools:    [policy_lookup, transaction_limit_checker]
+  forbidden_tools:  [payment_execute, database_write]
   output_schema:
     decision: approve | reject | repair | escalate
-    reasons: string[]
     risk_score: number
     human_approval_required: boolean</code></pre>
-<div class="caption"><b>Listing 1.</b> Example agent contract.</div>
+<div class="caption"><b>Listing 1.</b> An agent contract — allowed tools, <b>forbidden</b> tools, schema-d output.</div>
 </figure>
 
 <p>
-  The contract should declare allowed tools, forbidden tools, input schemas, output schemas, budget limits,
-  retry limits, verification rules, and escalation thresholds. <strong>The narrower the agent boundary, the easier
-  the system is to debug.</strong>
+  Allowed tools, <em>forbidden</em> tools, input schema, output schema, budget limits, retry limits, escalation
+  thresholds. The narrower the boundary, the easier the 2 AM debugging session. A verifier that <em>literally
+  cannot</em> call <code>payment_execute</code> can't accidentally pay someone. Revolutionary, I know.
 </p>
 
-<!-- ===== SECTION 6 ===== -->
-<h2 id="s6"><span class="num">§ 06</span>Core orchestration patterns.</h2>
-<p>
-  No single orchestration pattern solves every domain. Mature systems combine patterns based on risk, latency,
-  auditability, and resource constraints.
-</p>
-
-<h3><span class="num">6.1</span> Hierarchical Supervisor</h3>
-<p>
-  The hierarchical pattern uses a supervisor to decompose the mission and assign bounded tasks to specialists.
-  Safest default for SaaS, finance, legal-tech, healthcare, cybersecurity, and B2B workflow automation.
-</p>
-<figure class="diagram">
-  <div class="flow" style="flex-direction: column;">
-    <div class="node blue">Supervisor / Orchestrator</div>
-    <div style="display:flex; gap: 14px;">
-      <div class="node">Planner</div>
-      <div class="node">Researcher</div>
-      <div class="node">Executor</div>
-    </div>
-    <div class="node alt">Verifier</div>
-  </div>
-  <div class="caption"><b>Figure 3.</b> Hierarchical supervisor pattern.</div>
-</figure>
-<p><strong>Strengths:</strong> clear accountability, strong auditability, simple failure containment. <strong>Weaknesses:</strong> central bottleneck and reduced adaptability.</p>
-
-<h3><span class="num">6.2</span> Blackboard Pattern</h3>
-<p>Agents contribute to a shared structured workspace. Useful for diagnostics, research synthesis, threat analysis, scientific reasoning, product discovery, and UX decision-making.</p>
-
-<figure class="code">
-<pre><code>blackboard_entry:
-  id: string
-  author_agent: string
-  claim: string
-  evidence_refs: string[]
-  confidence: number
-  expiry: timestamp
-  state_version: string
-  verification_status: unverified | verified | rejected</code></pre>
-<div class="caption"><b>Listing 2.</b> Blackboard entry schema.</div>
-</figure>
-
-<p>Without schemas, blackboards rot into noisy group chats. Every claim must have evidence, author, confidence, expiry, and verification status.</p>
-
-<h3><span class="num">6.3</span> Event-Driven Mesh</h3>
-<p>
-  Event-driven systems use an event bus to decouple producers and consumers. They scale well, but causal
-  reasoning becomes difficult unless traces are mandatory. OpenTelemetry frames observability around signals
-  such as traces, metrics, logs, baggage, and profiles [<a href="#ref2">2</a>]; those concepts map directly to
-  multi-agent runtime instrumentation.
-</p>
-
-<figure class="code">
-<pre><code>{
-  "event_id": "evt_123",
-  "event_type": "task.completed",
-  "mission_id": "mission_456",
-  "trace_id": "trace_789",
-  "source_agent": "execution_agent.v1",
-  "state_version": "state_88",
-  "risk_level": "medium",
-  "payload": {}
-}</code></pre>
-<div class="caption"><b>Listing 3.</b> Agent event envelope.</div>
-</figure>
-
-<p>Event-driven agent systems require idempotency, schema versioning, dead-letter queues, causal tracing, retry budgets, and loop prevention.</p>
-
-<h3><span class="num">6.4</span> Market / Auction-Based Allocation</h3>
-<p>
-  Auction-based allocation is useful when agents have different capabilities, cost, latency, risk, availability,
-  or location. Common in robot fleets and distributed work scheduling. Recent robot fleet work emphasizes
-  shared world state, planning, scheduling, execution, and replanning across heterogeneous robots [<a href="#ref6">6</a>].
-</p>
-<pre style="text-align: center; background: var(--white); color: var(--ink); border: 1.5px solid var(--ink); border-left: 4px solid var(--blue);"><code>Score = 0.30·C + 0.20·Q − 0.20·K − 0.15·L − 0.15·R</code></pre>
-<p style="font-size: 13px; color: var(--grey); margin-top: -10px;">
-  Where <code>C</code> = capability match, <code>Q</code> = confidence, <code>K</code> = normalized cost,
-  <code>L</code> = latency, <code>R</code> = risk. Do not select agents only on speed or cost. That creates unsafe shortcuts.
-</p>
-
-<h3><span class="num">6.5</span> Hybrid Pattern</h3>
-<p>Serious systems usually end up hybrid: hierarchical control for governance, auction allocation for dynamic work, blackboard memory for shared reasoning, and event streams for tool results and telemetry.</p>
+<!-- ===== 5 ===== -->
+<h2 id="s5"><span class="num">§ 05</span>Orchestration patterns (and when to actually use them).</h2>
+<p>No single pattern wins everything. Mature systems mix them based on risk, latency, and how much you'll cry if something goes wrong.</p>
+<ul>
+  <li><strong>Hierarchical Supervisor</strong> — one boss decomposes the mission, hands bounded tasks to specialists, a verifier checks the work. Safest default for SaaS, fintech, legal-tech, healthcare. <em>Strength:</em> clean accountability, easy to audit. <em>Weakness:</em> the supervisor becomes a bottleneck.</li>
+  <li><strong>Blackboard</strong> — agents post to a shared structured workspace. Great for research synthesis, diagnostics, product discovery. But every entry <em>must</em> carry evidence, author, confidence, and verification status — otherwise your blackboard rots into a noisy group chat. (We've seen that group chat. We don't want that group chat.)</li>
+  <li><strong>Event-Driven Mesh</strong> — an event bus decouples producers and consumers. Scales beautifully, causal reasoning gets painful unless traces are mandatory. OpenTelemetry's whole model — traces, metrics, logs, baggage [<a href="#ref2">2</a>] — maps directly onto agent runtime instrumentation, so use it.</li>
+  <li><strong>Auction / Market</strong> — agents bid on tasks by capability, cost, latency, risk. Useful for robot fleets and heterogeneous workers [<a href="#ref6">6</a>]. One rule: <strong>don't allocate on speed or cost alone.</strong> That's how you get fast, cheap, <em>unsafe</em> shortcuts.</li>
+  <li><strong>Hybrid</strong> — what every serious system actually becomes. Of course it's a hybrid. It's always a hybrid.</li>
+</ul>
 
 <table>
-  <thead>
-    <tr><th>Function</th><th>Best pattern</th></tr>
-  </thead>
+  <thead><tr><th>What you need</th><th>Pattern that fits</th></tr></thead>
   <tbody>
     <tr><td>Mission control</td><td>Hierarchical supervisor</td></tr>
     <tr><td>Dynamic allocation</td><td>Auction / market</td></tr>
     <tr><td>Shared reasoning</td><td>Blackboard</td></tr>
     <tr><td>Tool propagation</td><td>Event-driven mesh</td></tr>
     <tr><td>Safety approval</td><td>Verifier + human gate</td></tr>
-    <tr><td>Recovery</td><td>Supervisor + event replay</td></tr>
     <tr><td>Memory</td><td>Canonical state + event log</td></tr>
   </tbody>
-  <caption><b>Table 1.</b> Pattern selection by system function.</caption>
+  <caption><b>Table 1.</b> Pick the pattern by the job, not by the demo.</caption>
 </table>
 
-<!-- ===== SECTION 7 ===== -->
-<h2 id="s7"><span class="num">§ 07</span>Mission-to-commit workflow.</h2>
-<p>The central workflow is not "agent talks to agent." It is mission intake, policy check, task graph creation, execution, verification, and state commit.</p>
-
-<figure class="diagram">
-  <div class="flow flow-grid">
-    <div class="node">Mission Intake</div>
-    <div class="node">Policy Check</div>
-    <div class="node">Task Graph</div>
-    <div class="node blue">Specialist Agent Work</div>
-    <div class="node">Tool / API Call</div>
-    <div class="node alt">Independent Verification</div>
-    <div class="node blue">Commit State</div>
-    <div class="node">Trace + Audit</div>
-  </div>
-  <div class="caption"><b>Figure 4.</b> Mission-to-commit workflow. State is committed only after explicit verification.</div>
-</figure>
-
-<!-- ===== SECTION 8 ===== -->
-<h2 id="s8"><span class="num">§ 08</span>The harness layer, in depth.</h2>
-<p>The harness is the runtime control envelope. It makes probabilistic agents behave inside deterministic boundaries. A harness should include:</p>
-<ul>
-  <li>Identity and access control</li>
-  <li>Tool whitelists, data egress controls, prompt and content isolation</li>
-  <li>Output validation</li>
-  <li>Risk scoring, budget ceilings, approval gates</li>
-  <li>Sandboxed execution, rollback</li>
-  <li>Immutable audit logs</li>
-</ul>
+<!-- ===== 6 ===== -->
+<h2 id="s6"><span class="num">§ 06</span>The harness layer, up close.</h2>
 <p>
-  LangGraph's public documentation emphasizes durable execution, persistence, human-in-the-loop control,
-  and runtime visibility as core orchestration capabilities [<a href="#ref3">3</a>].
+  The harness is what separates "industry-grade autonomous system" from "distributed hallucination machine."
+  A real one includes identity &amp; access control, tool whitelists, data egress controls, output validation,
+  risk scoring, budget ceilings, approval gates, sandboxed execution, rollback, and immutable audit logs.
+  (LangGraph leans hard into durable execution, persistence, human-in-the-loop, and runtime visibility for
+  exactly this reason [<a href="#ref3">3</a>].)
 </p>
+<p>The runtime gate, in plain terms:</p>
 
 <figure class="diagram">
   <div class="flow" style="flex-direction: column;">
@@ -664,308 +512,175 @@
     </div>
     <div class="node blue">Commit / Block / Repair</div>
   </div>
-  <div class="caption"><b>Figure 5.</b> Runtime harness gate.</div>
+  <div class="caption"><b>Figure 2.</b> The runtime harness gate. Boring, deterministic — exactly what you want between a probabilistic agent and your production database.</div>
 </figure>
 
-<!-- ===== SECTION 9 ===== -->
-<h2 id="s9"><span class="num">§ 09</span>Verification workflow.</h2>
-<p>The executor must not verify itself. Verification should be independent and risk-weighted.</p>
+<!-- ===== 7 ===== -->
+<h2 id="s7"><span class="num">§ 07</span>Verification: the executor does not grade its own homework.</h2>
+<p>
+  This is the single most skipped step, and it's the one that saves you. Verification must be
+  <strong>independent</strong> and <strong>risk-weighted</strong> — the agent that did the work is the last one
+  who should confirm it's correct.
+</p>
 
 <table>
-  <thead><tr><th>Action</th><th>Required verification</th></tr></thead>
+  <thead><tr><th>Action</th><th>What must verify it</th></tr></thead>
   <tbody>
     <tr><td>Read-only retrieval</td><td>Provenance + schema</td></tr>
-    <tr><td>Internal planning</td><td>Logical consistency</td></tr>
     <tr><td>Database write</td><td>Schema + permission + state version</td></tr>
     <tr><td>Code execution</td><td>Sandbox + tests + static analysis</td></tr>
-    <tr><td>Payment or trade</td><td>Policy + risk + human approval</td></tr>
+    <tr><td>Payment or trade</td><td>Policy + risk + <strong>human approval</strong></td></tr>
     <tr><td>Customer message</td><td>Factuality + tone + compliance</td></tr>
     <tr><td>Production deploy</td><td>CI + security + rollback plan</td></tr>
   </tbody>
   <caption><b>Table 2.</b> Risk-weighted verification matrix.</caption>
 </table>
 
-<p>Verification includes schema verification, policy verification, factual verification, logical verification, tool verification, security verification, and human verification.</p>
+<p>A read costs you a schema check. A payment costs you a human. Price the verification to match the blast radius. Simple.</p>
 
-<!-- ===== SECTION 10 ===== -->
-<h2 id="s10"><span class="num">§ 10</span>State & memory architecture.</h2>
-<p>Multi-agent systems fail when state becomes vague. Use three layers: local working memory, shared mission workspace, and canonical state.</p>
-<p>Agents should not directly mutate canonical state. They submit proposed state transitions.</p>
-
-<figure class="code">
-<pre><code>state_transition:
-  transition_id: string
-  proposed_by: agent_id
-  previous_state_version: string
-  operation: create | update | delete | reserve | release
-  target_resource: string
-  payload: object
-  verification_status: pending</code></pre>
-<div class="caption"><b>Listing 4.</b> State transition proposal.</div>
-</figure>
-
-<figure class="diagram">
-  <div class="flow" style="flex-direction: column;">
-    <div class="node">Agent Working Memory</div>
-    <div class="arrow">↓</div>
-    <div class="node blue">Shared Workspace</div>
-    <div class="arrow">↓</div>
-    <div class="node alt">Canonical State</div>
-    <div class="arrow">↓</div>
-    <div class="node">Event Log</div>
-  </div>
-  <div class="caption"><b>Figure 6.</b> Memory and state layers.</div>
-</figure>
-
-<!-- ===== SECTION 11 ===== -->
-<h2 id="s11"><span class="num">§ 11</span>Observability requirements.</h2>
-<p>Once agents act asynchronously, explainability becomes a distributed-systems problem. Every mission, task, tool call, agent decision, verification decision, human approval, and state transition needs a trace ID.</p>
-
-<figure class="code">
-<pre><code>{
-  "trace_id": "trace_abc",
-  "mission_id": "mission_001",
-  "task_id": "task_009",
-  "agent_id": "planner.v2",
-  "state_version": "state_104",
-  "tool_name": "database.write",
-  "policy_bundle": "policy.finance.v3",
-  "risk_score": 0.72,
-  "decision": "request_human_approval",
-  "latency_ms": 1200,
-  "tokens_used": 3400,
-  "retry_count": 1
-}</code></pre>
-<div class="caption"><b>Listing 5.</b> Minimum trace record.</div>
-</figure>
-
-<p>Track agent failure rate, verifier rejection rate, retry count, human escalation rate, state conflict rate, dead-letter events, tool error correlation, budget burn, and mean time to recovery.</p>
-
-<!-- ===== SECTION 12 ===== -->
-<h2 id="s12"><span class="num">§ 12</span>Failure & recovery workflows.</h2>
-<p>A serious system must design the unhappy path before celebrating autonomy.</p>
+<!-- ===== 8 ===== -->
+<h2 id="s8"><span class="num">§ 08</span>State, memory, and the failure nobody plans for.</h2>
+<p>
+  Multi-agent systems fall apart the moment "state" gets vague. Use three layers — local working memory, a
+  shared mission workspace, and one <strong>canonical state</strong> that is the truth. And agents should never
+  mutate canonical state directly. They <em>propose</em> transitions; the harness verifies and commits. (Yes,
+  like a pull request. Agents open PRs against reality. I think that's beautiful.)
+</p>
+<p>And please — design the unhappy path <em>before</em> you celebrate the happy one:</p>
 
 <table>
   <thead><tr><th>Failure</th><th>Recovery</th></tr></thead>
   <tbody>
-    <tr><td>Hallucinated output</td><td>Verifier rejects; repair or reassign</td></tr>
-    <tr><td>Tool timeout</td><td>Retry with backoff; fallback tool</td></tr>
-    <tr><td>State conflict</td><td>Lock reconcile; reload state</td></tr>
-    <tr><td>Infinite loop</td><td>Retry budget kill switch</td></tr>
-    <tr><td>Prompt injection</td><td>Isolate content; block tool call</td></tr>
-    <tr><td>Unsafe action</td><td>Policy stop + human review</td></tr>
-    <tr><td>Compromised agent</td><td>Revoke identity and tools</td></tr>
+    <tr><td>Hallucinated output</td><td>Verifier rejects → repair or reassign</td></tr>
+    <tr><td>Tool timeout</td><td>Retry with backoff → fallback tool</td></tr>
+    <tr><td>Infinite loop</td><td>Retry-budget kill switch</td></tr>
+    <tr><td>Prompt injection</td><td>Isolate content → block the tool call</td></tr>
+    <tr><td>Compromised agent</td><td>Revoke its identity and tools</td></tr>
   </tbody>
-  <caption><b>Table 3.</b> Common failure modes and recovery paths.</caption>
+  <caption><b>Table 3.</b> Common failure modes and their recovery paths.</caption>
 </table>
 
-<figure class="diagram">
-  <div class="flow flow-grid">
-    <div class="node alt">Failure Detected</div>
-    <div class="node">Classify Type</div>
-    <div class="node">Reassign Agent</div>
-    <div class="node">Retry Tool</div>
-    <div class="node alt">Safe Stop</div>
-    <div class="node">Resume from Checkpoint</div>
-    <div class="node blue">Verify Recovered State</div>
-  </div>
-  <div class="caption"><b>Figure 7.</b> Failure recovery workflow.</div>
-</figure>
-
-<!-- ===== SECTION 13 ===== -->
-<h2 id="s13"><span class="num">§ 13</span>Human-in-the-loop design.</h2>
-<p>Human approval is not a vague "Should I continue?" prompt. It is a structured decision packet.</p>
-
-<div class="pull">
-  <span class="label">Review packet minimum</span>
-  mission ID, task ID, proposed action, expected impact, risk score, passed/failed policy checks, evidence
-  references, alternatives, recommendation, and rollback plan.
-</div>
-
-<p>Humans should approve actions with known blast radius, evidence, impact, rollback plan, and alternatives. Anything less is fake consent.</p>
-
-<!-- ===== SECTION 14 ===== -->
-<h2 id="s14"><span class="num">§ 14</span>Agentic coding for industry-grade products.</h2>
 <p>
-  Agentic coding is where these concepts become commercially useful. But the goal is not faster code
-  generation. The goal is faster product delivery without collapsing quality, security, maintainability,
-  or user trust.
-</p>
-<p>
-  A real SaaS, B2B, or D2C product requires far more than screens and endpoints. It needs authentication,
-  authorization, tenant isolation, billing, onboarding, analytics, observability, support workflows, data
-  privacy, audit logs, CI/CD, rollback, cost control, and a product feedback loop.
+  Every mission, task, tool call, and decision gets a <code>trace_id</code>. Once agents go async, explainability
+  becomes a <em>distributed-systems</em> problem, not a vibes problem.
 </p>
 
-<h3><span class="num">14.1</span> The Agentic Product Factory</h3>
-<p>A strong agentic coding setup turns the software team into a harnessed product factory.</p>
-
-<h3><span class="num">14.2</span> Agent Roles in Product Engineering</h3>
-<table>
-  <thead><tr><th>Agent</th><th>Responsibility</th></tr></thead>
-  <tbody>
-    <tr><td>Product Agent</td><td>PRD, use cases, acceptance criteria, prioritization</td></tr>
-    <tr><td>Research Agent</td><td>Competitor review, user pain, market evidence</td></tr>
-    <tr><td>UX Agent</td><td>Flows, IA, wireframes, design system mapping</td></tr>
-    <tr><td>Architecture Agent</td><td>System design, data model, service boundaries</td></tr>
-    <tr><td>Backend Agent</td><td>APIs, database, jobs, integrations, domain logic</td></tr>
-    <tr><td>Frontend Agent</td><td>UI, state management, accessibility, responsiveness</td></tr>
-    <tr><td>QA Agent</td><td>Test plan, unit/integration/e2e tests, edge cases</td></tr>
-    <tr><td>Security Agent</td><td>Threat model, auth, RBAC, secret handling, dependency risk</td></tr>
-    <tr><td>DevOps Agent</td><td>CI/CD, environment config, preview deploys, rollback</td></tr>
-    <tr><td>Verifier Agent</td><td>Cross-checks requirements, diff, tests, risk, release gates</td></tr>
-  </tbody>
-  <caption><b>Table 4.</b> Specialized coding agents mapped to product delivery.</caption>
-</table>
-
-<h3><span class="num">14.3</span> B2B SaaS Pattern</h3>
-<p>B2B SaaS is governance-heavy. The agentic system must prioritize tenant isolation, RBAC, auditability, data export, admin controls, integration reliability, and contractual workflows.</p>
-
-<h3><span class="num">14.4</span> D2C Product Pattern</h3>
-<p>D2C products are conversion-heavy. The agentic system must prioritize onboarding, activation, payments, retention, recommendations, funnel analytics, performance, mobile UX, and trust signals.</p>
-
-<h3><span class="num">14.5</span> Industry-Grade Gates</h3>
-<p>Agentic coding must use quality gates. Otherwise it only produces faster technical debt.</p>
+<!-- ===== 9 ===== -->
+<h2 id="s9"><span class="num">§ 09</span>The maturity ladder (your "L4" is an L2 in a nice jacket).</h2>
+<p>
+  Most teams claim L4 while running L2 with extra prompts. The difference was never the <em>number</em> of agents.
+  It's governance, verification, state, observability, and recovery.
+</p>
 
 <table>
-  <thead><tr><th>Gate</th><th>Release standard</th></tr></thead>
+  <thead><tr><th>Level</th><th>What it actually means</th></tr></thead>
   <tbody>
-    <tr><td>Requirement gate</td><td>PRD, edge cases, measurable acceptance criteria</td></tr>
-    <tr><td>Architecture gate</td><td>Data model, API contract, scalability assumptions</td></tr>
-    <tr><td>Security gate</td><td>Auth, RBAC, secrets, dependency scan, threat model</td></tr>
-    <tr><td>Quality gate</td><td>Tests, lint, type checks, performance budgets</td></tr>
-    <tr><td>UX gate</td><td>Accessibility, responsive design, error states</td></tr>
-    <tr><td>Ops gate</td><td>Logs, traces, metrics, alerts, rollback</td></tr>
-    <tr><td>Business gate</td><td>Pricing, onboarding, support, analytics, retention</td></tr>
+    <tr><td><b>L0</b></td><td>Human uses tools manually</td></tr>
+    <tr><td><b>L1</b></td><td>Assistant suggests actions</td></tr>
+    <tr><td><b>L2</b></td><td>Agent uses tools under human control <em>(you are probably here)</em></td></tr>
+    <tr><td><b>L3</b></td><td>Multiple agents coordinate tasks</td></tr>
+    <tr><td><b>L4</b></td><td>Harnessed autonomy with verification + state <em>(you think you are here)</em></td></tr>
+    <tr><td><b>L5</b></td><td>Adaptive governed autonomy with self-repair</td></tr>
   </tbody>
-  <caption><b>Table 5.</b> Release gates for agentic product engineering.</caption>
+  <caption><b>Table 4.</b> Autonomy maturity levels.</caption>
 </table>
 
-<h3><span class="num">14.6</span> The Agentic Coding Control Loop</h3>
+<p>No shame in L2. A lot of shame in <em>shipping</em> L2 while <em>believing</em> it's L4.</p>
+
+<!-- ===== 10 ===== -->
+<h2 id="s10"><span class="num">§ 10</span>So where does this actually pay off? Agentic coding.</h2>
+<p>
+  This is where the theory turns into money. The goal of agentic coding is <em>not</em> faster code generation —
+  it's faster <em>product</em> delivery without collapsing quality, security, or user trust. A real SaaS needs
+  auth, tenant isolation, billing, observability, audit logs, rollback, cost control. Screens and endpoints are
+  the easy 20%.
+</p>
+<p>
+  So you give each concern an agent with a contract — Product, UX, Architecture, Backend, Frontend, QA, Security,
+  DevOps, and a <strong>Verifier</strong> that blocks the release if tests, tenant isolation, or audit logging are
+  missing.
+</p>
+
 <figure class="diagram">
   <div class="flow flow-grid">
     <div class="node">Market / User Problem</div>
-    <div class="node blue">Product Agent</div>
-    <div class="node blue">UX + Design Agent</div>
+    <div class="node blue">Product + UX Agents</div>
     <div class="node blue">Architecture Agent</div>
-    <div class="node blue">Backend + Frontend Agents</div>
-    <div class="node">QA + Security Agents</div>
+    <div class="node blue">Backend + Frontend</div>
+    <div class="node">QA + Security</div>
     <div class="node alt">Verifier + Release Gate</div>
     <div class="node">Telemetry + Feedback</div>
   </div>
-  <div class="caption"><b>Figure 8.</b> Agentic product factory for SaaS, B2B, and D2C delivery. The loop does not end at code. It ends at telemetry-backed product learning.</div>
+  <div class="caption"><b>Figure 3.</b> The agentic product factory. The loop does not end at code — it ends at telemetry-backed product learning.</div>
 </figure>
 
-<h3><span class="num">14.7</span> What Agentic Coding Should Never Do</h3>
+<p>And the one rule that holds the whole thing together:</p>
+
+<div class="pull">
+  <span class="label">The rule that holds it together</span>
+  The same agent must never define the requirement, write the code, approve the diff, disable the test,
+  deploy it, <em>and</em> interpret the failure. That's not autonomy. That's one unsupervised intern with root
+  access. Builders create, verifiers challenge, policy decides, CI enforces, humans approve the scary stuff.
+</div>
+
 <p>
-  An agentic coding system should not let the same agent define requirements, write code, approve the diff,
-  disable tests, deploy to production, and interpret production failures. That is not autonomy. That is
-  concentrated unchecked risk.
-</p>
-<p>The secure model is separation of duties:</p>
-<ul>
-  <li>Builder agents create artifacts.</li>
-  <li>Verifier agents challenge artifacts.</li>
-  <li>Policy services define allowed actions.</li>
-  <li>CI systems enforce deterministic checks.</li>
-  <li>Humans approve high-risk production transitions.</li>
-</ul>
-<p>
-  MCP can help standardize how coding agents connect to external systems such as files, databases, tools,
-  and workflows [<a href="#ref5">5</a>], but standard connectivity increases the importance of least
-  privilege and tool isolation.
+  MCP helps standardize how coding agents plug into files, databases, and tools [<a href="#ref5">5</a>] — but
+  standard connectivity just makes least privilege and tool isolation matter <em>more</em>, not less.
 </p>
 
-<!-- ===== SECTION 15 ===== -->
-<h2 id="s15"><span class="num">§ 15</span>Implementation stack.</h2>
-<p>A practical implementation can use the following stack.</p>
-<table>
-  <thead><tr><th>Layer</th><th>Typical choices</th></tr></thead>
-  <tbody>
-    <tr><td>Orchestration</td><td>LangGraph, Temporal, custom DAG runtime</td></tr>
-    <tr><td>Agent workers</td><td>Containerized Python/Node workers</td></tr>
-    <tr><td>State</td><td>Postgres, Redis, event store</td></tr>
-    <tr><td>Memory</td><td>pgvector, Qdrant, object store</td></tr>
-    <tr><td>Messaging</td><td>Kafka, NATS, RabbitMQ, Redis streams</td></tr>
-    <tr><td>Policy</td><td>OPA, Cedar, custom policy service</td></tr>
-    <tr><td>Observability</td><td>OpenTelemetry, Prometheus, Grafana, Jaeger</td></tr>
-    <tr><td>Execution sandbox</td><td>Docker, Firecracker, gVisor</td></tr>
-    <tr><td>Product repo</td><td>GitHub, CI, protected branches, preview deployments</td></tr>
-    <tr><td>Human gate</td><td>GitHub PR, Slack approval, internal console</td></tr>
-  </tbody>
-  <caption><b>Table 6.</b> Practical stack for harnessed agentic systems.</caption>
-</table>
-
-<!-- ===== SECTION 16 ===== -->
-<h2 id="s16"><span class="num">§ 16</span>Autonomy maturity model.</h2>
-<p>
-  Most teams claim L4 while operating at L2 with extra prompts. The difference is not the number of agents;
-  it is governance, verification, state, observability, and recovery.
-</p>
-<table>
-  <thead><tr><th>Level</th><th>Capability</th></tr></thead>
-  <tbody>
-    <tr><td><b>L0</b></td><td>Human uses tools manually</td></tr>
-    <tr><td><b>L1</b></td><td>Single assistant suggests actions</td></tr>
-    <tr><td><b>L2</b></td><td>Agent uses tools under human control</td></tr>
-    <tr><td><b>L3</b></td><td>Multiple agents coordinate tasks</td></tr>
-    <tr><td><b>L4</b></td><td>Harnessed autonomy with verification and state</td></tr>
-    <tr><td><b>L5</b></td><td>Adaptive governed autonomy with self-repair</td></tr>
-  </tbody>
-  <caption><b>Table 7.</b> Agentic autonomy maturity levels.</caption>
-</table>
-
-<!-- ===== SECTION 17 ===== -->
-<h2 id="s17"><span class="num">§ 17</span>Design rules.</h2>
+<!-- ===== 11 ===== -->
+<h2 id="s11"><span class="num">§ 11</span>The ten rules, if you skipped to the bottom (I see you).</h2>
 <ol>
-  <li>Start hierarchical before adding swarm behavior.</li>
-  <li>Define canonical state before building agent memory.</li>
-  <li>Define agent contracts before writing prompts.</li>
-  <li>Add verification before adding more agents.</li>
+  <li>Start hierarchical before you go full swarm.</li>
+  <li>Define canonical state before agent memory.</li>
+  <li>Define contracts before prompts.</li>
+  <li>Add verification before adding agents.</li>
   <li>Separate planning, execution, and approval.</li>
-  <li>Use traces for every agent and tool call.</li>
-  <li>Treat external content as untrusted.</li>
-  <li>Sandbox code execution and browser automation.</li>
-  <li>Use human gates for high-impact actions.</li>
+  <li>Trace every agent and tool call.</li>
+  <li>Treat all external content as untrusted.</li>
+  <li>Sandbox code and browser automation.</li>
+  <li>Human-gate the high-blast-radius actions.</li>
   <li>Optimize for recoverability, not demo magic.</li>
 </ol>
 
-<!-- ===== SECTION 18 ===== -->
-<h2 id="s18"><span class="num">§ 18</span>Conclusion.</h2>
+<!-- ===== 12 ===== -->
+<h2 id="s12"><span class="num">§ 12</span>So, the takeaway.</h2>
 <p>
-  Multi-agent systems are not powerful because they contain many agents. They are powerful when responsibilities
-  are partitioned, autonomy is bounded, authority is explicit, state is coherent, tools are constrained,
-  verification is independent, failures are recoverable, and observability is complete.
-</p>
-<p>
-  For agentic coding, the same principle applies. The goal is not to make one AI write an entire product in a
-  burst. The goal is to create a controlled product engineering system where specialized agents collaborate
-  under contracts and gates to ship reliable SaaS, B2B, and D2C products.
+  Multi-agent systems aren't powerful because they have many agents. They're powerful when responsibilities are
+  partitioned, autonomy is bounded, authority is explicit, state is coherent, verification is independent, and
+  failures are recoverable. Everything else is a very expensive way to generate confident nonsense at scale.
 </p>
 
 <div class="pull">
   <span class="label">Final principle</span>
-  Agents should be autonomous inside their lane, but the system must never be uncontrolled as a whole.
-  That is the difference between an industry-grade autonomous system and a distributed hallucination machine.
+  The agents were never the hard part. Build the harness. That's the whole difference between an industry-grade
+  autonomous system and a distributed hallucination machine.
 </div>
 
+<p style="color: var(--grey); font-size: 15px;">
+  This was the version I'd say out loud over coffee. The formal write-up — full reference architecture, every
+  diagram, the complete agent-contract and state-transition schemas — is in the
+  <a href="/harness/multi_agent_harnessing_sgnk.pdf">PDF</a>. If this saved you one 2 AM incident, that's a win.
+  <strong>Craft. Harness. Deploy.</strong> — Sagnik
+</p>
+
 <!-- ===== REFERENCES ===== -->
-<h2 id="refs"><span class="num">§ References</span>Cited works.</h2>
+<h2 id="refs"><span class="num">§ References</span>Where this comes from.</h2>
 <div class="refs">
   <ol>
-    <li id="ref1">National Institute of Standards and Technology. <em>AI Risk Management Framework</em>. NIST states that AI RMF is intended for voluntary use and for incorporating trustworthiness into the design, development, use, and evaluation of AI products, services, and systems. <a href="https://www.nist.gov/itl/ai-risk-management-framework">nist.gov/itl/ai-risk-management-framework</a></li>
-    <li id="ref2">OpenTelemetry. <em>Signals</em>. Official documentation describing observability signals including traces, metrics, logs, baggage, and profiles. <a href="https://opentelemetry.io/docs/concepts/signals/">opentelemetry.io/docs/concepts/signals/</a></li>
-    <li id="ref3">LangChain. <em>LangGraph Overview</em>. Documentation describing LangGraph as an orchestration runtime for long-running, stateful agents with durable execution, streaming, human-in-the-loop, and persistence. <a href="https://docs.langchain.com/oss/python/langgraph/overview">docs.langchain.com/oss/python/langgraph/overview</a></li>
-    <li id="ref4">OWASP GenAI Security Project. <em>LLM01:2025 Prompt Injection</em>. Official guidance on direct and indirect prompt injection, prevention, least privilege, output validation, human approval, and adversarial testing. <a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">genai.owasp.org/llmrisk/llm01-prompt-injection/</a></li>
-    <li id="ref5">Model Context Protocol. <em>What is the Model Context Protocol?</em>. Official documentation defining MCP as an open-source standard for connecting AI applications to external systems, data sources, tools, and workflows. <a href="https://modelcontextprotocol.io/docs/getting-started/intro">modelcontextprotocol.io/docs/getting-started/intro</a></li>
-    <li id="ref6">Gupta, R., Asbery, T., Merchant, Z., Anwar, A., and Thomason, J. <em>RobotFleet: An Open-Source Framework for Centralized Multi-Robot Task Planning</em>. arXiv, 2025. <a href="https://arxiv.org/abs/2510.10379">arxiv.org/abs/2510.10379</a></li>
-    <li id="ref7">Datta, S., Nahin, S. K., Chhabra, A., and Mohapatra, P. <em>Agentic AI Security: Threats, Defenses, Evaluation and Open Challenges</em>. arXiv, 2025. <a href="https://arxiv.org/abs/2510.23883">arxiv.org/abs/2510.23883</a></li>
+    <li id="ref1">National Institute of Standards and Technology. <em>AI Risk Management Framework</em> — incorporating trustworthiness into the design, development, use, and evaluation of AI systems. <a href="https://www.nist.gov/itl/ai-risk-management-framework">nist.gov/itl/ai-risk-management-framework</a></li>
+    <li id="ref2">OpenTelemetry. <em>Signals</em> — observability signals: traces, metrics, logs, baggage, profiles. <a href="https://opentelemetry.io/docs/concepts/signals/">opentelemetry.io/docs/concepts/signals/</a></li>
+    <li id="ref3">LangChain. <em>LangGraph Overview</em> — orchestration runtime for long-running, stateful agents with durable execution, human-in-the-loop, and persistence. <a href="https://docs.langchain.com/oss/python/langgraph/overview">docs.langchain.com/oss/python/langgraph/overview</a></li>
+    <li id="ref4">OWASP GenAI Security Project. <em>LLM01:2025 Prompt Injection</em> — least privilege, output validation, human approval, adversarial testing. <a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">genai.owasp.org/llmrisk/llm01-prompt-injection/</a></li>
+    <li id="ref5">Model Context Protocol. <em>What is MCP?</em> — open standard for connecting AI apps to external systems, data, and tools. <a href="https://modelcontextprotocol.io/docs/getting-started/intro">modelcontextprotocol.io/docs/getting-started/intro</a></li>
+    <li id="ref6">Gupta, R. et al. <em>RobotFleet: An Open-Source Framework for Centralized Multi-Robot Task Planning</em>. arXiv, 2025. <a href="https://arxiv.org/abs/2510.10379">arxiv.org/abs/2510.10379</a></li>
+    <li id="ref7">Datta, S. et al. <em>Agentic AI Security: Threats, Defenses, Evaluation and Open Challenges</em>. arXiv, 2025. <a href="https://arxiv.org/abs/2510.23883">arxiv.org/abs/2510.23883</a></li>
   </ol>
 </div>
 
 <!-- ===== CITE ===== -->
 <h2 id="cite"><span class="num">§ Cite</span>How to cite this work.</h2>
-<p>If this work informed your thinking, cite it as:</p>
+<p>If this informed your thinking, cite it as:</p>
 
 <div class="cite-block" id="bibtex">@misc{mitra2026harnessing,
   author       = {Mitra, Sagnik},
