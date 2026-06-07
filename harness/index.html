@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>The Harness — Your Multi-Agent Setup is Not Architecture · sgnk</title>
-<meta name="description" content="A deep dive into why adding more agents is the fastest way to ship a confident, expensive nothing — and the harness (control, state, verification, recovery) that actually makes agentic systems production-grade. By Sagnik Mitra (sgnk)." />
+<title>The Harness — More Agents Do Not Make an Architecture · sgnk</title>
+<meta name="description" content="Most multi-agent systems fail not because the agents are weak, but because nobody built the harness around them — control, state, verification, recovery. What I've learned about doing it properly. By Sagnik Mitra (sgnk)." />
 <meta name="author" content="Sagnik Mitra" />
 <meta name="theme-color" content="#1a5cff" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="article" />
-<meta property="og:title" content="The Harness — Your Multi-Agent Setup is Not Architecture" />
-<meta property="og:description" content="Agents may be autonomous inside their lane, but the system must never be uncontrolled as a whole. The harness, said out loud." />
+<meta property="og:title" content="The Harness — More Agents Do Not Make an Architecture" />
+<meta property="og:description" content="Agents may be autonomous inside their lane, but the system as a whole must never be uncontrolled. What I've learned building harnessed multi-agent systems." />
 <meta property="og:url" content="https://sgnk.ai/harness" />
 <meta property="og:site_name" content="sgnk.ai" />
 <meta property="article:author" content="Sagnik Mitra" />
@@ -19,8 +19,8 @@
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="The Harness — Your Multi-Agent Setup is Not Architecture" />
-<meta name="twitter:description" content="The agents were never the hard part. Build the harness. By Sagnik Mitra (sgnk)." />
+<meta name="twitter:title" content="The Harness — More Agents Do Not Make an Architecture" />
+<meta name="twitter:description" content="The agents were never the hard part. The harness is. By Sagnik Mitra (sgnk)." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -316,11 +316,12 @@
 
 <!-- ===== HEADER ===== -->
 <header class="paper">
-  <div class="eyebrow">The Harness · field notes · 2026</div>
-  <h1 class="title">Your multi-agent setup is not architecture.</h1>
+  <div class="eyebrow">The Harness · 2026</div>
+  <h1 class="title">The Harness.</h1>
   <p class="subtitle">
-    A deep dive into why "just add more agents" is the fastest way to ship a very confident, very
-    expensive nothing — and the harness that actually makes the thing production-grade.
+    Everyone has a multi-agent system now. After building a few of these myself, I have come to think the
+    part that actually matters is the harness around the agents — not the agents themselves. This is the
+    shorter, plainer version of what I have learned.
   </p>
 
   <div class="meta">
@@ -331,7 +332,7 @@
   </div>
 
   <div class="actions">
-    <a href="/harness/multi_agent_harnessing_sgnk.pdf" class="btn primary" download>↓ Download the paper (PDF)</a>
+    <a href="/harness/multi_agent_harnessing_sgnk.pdf" class="btn primary" download>↓ Download the full paper (PDF)</a>
     <a href="#cite" class="btn">⌘ Cite this work</a>
     <a href="#s1" class="btn">→ Start reading</a>
   </div>
@@ -344,77 +345,73 @@
 <div class="toc">
   <h4>What's inside</h4>
   <ol>
-    <li><a href="#s1">The one line that matters</a></li>
-    <li><a href="#s2">A few definitions</a></li>
+    <li><a href="#s1">More agents do not make an architecture</a></li>
+    <li><a href="#s2">A few definitions first</a></li>
     <li><a href="#s3">The five planes</a></li>
-    <li><a href="#s4">Contracts, not personalities</a></li>
+    <li><a href="#s4">Contracts, not personality prompts</a></li>
     <li><a href="#s5">Orchestration patterns</a></li>
     <li><a href="#s6">The harness layer</a></li>
     <li><a href="#s7">Verification</a></li>
-    <li><a href="#s8">State, memory & failure</a></li>
-    <li><a href="#s9">The maturity ladder</a></li>
-    <li><a href="#s10">Agentic coding</a></li>
-    <li><a href="#s11">The ten rules</a></li>
-    <li><a href="#s12">So, the takeaway</a></li>
+    <li><a href="#s8">State, memory and failure</a></li>
+    <li><a href="#s9">The autonomy maturity ladder</a></li>
+    <li><a href="#s10">Where this pays off: agentic coding</a></li>
+    <li><a href="#s11">A few rules I try to follow</a></li>
+    <li><a href="#s12">So, in the end</a></li>
     <li><a href="#refs">References</a></li>
     <li><a href="#cite">How to cite</a></li>
   </ol>
 </div>
 
 <!-- ===== 1 ===== -->
-<h2 id="s1"><span class="num">§ 01</span>Your multi-agent setup is not architecture.</h2>
+<h2 id="s1"><span class="num">§ 01</span>More agents do not make an architecture.</h2>
 <p>
-  Hey there. So somewhere in the last year, "multi-agent system" became the thing everyone has and almost
-  nobody can explain. You know the setup — a planner agent, a researcher agent, a coder agent, a reviewer
-  agent, and one executor agent that quietly does the work of all four while the others take credit
-  (we've all built this, no judgment).
+  You will say that everyone has a multi-agent system now, and that is mostly true. A planner agent, a
+  researcher agent, a coder agent, a reviewer agent, an executor agent — put them in a loop and it certainly
+  looks like a system. But after building a few of these myself, I have slowly come to think that most of them
+  are not really systems at all. They are a handful of language models taking turns, which is a different thing
+  from an architecture.
 </p>
 <p>
-  Here's the uncomfortable part: <strong>that's not a system. That's distributed prompt choreography in a trench
-  coat.</strong> Five language models taking turns is not architecture, the same way five people in a WhatsApp
-  group is not a company.
+  I am not saying the agents do not matter, because they do. But in my experience the agents are the easy part.
+  They are replaceable, and you can swap one model for another in an afternoon. The hard part — the part that
+  decides whether the whole thing survives in production — is the harness around them: the layer that decides
+  who is allowed to do what, who owns the truth, and what happens when something goes wrong. And at some point,
+  something always goes wrong.
 </p>
 <p>
-  And before anyone @'s me — I'm not saying agents are bad. I'm saying the agents are the <em>easy</em> part.
-  They're replaceable cognitive workers. The hard part — the part that decides whether your thing survives
-  contact with production — is the <strong>harness</strong>: the boring control layer wrapped around the agents
-  that decides who's allowed to do what, who owns the truth, and what happens when everything catches fire at
-  2 AM (and it will, my god, it will).
-</p>
-<p>
-  NIST frames AI risk as a <em>lifecycle</em> problem — design, development, use, evaluation — not a "which model
-  did you pick" problem [<a href="#ref1">1</a>]. That matters here, because agentic systems act over
-  <strong>time</strong>, across <strong>tools</strong>, and across <strong>changing state</strong>. Three things a
-  single clever prompt has never had to deal with.
+  NIST describes AI risk as a lifecycle problem, covering the design, development, use and evaluation of a
+  system, and not simply the question of which model you picked [<a href="#ref1">1</a>]. That framing is useful
+  here, because an agentic system acts over time, across tools, and across changing state. A single good prompt
+  never had to worry about any of that.
 </p>
 
 <div class="pull">
-  <span class="label">The one line that matters</span>
-  Agents may be autonomous inside their lane. The system must never be uncontrolled as a whole. Print it,
-  frame it, tattoo it on your CI pipeline. Everything below is just engineering that sentence into something
-  you can deploy.
+  <span class="label">The one idea to hold on to</span>
+  Agents may be autonomous inside their own lane, but the system as a whole must never be uncontrolled. Almost
+  everything below is just an attempt to engineer that one sentence into something you can actually deploy.
 </div>
 
 <!-- ===== 2 ===== -->
-<h2 id="s2"><span class="num">§ 02</span>A few definitions, so we're on the same page.</h2>
-<p><strong>Agent</strong> — a bounded actor that observes context, reasons over a task, produces artifacts, and <em>maybe</em> calls a tool. Bounded. Write that down.</p>
-<p><strong>Harness</strong> — the runtime control envelope around the agents: policy, permissions, budgets, schemas, memory, verification, observability, recovery. The unsexy stuff. The stuff that works.</p>
-<p><strong>Orchestration</strong> — how you decompose goals, route work, schedule it, merge it, and move state forward without losing your mind.</p>
+<h2 id="s2"><span class="num">§ 02</span>A few definitions first.</h2>
+<p>Before going further, let me put down a few words the way I am using them, so we are on the same page.</p>
+<p>An <strong>Agent</strong> is a bounded actor that can observe context, reason over a task, produce an artifact, and sometimes call a tool. The important word there is bounded.</p>
+<p>The <strong>Harness</strong> is the runtime control envelope around the agents: policy, permissions, budgets, schemas, memory, verification, observability and recovery. It is the unglamorous part, and it is also the part that does most of the work.</p>
+<p><strong>Orchestration</strong> is how you break a goal into pieces, route them, schedule them, and move the state forward without losing track of what is happening.</p>
 <p>
-  Notice the harness has nothing to do with how smart your model is. That's the point. <strong>You make
-  probabilistic agents behave by putting them inside deterministic boundaries.</strong>
+  You will notice that none of this depends on how clever the model is, and that is rather the point. You make
+  probabilistic agents behave by putting them inside boundaries that are not probabilistic.
 </p>
 
 <!-- ===== 3 ===== -->
-<h2 id="s3"><span class="num">§ 03</span>The five planes (where most systems quietly fail).</h2>
-<p>Serious agent systems separate five planes. Weak systems mash all five inside one giant system prompt and then act surprised.</p>
-<ol>
-  <li><strong>Control plane</strong> — owns <em>authority</em>. Delegation, cancellation, escalation, approval, recovery. Who's the boss.</li>
-  <li><strong>Data plane</strong> — moves events, messages, retrieved docs, tool outputs, telemetry between services. The plumbing.</li>
-  <li><strong>State plane</strong> — owns <em>truth</em>. Task status, locks, memory, customer records, audit trails. The single source of "what actually happened."</li>
-  <li><strong>Execution plane</strong> — does the work. LLM calls, code edits, browser automation, DB queries, shell commands.</li>
-  <li><strong>Assurance plane</strong> — constrains <em>risk</em>. Policy, verification, sandboxing, rollback, human approval. OWASP straight-up recommends least privilege, validated output formats, human approval for high-risk actions, and adversarial testing for prompt injection [<a href="#ref4">4</a>]. Non-negotiable.</li>
-</ol>
+<h2 id="s3"><span class="num">§ 03</span>The five planes.</h2>
+<p>A serious agent system tends to separate five planes. A weaker one usually mixes all of them inside a single large prompt, and then it becomes very hard to tell what actually went wrong.</p>
+<ul>
+  <li><strong>Control plane</strong> — owns authority: delegation, cancellation, escalation, approval and recovery.</li>
+  <li><strong>Data plane</strong> — moves events, messages, retrieved documents, tool outputs and telemetry between services.</li>
+  <li><strong>State plane</strong> — owns the truth: task status, locks, memory, customer records and audit trails.</li>
+  <li><strong>Execution plane</strong> — does the actual work: LLM calls, code edits, browser automation, database queries, shell commands.</li>
+  <li><strong>Assurance plane</strong> — constrains the risk: policy, verification, sandboxing, rollback and human approval. OWASP recommends least privilege, validated output formats, human approval for high-risk operations, and adversarial testing for prompt injection [<a href="#ref4">4</a>], and all of that lives here.</li>
+</ul>
 
 <figure class="diagram">
   <div class="flow" style="flex-direction: column; gap: 14px;">
@@ -431,18 +428,14 @@
   <div class="caption"><b>Figure 1.</b> The five planes of agentic autonomy.</div>
 </figure>
 
-<p>
-  If your "multi-agent system" has all five of these living inside the prompt of one supervisor agent — and be
-  honest — that's not five planes. That's one plane wearing five hats and hoping.
-</p>
+<p>If all five of these are living inside the prompt of one supervisor agent, then it is not really five planes. It is one plane doing five jobs at once, and that is usually where the trouble begins.</p>
 
 <!-- ===== 4 ===== -->
-<h2 id="s4"><span class="num">§ 04</span>Agents should have contracts, not personalities.</h2>
-<p>This is the hill I'll gently die on.</p>
+<h2 id="s4"><span class="num">§ 04</span>Agents need contracts, not personality prompts.</h2>
 <p>
-  Stop defining agents with motivational prompts. "You are a brilliant, meticulous senior engineer who cares
-  deeply about quality" — that's not an engineering spec, that's a horoscope. Define them with
-  <strong>contracts</strong>:
+  In my experience, agents should not be defined by a personality. A prompt that says the agent is a brilliant
+  and meticulous senior engineer who cares deeply about quality does not actually constrain anything. What works
+  far better is to define the agent with a contract.
 </p>
 
 <figure class="code">
@@ -455,24 +448,25 @@
     decision: approve | reject | repair | escalate
     risk_score: number
     human_approval_required: boolean</code></pre>
-<div class="caption"><b>Listing 1.</b> An agent contract — allowed tools, <b>forbidden</b> tools, schema-d output.</div>
+<div class="caption"><b>Listing 1.</b> An agent contract — allowed tools, forbidden tools, and a schema-d output.</div>
 </figure>
 
 <p>
-  Allowed tools, <em>forbidden</em> tools, input schema, output schema, budget limits, retry limits, escalation
-  thresholds. The narrower the boundary, the easier the 2 AM debugging session. A verifier that <em>literally
-  cannot</em> call <code>payment_execute</code> can't accidentally pay someone. Revolutionary, I know.
+  The contract declares the allowed tools, the forbidden tools, the input schema, the output schema, the budget
+  and retry limits, and the escalation rules. The narrower you draw the boundary, the easier the system is to
+  debug later. A verifier that simply cannot call <code>payment_execute</code> is not going to pay someone by
+  accident, and that kind of quiet guarantee is worth a lot.
 </p>
 
 <!-- ===== 5 ===== -->
-<h2 id="s5"><span class="num">§ 05</span>Orchestration patterns (and when to actually use them).</h2>
-<p>No single pattern wins everything. Mature systems mix them based on risk, latency, and how much you'll cry if something goes wrong.</p>
+<h2 id="s5"><span class="num">§ 05</span>Orchestration patterns, and when to use them.</h2>
+<p>No single pattern fits every case. Mature systems usually mix a few of them, depending on the risk, the latency, and how much it would hurt if something failed.</p>
 <ul>
-  <li><strong>Hierarchical Supervisor</strong> — one boss decomposes the mission, hands bounded tasks to specialists, a verifier checks the work. Safest default for SaaS, fintech, legal-tech, healthcare. <em>Strength:</em> clean accountability, easy to audit. <em>Weakness:</em> the supervisor becomes a bottleneck.</li>
-  <li><strong>Blackboard</strong> — agents post to a shared structured workspace. Great for research synthesis, diagnostics, product discovery. But every entry <em>must</em> carry evidence, author, confidence, and verification status — otherwise your blackboard rots into a noisy group chat. (We've seen that group chat. We don't want that group chat.)</li>
-  <li><strong>Event-Driven Mesh</strong> — an event bus decouples producers and consumers. Scales beautifully, causal reasoning gets painful unless traces are mandatory. OpenTelemetry's whole model — traces, metrics, logs, baggage [<a href="#ref2">2</a>] — maps directly onto agent runtime instrumentation, so use it.</li>
-  <li><strong>Auction / Market</strong> — agents bid on tasks by capability, cost, latency, risk. Useful for robot fleets and heterogeneous workers [<a href="#ref6">6</a>]. One rule: <strong>don't allocate on speed or cost alone.</strong> That's how you get fast, cheap, <em>unsafe</em> shortcuts.</li>
-  <li><strong>Hybrid</strong> — what every serious system actually becomes. Of course it's a hybrid. It's always a hybrid.</li>
+  <li><strong>Hierarchical supervisor</strong> — one supervisor breaks the mission down and hands bounded tasks to specialists, and a verifier checks the result. It is the safest default for SaaS, fintech, legal-tech and healthcare. It is easy to audit, though the supervisor can become a bottleneck.</li>
+  <li><strong>Blackboard</strong> — agents write to a shared, structured workspace. It is good for research synthesis and diagnostics, but every entry has to carry its evidence, author, confidence and verification status, otherwise the workspace slowly turns into a noisy group chat.</li>
+  <li><strong>Event-driven mesh</strong> — an event bus decouples producers and consumers. It scales well, but causal reasoning gets hard unless traces are mandatory. OpenTelemetry's model of traces, metrics, logs and baggage [<a href="#ref2">2</a>] maps onto agent runtimes quite directly.</li>
+  <li><strong>Auction or market</strong> — agents bid for tasks by capability, cost, latency and risk, which shows up in robot fleets and similar settings [<a href="#ref6">6</a>]. One caution: do not allocate on speed or cost alone, because that is how you end up with fast, cheap and unsafe.</li>
+  <li><strong>Hybrid</strong> — what most serious systems become in the end, and there is nothing wrong with that.</li>
 </ul>
 
 <table>
@@ -485,19 +479,19 @@
     <tr><td>Safety approval</td><td>Verifier + human gate</td></tr>
     <tr><td>Memory</td><td>Canonical state + event log</td></tr>
   </tbody>
-  <caption><b>Table 1.</b> Pick the pattern by the job, not by the demo.</caption>
+  <caption><b>Table 1.</b> Choosing the pattern by the job it has to do.</caption>
 </table>
 
 <!-- ===== 6 ===== -->
-<h2 id="s6"><span class="num">§ 06</span>The harness layer, up close.</h2>
+<h2 id="s6"><span class="num">§ 06</span>The harness layer, in a bit more detail.</h2>
 <p>
-  The harness is what separates "industry-grade autonomous system" from "distributed hallucination machine."
-  A real one includes identity &amp; access control, tool whitelists, data egress controls, output validation,
-  risk scoring, budget ceilings, approval gates, sandboxed execution, rollback, and immutable audit logs.
-  (LangGraph leans hard into durable execution, persistence, human-in-the-loop, and runtime visibility for
-  exactly this reason [<a href="#ref3">3</a>].)
+  The harness is the piece that makes probabilistic agents behave inside boundaries that are not. A reasonably
+  complete one includes identity and access control, tool whitelists, data egress controls, output validation,
+  risk scoring, budget ceilings, approval gates, sandboxed execution, rollback and an immutable audit log.
+  LangGraph's documentation puts durable execution, persistence, human-in-the-loop and runtime visibility at the
+  centre for much the same reasons [<a href="#ref3">3</a>].
 </p>
-<p>The runtime gate, in plain terms:</p>
+<p>In plain terms, the runtime gate looks like this.</p>
 
 <figure class="diagram">
   <div class="flow" style="flex-direction: column;">
@@ -512,15 +506,17 @@
     </div>
     <div class="node blue">Commit / Block / Repair</div>
   </div>
-  <div class="caption"><b>Figure 2.</b> The runtime harness gate. Boring, deterministic — exactly what you want between a probabilistic agent and your production database.</div>
+  <div class="caption"><b>Figure 2.</b> The runtime harness gate.</div>
 </figure>
 
+<p>It is not exciting, and that is exactly what you want sitting between a probabilistic agent and your production database.</p>
+
 <!-- ===== 7 ===== -->
-<h2 id="s7"><span class="num">§ 07</span>Verification: the executor does not grade its own homework.</h2>
+<h2 id="s7"><span class="num">§ 07</span>Verification, and why the executor cannot check itself.</h2>
 <p>
-  This is the single most skipped step, and it's the one that saves you. Verification must be
-  <strong>independent</strong> and <strong>risk-weighted</strong> — the agent that did the work is the last one
-  who should confirm it's correct.
+  This is the step that gets skipped most often, and it is also the one that tends to save you. Verification
+  should be independent and weighted by risk — the agent that did the work is the last one who should be allowed
+  to declare it correct.
 </p>
 
 <table>
@@ -529,75 +525,77 @@
     <tr><td>Read-only retrieval</td><td>Provenance + schema</td></tr>
     <tr><td>Database write</td><td>Schema + permission + state version</td></tr>
     <tr><td>Code execution</td><td>Sandbox + tests + static analysis</td></tr>
-    <tr><td>Payment or trade</td><td>Policy + risk + <strong>human approval</strong></td></tr>
+    <tr><td>Payment or trade</td><td>Policy + risk + human approval</td></tr>
     <tr><td>Customer message</td><td>Factuality + tone + compliance</td></tr>
     <tr><td>Production deploy</td><td>CI + security + rollback plan</td></tr>
   </tbody>
   <caption><b>Table 2.</b> Risk-weighted verification matrix.</caption>
 </table>
 
-<p>A read costs you a schema check. A payment costs you a human. Price the verification to match the blast radius. Simple.</p>
+<p>A read costs you a schema check. A payment costs you a human in the loop. The idea is simply to make the cost of verifying match the size of the thing that can go wrong.</p>
 
 <!-- ===== 8 ===== -->
-<h2 id="s8"><span class="num">§ 08</span>State, memory, and the failure nobody plans for.</h2>
+<h2 id="s8"><span class="num">§ 08</span>State, memory, and planning for failure.</h2>
 <p>
-  Multi-agent systems fall apart the moment "state" gets vague. Use three layers — local working memory, a
-  shared mission workspace, and one <strong>canonical state</strong> that is the truth. And agents should never
-  mutate canonical state directly. They <em>propose</em> transitions; the harness verifies and commits. (Yes,
-  like a pull request. Agents open PRs against reality. I think that's beautiful.)
+  Multi-agent systems tend to fall apart the moment state becomes vague. It helps to keep three layers — a local
+  working memory, a shared mission workspace, and one canonical state that holds the truth. And agents should not
+  write to canonical state directly; they propose a transition, and the harness verifies it and then commits it.
+  (It is a little like opening a pull request against reality, which I have always found a nice way to think
+  about it.)
 </p>
-<p>And please — design the unhappy path <em>before</em> you celebrate the happy one:</p>
+<p>It also helps to design the unhappy path before celebrating the happy one.</p>
 
 <table>
   <thead><tr><th>Failure</th><th>Recovery</th></tr></thead>
   <tbody>
-    <tr><td>Hallucinated output</td><td>Verifier rejects → repair or reassign</td></tr>
-    <tr><td>Tool timeout</td><td>Retry with backoff → fallback tool</td></tr>
-    <tr><td>Infinite loop</td><td>Retry-budget kill switch</td></tr>
-    <tr><td>Prompt injection</td><td>Isolate content → block the tool call</td></tr>
-    <tr><td>Compromised agent</td><td>Revoke its identity and tools</td></tr>
+    <tr><td>Hallucinated output</td><td>Verifier rejects, then repair or reassign</td></tr>
+    <tr><td>Tool timeout</td><td>Retry with backoff, then a fallback tool</td></tr>
+    <tr><td>Infinite loop</td><td>A retry-budget kill switch</td></tr>
+    <tr><td>Prompt injection</td><td>Isolate the content, block the tool call</td></tr>
+    <tr><td>Compromised agent</td><td>Revoke its identity and its tools</td></tr>
   </tbody>
-  <caption><b>Table 3.</b> Common failure modes and their recovery paths.</caption>
+  <caption><b>Table 3.</b> Common failure modes and how to recover from them.</caption>
 </table>
 
 <p>
-  Every mission, task, tool call, and decision gets a <code>trace_id</code>. Once agents go async, explainability
-  becomes a <em>distributed-systems</em> problem, not a vibes problem.
+  Every mission, task, tool call and decision gets a trace id. Once the agents start acting asynchronously,
+  explaining what happened becomes a distributed-systems problem, and traces are really the only thing that make
+  it tractable.
 </p>
 
 <!-- ===== 9 ===== -->
-<h2 id="s9"><span class="num">§ 09</span>The maturity ladder (your "L4" is an L2 in a nice jacket).</h2>
+<h2 id="s9"><span class="num">§ 09</span>The autonomy maturity ladder.</h2>
 <p>
-  Most teams claim L4 while running L2 with extra prompts. The difference was never the <em>number</em> of agents.
-  It's governance, verification, state, observability, and recovery.
+  Most teams will say they are at L4 while they are really running an L2 with some extra prompting. The
+  difference was never the number of agents; it is governance, verification, state, observability and recovery.
 </p>
 
 <table>
   <thead><tr><th>Level</th><th>What it actually means</th></tr></thead>
   <tbody>
     <tr><td><b>L0</b></td><td>Human uses tools manually</td></tr>
-    <tr><td><b>L1</b></td><td>Assistant suggests actions</td></tr>
-    <tr><td><b>L2</b></td><td>Agent uses tools under human control <em>(you are probably here)</em></td></tr>
+    <tr><td><b>L1</b></td><td>An assistant suggests actions</td></tr>
+    <tr><td><b>L2</b></td><td>An agent uses tools under human control</td></tr>
     <tr><td><b>L3</b></td><td>Multiple agents coordinate tasks</td></tr>
-    <tr><td><b>L4</b></td><td>Harnessed autonomy with verification + state <em>(you think you are here)</em></td></tr>
-    <tr><td><b>L5</b></td><td>Adaptive governed autonomy with self-repair</td></tr>
+    <tr><td><b>L4</b></td><td>Harnessed autonomy, with verification and state</td></tr>
+    <tr><td><b>L5</b></td><td>Adaptive governed autonomy, with self-repair</td></tr>
   </tbody>
   <caption><b>Table 4.</b> Autonomy maturity levels.</caption>
 </table>
 
-<p>No shame in L2. A lot of shame in <em>shipping</em> L2 while <em>believing</em> it's L4.</p>
+<p>There is no shame in being at L2. The trouble only starts when an L2 is shipped as though it were an L4.</p>
 
 <!-- ===== 10 ===== -->
-<h2 id="s10"><span class="num">§ 10</span>So where does this actually pay off? Agentic coding.</h2>
+<h2 id="s10"><span class="num">§ 10</span>Where this pays off: agentic coding.</h2>
 <p>
-  This is where the theory turns into money. The goal of agentic coding is <em>not</em> faster code generation —
-  it's faster <em>product</em> delivery without collapsing quality, security, or user trust. A real SaaS needs
-  auth, tenant isolation, billing, observability, audit logs, rollback, cost control. Screens and endpoints are
-  the easy 20%.
+  This is where the whole thing starts to earn its keep. The goal of agentic coding is not really faster code
+  generation — it is faster product delivery, without quietly giving up on quality, security or user trust along
+  the way. A real product needs authentication, tenant isolation, billing, observability, audit logs, rollback
+  and cost control, and the screens and endpoints are only a small part of it.
 </p>
 <p>
-  So you give each concern an agent with a contract — Product, UX, Architecture, Backend, Frontend, QA, Security,
-  DevOps, and a <strong>Verifier</strong> that blocks the release if tests, tenant isolation, or audit logging are
+  So you give each concern its own agent with its own contract — Product, UX, Architecture, Backend, Frontend,
+  QA, Security, DevOps — and a Verifier that holds the release if tests, tenant isolation or audit logging are
   missing.
 </p>
 
@@ -611,57 +609,59 @@
     <div class="node alt">Verifier + Release Gate</div>
     <div class="node">Telemetry + Feedback</div>
   </div>
-  <div class="caption"><b>Figure 3.</b> The agentic product factory. The loop does not end at code — it ends at telemetry-backed product learning.</div>
+  <div class="caption"><b>Figure 3.</b> An agentic product loop. It does not end at the code; it ends at the telemetry that tells you whether the product actually worked.</div>
 </figure>
 
-<p>And the one rule that holds the whole thing together:</p>
+<p>And there is one rule I keep coming back to.</p>
 
 <div class="pull">
-  <span class="label">The rule that holds it together</span>
-  The same agent must never define the requirement, write the code, approve the diff, disable the test,
-  deploy it, <em>and</em> interpret the failure. That's not autonomy. That's one unsupervised intern with root
-  access. Builders create, verifiers challenge, policy decides, CI enforces, humans approve the scary stuff.
+  <span class="label">The rule I keep coming back to</span>
+  The same agent should not get to define the requirement, write the code, approve the change, disable the test,
+  deploy it, and then explain the failure. That is not autonomy, it is just unchecked work. It is much safer to
+  separate the duties: builders make things, verifiers challenge them, policy decides what is allowed, CI
+  enforces the checks, and a human approves the few actions that genuinely need it.
 </div>
 
 <p>
-  MCP helps standardize how coding agents plug into files, databases, and tools [<a href="#ref5">5</a>] — but
-  standard connectivity just makes least privilege and tool isolation matter <em>more</em>, not less.
+  MCP helps standardise how coding agents connect to files, databases and tools [<a href="#ref5">5</a>], but the
+  more standard that connectivity becomes, the more least privilege and tool isolation start to matter.
 </p>
 
 <!-- ===== 11 ===== -->
-<h2 id="s11"><span class="num">§ 11</span>The ten rules, if you skipped to the bottom (I see you).</h2>
+<h2 id="s11"><span class="num">§ 11</span>A few rules I try to follow.</h2>
+<p>If you skip everything else, these are the ones I would keep.</p>
 <ol>
-  <li>Start hierarchical before you go full swarm.</li>
-  <li>Define canonical state before agent memory.</li>
-  <li>Define contracts before prompts.</li>
-  <li>Add verification before adding agents.</li>
-  <li>Separate planning, execution, and approval.</li>
-  <li>Trace every agent and tool call.</li>
+  <li>Start hierarchical before reaching for swarm behaviour.</li>
+  <li>Define the canonical state before building agent memory.</li>
+  <li>Define the contracts before writing the prompts.</li>
+  <li>Add verification before adding more agents.</li>
+  <li>Keep planning, execution and approval separate.</li>
+  <li>Trace every agent and every tool call.</li>
   <li>Treat all external content as untrusted.</li>
-  <li>Sandbox code and browser automation.</li>
-  <li>Human-gate the high-blast-radius actions.</li>
-  <li>Optimize for recoverability, not demo magic.</li>
+  <li>Sandbox code execution and browser automation.</li>
+  <li>Put a human gate on the high-impact actions.</li>
+  <li>Optimise for recoverability, not for the demo.</li>
 </ol>
 
 <!-- ===== 12 ===== -->
-<h2 id="s12"><span class="num">§ 12</span>So, the takeaway.</h2>
+<h2 id="s12"><span class="num">§ 12</span>So, in the end.</h2>
 <p>
-  Multi-agent systems aren't powerful because they have many agents. They're powerful when responsibilities are
-  partitioned, autonomy is bounded, authority is explicit, state is coherent, verification is independent, and
-  failures are recoverable. Everything else is a very expensive way to generate confident nonsense at scale.
+  Multi-agent systems are not powerful because they have many agents in them. They become powerful when the
+  responsibilities are clearly divided, the autonomy is bounded, the authority is explicit, the state is
+  coherent, the verification is independent, and the failures are recoverable. Without that, more agents mostly
+  means more confident output that nobody actually checked.
 </p>
 
 <div class="pull">
-  <span class="label">Final principle</span>
-  The agents were never the hard part. Build the harness. That's the whole difference between an industry-grade
-  autonomous system and a distributed hallucination machine.
+  <span class="label">In short</span>
+  The agents were never really the hard part. The harness is. That, to me, is the whole difference between a
+  system you can put in front of real users and one that only works in the demo.
 </div>
 
 <p style="color: var(--grey); font-size: 15px;">
-  This was the version I'd say out loud over coffee. The formal write-up — full reference architecture, every
-  diagram, the complete agent-contract and state-transition schemas — is in the
-  <a href="/harness/multi_agent_harnessing_sgnk.pdf">PDF</a>. If this saved you one 2 AM incident, that's a win.
-  <strong>Craft. Harness. Deploy.</strong> — Sagnik
+  This was the shorter, plainer version of the idea. The full write-up, with the complete reference architecture
+  and all the schemas and diagrams, is in the <a href="/harness/multi_agent_harnessing_sgnk.pdf">PDF</a> if you
+  want the detail. I hope it saves you some trouble. — Sagnik
 </p>
 
 <!-- ===== REFERENCES ===== -->
@@ -670,9 +670,9 @@
   <ol>
     <li id="ref1">National Institute of Standards and Technology. <em>AI Risk Management Framework</em> — incorporating trustworthiness into the design, development, use, and evaluation of AI systems. <a href="https://www.nist.gov/itl/ai-risk-management-framework">nist.gov/itl/ai-risk-management-framework</a></li>
     <li id="ref2">OpenTelemetry. <em>Signals</em> — observability signals: traces, metrics, logs, baggage, profiles. <a href="https://opentelemetry.io/docs/concepts/signals/">opentelemetry.io/docs/concepts/signals/</a></li>
-    <li id="ref3">LangChain. <em>LangGraph Overview</em> — orchestration runtime for long-running, stateful agents with durable execution, human-in-the-loop, and persistence. <a href="https://docs.langchain.com/oss/python/langgraph/overview">docs.langchain.com/oss/python/langgraph/overview</a></li>
+    <li id="ref3">LangChain. <em>LangGraph Overview</em> — an orchestration runtime for long-running, stateful agents with durable execution, human-in-the-loop, and persistence. <a href="https://docs.langchain.com/oss/python/langgraph/overview">docs.langchain.com/oss/python/langgraph/overview</a></li>
     <li id="ref4">OWASP GenAI Security Project. <em>LLM01:2025 Prompt Injection</em> — least privilege, output validation, human approval, adversarial testing. <a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/">genai.owasp.org/llmrisk/llm01-prompt-injection/</a></li>
-    <li id="ref5">Model Context Protocol. <em>What is MCP?</em> — open standard for connecting AI apps to external systems, data, and tools. <a href="https://modelcontextprotocol.io/docs/getting-started/intro">modelcontextprotocol.io/docs/getting-started/intro</a></li>
+    <li id="ref5">Model Context Protocol. <em>What is MCP?</em> — an open standard for connecting AI apps to external systems, data, and tools. <a href="https://modelcontextprotocol.io/docs/getting-started/intro">modelcontextprotocol.io/docs/getting-started/intro</a></li>
     <li id="ref6">Gupta, R. et al. <em>RobotFleet: An Open-Source Framework for Centralized Multi-Robot Task Planning</em>. arXiv, 2025. <a href="https://arxiv.org/abs/2510.10379">arxiv.org/abs/2510.10379</a></li>
     <li id="ref7">Datta, S. et al. <em>Agentic AI Security: Threats, Defenses, Evaluation and Open Challenges</em>. arXiv, 2025. <a href="https://arxiv.org/abs/2510.23883">arxiv.org/abs/2510.23883</a></li>
   </ol>
@@ -680,7 +680,7 @@
 
 <!-- ===== CITE ===== -->
 <h2 id="cite"><span class="num">§ Cite</span>How to cite this work.</h2>
-<p>If this informed your thinking, cite it as:</p>
+<p>If this informed your thinking, you can cite it as:</p>
 
 <div class="cite-block" id="bibtex">@misc{mitra2026harnessing,
   author       = {Mitra, Sagnik},
