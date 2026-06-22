@@ -246,6 +246,9 @@
     .link-btn:nth-child(3) { animation-delay: .48s; }
     .link-btn:nth-child(4) { animation-delay: .56s; }
     .link-btn:nth-child(5) { animation-delay: .64s; }
+    .link-btn:nth-child(6) { animation-delay: .72s; }
+    .link-btn:nth-child(7) { animation-delay: .80s; }
+    .link-btn:nth-child(8) { animation-delay: .88s; }
 
     @keyframes link-enter {
       from { opacity: 0; transform: translateX(-16px); }
@@ -303,11 +306,14 @@
     }
     .link-icon svg { width: 19px; height: 19px; }
 
-    .link-icon.phone    { color: #ff7070; }
-    .link-icon.email    { color: #ffa94d; }
-    .link-icon.whatsapp { color: #69db7c; }
-    .link-icon.website  { color: #74c0fc; }
-    .link-icon.amc      { color: var(--red); }
+    .link-icon.phone     { color: #ff7070; }
+    .link-icon.email     { color: #ffa94d; }
+    .link-icon.whatsapp  { color: #69db7c; }
+    .link-icon.website   { color: #74c0fc; }
+    .link-icon.amc       { color: var(--red); }
+    .link-icon.instagram { color: #f77737; }
+    .link-icon.book      { color: #a9e34b; }
+    .link-icon.track     { color: #66d9e8; }
 
     /* ── text ── */
     .link-text { flex: 1; min-width: 0; }
@@ -493,6 +499,24 @@ const CONFIG = {
       sub:   "Annual maintenance plans & pricing",
       href:  "https://gearup.sgnk.ai/amc-chart",
     },
+    {
+      type:  "instagram",
+      label: "Follow on Instagram",
+      sub:   "@gearup.sgnk.ai",
+      href:  "https://instagram.com/gearup.sgnk.ai",
+    },
+    {
+      type:  "book",
+      label: "Book a Service",
+      sub:   "Schedule your next appointment",
+      href:  "https://gearup.sgnk.ai/book-service",
+    },
+    {
+      type:  "track",
+      label: "Track your Service",
+      sub:   "Live job status updates",
+      href:  "https://gearup.sgnk.ai/track",
+    },
   ]
 };
 
@@ -519,6 +543,23 @@ const ICONS = {
     <line x1="16" y1="13" x2="8" y2="13"/>
     <line x1="16" y1="17" x2="8" y2="17"/>
     <polyline points="10 9 9 9 8 9"/>
+  </svg>`,
+  instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5"/>
+    <circle cx="12" cy="12" r="4"/>
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+  </svg>`,
+  book: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect width="18" height="18" x="3" y="4" rx="2"/>
+    <line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/>
+    <line x1="3" y1="10" x2="21" y2="10"/>
+    <line x1="8" y1="14" x2="16" y2="14"/>
+    <line x1="8" y1="18" x2="12" y2="18"/>
+  </svg>`,
+  track: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/>
+    <circle cx="12" cy="10" r="3"/>
   </svg>`,
   arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
     <path d="M5 12h14M12 5l7 7-7 7"/>
