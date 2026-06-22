@@ -523,11 +523,13 @@
 
     /* ── print ── */
     @media print {
-      body { background: none; padding: 0; }
+      /* force background colours to print — Chrome blocks them by default */
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: none !important; padding: 0; }
       body::before, body::after { display: none; }
       .topbar { display: none; }
-      .a4 { box-shadow: none; width: 100%; }
-      @page { size: A4; margin: 0; }
+      .a4 { box-shadow: none; width: 210mm; margin: 0 auto; }
+      @page { size: A4 portrait; margin: 0; }
     }
 
     /* ── mobile ── */
@@ -883,38 +885,25 @@
 </div><!-- /.a4 -->
 
 <script>
-document.getElementById("btn-download").addEventListener("click", async function () {
+document.getElementById("btn-download").addEventListener("click", function () {
   const btn = this;
   btn.disabled = true;
   btn.innerHTML = '<span class="material-symbols-rounded">hourglass_top</span> Generating…';
 
   const el = document.querySelector(".a4");
-  const logoImg = el.querySelector('.logo-wide');
-  const origSrc = logoImg ? logoImg.src : null;
 
-  // Fetch SVG and convert to base64 data URL so html2canvas captures it reliably
-  if (logoImg && origSrc) {
-    try {
-      const resp = await fetch(origSrc);
-      const svgText = await resp.text();
-      const b64 = btoa(unescape(encodeURIComponent(svgText)));
-      logoImg.src = 'data:image/svg+xml;base64,' + b64;
-      await new Promise(r => { logoImg.onload = r; logoImg.onerror = r; setTimeout(r, 500); });
-    } catch (e) {}
-  }
-
+  // Logo is inline SVG — html2canvas captures it natively, no img-swap needed.
   html2pdf().set({
     margin: 0,
     filename: "gear-up-amc-chart.pdf",
     image: { type: "jpeg", quality: 0.98 },
     html2canvas: { scale: 2, useCORS: true, allowTaint: true, logging: false, scrollY: 0 },
-    jsPDF: { unit: "px", format: [el.scrollWidth * 2, el.scrollHeight * 2], orientation: "portrait" },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
     pagebreak: { mode: "avoid-all" }
   })
   .from(el)
   .save()
   .then(function () {
-    if (logoImg && origSrc) logoImg.src = origSrc;
     btn.disabled = false;
     btn.innerHTML = '<span class="material-symbols-rounded">download</span> Download PDF';
   });
