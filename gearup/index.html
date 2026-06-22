@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GearUp Servicing</title>
-  <meta name="description" content="GearUp Servicing — multi-brand vehicle care. Call, WhatsApp, or book online.">
+  <title>Gear Up</title>
+  <meta name="description" content="Gear Up — Call, WhatsApp, or book online.">
   <meta name="theme-color" content="#e01010">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
   <style>
     /* ── design tokens ── */
@@ -371,9 +372,21 @@
     @media (max-width: 360px) {
       body { padding: 28px 10px 64px; }
     }
+
+    /* ── particles canvas ── */
+    #particles-js {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    #particles-js canvas { display: block; }
   </style>
 </head>
 <body>
+
+<!-- ══ PARTICLES ══ -->
+<div id="particles-js"></div>
 
 <!-- ══ BACKGROUND SCENE ══ -->
 <div class="bg-scene" id="bg-scene">
@@ -428,8 +441,7 @@
     </svg>
   </div>
 
-  <div class="name">Gear<b>Up</b> Servicing</div>
-  <div class="tagline">multi-brand vehicle care</div>
+  <div class="name">Gear <b>Up</b></div>
 
   <div class="divider">
     <div class="divider-line"></div>
@@ -454,32 +466,32 @@ const CONFIG = {
     {
       type:  "phone",
       label: "Call Us",
-      sub:   "+91 XXXXX XXXXX",
-      href:  "tel:+91XXXXXXXXXX",
+      sub:   "+91 92425 19099",
+      href:  "tel:+919242519099",
     },
     {
       type:  "email",
       label: "Email",
-      sub:   "gearup@example.com",
-      href:  "mailto:gearup@example.com",
+      sub:   "gearup.sgnk.ai@gmail.com",
+      href:  "mailto:gearup.sgnk.ai@gmail.com",
     },
     {
       type:  "whatsapp",
       label: "WhatsApp",
       sub:   "Chat with us instantly",
-      href:  "https://wa.me/91XXXXXXXXXX",
+      href:  "https://wa.me/919242519099",
     },
     {
       type:  "website",
       label: "Visit Website",
-      sub:   "Book a service · track your job",
-      href:  "https://gearup.example.com",
+      sub:   "gearup.sgnk.ai",
+      href:  "https://gearup.sgnk.ai",
     },
     {
       type:  "amc",
       label: "AMC Chart",
       sub:   "Annual maintenance plans & pricing",
-      href:  "https://gearup.example.com/amc",
+      href:  "https://gearup.sgnk.ai/amc-chart",
     },
   ]
 };
@@ -531,23 +543,39 @@ CONFIG.links.forEach(link => {
   container.appendChild(a);
 });
 
-/* spark particles */
-const scene = document.getElementById("bg-scene");
-const W = window.innerWidth;
-const H = window.innerHeight;
-for (let i = 0; i < 18; i++) {
-  const s = document.createElement("div");
-  s.className = "spark";
-  const size = 2 + Math.random() * 3;
-  s.style.cssText = `
-    width:${size}px; height:${size}px;
-    left:${Math.random() * 100}%;
-    top:${60 + Math.random() * 40}%;
-    --dur:${2.5 + Math.random() * 4}s;
-    --delay:${Math.random() * 5}s;
-  `;
-  scene.appendChild(s);
-}
+/* particles.js — subtle red dust */
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 38, density: { enable: true, value_area: 900 } },
+    color: { value: "#e01010" },
+    shape: { type: "circle" },
+    opacity: {
+      value: 0.18,
+      random: true,
+      anim: { enable: true, speed: 0.4, opacity_min: 0.04, sync: false }
+    },
+    size: {
+      value: 2.2,
+      random: true,
+      anim: { enable: false }
+    },
+    line_linked: { enable: false },
+    move: {
+      enable: true,
+      speed: 0.55,
+      direction: "none",
+      random: true,
+      straight: false,
+      out_mode: "out",
+      bounce: false
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: { onhover: { enable: false }, onclick: { enable: false }, resize: true }
+  },
+  retina_detect: true
+});
 </script>
 </body>
 </html>
