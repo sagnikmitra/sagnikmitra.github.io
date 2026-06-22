@@ -5,21 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GearUp Servicing</title>
   <meta name="description" content="GearUp Servicing — multi-brand vehicle care. Call, WhatsApp, or book online.">
-  <meta name="theme-color" content="#1a5cff">
+  <meta name="theme-color" content="#e01010">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     /* ── tokens ── */
     :root {
-      --blue:       #1a5cff;
-      --blue-dim:   #e8eeff;
-      --ink:        #111;
-      --muted:      #666;
-      --line:       #e2e2e2;
-      --bg:         #f5f6f8;
-      --card:       #fff;
-      --radius:     0px;
+      --red:        #e01010;
+      --red-dark:   #ac0000;
+      --red-glow:   rgba(224, 16, 16, 0.20);
+      --red-dim:    rgba(224, 16, 16, 0.09);
+      --bg:         #0c0c0c;
+      --surface:    #161616;
+      --surface-2:  #1e1e1e;
+      --line:       #272727;
+      --line-hover: #e01010;
+      --ink:        #f2f2f2;
+      --muted:      #7a7a7a;
+      --muted-2:    #555;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,62 +36,81 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 48px 16px 80px;
+      padding: 52px 16px 80px;
+      /* subtle noise texture via gradient */
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(224,16,16,.07) 0%, transparent 70%);
     }
 
-    /* ── card wrapper ── */
+    /* ── card ── */
     .card {
       width: 100%;
       max-width: 440px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0;
     }
 
-    /* ── avatar / logo ── */
-    .avatar {
-      width: 88px;
-      height: 88px;
+    /* ── logo ── */
+    .logo-wrap {
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
-      background: var(--blue);
+      background: var(--surface);
+      border: 1.5px solid var(--line);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -.5px;
-      border: 3px solid #fff;
-      box-shadow: 0 2px 12px rgba(26,92,255,.18);
-      margin-bottom: 16px;
-      user-select: none;
+      margin-bottom: 18px;
+      box-shadow: 0 0 0 6px rgba(224,16,16,.07), 0 0 28px rgba(224,16,16,.12);
+      transition: box-shadow .2s;
+    }
+    .logo-wrap:hover {
+      box-shadow: 0 0 0 6px rgba(224,16,16,.13), 0 0 40px rgba(224,16,16,.22);
+    }
+    .logo-wrap img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      display: block;
     }
 
+    /* ── identity ── */
     .name {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       color: var(--ink);
-      letter-spacing: -.3px;
+      letter-spacing: -.4px;
       text-align: center;
     }
+    .name b { color: var(--red); }
 
     .tagline {
-      font-size: 13px;
+      font-size: 11.5px;
       color: var(--muted);
-      margin-top: 4px;
+      margin-top: 5px;
       text-align: center;
       font-family: 'Google Sans Code', monospace;
-      letter-spacing: .06em;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    /* ── divider ── */
+    .divider {
+      width: 32px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red), var(--red-dark));
+      margin: 22px auto 0;
+      border-radius: 1px;
     }
 
     /* ── links ── */
     .links {
       width: 100%;
-      margin-top: 32px;
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
     }
 
     .link-btn {
@@ -95,145 +118,174 @@
       align-items: center;
       gap: 14px;
       width: 100%;
-      padding: 15px 18px;
-      background: var(--card);
+      padding: 14px 16px;
+      background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 0;
       text-decoration: none;
       color: var(--ink);
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 500;
       cursor: pointer;
-      transition: border-color .15s, background .15s, box-shadow .15s;
+      transition: border-color .14s, background .14s, box-shadow .14s;
       -webkit-tap-highlight-color: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* red left-edge accent on hover */
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--red), var(--red-dark));
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform .16s ease;
     }
 
     .link-btn:hover {
-      border-color: var(--blue);
-      background: var(--blue-dim);
-      box-shadow: 0 2px 8px rgba(26,92,255,.1);
+      border-color: rgba(224,16,16,.4);
+      background: var(--surface-2);
+      box-shadow: inset 0 0 0 1px rgba(224,16,16,.09), 0 2px 12px rgba(0,0,0,.3);
     }
+    .link-btn:hover::before { transform: scaleY(1); }
+    .link-btn:active { background: #222; }
 
-    .link-btn:active {
-      background: #dce5ff;
-    }
-
+    /* ── icon box ── */
     .link-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+      width: 38px;
+      height: 38px;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
     }
+    .link-icon svg { width: 18px; height: 18px; }
 
-    .link-icon svg {
-      width: 20px;
-      height: 20px;
-    }
+    /* per-type icon color */
+    .link-icon.phone    { color: #ff6b6b; }
+    .link-icon.email    { color: #ffa94d; }
+    .link-icon.whatsapp { color: #69db7c; }
+    .link-icon.website  { color: #74c0fc; }
+    .link-icon.amc      { color: #e01010; }
 
-    .link-icon.phone   { background: #e8f5e9; color: #2e7d32; }
-    .link-icon.email   { background: #fff3e0; color: #e65100; }
-    .link-icon.whatsapp{ background: #e8f5e9; color: #1b5e20; }
-    .link-icon.website { background: #e3f2fd; color: #0d47a1; }
-    .link-icon.amc     { background: #fce4ec; color: #880e4f; }
-
-    .link-text {
-      flex: 1;
-    }
+    .link-text { flex: 1; min-width: 0; }
 
     .link-label {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 600;
       color: var(--ink);
     }
 
     .link-sub {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--muted);
-      margin-top: 1px;
+      margin-top: 2px;
       font-family: 'Google Sans Code', monospace;
+      letter-spacing: .04em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .link-arrow {
-      color: var(--muted);
+      color: var(--muted-2);
       flex-shrink: 0;
+      transition: color .14s, transform .14s;
+    }
+    .link-btn:hover .link-arrow {
+      color: var(--red);
+      transform: translateX(2px);
     }
 
     /* ── footer ── */
     footer {
-      margin-top: 48px;
-      font-family: 'Google Sans Code', monospace;
-      font-size: 11px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-align: center;
+      margin-top: 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
     }
-
-    footer a { color: var(--blue); font-weight: 700; text-decoration: none; }
+    .footer-wordmark {
+      font-family: 'Google Sans Code', monospace;
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+    .footer-wordmark a {
+      color: var(--red);
+      font-weight: 600;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
 <div class="card">
 
-  <!-- ── profile ── -->
-  <div class="avatar">GU</div>
-  <div class="name">GearUp Servicing</div>
-  <div class="tagline">multi-brand vehicle care</div>
+  <div class="logo-wrap">
+    <img src="gearup-logo.svg" alt="GearUp logo" width="52" height="52">
+  </div>
 
-  <!-- ── links ── -->
-  <!-- EDIT: update href values below. All contact info lives here. -->
+  <div class="name">Gear<b>Up</b> Servicing</div>
+  <div class="tagline">multi-brand vehicle care</div>
+  <div class="divider"></div>
+
   <div class="links" id="links"></div>
 
 </div>
 
-<footer>by <a href="https://sgnk.ai">sgnk</a></footer>
+<footer>
+  <div class="footer-wordmark">by <a href="https://sgnk.ai">sgnk</a></div>
+</footer>
 
 <script>
-/* ── CONFIG — edit this block to update links ── */
+/* ══════════════════════════════════════════
+   CONFIG — edit the values below to update
+   ══════════════════════════════════════════ */
 const CONFIG = {
   links: [
     {
-      id:    "phone",
-      label: "Call Us",
-      sub:   "+91 XXXXX XXXXX",            /* ← replace with phone number */
-      href:  "tel:+91XXXXXXXXXX",           /* ← replace with tel: link   */
       type:  "phone",
+      label: "Call Us",
+      sub:   "+91 XXXXX XXXXX",            /* ← phone number */
+      href:  "tel:+91XXXXXXXXXX",           /* ← tel: link    */
     },
     {
-      id:    "email",
-      label: "Email",
-      sub:   "gearup@example.com",          /* ← replace with email       */
-      href:  "mailto:gearup@example.com",   /* ← replace with mailto: link */
       type:  "email",
+      label: "Email",
+      sub:   "gearup@example.com",          /* ← email address */
+      href:  "mailto:gearup@example.com",   /* ← mailto: link  */
     },
     {
-      id:    "whatsapp",
-      label: "WhatsApp",
-      sub:   "Chat with us",
-      href:  "https://wa.me/91XXXXXXXXXX",  /* ← replace with WhatsApp number */
       type:  "whatsapp",
+      label: "WhatsApp",
+      sub:   "Chat with us instantly",
+      href:  "https://wa.me/91XXXXXXXXXX",  /* ← WhatsApp number */
     },
     {
-      id:    "website",
-      label: "Visit Website",
-      sub:   "Book a service online",
-      href:  "https://gearup.example.com",  /* ← replace with live site URL   */
       type:  "website",
+      label: "Visit Website",
+      sub:   "Book a service · track your job",
+      href:  "https://gearup.example.com",  /* ← live site URL */
     },
     {
-      id:    "amc",
-      label: "AMC Chart",
-      sub:   "Annual maintenance plans",
-      href:  "https://gearup.example.com/amc", /* ← replace with AMC chart URL */
       type:  "amc",
+      label: "AMC Chart",
+      sub:   "Annual maintenance plans & pricing",
+      href:  "https://gearup.example.com/amc", /* ← AMC chart URL or PDF */
     },
   ]
 };
 
-/* ── icons ── */
+/* ══════════════════════════════════════════
+   Icons (SVG strings)
+   ══════════════════════════════════════════ */
 const ICONS = {
   phone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -258,7 +310,7 @@ const ICONS = {
     <line x1="16" y1="17" x2="8" y2="17"/>
     <polyline points="10 9 9 9 8 9"/>
   </svg>`,
-  arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+  arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
     <path d="M5 12h14M12 5l7 7-7 7"/>
   </svg>`,
 };
@@ -269,8 +321,7 @@ CONFIG.links.forEach(link => {
   const a = document.createElement("a");
   a.className = "link-btn";
   a.href = link.href;
-  if (link.href.startsWith("http")) a.target = "_blank";
-  a.rel = "noopener noreferrer";
+  if (link.href.startsWith("http")) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
   a.innerHTML = `
     <div class="link-icon ${link.type}">${ICONS[link.type]}</div>
     <div class="link-text">
