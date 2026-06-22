@@ -197,7 +197,7 @@
 
     /* ══ HERO ══ */
     .hero {
-      background: linear-gradient(120deg, var(--navy) 0%, var(--navy-mid) 70%, #1e3660 100%);
+      background: linear-gradient(120deg, #7f0000 0%, #b71c1c 55%, var(--red) 100%);
       color: #fff;
       padding: 9px 16px 8px;
       display: flex;
@@ -261,7 +261,7 @@
       border: none;
     }
     thead th:first-child {
-      background: var(--navy);
+      background: linear-gradient(135deg, #7f0000 0%, #b71c1c 100%);
       color: #fff;
       text-align: left;
     }
@@ -338,7 +338,7 @@
     }
     .note-product {
       flex: 1;
-      background: var(--navy);
+      background: linear-gradient(90deg, #7f0000 0%, #b71c1c 100%);
       color: #fff;
       padding: 7px 10px;
       font-size: 10.5px;
@@ -431,7 +431,7 @@
       border: 1.5px solid var(--line);
     }
     .why-header {
-      background: var(--navy);
+      background: linear-gradient(90deg, #7f0000 0%, #b71c1c 50%, var(--red) 100%);
       color: #fff;
       text-align: center;
       padding: 5px 10px;
@@ -478,7 +478,7 @@
 
     /* ══ CTA ══ */
     .cta {
-      background: linear-gradient(120deg, var(--navy) 0%, var(--navy-mid) 100%);
+      background: linear-gradient(120deg, #7f0000 0%, #b71c1c 55%, var(--red) 100%);
       color: #fff;
       text-align: center;
       padding: 10px 16px 8px;
@@ -627,6 +627,9 @@
       <tr><td>TVS Spare Parts</td>                     <td>5%</td>       <td>8%</td>       </tr>
       <tr><td>Yamaha Spare Parts</td>                  <td>2%</td>       <td>5%</td>       </tr>
       <tr><td>Royal Enfield Spare Parts</td>           <td>3%</td>       <td>6%</td>       </tr>
+      <tr><td>Jawa / Yezdi Spare Parts</td>            <td>2%</td>       <td>5%</td>       </tr>
+      <tr><td>Suzuki Spare Parts</td>                  <td>2%</td>       <td>5%</td>       </tr>
+      <tr><td>KTM Spare Parts</td>                     <td>2%</td>       <td>5%</td>       </tr>
       <tr><td>RE Engine Oil</td>                       <td>8%</td>       <td>11%</td>      </tr>
       <tr><td>Studds / Steelbird</td>                  <td>14%</td>      <td>17%</td>      </tr>
       <tr><td>Non-Branded Parts &amp; Accessories</td> <td>Up to 30%</td><td>Up to 35%</td></tr>
@@ -721,41 +724,38 @@
 </div><!-- /.a4 -->
 
 <script>
-document.getElementById("btn-download").addEventListener("click", function () {
+document.getElementById("btn-download").addEventListener("click", async function () {
   const btn = this;
   btn.disabled = true;
   btn.innerHTML = '<span class="material-symbols-rounded">hourglass_top</span> Generating…';
 
   const el = document.querySelector(".a4");
-
-  // Swap inline SVG logos for img tags temporarily so html2canvas captures them
   const logoImg = el.querySelector('.logo-wide');
-  const logoSrc = logoImg && logoImg.src;
+  const origSrc = logoImg ? logoImg.src : null;
+
+  // Fetch SVG and convert to base64 data URL so html2canvas captures it reliably
+  if (logoImg && origSrc) {
+    try {
+      const resp = await fetch(origSrc);
+      const svgText = await resp.text();
+      const b64 = btoa(unescape(encodeURIComponent(svgText)));
+      logoImg.src = 'data:image/svg+xml;base64,' + b64;
+      await new Promise(r => { logoImg.onload = r; logoImg.onerror = r; setTimeout(r, 500); });
+    } catch (e) {}
+  }
 
   html2pdf().set({
     margin: 0,
     filename: "gear-up-amc-chart.pdf",
     image: { type: "jpeg", quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      allowTaint: false,
-      logging: false,
-      scrollY: 0,
-      onclone: function(doc) {
-        // Ensure logo img in cloned doc has crossOrigin
-        var clonedLogo = doc.querySelector('.logo-wide');
-        if (clonedLogo) {
-          clonedLogo.crossOrigin = 'anonymous';
-        }
-      }
-    },
+    html2canvas: { scale: 2, useCORS: true, allowTaint: true, logging: false, scrollY: 0 },
     jsPDF: { unit: "px", format: [el.scrollWidth * 2, el.scrollHeight * 2], orientation: "portrait" },
     pagebreak: { mode: "avoid-all" }
   })
   .from(el)
   .save()
   .then(function () {
+    if (logoImg && origSrc) logoImg.src = origSrc;
     btn.disabled = false;
     btn.innerHTML = '<span class="material-symbols-rounded">download</span> Download PDF';
   });
