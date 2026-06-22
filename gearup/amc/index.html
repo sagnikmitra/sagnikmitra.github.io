@@ -13,34 +13,72 @@
   <style>
     /* ── tokens ── */
     :root {
-      --red:        #c62828;
-      --red-mid:    #e53935;
-      --red-light:  #ffebee;
-      --red-border: #ffcdd2;
-      --navy:       #1a2d45;
-      --navy-mid:   #263f5e;
-      --green:      #2e7d32;
-      --green-light:#e8f5e9;
-      --green-border:#c8e6c9;
-      --gold:       #f9a825;
-      --ink:        #111;
-      --ink-2:      #2a2a2a;
-      --muted:      #5f6368;
-      --line:       #dadce0;
-      --bg-page:    #e8eaed;
+      --red:         #c62828;
+      --red-mid:     #e53935;
+      --red-deep:    #b71c1c;
+      --red-light:   #fff5f5;
+      --red-border:  #ffcdd2;
+      --gold:        #f9a825;
+      --gold-light:  #fff8e1;
+      --gold-border: #ffe082;
+      --navy:        #1a2d45;
+      --navy-mid:    #263f5e;
+      --grey:        #546e7a;
+      --grey-mid:    #607d8b;
+      --grey-light:  #f5f5f5;
+      --grey-border: #cfd8dc;
+      --ink:         #111;
+      --ink-2:       #2a2a2a;
+      --muted:       #5f6368;
+      --line:        #dadce0;
+      --bg-page:     #e2e4e8;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Google Sans', sans-serif;
-      background: var(--bg-page);
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(198,40,40,.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 20%, rgba(26,45,69,.05) 0%, transparent 55%),
+        linear-gradient(160deg, #eceef2 0%, #e2e4e8 50%, #dcdee3 100%);
+      background-attachment: fixed;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 24px 16px 48px;
       color: var(--ink);
+      position: relative;
+    }
+
+    /* subtle gear watermark behind the card */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -5%;
+      right: -8%;
+      width: 480px;
+      height: 460px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 552 521' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M543.766 228.769C548.111 228.769 551.673 232.199 551.704 236.543C551.723 239.168 551.721 242.005 551.718 245.082L551.697 271.184C551.681 289.686 551.671 298.937 546.629 305.88C541.585 312.821 532.792 315.685 515.207 321.412L476.416 334.156C466.446 338.125 455.013 348.474 448.415 359.903C441.813 371.337 438.567 386.407 440.116 397.029L448.475 436.995C452.307 455.09 454.224 464.136 450.734 471.976C447.243 479.813 439.235 484.446 423.22 493.71L400.628 506.779C383.542 516.662 374.997 521.608 366.032 520.367C357.065 519.128 350.197 512.056 336.466 497.913L313.105 473.948C304.014 465.474 292.218 460.496 279.802 459.888L269.536 459.887C258.29 460.405 247.501 464.511 238.746 471.607L217.942 490.006C204.209 502.196 197.342 508.292 188.874 509.158C180.409 510.023 172.47 505.44 156.593 496.274L131.105 481.559C115.231 472.394 107.292 467.81 103.806 460.045C100.323 452.278 102.169 443.284 105.861 425.296L111.392 398.08C113.159 386.949 111.32 375.552 106.148 365.555L101.013 356.664C94.2787 346.216 84.0688 338.488 72.1851 334.852L39.7506 326.604C20.6353 321.784 11.0777 319.372 5.52204 312.226C3.22478 309.273 5.84633 305.558 9.5854 305.698C41.6079 306.894 106.22 315.971 143.897 321.922C146.485 322.331 148.692 323.98 149.923 326.293C173.579 370.714 220.354 400.955 274.193 400.955C335.989 400.955 388.479 361.116 407.383 305.721C409.094 300.707 405.221 295.694 399.923 295.694H281.281C265.628 295.694 252.938 283.005 252.938 267.352V257.229C252.938 241.577 265.628 228.888 281.281 228.888H411.416L124.883 247.864C129.754 247.688 133.658 251.827 133.537 256.699C133.507 257.881 133.493 259.066 133.493 260.255C133.493 263.096 133.577 265.918 133.743 268.718C134.04 273.716 130.075 278.065 125.072 277.869L7.78083 273.274C3.43266 273.103-0.00350327 269.527 2.68066e-06 265.176L0.00403706 260.168C0.00754687 255.812 3.4568 252.239 7.81027 252.082L124.883 247.864ZM151.082 13.7743C168.167 3.89068 176.711-1.05116 185.677 0.187431C194.643 1.42673 201.51 8.49823 215.243 22.6406L238.605 46.6064C247.694 55.0781 259.488 60.0583 271.902 60.6669L282.17 60.6699C293.416 60.1512 304.208 56.0431 312.964 48.9482L333.766 30.5536C347.498 18.3619 354.366 12.2653 362.833 11.3993C371.3 10.5347 379.24 15.1177 395.113 24.2822L420.602 38.998C436.478 48.164 444.416 52.7479 447.899 60.5126C451.384 68.2789 449.538 77.2746 445.846 95.2636L440.315 122.475C438.549 133.606 440.388 145.005 445.562 155.004L450.7 163.895C454.364 169.581 451.044 179.251 444.282 179.079C419.713 178.458 390.785 174.111 372.491 159.588C347.129 134.82 312.443 119.556 274.193 119.556C218.215 119.556 169.872 152.246 147.214 199.578C146.011 202.09 143.686 203.892 140.929 204.292C104.658 209.556 45.1718 217.255 8.30834 219.654C5.44151 219.841 3.39012 217.001 5.07868 214.677C10.1229 207.734 18.9159 204.871 36.5025 199.143L75.2926 186.398C85.2669 182.429 96.6931 172.082 103.295 160.648C109.893 149.219 113.142 134.144 111.591 123.524L103.234 83.5595C99.4006 65.4659 97.4838 56.4181 100.974 48.58C104.465 40.7422 112.473 36.1092 128.489 26.8447L151.082 13.7743Z' fill='%231a2d45' fill-opacity='0.045'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -5%;
+      left: -6%;
+      width: 320px;
+      height: 300px;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 552 521' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M543.766 228.769C548.111 228.769 551.673 232.199 551.704 236.543C551.723 239.168 551.721 242.005 551.718 245.082L551.697 271.184C551.681 289.686 551.671 298.937 546.629 305.88C541.585 312.821 532.792 315.685 515.207 321.412L476.416 334.156C466.446 338.125 455.013 348.474 448.415 359.903C441.813 371.337 438.567 386.407 440.116 397.029L448.475 436.995C452.307 455.09 454.224 464.136 450.734 471.976C447.243 479.813 439.235 484.446 423.22 493.71L400.628 506.779C383.542 516.662 374.997 521.608 366.032 520.367C357.065 519.128 350.197 512.056 336.466 497.913L313.105 473.948C304.014 465.474 292.218 460.496 279.802 459.888L269.536 459.887C258.29 460.405 247.501 464.511 238.746 471.607L217.942 490.006C204.209 502.196 197.342 508.292 188.874 509.158C180.409 510.023 172.47 505.44 156.593 496.274L131.105 481.559C115.231 472.394 107.292 467.81 103.806 460.045C100.323 452.278 102.169 443.284 105.861 425.296L111.392 398.08C113.159 386.949 111.32 375.552 106.148 365.555L101.013 356.664C94.2787 346.216 84.0688 338.488 72.1851 334.852L39.7506 326.604C20.6353 321.784 11.0777 319.372 5.52204 312.226C3.22478 309.273 5.84633 305.558 9.5854 305.698C41.6079 306.894 106.22 315.971 143.897 321.922C146.485 322.331 148.692 323.98 149.923 326.293C173.579 370.714 220.354 400.955 274.193 400.955C335.989 400.955 388.479 361.116 407.383 305.721C409.094 300.707 405.221 295.694 399.923 295.694H281.281C265.628 295.694 252.938 283.005 252.938 267.352V257.229C252.938 241.577 265.628 228.888 281.281 228.888H411.416L124.883 247.864C129.754 247.688 133.658 251.827 133.537 256.699C133.507 257.881 133.493 259.066 133.493 260.255C133.493 263.096 133.577 265.918 133.743 268.718C134.04 273.716 130.075 278.065 125.072 277.869L7.78083 273.274C3.43266 273.103-0.00350327 269.527 2.68066e-06 265.176L0.00403706 260.168C0.00754687 255.812 3.4568 252.239 7.81027 252.082L124.883 247.864ZM151.082 13.7743C168.167 3.89068 176.711-1.05116 185.677 0.187431C194.643 1.42673 201.51 8.49823 215.243 22.6406L238.605 46.6064C247.694 55.0781 259.488 60.0583 271.902 60.6669L282.17 60.6699C293.416 60.1512 304.208 56.0431 312.964 48.9482L333.766 30.5536C347.498 18.3619 354.366 12.2653 362.833 11.3993C371.3 10.5347 379.24 15.1177 395.113 24.2822L420.602 38.998C436.478 48.164 444.416 52.7479 447.899 60.5126C451.384 68.2789 449.538 77.2746 445.846 95.2636L440.315 122.475C438.549 133.606 440.388 145.005 445.562 155.004L450.7 163.895C454.364 169.581 451.044 179.251 444.282 179.079C419.713 178.458 390.785 174.111 372.491 159.588C347.129 134.82 312.443 119.556 274.193 119.556C218.215 119.556 169.872 152.246 147.214 199.578C146.011 202.09 143.686 203.892 140.929 204.292C104.658 209.556 45.1718 217.255 8.30834 219.654C5.44151 219.841 3.39012 217.001 5.07868 214.677C10.1229 207.734 18.9159 204.871 36.5025 199.143L75.2926 186.398C85.2669 182.429 96.6931 172.082 103.295 160.648C109.893 149.219 113.142 134.144 111.591 123.524L103.234 83.5595C99.4006 65.4659 97.4838 56.4181 100.974 48.58C104.465 40.7422 112.473 36.1092 128.489 26.8447L151.082 13.7743Z' fill='%23c62828' fill-opacity='0.035'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .material-symbols-rounded {
@@ -56,6 +94,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 0 14px;
+      position: relative;
+      z-index: 1;
     }
     .topbar a {
       color: var(--navy);
@@ -84,7 +124,7 @@
     }
     .btn-action .material-symbols-rounded { font-size: 17px; }
     .btn-action.download { background: var(--red); color: #fff; }
-    .btn-action.download:hover { background: var(--red-mid); }
+    .btn-action.download:hover { background: var(--red-deep); }
     .btn-action.print { background: var(--navy); color: #fff; }
     .btn-action.print:hover { background: var(--navy-mid); }
     .btn-action:disabled { opacity: .6; cursor: not-allowed; }
@@ -94,10 +134,21 @@
       background: #fff;
       width: min(210mm, 100%);
       padding: 10mm 13mm 9mm;
-      box-shadow: 0 4px 24px rgba(0,0,0,.14), 0 1px 4px rgba(0,0,0,.08);
+      box-shadow: 0 6px 32px rgba(0,0,0,.14), 0 1px 4px rgba(0,0,0,.08);
       display: flex;
       flex-direction: column;
       gap: 4.5mm;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* red top edge accent on A4 card */
+    .a4::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red-deep) 0%, var(--red) 40%, var(--gold) 70%, var(--red-mid) 100%);
     }
 
     /* ══ HEADER ══ */
@@ -106,25 +157,14 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 8px;
+      padding-top: 3px;
     }
 
-    .logo-block { display: flex; align-items: center; gap: 10px; }
-    .logo-gear  { width: 50px; height: 47px; flex-shrink: 0; }
-
-    .logo-text { display: flex; flex-direction: column; gap: 2px; }
-    .logo-name {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--red);
-      letter-spacing: -.5px;
-      line-height: 1;
-    }
-    .logo-tagline {
-      font-size: 10px;
-      color: var(--red-mid);
-      font-style: italic;
-      font-weight: 500;
-      letter-spacing: .06em;
+    /* wide wordmark logo — use <img> so html2canvas renders it */
+    .logo-wide {
+      height: 46px;
+      width: auto;
+      display: block;
     }
 
     .contact-block {
@@ -148,16 +188,16 @@
       letter-spacing: .04em;
     }
 
-    /* ── red bar ── */
+    /* ── red-gold bar ── */
     .red-bar {
       height: 3px;
-      background: linear-gradient(90deg, var(--red) 0%, var(--red-mid) 60%, transparent 100%);
+      background: linear-gradient(90deg, var(--red-deep) 0%, var(--red) 55%, var(--gold) 80%, transparent 100%);
       margin: -1mm 0 0;
     }
 
     /* ══ HERO ══ */
     .hero {
-      background: var(--navy);
+      background: linear-gradient(120deg, var(--navy) 0%, var(--navy-mid) 70%, #1e3660 100%);
       color: #fff;
       padding: 9px 16px 8px;
       display: flex;
@@ -172,8 +212,16 @@
       position: absolute;
       top: 0; right: 0; bottom: 0;
       width: 40%;
-      background: linear-gradient(135deg, transparent, rgba(255,255,255,.04));
+      background: linear-gradient(135deg, transparent, rgba(249,168,37,.06));
       pointer-events: none;
+    }
+    /* gold bottom line on hero */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
     .hero-title {
       font-size: 17px;
@@ -217,15 +265,28 @@
       color: #fff;
       text-align: left;
     }
+    /* Regular column — neutral grey */
     thead th:nth-child(2) {
-      background: var(--red);
+      background: var(--grey);
       color: #fff;
       text-align: center;
     }
+    /* AMC column — brand red + gold hint */
     thead th:nth-child(3) {
-      background: var(--green);
+      background: linear-gradient(135deg, var(--red-deep) 0%, var(--red) 100%);
       color: #fff;
       text-align: center;
+      border-bottom: 2px solid var(--gold);
+      position: relative;
+    }
+    thead th:nth-child(3)::after {
+      content: '★';
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      font-size: 9px;
+      color: var(--gold);
+      font-style: normal;
     }
     thead th .col-sub {
       display: block;
@@ -244,23 +305,27 @@
     }
     tbody tr:nth-child(even) td:first-child { background: #fafafa; }
     tbody td:first-child { color: var(--ink-2); font-weight: 500; }
+
+    /* Regular column cells — grey */
     tbody td:nth-child(2) {
       text-align: center;
       font-weight: 700;
       font-size: 12.5px;
-      color: var(--red);
-      background: var(--red-light);
-      border-left: 2px solid var(--red-border);
-      border-right: 1px solid var(--red-border);
+      color: var(--grey);
+      background: var(--grey-light);
+      border-left: 2px solid var(--grey-border);
+      border-right: 1px solid var(--grey-border);
     }
+
+    /* AMC column cells — red + gold warmth */
     tbody td:nth-child(3) {
       text-align: center;
       font-weight: 700;
       font-size: 12.5px;
-      color: var(--green);
-      background: var(--green-light);
-      border-left: 1px solid var(--green-border);
-      border-right: 2px solid var(--green-border);
+      color: var(--red-deep);
+      background: linear-gradient(135deg, #fff8f0 0%, #fff5f0 100%);
+      border-left: 2px solid var(--gold-border);
+      border-right: 2px solid var(--gold-border);
     }
 
     /* 3% note row */
@@ -285,7 +350,7 @@
     .note-product .material-symbols-rounded { font-size: 15px; color: var(--gold); flex-shrink: 0; }
     .note-discount {
       width: 50%;
-      background: var(--green);
+      background: linear-gradient(135deg, var(--red-deep) 0%, var(--red) 100%);
       color: #fff;
       padding: 7px 10px;
       font-size: 10px;
@@ -295,8 +360,9 @@
       justify-content: center;
       text-align: center;
       gap: 4px;
+      border-left: 2px solid var(--gold);
     }
-    .note-discount .material-symbols-rounded { font-size: 14px; }
+    .note-discount .material-symbols-rounded { font-size: 14px; color: var(--gold); }
 
     /* ══ COMPARISON ══ */
     .cmp-section { display: grid; grid-template-columns: 1fr 32px 1fr; gap: 6px; align-items: stretch; }
@@ -307,8 +373,17 @@
       flex-direction: column;
       gap: 6px;
     }
-    .cmp-card.bad  { background: var(--red-light);   border-top: 3px solid var(--red);   }
-    .cmp-card.good { background: var(--green-light);  border-top: 3px solid var(--green); }
+    /* Regular — grey neutral */
+    .cmp-card.bad  { background: var(--grey-light); border-top: 3px solid var(--grey); }
+    /* AMC — red with gold accent */
+    .cmp-card.good { background: linear-gradient(135deg, #fff8f0, #fff5f0); border-top: 3px solid var(--red); position: relative; }
+    .cmp-card.good::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 32px; height: 3px;
+      background: var(--gold);
+    }
 
     .cmp-head {
       display: flex;
@@ -320,16 +395,16 @@
       letter-spacing: .05em;
     }
     .cmp-head .material-symbols-rounded { font-size: 16px; }
-    .cmp-head.bad  { color: var(--red);   }
-    .cmp-head.good { color: var(--green); }
+    .cmp-head.bad  { color: var(--grey);  }
+    .cmp-head.good { color: var(--red);   }
 
     .cmp-verdict {
       font-size: 13px;
       font-weight: 800;
       line-height: 1.25;
     }
-    .cmp-verdict.bad  { color: var(--red);   }
-    .cmp-verdict.good { color: var(--green); }
+    .cmp-verdict.bad  { color: var(--grey);     }
+    .cmp-verdict.good { color: var(--red-deep); }
 
     .cmp-list {
       list-style: none;
@@ -341,8 +416,8 @@
     }
     .cmp-list li { display: flex; align-items: center; gap: 5px; }
     .cmp-list li .material-symbols-rounded { font-size: 13px; flex-shrink: 0; }
-    .cmp-list.bad  li .material-symbols-rounded { color: var(--red);   }
-    .cmp-list.good li .material-symbols-rounded { color: var(--green); }
+    .cmp-list.bad  li .material-symbols-rounded { color: var(--grey);    }
+    .cmp-list.good li .material-symbols-rounded { color: var(--red);     }
 
     .cmp-arrow {
       display: flex;
@@ -384,12 +459,12 @@
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      background: var(--green-light);
-      border: 1.5px solid var(--green-border);
+      background: linear-gradient(135deg, #fff5f0, #ffede0);
+      border: 1.5px solid var(--gold-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--green);
+      color: var(--red);
     }
     .why-ico .material-symbols-rounded { font-size: 18px; }
 
@@ -403,7 +478,7 @@
 
     /* ══ CTA ══ */
     .cta {
-      background: var(--navy);
+      background: linear-gradient(120deg, var(--navy) 0%, var(--navy-mid) 100%);
       color: #fff;
       text-align: center;
       padding: 10px 16px 8px;
@@ -414,8 +489,16 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,.03) 0%, transparent 60%);
+      background: linear-gradient(135deg, rgba(249,168,37,.07) 0%, transparent 60%);
       pointer-events: none;
+    }
+    /* gold top line on CTA */
+    .cta::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
     .cta-main {
       font-size: 15px;
@@ -441,17 +524,19 @@
     /* ── print ── */
     @media print {
       body { background: none; padding: 0; }
+      body::before, body::after { display: none; }
       .topbar { display: none; }
-      .a4 { box-shadow: none; width: 100%; min-height: auto; }
+      .a4 { box-shadow: none; width: 100%; }
       @page { size: A4; margin: 0; }
     }
 
     /* ── mobile ── */
     @media (max-width: 680px) {
       body { padding: 0 0 32px; }
+      body::before, body::after { display: none; }
       .topbar { padding: 10px 12px 12px; width: 100%; }
       .a4 { padding: 5mm 4mm; gap: 3.5mm; }
-      .logo-name { font-size: 20px; }
+      .logo-wide { height: 34px; }
       .hero-title { font-size: 13px; }
       table { font-size: 9.5px; }
       thead th { padding: 5px 6px; font-size: 8.5px; }
@@ -489,20 +574,7 @@
 
   <!-- HEADER -->
   <div class="hdr">
-    <div class="logo-block">
-      <svg class="logo-gear" viewBox="0 0 552 521" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="lg" x1="275.865" y1="0" x2="275.865" y2="520.555" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FF0000"/><stop offset="1" stop-color="#AC0000"/>
-          </linearGradient>
-        </defs>
-        <path d="M543.766 228.769C548.111 228.769 551.673 232.199 551.704 236.543C551.723 239.168 551.721 242.005 551.718 245.082L551.697 271.184C551.681 289.686 551.671 298.937 546.629 305.88C541.585 312.821 532.792 315.685 515.207 321.412L476.416 334.156C466.446 338.125 455.013 348.474 448.415 359.903C441.813 371.337 438.567 386.407 440.116 397.029L448.475 436.995C452.307 455.09 454.224 464.136 450.734 471.976C447.243 479.813 439.235 484.446 423.22 493.71L400.628 506.779C383.542 516.662 374.997 521.608 366.032 520.367C357.065 519.128 350.197 512.056 336.466 497.913L313.105 473.948C304.014 465.474 292.218 460.496 279.802 459.888L269.536 459.887C258.29 460.405 247.501 464.511 238.746 471.607L217.942 490.006C204.209 502.196 197.342 508.292 188.874 509.158C180.409 510.023 172.47 505.44 156.593 496.274L131.105 481.559C115.231 472.394 107.292 467.81 103.806 460.045C100.323 452.278 102.169 443.284 105.861 425.296L111.392 398.08C113.159 386.949 111.32 375.552 106.148 365.555L101.013 356.664C94.2787 346.216 84.0688 338.488 72.1851 334.852L39.7506 326.604C20.6353 321.784 11.0777 319.372 5.52204 312.226C3.22478 309.273 5.84633 305.558 9.5854 305.698C41.6079 306.894 106.22 315.971 143.897 321.922C146.485 322.331 148.692 323.98 149.923 326.293C173.579 370.714 220.354 400.955 274.193 400.955C335.989 400.955 388.479 361.116 407.383 305.721C409.094 300.707 405.221 295.694 399.923 295.694H281.281C265.628 295.694 252.938 283.005 252.938 267.352V257.229C252.938 241.577 265.628 228.888 281.281 228.888H411.321C411.352 228.888 411.375 228.859 411.368 228.829C411.362 228.798 411.385 228.769 411.416 228.769H543.766ZM124.883 247.864C129.754 247.688 133.658 251.827 133.537 256.699C133.507 257.881 133.493 259.066 133.493 260.255C133.493 263.096 133.577 265.918 133.743 268.718C134.04 273.716 130.075 278.065 125.072 277.869L7.78083 273.274C3.43266 273.103 -0.00350327 269.527 2.68066e-06 265.176L0.00403706 260.168C0.00754687 255.812 3.4568 252.239 7.81027 252.082L124.883 247.864ZM151.082 13.7743C168.167 3.89068 176.711 -1.05116 185.677 0.187431C194.643 1.42673 201.51 8.49823 215.243 22.6406L238.605 46.6064C247.694 55.0781 259.488 60.0583 271.902 60.6669L282.17 60.6699C293.416 60.1512 304.208 56.0431 312.964 48.9482L333.766 30.5536C347.498 18.3619 354.366 12.2653 362.833 11.3993C371.3 10.5347 379.24 15.1177 395.113 24.2822L420.602 38.998C436.478 48.164 444.416 52.7479 447.899 60.5126C451.384 68.2789 449.538 77.2746 445.846 95.2636L440.315 122.475C438.549 133.606 440.388 145.005 445.562 155.004L450.7 163.895C454.364 169.581 451.044 179.251 444.282 179.079C419.713 178.458 390.785 174.111 372.491 159.588C347.129 134.82 312.443 119.556 274.193 119.556C218.215 119.556 169.872 152.246 147.214 199.578C146.011 202.09 143.686 203.892 140.929 204.292C104.658 209.556 45.1718 217.255 8.30834 219.654C5.44151 219.841 3.39012 217.001 5.07868 214.677C10.1229 207.734 18.9159 204.871 36.5025 199.143L75.2926 186.398C85.2669 182.429 96.6931 172.082 103.295 160.648C109.893 149.219 113.142 134.144 111.591 123.524L103.234 83.5595C99.4006 65.4659 97.4838 56.4181 100.974 48.58C104.465 40.7422 112.473 36.1092 128.489 26.8447L151.082 13.7743Z" fill="url(#lg)"/>
-      </svg>
-      <div class="logo-text">
-        <div class="logo-name">Gear Up</div>
-        <div class="logo-tagline">service. spares. safety.</div>
-      </div>
-    </div>
+    <img class="logo-wide" src="../gearup.svg" alt="Gear Up" crossorigin="anonymous">
 
     <div class="contact-block">
       <div class="contact-row">
@@ -540,24 +612,24 @@
         <th>Product</th>
         <th>
           Regular Customer
-          <span class="col-sub">Pay More ✗</span>
+          <span class="col-sub">Standard Pricing</span>
         </th>
         <th>
           AMC Customer
-          <span class="col-sub">Save More ✓</span>
+          <span class="col-sub">Save More ★</span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Hero Spare Parts</td>             <td>4%</td>  <td>7%</td>  </tr>
-      <tr><td>Honda Spare Parts</td>            <td>3%</td>  <td>6%</td>  </tr>
-      <tr><td>Bajaj Spare Parts</td>            <td>5%</td>  <td>8%</td>  </tr>
-      <tr><td>TVS Spare Parts</td>              <td>5%</td>  <td>8%</td>  </tr>
-      <tr><td>Yamaha Spare Parts</td>           <td>2%</td>  <td>5%</td>  </tr>
-      <tr><td>Royal Enfield Spare Parts</td>    <td>3%</td>  <td>6%</td>  </tr>
-      <tr><td>RE Engine Oil</td>                <td>8%</td>  <td>11%</td> </tr>
-      <tr><td>Studds / Steelbird</td>           <td>14%</td> <td>17%</td> </tr>
-      <tr><td>Non-Branded Parts &amp; Accessories</td><td>Up to 30%</td><td>Up to 35%</td></tr>
+      <tr><td>Hero Spare Parts</td>                    <td>4%</td>       <td>7%</td>       </tr>
+      <tr><td>Honda Spare Parts</td>                   <td>3%</td>       <td>6%</td>       </tr>
+      <tr><td>Bajaj Spare Parts</td>                   <td>5%</td>       <td>8%</td>       </tr>
+      <tr><td>TVS Spare Parts</td>                     <td>5%</td>       <td>8%</td>       </tr>
+      <tr><td>Yamaha Spare Parts</td>                  <td>2%</td>       <td>5%</td>       </tr>
+      <tr><td>Royal Enfield Spare Parts</td>           <td>3%</td>       <td>6%</td>       </tr>
+      <tr><td>RE Engine Oil</td>                       <td>8%</td>       <td>11%</td>      </tr>
+      <tr><td>Studds / Steelbird</td>                  <td>14%</td>      <td>17%</td>      </tr>
+      <tr><td>Non-Branded Parts &amp; Accessories</td> <td>Up to 30%</td><td>Up to 35%</td></tr>
     </tbody>
     <tfoot>
       <tr>
@@ -568,7 +640,7 @@
               All other products &amp; accessories
             </div>
             <div class="note-discount">
-              <span class="material-symbols-rounded">add_circle</span>
+              <span class="material-symbols-rounded">star</span>
               AMC members save 3% more than regular customers
             </div>
           </div>
@@ -581,14 +653,14 @@
   <div class="cmp-section">
     <div class="cmp-card bad">
       <div class="cmp-head bad">
-        <span class="material-symbols-rounded">cancel</span>
+        <span class="material-symbols-rounded">person</span>
         Regular Customer
       </div>
-      <div class="cmp-verdict bad">Pay More · Get Less</div>
+      <div class="cmp-verdict bad">Standard Prices</div>
       <ul class="cmp-list bad">
-        <li><span class="material-symbols-rounded">close</span> Higher prices on every purchase</li>
-        <li><span class="material-symbols-rounded">close</span> No extra benefits</li>
-        <li><span class="material-symbols-rounded">close</span> More cost, more burden</li>
+        <li><span class="material-symbols-rounded">remove</span> Higher prices on every purchase</li>
+        <li><span class="material-symbols-rounded">remove</span> No exclusive benefits</li>
+        <li><span class="material-symbols-rounded">remove</span> More spend, less savings</li>
       </ul>
     </div>
 
@@ -598,10 +670,10 @@
 
     <div class="cmp-card good">
       <div class="cmp-head good">
-        <span class="material-symbols-rounded">check_circle</span>
+        <span class="material-symbols-rounded">verified</span>
         AMC Customer
       </div>
-      <div class="cmp-verdict good">Save More · Get Better Service</div>
+      <div class="cmp-verdict good">Save More · Better Service</div>
       <ul class="cmp-list good">
         <li><span class="material-symbols-rounded">check</span> Lower prices on every purchase</li>
         <li><span class="material-symbols-rounded">check</span> Priority Workshop Service</li>
@@ -655,11 +727,29 @@ document.getElementById("btn-download").addEventListener("click", function () {
   btn.innerHTML = '<span class="material-symbols-rounded">hourglass_top</span> Generating…';
 
   const el = document.querySelector(".a4");
+
+  // Swap inline SVG logos for img tags temporarily so html2canvas captures them
+  const logoImg = el.querySelector('.logo-wide');
+  const logoSrc = logoImg && logoImg.src;
+
   html2pdf().set({
     margin: 0,
     filename: "gear-up-amc-chart.pdf",
     image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      allowTaint: false,
+      logging: false,
+      scrollY: 0,
+      onclone: function(doc) {
+        // Ensure logo img in cloned doc has crossOrigin
+        var clonedLogo = doc.querySelector('.logo-wide');
+        if (clonedLogo) {
+          clonedLogo.crossOrigin = 'anonymous';
+        }
+      }
+    },
     jsPDF: { unit: "px", format: [el.scrollWidth * 2, el.scrollHeight * 2], orientation: "portrait" },
     pagebreak: { mode: "avoid-all" }
   })
