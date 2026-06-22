@@ -249,6 +249,7 @@
     .link-btn:nth-child(6) { animation-delay: .72s; }
     .link-btn:nth-child(7) { animation-delay: .80s; }
     .link-btn:nth-child(8) { animation-delay: .88s; }
+    .link-btn:nth-child(9) { animation-delay: .96s; }
 
     @keyframes link-enter {
       from { opacity: 0; transform: translateX(-16px); }
@@ -314,6 +315,7 @@
     .link-icon.instagram { color: #f77737; }
     .link-icon.book      { color: #a9e34b; }
     .link-icon.track     { color: #66d9e8; }
+    .link-icon.location  { color: #da77f2; }
 
     /* ── text ── */
     .link-text { flex: 1; min-width: 0; }
@@ -517,6 +519,12 @@ const CONFIG = {
       sub:   "Live job status updates",
       href:  "https://gearup.sgnk.ai/track",
     },
+    {
+      type:  "location",
+      label: "Our Location",
+      sub:   "Find us on the map",
+      href:  "https://gearup.sgnk.ai/location",
+    },
   ]
 };
 
@@ -560,6 +568,10 @@ const ICONS = {
   track: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/>
     <circle cx="12" cy="10" r="3"/>
+  </svg>`,
+  location: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+    <circle cx="12" cy="9" r="2.5"/>
   </svg>`,
   arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
     <path d="M5 12h14M12 5l7 7-7 7"/>
