@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AMC Chart — Gear Up</title>
+  <meta name="description" content="Gear Up AMC Members Save More — exclusive discounts on spare parts and engine oil.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Google+Sans+Code:wght@400;500;600&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,500,1,0&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    /* ── tokens ── */
+    :root {
+      --red:        #c62828;
+      --red-mid:    #e53935;
+      --red-light:  #ffebee;
+      --red-border: #ffcdd2;
+      --navy:       #1a2d45;
+      --navy-mid:   #263f5e;
+      --green:      #2e7d32;
+      --green-light:#e8f5e9;
+      --green-border:#c8e6c9;
+      --gold:       #f9a825;
+      --ink:        #111;
+      --ink-2:      #2a2a2a;
+      --muted:      #5f6368;
+      --line:       #dadce0;
+      --bg-page:    #e8eaed;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Google Sans', sans-serif;
+      background: var(--bg-page);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 48px;
+      color: var(--ink);
+    }
+
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 20;
+      user-select: none;
+      line-height: 1;
+    }
+
+    /* ── web nav ── */
+    .topbar {
+      width: min(210mm, 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0 14px;
+    }
+    .topbar a {
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .topbar a:hover { color: var(--red); }
+
+    .topbar-actions { display: flex; gap: 8px; }
+
+    .btn-action {
+      border: none;
+      padding: 8px 14px;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background .15s, opacity .15s;
+    }
+    .btn-action .material-symbols-rounded { font-size: 17px; }
+    .btn-action.download { background: var(--red); color: #fff; }
+    .btn-action.download:hover { background: var(--red-mid); }
+    .btn-action.print { background: var(--navy); color: #fff; }
+    .btn-action.print:hover { background: var(--navy-mid); }
+    .btn-action:disabled { opacity: .6; cursor: not-allowed; }
+
+    /* ══ A4 SHELL ══ */
+    .a4 {
+      background: #fff;
+      width: min(210mm, 100%);
+      padding: 10mm 13mm 9mm;
+      box-shadow: 0 4px 24px rgba(0,0,0,.14), 0 1px 4px rgba(0,0,0,.08);
+      display: flex;
+      flex-direction: column;
+      gap: 4.5mm;
+    }
+
+    /* ══ HEADER ══ */
+    .hdr {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .logo-block { display: flex; align-items: center; gap: 10px; }
+    .logo-gear  { width: 50px; height: 47px; flex-shrink: 0; }
+
+    .logo-text { display: flex; flex-direction: column; gap: 2px; }
+    .logo-name {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: -.5px;
+      line-height: 1;
+    }
+    .logo-tagline {
+      font-size: 10px;
+      color: var(--red-mid);
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: .06em;
+    }
+
+    .contact-block {
+      text-align: right;
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      justify-content: flex-end;
+    }
+    .contact-row .material-symbols-rounded { font-size: 13px; color: var(--navy); }
+    .contact-block strong { color: var(--navy); font-weight: 700; }
+    .gstin-row {
+      font-family: 'Google Sans Code', monospace;
+      font-size: 9.5px;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+
+    /* ── red bar ── */
+    .red-bar {
+      height: 3px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--red-mid) 60%, transparent 100%);
+      margin: -1mm 0 0;
+    }
+
+    /* ══ HERO ══ */
+    .hero {
+      background: var(--navy);
+      color: #fff;
+      padding: 9px 16px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 40%;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,.04));
+      pointer-events: none;
+    }
+    .hero-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-title .material-symbols-rounded { font-size: 22px; color: var(--gold); }
+    .hero-sub {
+      font-size: 10.5px;
+      color: rgba(255,255,255,.72);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    /* ══ TABLE ══ */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+
+    table colgroup col:first-child  { width: 50%; }
+    table colgroup col:nth-child(2) { width: 25%; }
+    table colgroup col:nth-child(3) { width: 25%; }
+
+    /* column headers */
+    thead th {
+      padding: 7px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      border: none;
+    }
+    thead th:first-child {
+      background: var(--navy);
+      color: #fff;
+      text-align: left;
+    }
+    thead th:nth-child(2) {
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+    }
+    thead th:nth-child(3) {
+      background: var(--green);
+      color: #fff;
+      text-align: center;
+    }
+    thead th .col-sub {
+      display: block;
+      font-size: 9px;
+      font-weight: 400;
+      opacity: .85;
+      margin-top: 1px;
+      text-transform: none;
+      letter-spacing: .02em;
+    }
+
+    /* body rows */
+    tbody tr td {
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    tbody tr:nth-child(even) td:first-child { background: #fafafa; }
+    tbody td:first-child { color: var(--ink-2); font-weight: 500; }
+    tbody td:nth-child(2) {
+      text-align: center;
+      font-weight: 700;
+      font-size: 12.5px;
+      color: var(--red);
+      background: var(--red-light);
+      border-left: 2px solid var(--red-border);
+      border-right: 1px solid var(--red-border);
+    }
+    tbody td:nth-child(3) {
+      text-align: center;
+      font-weight: 700;
+      font-size: 12.5px;
+      color: var(--green);
+      background: var(--green-light);
+      border-left: 1px solid var(--green-border);
+      border-right: 2px solid var(--green-border);
+    }
+
+    /* 3% note row */
+    tfoot tr td {
+      padding: 0;
+    }
+    .note-row {
+      display: flex;
+      align-items: stretch;
+    }
+    .note-product {
+      flex: 1;
+      background: var(--navy);
+      color: #fff;
+      padding: 7px 10px;
+      font-size: 10.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .note-product .material-symbols-rounded { font-size: 15px; color: var(--gold); flex-shrink: 0; }
+    .note-discount {
+      width: 50%;
+      background: var(--green);
+      color: #fff;
+      padding: 7px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 4px;
+    }
+    .note-discount .material-symbols-rounded { font-size: 14px; }
+
+    /* ══ COMPARISON ══ */
+    .cmp-section { display: grid; grid-template-columns: 1fr 32px 1fr; gap: 6px; align-items: stretch; }
+
+    .cmp-card {
+      padding: 9px 11px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cmp-card.bad  { background: var(--red-light);   border-top: 3px solid var(--red);   }
+    .cmp-card.good { background: var(--green-light);  border-top: 3px solid var(--green); }
+
+    .cmp-head {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .cmp-head .material-symbols-rounded { font-size: 16px; }
+    .cmp-head.bad  { color: var(--red);   }
+    .cmp-head.good { color: var(--green); }
+
+    .cmp-verdict {
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .cmp-verdict.bad  { color: var(--red);   }
+    .cmp-verdict.good { color: var(--green); }
+
+    .cmp-list {
+      list-style: none;
+      font-size: 10px;
+      color: var(--ink-2);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .cmp-list li { display: flex; align-items: center; gap: 5px; }
+    .cmp-list li .material-symbols-rounded { font-size: 13px; flex-shrink: 0; }
+    .cmp-list.bad  li .material-symbols-rounded { color: var(--red);   }
+    .cmp-list.good li .material-symbols-rounded { color: var(--green); }
+
+    .cmp-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cmp-arrow .material-symbols-rounded { font-size: 22px; color: var(--muted); }
+
+    /* ══ WHY AMC ══ */
+    .why {
+      border: 1.5px solid var(--line);
+    }
+    .why-header {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: 5px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .why-icons {
+      display: flex;
+      padding: 8px 4px;
+    }
+    .why-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 0 4px;
+      border-right: 1px solid var(--line);
+    }
+    .why-item:last-child { border-right: none; }
+
+    .why-ico {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--green-light);
+      border: 1.5px solid var(--green-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+    }
+    .why-ico .material-symbols-rounded { font-size: 18px; }
+
+    .why-label {
+      font-size: 9.5px;
+      color: var(--ink-2);
+      text-align: center;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    /* ══ CTA ══ */
+    .cta {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-main {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .cta-main .material-symbols-rounded { font-size: 18px; color: var(--gold); }
+    .cta-main .gold { color: var(--gold); }
+    .cta-sub {
+      font-family: 'Google Sans Code', monospace;
+      font-size: 8.5px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .6;
+      margin-top: 3px;
+    }
+
+    /* ── print ── */
+    @media print {
+      body { background: none; padding: 0; }
+      .topbar { display: none; }
+      .a4 { box-shadow: none; width: 100%; min-height: auto; }
+      @page { size: A4; margin: 0; }
+    }
+
+    /* ── mobile ── */
+    @media (max-width: 680px) {
+      body { padding: 0 0 32px; }
+      .topbar { padding: 10px 12px 12px; width: 100%; }
+      .a4 { padding: 5mm 4mm; gap: 3.5mm; }
+      .logo-name { font-size: 20px; }
+      .hero-title { font-size: 13px; }
+      table { font-size: 9.5px; }
+      thead th { padding: 5px 6px; font-size: 8.5px; }
+      tbody td { padding: 5px 6px; }
+      tbody td:nth-child(2), tbody td:nth-child(3) { font-size: 11px; }
+      .cmp-section { grid-template-columns: 1fr 22px 1fr; }
+      .cmp-verdict { font-size: 11px; }
+      .cmp-list { font-size: 9px; }
+      .why-label { font-size: 8.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- web nav -->
+<div class="topbar">
+  <a href="/gearup">
+    <span class="material-symbols-rounded" style="font-size:16px">arrow_back</span>
+    Back to Gear Up
+  </a>
+  <div class="topbar-actions">
+    <button class="btn-action download" id="btn-download">
+      <span class="material-symbols-rounded">download</span>
+      Download PDF
+    </button>
+    <button class="btn-action print" onclick="window.print()">
+      <span class="material-symbols-rounded">print</span>
+      Print
+    </button>
+  </div>
+</div>
+
+<!-- ══ A4 ══ -->
+<div class="a4">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="logo-block">
+      <svg class="logo-gear" viewBox="0 0 552 521" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lg" x1="275.865" y1="0" x2="275.865" y2="520.555" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FF0000"/><stop offset="1" stop-color="#AC0000"/>
+          </linearGradient>
+        </defs>
+        <path d="M543.766 228.769C548.111 228.769 551.673 232.199 551.704 236.543C551.723 239.168 551.721 242.005 551.718 245.082L551.697 271.184C551.681 289.686 551.671 298.937 546.629 305.88C541.585 312.821 532.792 315.685 515.207 321.412L476.416 334.156C466.446 338.125 455.013 348.474 448.415 359.903C441.813 371.337 438.567 386.407 440.116 397.029L448.475 436.995C452.307 455.09 454.224 464.136 450.734 471.976C447.243 479.813 439.235 484.446 423.22 493.71L400.628 506.779C383.542 516.662 374.997 521.608 366.032 520.367C357.065 519.128 350.197 512.056 336.466 497.913L313.105 473.948C304.014 465.474 292.218 460.496 279.802 459.888L269.536 459.887C258.29 460.405 247.501 464.511 238.746 471.607L217.942 490.006C204.209 502.196 197.342 508.292 188.874 509.158C180.409 510.023 172.47 505.44 156.593 496.274L131.105 481.559C115.231 472.394 107.292 467.81 103.806 460.045C100.323 452.278 102.169 443.284 105.861 425.296L111.392 398.08C113.159 386.949 111.32 375.552 106.148 365.555L101.013 356.664C94.2787 346.216 84.0688 338.488 72.1851 334.852L39.7506 326.604C20.6353 321.784 11.0777 319.372 5.52204 312.226C3.22478 309.273 5.84633 305.558 9.5854 305.698C41.6079 306.894 106.22 315.971 143.897 321.922C146.485 322.331 148.692 323.98 149.923 326.293C173.579 370.714 220.354 400.955 274.193 400.955C335.989 400.955 388.479 361.116 407.383 305.721C409.094 300.707 405.221 295.694 399.923 295.694H281.281C265.628 295.694 252.938 283.005 252.938 267.352V257.229C252.938 241.577 265.628 228.888 281.281 228.888H411.321C411.352 228.888 411.375 228.859 411.368 228.829C411.362 228.798 411.385 228.769 411.416 228.769H543.766ZM124.883 247.864C129.754 247.688 133.658 251.827 133.537 256.699C133.507 257.881 133.493 259.066 133.493 260.255C133.493 263.096 133.577 265.918 133.743 268.718C134.04 273.716 130.075 278.065 125.072 277.869L7.78083 273.274C3.43266 273.103 -0.00350327 269.527 2.68066e-06 265.176L0.00403706 260.168C0.00754687 255.812 3.4568 252.239 7.81027 252.082L124.883 247.864ZM151.082 13.7743C168.167 3.89068 176.711 -1.05116 185.677 0.187431C194.643 1.42673 201.51 8.49823 215.243 22.6406L238.605 46.6064C247.694 55.0781 259.488 60.0583 271.902 60.6669L282.17 60.6699C293.416 60.1512 304.208 56.0431 312.964 48.9482L333.766 30.5536C347.498 18.3619 354.366 12.2653 362.833 11.3993C371.3 10.5347 379.24 15.1177 395.113 24.2822L420.602 38.998C436.478 48.164 444.416 52.7479 447.899 60.5126C451.384 68.2789 449.538 77.2746 445.846 95.2636L440.315 122.475C438.549 133.606 440.388 145.005 445.562 155.004L450.7 163.895C454.364 169.581 451.044 179.251 444.282 179.079C419.713 178.458 390.785 174.111 372.491 159.588C347.129 134.82 312.443 119.556 274.193 119.556C218.215 119.556 169.872 152.246 147.214 199.578C146.011 202.09 143.686 203.892 140.929 204.292C104.658 209.556 45.1718 217.255 8.30834 219.654C5.44151 219.841 3.39012 217.001 5.07868 214.677C10.1229 207.734 18.9159 204.871 36.5025 199.143L75.2926 186.398C85.2669 182.429 96.6931 172.082 103.295 160.648C109.893 149.219 113.142 134.144 111.591 123.524L103.234 83.5595C99.4006 65.4659 97.4838 56.4181 100.974 48.58C104.465 40.7422 112.473 36.1092 128.489 26.8447L151.082 13.7743Z" fill="url(#lg)"/>
+      </svg>
+      <div class="logo-text">
+        <div class="logo-name">Gear Up</div>
+        <div class="logo-tagline">service. spares. safety.</div>
+      </div>
+    </div>
+
+    <div class="contact-block">
+      <div class="contact-row">
+        <span class="material-symbols-rounded">location_on</span>
+        Milanpally, Katjuridanga, Bankura
+      </div>
+      <div class="contact-row">
+        <span class="material-symbols-rounded">call</span> 9242519099
+        &nbsp;·&nbsp;
+        <span class="material-symbols-rounded">mail</span> gearup.sgnk.ai@gmail.com
+      </div>
+      <div class="contact-row gstin-row">
+        <strong>GSTIN:</strong>&nbsp;19EHTPM1499B1ZS
+      </div>
+    </div>
+  </div>
+
+  <div class="red-bar"></div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-title">
+      <span class="material-symbols-rounded">two_wheeler</span>
+      AMC Members Save More!
+      <span class="material-symbols-rounded">two_wheeler</span>
+    </div>
+    <div class="hero-sub">Exclusive Discounts on Spare Parts, Engine Oil, Chain Cleaner &amp; Chain Lube</div>
+  </div>
+
+  <!-- TABLE -->
+  <table>
+    <colgroup><col><col><col></colgroup>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>
+          Regular Customer
+          <span class="col-sub">Pay More ✗</span>
+        </th>
+        <th>
+          AMC Customer
+          <span class="col-sub">Save More ✓</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Hero Spare Parts</td>             <td>4%</td>  <td>7%</td>  </tr>
+      <tr><td>Honda Spare Parts</td>            <td>3%</td>  <td>6%</td>  </tr>
+      <tr><td>Bajaj Spare Parts</td>            <td>5%</td>  <td>8%</td>  </tr>
+      <tr><td>TVS Spare Parts</td>              <td>5%</td>  <td>8%</td>  </tr>
+      <tr><td>Yamaha Spare Parts</td>           <td>2%</td>  <td>5%</td>  </tr>
+      <tr><td>Royal Enfield Spare Parts</td>    <td>3%</td>  <td>6%</td>  </tr>
+      <tr><td>RE Engine Oil</td>                <td>8%</td>  <td>11%</td> </tr>
+      <tr><td>Studds / Steelbird</td>           <td>14%</td> <td>17%</td> </tr>
+      <tr><td>Non-Branded Parts &amp; Accessories</td><td>Up to 30%</td><td>Up to 35%</td></tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">
+          <div class="note-row">
+            <div class="note-product">
+              <span class="material-symbols-rounded">info</span>
+              All other products &amp; accessories
+            </div>
+            <div class="note-discount">
+              <span class="material-symbols-rounded">add_circle</span>
+              AMC members save 3% more than regular customers
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <!-- COMPARISON -->
+  <div class="cmp-section">
+    <div class="cmp-card bad">
+      <div class="cmp-head bad">
+        <span class="material-symbols-rounded">cancel</span>
+        Regular Customer
+      </div>
+      <div class="cmp-verdict bad">Pay More · Get Less</div>
+      <ul class="cmp-list bad">
+        <li><span class="material-symbols-rounded">close</span> Higher prices on every purchase</li>
+        <li><span class="material-symbols-rounded">close</span> No extra benefits</li>
+        <li><span class="material-symbols-rounded">close</span> More cost, more burden</li>
+      </ul>
+    </div>
+
+    <div class="cmp-arrow">
+      <span class="material-symbols-rounded">arrow_forward</span>
+    </div>
+
+    <div class="cmp-card good">
+      <div class="cmp-head good">
+        <span class="material-symbols-rounded">check_circle</span>
+        AMC Customer
+      </div>
+      <div class="cmp-verdict good">Save More · Get Better Service</div>
+      <ul class="cmp-list good">
+        <li><span class="material-symbols-rounded">check</span> Lower prices on every purchase</li>
+        <li><span class="material-symbols-rounded">check</span> Priority Workshop Service</li>
+        <li><span class="material-symbols-rounded">check</span> More savings, better experience</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WHY AMC -->
+  <div class="why">
+    <div class="why-header">— Why Choose AMC? —</div>
+    <div class="why-icons">
+      <div class="why-item">
+        <div class="why-ico"><span class="material-symbols-rounded">percent</span></div>
+        <div class="why-label">Extra Discount<br>on Every Purchase</div>
+      </div>
+      <div class="why-item">
+        <div class="why-ico"><span class="material-symbols-rounded">handyman</span></div>
+        <div class="why-label">Priority<br>Workshop Service</div>
+      </div>
+      <div class="why-item">
+        <div class="why-ico"><span class="material-symbols-rounded">savings</span></div>
+        <div class="why-label">Lower<br>Maintenance Cost</div>
+      </div>
+      <div class="why-item">
+        <div class="why-ico"><span class="material-symbols-rounded">card_membership</span></div>
+        <div class="why-label">Exclusive<br>Member Benefits</div>
+      </div>
+      <div class="why-item">
+        <div class="why-ico"><span class="material-symbols-rounded">currency_rupee</span></div>
+        <div class="why-label">More Savings<br>Throughout the Year</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="cta-main">
+      <span class="material-symbols-rounded">verified</span>
+      Join AMC Today &amp; Save Up To <span class="gold">35%</span>
+    </div>
+    <div class="cta-sub">Save More · Ride More · Stress Less</div>
+  </div>
+
+</div><!-- /.a4 -->
+
+<script>
+document.getElementById("btn-download").addEventListener("click", function () {
+  const btn = this;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="material-symbols-rounded">hourglass_top</span> Generating…';
+
+  const el = document.querySelector(".a4");
+  html2pdf().set({
+    margin: 0,
+    filename: "gear-up-amc-chart.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0 },
+    jsPDF: { unit: "px", format: [el.scrollWidth * 2, el.scrollHeight * 2], orientation: "portrait" },
+    pagebreak: { mode: "avoid-all" }
+  })
+  .from(el)
+  .save()
+  .then(function () {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-rounded">download</span> Download PDF';
+  });
+});
+</script>
+</body>
+</html>
