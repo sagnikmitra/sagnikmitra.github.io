@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GearUp Servicing</title>
+  <meta name="description" content="GearUp Servicing — multi-brand vehicle care. Call, WhatsApp, or book online.">
+  <meta name="theme-color" content="#1a5cff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── tokens ── */
+    :root {
+      --blue:       #1a5cff;
+      --blue-dim:   #e8eeff;
+      --ink:        #111;
+      --muted:      #666;
+      --line:       #e2e2e2;
+      --bg:         #f5f6f8;
+      --card:       #fff;
+      --radius:     0px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Google Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 48px 16px 80px;
+    }
+
+    /* ── card wrapper ── */
+    .card {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── avatar / logo ── */
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.5px;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 12px rgba(26,92,255,.18);
+      margin-bottom: 16px;
+      user-select: none;
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.3px;
+      text-align: center;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      text-align: center;
+      font-family: 'Google Sans Code', monospace;
+      letter-spacing: .06em;
+    }
+
+    /* ── links ── */
+    .links {
+      width: 100%;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 15px 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color .15s, background .15s, box-shadow .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link-btn:hover {
+      border-color: var(--blue);
+      background: var(--blue-dim);
+      box-shadow: 0 2px 8px rgba(26,92,255,.1);
+    }
+
+    .link-btn:active {
+      background: #dce5ff;
+    }
+
+    .link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .link-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .link-icon.phone   { background: #e8f5e9; color: #2e7d32; }
+    .link-icon.email   { background: #fff3e0; color: #e65100; }
+    .link-icon.whatsapp{ background: #e8f5e9; color: #1b5e20; }
+    .link-icon.website { background: #e3f2fd; color: #0d47a1; }
+    .link-icon.amc     { background: #fce4ec; color: #880e4f; }
+
+    .link-text {
+      flex: 1;
+    }
+
+    .link-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .link-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 1px;
+      font-family: 'Google Sans Code', monospace;
+    }
+
+    .link-arrow {
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    /* ── footer ── */
+    footer {
+      margin-top: 48px;
+      font-family: 'Google Sans Code', monospace;
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer a { color: var(--blue); font-weight: 700; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- ── profile ── -->
+  <div class="avatar">GU</div>
+  <div class="name">GearUp Servicing</div>
+  <div class="tagline">multi-brand vehicle care</div>
+
+  <!-- ── links ── -->
+  <!-- EDIT: update href values below. All contact info lives here. -->
+  <div class="links" id="links"></div>
+
+</div>
+
+<footer>by <a href="https://sgnk.ai">sgnk</a></footer>
+
+<script>
+/* ── CONFIG — edit this block to update links ── */
+const CONFIG = {
+  links: [
+    {
+      id:    "phone",
+      label: "Call Us",
+      sub:   "+91 XXXXX XXXXX",            /* ← replace with phone number */
+      href:  "tel:+91XXXXXXXXXX",           /* ← replace with tel: link   */
+      type:  "phone",
+    },
+    {
+      id:    "email",
+      label: "Email",
+      sub:   "gearup@example.com",          /* ← replace with email       */
+      href:  "mailto:gearup@example.com",   /* ← replace with mailto: link */
+      type:  "email",
+    },
+    {
+      id:    "whatsapp",
+      label: "WhatsApp",
+      sub:   "Chat with us",
+      href:  "https://wa.me/91XXXXXXXXXX",  /* ← replace with WhatsApp number */
+      type:  "whatsapp",
+    },
+    {
+      id:    "website",
+      label: "Visit Website",
+      sub:   "Book a service online",
+      href:  "https://gearup.example.com",  /* ← replace with live site URL   */
+      type:  "website",
+    },
+    {
+      id:    "amc",
+      label: "AMC Chart",
+      sub:   "Annual maintenance plans",
+      href:  "https://gearup.example.com/amc", /* ← replace with AMC chart URL */
+      type:  "amc",
+    },
+  ]
+};
+
+/* ── icons ── */
+const ICONS = {
+  phone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>`,
+  email: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect width="20" height="16" x="2" y="4" rx="2"/>
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+  </svg>`,
+  whatsapp: `<svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.122 1.523 5.855L.057 23.882a.5.5 0 0 0 .612.612l6.111-1.6A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.007-1.375l-.357-.212-3.708.972.99-3.614-.233-.371A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182c5.429 0 9.818 4.388 9.818 9.818 0 5.429-4.389 9.818-9.818 9.818z"/>
+  </svg>`,
+  website: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/>
+    <path d="M2 12h20"/>
+  </svg>`,
+  amc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="16" y1="13" x2="8" y2="13"/>
+    <line x1="16" y1="17" x2="8" y2="17"/>
+    <polyline points="10 9 9 9 8 9"/>
+  </svg>`,
+  arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+    <path d="M5 12h14M12 5l7 7-7 7"/>
+  </svg>`,
+};
+
+/* ── render ── */
+const container = document.getElementById("links");
+CONFIG.links.forEach(link => {
+  const a = document.createElement("a");
+  a.className = "link-btn";
+  a.href = link.href;
+  if (link.href.startsWith("http")) a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  a.innerHTML = `
+    <div class="link-icon ${link.type}">${ICONS[link.type]}</div>
+    <div class="link-text">
+      <div class="link-label">${link.label}</div>
+      ${link.sub ? `<div class="link-sub">${link.sub}</div>` : ""}
+    </div>
+    <span class="link-arrow">${ICONS.arrow}</span>
+  `;
+  container.appendChild(a);
+});
+</script>
+</body>
+</html>
