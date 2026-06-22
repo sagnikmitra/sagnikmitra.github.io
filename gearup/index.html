@@ -9,24 +9,26 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    /* ── tokens ── */
+    /* ── design tokens ── */
     :root {
-      --red:        #e01010;
-      --red-dark:   #ac0000;
-      --red-glow:   rgba(224, 16, 16, 0.20);
-      --red-dim:    rgba(224, 16, 16, 0.09);
-      --bg:         #0c0c0c;
-      --surface:    #161616;
-      --surface-2:  #1e1e1e;
-      --line:       #272727;
-      --line-hover: #e01010;
-      --ink:        #f2f2f2;
-      --muted:      #7a7a7a;
-      --muted-2:    #555;
+      --red:      #e01010;
+      --red-dark: #ac0000;
+      --red-glow: rgba(224,16,16,.22);
+      --red-dim:  rgba(224,16,16,.08);
+      --bg:       #0a0a0a;
+      --surf:     #141414;
+      --surf2:    #1c1c1c;
+      --line:     #242424;
+      --ink:      #f0f0f0;
+      --muted:    #6a6a6a;
+      --muted2:   #444;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Google Sans', sans-serif;
@@ -35,105 +37,221 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 52px 16px 80px;
-      /* subtle noise texture via gradient */
-      background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(224,16,16,.07) 0%, transparent 70%);
+      padding: 56px 16px 88px;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* ── card ── */
+    /* ════════════════════════════════
+       BACKGROUND SCENE
+    ════════════════════════════════ */
+    .bg-scene {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* red radial halo at top */
+    .bg-scene::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(200,10,10,.18) 0%, transparent 70%);
+    }
+
+    /* scanline overlay */
+    .bg-scene::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0,0,0,.06) 3px,
+        rgba(0,0,0,.06) 4px
+      );
+    }
+
+    .bg-gear {
+      position: absolute;
+      opacity: .035;
+      filter: blur(.5px);
+      will-change: transform;
+    }
+    .bg-gear.cw  { animation: spin-cw  var(--d, 60s) linear infinite; }
+    .bg-gear.ccw { animation: spin-ccw var(--d, 50s) linear infinite; }
+
+    @keyframes spin-cw  { to { transform: rotate( 360deg); } }
+    @keyframes spin-ccw { to { transform: rotate(-360deg); } }
+
+    /* spark particles */
+    .spark {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--red);
+      opacity: 0;
+      animation: rise var(--dur, 3s) ease-in var(--delay, 0s) infinite;
+      will-change: transform, opacity;
+    }
+    @keyframes rise {
+      0%   { opacity: .9; transform: translateY(0)      scale(1);   }
+      60%  { opacity: .4; transform: translateY(-120px) scale(.7);  }
+      100% { opacity: 0;  transform: translateY(-220px) scale(.2);  }
+    }
+
+    /* horizontal "track" line */
+    .bg-track {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(224,16,16,.15), transparent);
+      animation: track-pulse 4s ease-in-out infinite;
+    }
+    @keyframes track-pulse {
+      0%,100% { opacity: .4; } 50% { opacity: 1; }
+    }
+
+    /* ════════════════════════════════
+       CONTENT LAYER
+    ════════════════════════════════ */
     .card {
+      position: relative;
+      z-index: 1;
       width: 100%;
-      max-width: 440px;
+      max-width: 460px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      animation: fade-up .7s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0);    }
     }
 
     /* ── logo ── */
     .logo-wrap {
-      width: 96px;
-      height: 96px;
+      position: relative;
+      width: 100px; height: 100px;
       border-radius: 50%;
-      background: var(--surface);
+      background: var(--surf);
       border: 1.5px solid var(--line);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 18px;
-      box-shadow: 0 0 0 6px rgba(224,16,16,.07), 0 0 28px rgba(224,16,16,.12);
-      transition: box-shadow .2s;
+      margin-bottom: 20px;
+      animation: logo-enter .8s cubic-bezier(.22,1,.36,1) both, glow-pulse 3s ease-in-out 1s infinite;
     }
-    .logo-wrap:hover {
-      box-shadow: 0 0 0 6px rgba(224,16,16,.13), 0 0 40px rgba(224,16,16,.22);
+    @keyframes logo-enter {
+      from { opacity: 0; transform: scale(.6) rotate(-30deg); }
+      to   { opacity: 1; transform: scale(1)  rotate(0deg);   }
     }
-    .logo-wrap img {
-      width: 52px;
-      height: 52px;
-      object-fit: contain;
-      display: block;
+    @keyframes glow-pulse {
+      0%,100% { box-shadow: 0 0 0 5px rgba(224,16,16,.06), 0 0 24px rgba(224,16,16,.14); }
+      50%      { box-shadow: 0 0 0 8px rgba(224,16,16,.12), 0 0 48px rgba(224,16,16,.28); }
+    }
+
+    .logo-gear {
+      width: 56px; height: 56px;
+      animation: spin-cw 14s linear infinite;
+      transform-origin: center;
     }
 
     /* ── identity ── */
     .name {
-      font-size: 24px;
+      font-size: clamp(22px, 5vw, 26px);
       font-weight: 700;
       color: var(--ink);
       letter-spacing: -.4px;
       text-align: center;
+      animation: fade-up .6s .15s cubic-bezier(.22,1,.36,1) both;
     }
     .name b { color: var(--red); }
 
     .tagline {
-      font-size: 11.5px;
+      font-size: clamp(10px, 2.5vw, 12px);
       color: var(--muted);
       margin-top: 5px;
       text-align: center;
       font-family: 'Google Sans Code', monospace;
-      letter-spacing: .12em;
+      letter-spacing: .14em;
       text-transform: uppercase;
+      animation: fade-up .6s .22s cubic-bezier(.22,1,.36,1) both;
     }
 
-    /* ── divider ── */
     .divider {
-      width: 32px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--red), var(--red-dark));
-      margin: 22px auto 0;
-      border-radius: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0 0;
+      width: 100%;
+      animation: fade-up .5s .28s both;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line));
+    }
+    .divider-line:last-child {
+      background: linear-gradient(270deg, transparent, var(--line));
+    }
+    .divider-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 8px var(--red);
+      animation: dot-pulse 2s ease-in-out infinite;
+    }
+    @keyframes dot-pulse {
+      0%,100% { transform: scale(1);   opacity: 1;  }
+      50%      { transform: scale(1.5); opacity: .7; }
     }
 
     /* ── links ── */
     .links {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 18px;
       display: flex;
       flex-direction: column;
       gap: 9px;
     }
 
     .link-btn {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 14px;
       width: 100%;
+      min-height: 60px;
       padding: 14px 16px;
-      background: var(--surface);
+      background: var(--surf);
       border: 1px solid var(--line);
       border-radius: 0;
       text-decoration: none;
       color: var(--ink);
-      font-size: 14.5px;
-      font-weight: 500;
       cursor: pointer;
-      transition: border-color .14s, background .14s, box-shadow .14s;
-      -webkit-tap-highlight-color: transparent;
-      position: relative;
       overflow: hidden;
+      transition: border-color .18s, background .18s, box-shadow .18s;
+      -webkit-tap-highlight-color: transparent;
+      animation: link-enter .55s cubic-bezier(.22,1,.36,1) both;
+    }
+    .link-btn:nth-child(1) { animation-delay: .32s; }
+    .link-btn:nth-child(2) { animation-delay: .40s; }
+    .link-btn:nth-child(3) { animation-delay: .48s; }
+    .link-btn:nth-child(4) { animation-delay: .56s; }
+    .link-btn:nth-child(5) { animation-delay: .64s; }
+
+    @keyframes link-enter {
+      from { opacity: 0; transform: translateX(-16px); }
+      to   { opacity: 1; transform: translateX(0);     }
     }
 
-    /* red left-edge accent on hover */
+    /* red left sweep */
     .link-btn::before {
       content: '';
       position: absolute;
@@ -142,48 +260,63 @@
       background: linear-gradient(180deg, var(--red), var(--red-dark));
       transform: scaleY(0);
       transform-origin: bottom;
-      transition: transform .16s ease;
+      transition: transform .2s cubic-bezier(.22,1,.36,1);
     }
 
-    .link-btn:hover {
+    /* shimmer on hover */
+    .link-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 30%, rgba(224,16,16,.06) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform .45s ease;
+    }
+
+    .link-btn:hover,
+    .link-btn:focus-visible {
       border-color: rgba(224,16,16,.4);
-      background: var(--surface-2);
-      box-shadow: inset 0 0 0 1px rgba(224,16,16,.09), 0 2px 12px rgba(0,0,0,.3);
+      background: var(--surf2);
+      box-shadow: inset 0 0 0 1px rgba(224,16,16,.1), 0 4px 20px rgba(0,0,0,.4);
+      outline: none;
     }
     .link-btn:hover::before { transform: scaleY(1); }
-    .link-btn:active { background: #222; }
+    .link-btn:hover::after  { transform: translateX(100%); }
+
+    .link-btn:active { background: #202020; transform: scale(.99); }
 
     /* ── icon box ── */
     .link-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 0;
+      width: 40px; height: 40px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
       border: 1px solid var(--line);
-      background: var(--surface-2);
+      background: var(--surf2);
+      transition: border-color .18s, background .18s;
     }
-    .link-icon svg { width: 18px; height: 18px; }
+    .link-btn:hover .link-icon {
+      border-color: rgba(224,16,16,.3);
+      background: rgba(224,16,16,.07);
+    }
+    .link-icon svg { width: 19px; height: 19px; }
 
-    /* per-type icon color */
-    .link-icon.phone    { color: #ff6b6b; }
+    .link-icon.phone    { color: #ff7070; }
     .link-icon.email    { color: #ffa94d; }
     .link-icon.whatsapp { color: #69db7c; }
     .link-icon.website  { color: #74c0fc; }
-    .link-icon.amc      { color: #e01010; }
+    .link-icon.amc      { color: var(--red); }
 
+    /* ── text ── */
     .link-text { flex: 1; min-width: 0; }
-
     .link-label {
-      font-size: 14.5px;
+      font-size: clamp(13.5px, 3.5vw, 15px);
       font-weight: 600;
       color: var(--ink);
     }
-
     .link-sub {
-      font-size: 11.5px;
+      font-size: clamp(10.5px, 2.6vw, 12px);
       color: var(--muted);
       margin-top: 2px;
       font-family: 'Google Sans Code', monospace;
@@ -194,42 +327,97 @@
     }
 
     .link-arrow {
-      color: var(--muted-2);
+      color: var(--muted2);
       flex-shrink: 0;
-      transition: color .14s, transform .14s;
+      transition: color .18s, transform .2s cubic-bezier(.22,1,.36,1);
     }
     .link-btn:hover .link-arrow {
       color: var(--red);
-      transform: translateX(2px);
+      transform: translateX(4px);
     }
 
     /* ── footer ── */
     footer {
+      position: relative;
+      z-index: 1;
       margin-top: 52px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      text-align: center;
+      animation: fade-up .5s .8s both;
     }
-    .footer-wordmark {
+    .footer-by {
       font-family: 'Google Sans Code', monospace;
       font-size: 10px;
-      letter-spacing: .16em;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--muted-2);
+      color: var(--muted2);
     }
-    .footer-wordmark a {
+    .footer-by a {
       color: var(--red);
       font-weight: 600;
       text-decoration: none;
+      transition: opacity .15s;
+    }
+    .footer-by a:hover { opacity: .75; }
+
+    /* ── mobile tweaks ── */
+    @media (max-width: 420px) {
+      body      { padding: 36px 12px 72px; }
+      .logo-wrap { width: 88px; height: 88px; }
+      .logo-gear { width: 48px; height: 48px; }
+      .link-btn { gap: 12px; padding: 13px 13px; }
+      .link-icon { width: 38px; height: 38px; }
+    }
+
+    @media (max-width: 360px) {
+      body { padding: 28px 10px 64px; }
     }
   </style>
 </head>
 <body>
+
+<!-- ══ BACKGROUND SCENE ══ -->
+<div class="bg-scene" id="bg-scene">
+  <!-- pulsing horizontal track lines -->
+  <div class="bg-track" style="top:28%"></div>
+  <div class="bg-track" style="top:72%; animation-delay:2s;"></div>
+
+  <!-- large gear — top right -->
+  <div class="bg-gear cw" style="--d:70s; top:-140px; right:-100px;">
+    <svg width="380" height="360" viewBox="0 0 552 521" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g1" x1="275" y1="0" x2="275" y2="521" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FF0000"/><stop offset="1" stop-color="#AC0000"/>
+      </linearGradient></defs>
+      <path d="M543.766 228.769C548.111 228.769 551.673 232.199 551.704 236.543C551.723 239.168 551.721 242.005 551.718 245.082L551.697 271.184C551.681 289.686 551.671 298.937 546.629 305.88C541.585 312.821 532.792 315.685 515.207 321.412L476.416 334.156C466.446 338.125 455.013 348.474 448.415 359.903C441.813 371.337 438.567 386.407 440.116 397.029L448.475 436.995C452.307 455.09 454.224 464.136 450.734 471.976C447.243 479.813 439.235 484.446 423.22 493.71L400.628 506.779C383.542 516.662 374.997 521.608 366.032 520.367C357.065 519.128 350.197 512.056 336.466 497.913L313.105 473.948C304.014 465.474 292.218 460.496 279.802 459.888L269.536 459.887C258.29 460.405 247.501 464.511 238.746 471.607L217.942 490.006C204.209 502.196 197.342 508.292 188.874 509.158C180.409 510.023 172.47 505.44 156.593 496.274L131.105 481.559C115.231 472.394 107.292 467.81 103.806 460.045C100.323 452.278 102.169 443.284 105.861 425.296L111.392 398.08C113.159 386.949 111.32 375.552 106.148 365.555L101.013 356.664C94.2787 346.216 84.0688 338.488 72.1851 334.852L39.7506 326.604C20.6353 321.784 11.0777 319.372 5.52204 312.226C3.22478 309.273 5.84633 305.558 9.5854 305.698C41.6079 306.894 106.22 315.971 143.897 321.922C146.485 322.331 148.692 323.98 149.923 326.293C173.579 370.714 220.354 400.955 274.193 400.955C335.989 400.955 388.479 361.116 407.383 305.721C409.094 300.707 405.221 295.694 399.923 295.694H281.281C265.628 295.694 252.938 283.005 252.938 267.352V257.229C252.938 241.577 265.628 228.888 281.281 228.888H411.321C411.352 228.888 411.375 228.859 411.368 228.829C411.362 228.798 411.385 228.769 411.416 228.769H543.766ZM124.883 247.864C129.754 247.688 133.658 251.827 133.537 256.699C133.507 257.881 133.493 259.066 133.493 260.255C133.493 263.096 133.577 265.918 133.743 268.718C134.04 273.716 130.075 278.065 125.072 277.869L7.78083 273.274C3.43266 273.103 -0.00350327 269.527 2.68066e-06 265.176L0.00403706 260.168C0.00754687 255.812 3.4568 252.239 7.81027 252.082L124.883 247.864ZM151.082 13.7743C168.167 3.89068 176.711 -1.05116 185.677 0.187431C194.643 1.42673 201.51 8.49823 215.243 22.6406L238.605 46.6064C247.694 55.0781 259.488 60.0583 271.902 60.6669L282.17 60.6699C293.416 60.1512 304.208 56.0431 312.964 48.9482L333.766 30.5536C347.498 18.3619 354.366 12.2653 362.833 11.3993C371.3 10.5347 379.24 15.1177 395.113 24.2822L420.602 38.998C436.478 48.164 444.416 52.7479 447.899 60.5126C451.384 68.2789 449.538 77.2746 445.846 95.2636L440.315 122.475C438.549 133.606 440.388 145.005 445.562 155.004L450.7 163.895C454.364 169.581 451.044 179.251 444.282 179.079C419.713 178.458 390.785 174.111 372.491 159.588C347.129 134.82 312.443 119.556 274.193 119.556C218.215 119.556 169.872 152.246 147.214 199.578C146.011 202.09 143.686 203.892 140.929 204.292C104.658 209.556 45.1718 217.255 8.30834 219.654C5.44151 219.841 3.39012 217.001 5.07868 214.677C10.1229 207.734 18.9159 204.871 36.5025 199.143L75.2926 186.398C85.2669 182.429 96.6931 172.082 103.295 160.648C109.893 149.219 113.142 134.144 111.591 123.524L103.234 83.5595C99.4006 65.4659 97.4838 56.4181 100.974 48.58C104.465 40.7422 112.473 36.1092 128.489 26.8447L151.082 13.7743Z" fill="url(#g1)"/>
+    </svg>
+  </div>
+
+  <!-- medium gear — bottom left -->
+  <div class="bg-gear ccw" style="--d:50s; bottom:-80px; left:-70px;">
+    <svg width="240" height="228" viewBox="0 0 552 521" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g2" x1="275" y1="0" x2="275" y2="521" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FF0000"/><stop offset="1" stop-color="#AC0000"/>
+      </linearGradient></defs>
+      <path d="M543.766 228.769C548.111 228.769 551.673 232.199 551.704 236.543C551.723 239.168 551.721 242.005 551.718 245.082L551.697 271.184C551.681 289.686 551.671 298.937 546.629 305.88C541.585 312.821 532.792 315.685 515.207 321.412L476.416 334.156C466.446 338.125 455.013 348.474 448.415 359.903C441.813 371.337 438.567 386.407 440.116 397.029L448.475 436.995C452.307 455.09 454.224 464.136 450.734 471.976C447.243 479.813 439.235 484.446 423.22 493.71L400.628 506.779C383.542 516.662 374.997 521.608 366.032 520.367C357.065 519.128 350.197 512.056 336.466 497.913L313.105 473.948C304.014 465.474 292.218 460.496 279.802 459.888L269.536 459.887C258.29 460.405 247.501 464.511 238.746 471.607L217.942 490.006C204.209 502.196 197.342 508.292 188.874 509.158C180.409 510.023 172.47 505.44 156.593 496.274L131.105 481.559C115.231 472.394 107.292 467.81 103.806 460.045C100.323 452.278 102.169 443.284 105.861 425.296L111.392 398.08C113.159 386.949 111.32 375.552 106.148 365.555L101.013 356.664C94.2787 346.216 84.0688 338.488 72.1851 334.852L39.7506 326.604C20.6353 321.784 11.0777 319.372 5.52204 312.226C3.22478 309.273 5.84633 305.558 9.5854 305.698C41.6079 306.894 106.22 315.971 143.897 321.922C146.485 322.331 148.692 323.98 149.923 326.293C173.579 370.714 220.354 400.955 274.193 400.955C335.989 400.955 388.479 361.116 407.383 305.721C409.094 300.707 405.221 295.694 399.923 295.694H281.281C265.628 295.694 252.938 283.005 252.938 267.352V257.229C252.938 241.577 265.628 228.888 281.281 228.888H411.321C411.352 228.888 411.375 228.859 411.368 228.829C411.362 228.798 411.385 228.769 411.416 228.769H543.766ZM124.883 247.864C129.754 247.688 133.658 251.827 133.537 256.699C133.507 257.881 133.493 259.066 133.493 260.255C133.493 263.096 133.577 265.918 133.743 268.718C134.04 273.716 130.075 278.065 125.072 277.869L7.78083 273.274C3.43266 273.103 -0.00350327 269.527 2.68066e-06 265.176L0.00403706 260.168C0.00754687 255.812 3.4568 252.239 7.81027 252.082L124.883 247.864ZM151.082 13.7743C168.167 3.89068 176.711 -1.05116 185.677 0.187431C194.643 1.42673 201.51 8.49823 215.243 22.6406L238.605 46.6064C247.694 55.0781 259.488 60.0583 271.902 60.6669L282.17 60.6699C293.416 60.1512 304.208 56.0431 312.964 48.9482L333.766 30.5536C347.498 18.3619 354.366 12.2653 362.833 11.3993C371.3 10.5347 379.24 15.1177 395.113 24.2822L420.602 38.998C436.478 48.164 444.416 52.7479 447.899 60.5126C451.384 68.2789 449.538 77.2746 445.846 95.2636L440.315 122.475C438.549 133.606 440.388 145.005 445.562 155.004L450.7 163.895C454.364 169.581 451.044 179.251 444.282 179.079C419.713 178.458 390.785 174.111 372.491 159.588C347.129 134.82 312.443 119.556 274.193 119.556C218.215 119.556 169.872 152.246 147.214 199.578C146.011 202.09 143.686 203.892 140.929 204.292C104.658 209.556 45.1718 217.255 8.30834 219.654C5.44151 219.841 3.39012 217.001 5.07868 214.677C10.1229 207.734 18.9159 204.871 36.5025 199.143L75.2926 186.398C85.2669 182.429 96.6931 172.082 103.295 160.648C109.893 149.219 113.142 134.144 111.591 123.524L103.234 83.5595C99.4006 65.4659 97.4838 56.4181 100.974 48.58C104.465 40.7422 112.473 36.1092 128.489 26.8447L151.082 13.7743Z" fill="url(#g2)"/>
+    </svg>
+  </div>
+
+  <!-- small gear — mid-right -->
+  <div class="bg-gear cw" style="--d:35s; top:45%; right:-30px; opacity:.025;">
+    <svg width="150" height="142" viewBox="0 0 552 521" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="g3" x1="275" y1="0" x2="275" y2="521" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FF0000"/><stop offset="1" stop-color="#AC0000"/>
+      </linearGradient></defs>
+      <path d="M543.766 228.769C548.111 228.769 551.673 232.199 551.704 236.543C551.723 239.168 551.721 242.005 551.718 245.082L551.697 271.184C551.681 289.686 551.671 298.937 546.629 305.88C541.585 312.821 532.792 315.685 515.207 321.412L476.416 334.156C466.446 338.125 455.013 348.474 448.415 359.903C441.813 371.337 438.567 386.407 440.116 397.029L448.475 436.995C452.307 455.09 454.224 464.136 450.734 471.976C447.243 479.813 439.235 484.446 423.22 493.71L400.628 506.779C383.542 516.662 374.997 521.608 366.032 520.367C357.065 519.128 350.197 512.056 336.466 497.913L313.105 473.948C304.014 465.474 292.218 460.496 279.802 459.888L269.536 459.887C258.29 460.405 247.501 464.511 238.746 471.607L217.942 490.006C204.209 502.196 197.342 508.292 188.874 509.158C180.409 510.023 172.47 505.44 156.593 496.274L131.105 481.559C115.231 472.394 107.292 467.81 103.806 460.045C100.323 452.278 102.169 443.284 105.861 425.296L111.392 398.08C113.159 386.949 111.32 375.552 106.148 365.555L101.013 356.664C94.2787 346.216 84.0688 338.488 72.1851 334.852L39.7506 326.604C20.6353 321.784 11.0777 319.372 5.52204 312.226C3.22478 309.273 5.84633 305.558 9.5854 305.698C41.6079 306.894 106.22 315.971 143.897 321.922C146.485 322.331 148.692 323.98 149.923 326.293C173.579 370.714 220.354 400.955 274.193 400.955C335.989 400.955 388.479 361.116 407.383 305.721C409.094 300.707 405.221 295.694 399.923 295.694H281.281C265.628 295.694 252.938 283.005 252.938 267.352V257.229C252.938 241.577 265.628 228.888 281.281 228.888H411.321C411.352 228.888 411.375 228.859 411.368 228.829C411.362 228.798 411.385 228.769 411.416 228.769H543.766ZM124.883 247.864C129.754 247.688 133.658 251.827 133.537 256.699C133.507 257.881 133.493 259.066 133.493 260.255C133.493 263.096 133.577 265.918 133.743 268.718C134.04 273.716 130.075 278.065 125.072 277.869L7.78083 273.274C3.43266 273.103 -0.00350327 269.527 2.68066e-06 265.176L0.00403706 260.168C0.00754687 255.812 3.4568 252.239 7.81027 252.082L124.883 247.864ZM151.082 13.7743C168.167 3.89068 176.711 -1.05116 185.677 0.187431C194.643 1.42673 201.51 8.49823 215.243 22.6406L238.605 46.6064C247.694 55.0781 259.488 60.0583 271.902 60.6669L282.17 60.6699C293.416 60.1512 304.208 56.0431 312.964 48.9482L333.766 30.5536C347.498 18.3619 354.366 12.2653 362.833 11.3993C371.3 10.5347 379.24 15.1177 395.113 24.2822L420.602 38.998C436.478 48.164 444.416 52.7479 447.899 60.5126C451.384 68.2789 449.538 77.2746 445.846 95.2636L440.315 122.475C438.549 133.606 440.388 145.005 445.562 155.004L450.7 163.895C454.364 169.581 451.044 179.251 444.282 179.079C419.713 178.458 390.785 174.111 372.491 159.588C347.129 134.82 312.443 119.556 274.193 119.556C218.215 119.556 169.872 152.246 147.214 199.578C146.011 202.09 143.686 203.892 140.929 204.292C104.658 209.556 45.1718 217.255 8.30834 219.654C5.44151 219.841 3.39012 217.001 5.07868 214.677C10.1229 207.734 18.9159 204.871 36.5025 199.143L75.2926 186.398C85.2669 182.429 96.6931 172.082 103.295 160.648C109.893 149.219 113.142 134.144 111.591 123.524L103.234 83.5595C99.4006 65.4659 97.4838 56.4181 100.974 48.58C104.465 40.7422 112.473 36.1092 128.489 26.8447L151.082 13.7743Z" fill="url(#g3)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ══ CONTENT ══ -->
 <div class="card">
 
+  <!-- logo: spinning gear -->
   <div class="logo-wrap">
-    <svg width="52" height="52" viewBox="0 0 552 521" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="GearUp logo">
+    <svg class="logo-gear" viewBox="0 0 552 521" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="GearUp logo">
       <defs>
         <linearGradient id="gu-grad" x1="275.865" y1="0" x2="275.865" y2="520.555" gradientUnits="userSpaceOnUse">
           <stop stop-color="#FF0000"/>
@@ -242,58 +430,60 @@
 
   <div class="name">Gear<b>Up</b> Servicing</div>
   <div class="tagline">multi-brand vehicle care</div>
-  <div class="divider"></div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-dot"></div>
+    <div class="divider-line"></div>
+  </div>
 
   <div class="links" id="links"></div>
 
 </div>
 
 <footer>
-  <div class="footer-wordmark">by <a href="https://sgnk.ai">sgnk</a></div>
+  <div class="footer-by">by <a href="https://sgnk.ai">sgnk</a></div>
 </footer>
 
 <script>
 /* ══════════════════════════════════════════
-   CONFIG — edit the values below to update
+   CONFIG — edit values here
    ══════════════════════════════════════════ */
 const CONFIG = {
   links: [
     {
       type:  "phone",
       label: "Call Us",
-      sub:   "+91 XXXXX XXXXX",            /* ← phone number */
-      href:  "tel:+91XXXXXXXXXX",           /* ← tel: link    */
+      sub:   "+91 XXXXX XXXXX",
+      href:  "tel:+91XXXXXXXXXX",
     },
     {
       type:  "email",
       label: "Email",
-      sub:   "gearup@example.com",          /* ← email address */
-      href:  "mailto:gearup@example.com",   /* ← mailto: link  */
+      sub:   "gearup@example.com",
+      href:  "mailto:gearup@example.com",
     },
     {
       type:  "whatsapp",
       label: "WhatsApp",
       sub:   "Chat with us instantly",
-      href:  "https://wa.me/91XXXXXXXXXX",  /* ← WhatsApp number */
+      href:  "https://wa.me/91XXXXXXXXXX",
     },
     {
       type:  "website",
       label: "Visit Website",
       sub:   "Book a service · track your job",
-      href:  "https://gearup.example.com",  /* ← live site URL */
+      href:  "https://gearup.example.com",
     },
     {
       type:  "amc",
       label: "AMC Chart",
       sub:   "Annual maintenance plans & pricing",
-      href:  "https://gearup.example.com/amc", /* ← AMC chart URL or PDF */
+      href:  "https://gearup.example.com/amc",
     },
   ]
 };
 
-/* ══════════════════════════════════════════
-   Icons (SVG strings)
-   ══════════════════════════════════════════ */
 const ICONS = {
   phone: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -323,7 +513,7 @@ const ICONS = {
   </svg>`,
 };
 
-/* ── render ── */
+/* render links */
 const container = document.getElementById("links");
 CONFIG.links.forEach(link => {
   const a = document.createElement("a");
@@ -340,6 +530,24 @@ CONFIG.links.forEach(link => {
   `;
   container.appendChild(a);
 });
+
+/* spark particles */
+const scene = document.getElementById("bg-scene");
+const W = window.innerWidth;
+const H = window.innerHeight;
+for (let i = 0; i < 18; i++) {
+  const s = document.createElement("div");
+  s.className = "spark";
+  const size = 2 + Math.random() * 3;
+  s.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random() * 100}%;
+    top:${60 + Math.random() * 40}%;
+    --dur:${2.5 + Math.random() * 4}s;
+    --delay:${Math.random() * 5}s;
+  `;
+  scene.appendChild(s);
+}
 </script>
 </body>
 </html>
