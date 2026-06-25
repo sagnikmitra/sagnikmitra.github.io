@@ -1,7 +1,7 @@
 ---
-version: 1.1
+version: 1.3
 name: sgnk-design-system
-description: An editorial research-page aesthetic where pixel-art identity meets Google Sans typography on a calm white canvas, interrupted only by a single electric blue (#1a5cff). The system frames long-form technical writing — flowcharts walk-through-able, paper-deep-links scattered through prose, reading-scaffolding (progress bar, active TOC, drop-cap lead, back-to-top) doing the work of decoration. Chrome stays hairline-thin so the writing and the diagrams carry the page. The voice (earnest, plain, "in my usage" first-person) lives inseparably with the visual restraint — together they form one coherent designer-engineer signature.
+description: An editorial research-page aesthetic where pixel-art identity meets Google Sans typography on a calm white canvas, interrupted only by a single electric blue (#1a5cff). The system frames long-form technical writing — flowcharts walk-through-able, paper-deep-links scattered through prose, reading-scaffolding (progress bar, active TOC, drop-cap lead, back-to-top) doing the work of decoration. Chrome stays hairline-thin so the writing and the diagrams carry the page. The voice (earnest, plain, "in my usage" first-person) lives inseparably with the visual restraint — together they form one coherent designer-engineer signature. v1.2 adds the Typography Laws — nine practical rules (hierarchy, proximity, leading-by-size, chunking, placement, font-as-voice, the measure, alignment, contrast). v1.3 adds the Design Principles — a 16-point judgment layer (context-before-verdict, taste, systems-not-screens, hierarchy-across-the-flow, eye choreography, leverage point, friction & flow, grids, transferability, motion-as-spatial-logic, copy-that-decides, prompt-like-a-designer) covering everything beyond type; together they are the human audit pass over any AI-scaffolded surface.
 
 colors:
   primary: "#1a5cff"
@@ -117,6 +117,8 @@ Jump to the section you need — this is a load-on-demand reference, not a read-
 - [Starter Article Shell](#starter-article-shell) — copy → rename → fill workflow.
 - [Minimum Viable Post Checklist](#minimum-viable-post-checklist) — the publish gate.
 - [Colors](#colors) · [Typography](#typography) · [Layout](#layout) · [Elevation & Depth](#elevation--depth) · [Shapes](#shapes) — the token foundations.
+- [Typography Laws](#typography-laws--direction-not-decoration) — the nine practical rules behind the tokens; **the audit pass for any AI-scaffolded page**.
+- [Design Principles](#design-principles--the-judgment-layer) — the 16-point judgment layer beyond type (composition, flow, motion, copy, systems thinking, the AI-era method).
 - [Brand Assets](#brand-assets) — logo inventory + path discipline.
 - [Components](#components) · [State Chips](#state-chips) — paste-ready markup per component.
 - [Sub-brand Variants](#sub-brand-variants) — what inheriting surfaces keep vs. change.
@@ -189,6 +191,14 @@ body {
 }
 ::selection { background: var(--blue); color: var(--canvas); }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: var(--r-sm); }
+
+/* Law 7 — lock the body measure; structure spans the full column.
+   NB: ch is font-relative — for Google Sans 1ch ≈ 10.3px, so 60ch ≈ 617px ≈ ~88 chars/line
+   (a deliberate balance: tighter than the old ~100, slightly above the 60–65 ideal,
+   chosen to keep the editorial density of the reading column). */
+main p, main li { max-width: 60ch; }   /* ≈ 617px ≈ ~88 CPL */
+main p.lead     { max-width: 50ch; }   /* ≈ 611px ≈ ~72 CPL (19px lead) */
+figure, table, pre, .diagram, .flow { max-width: none; }
 
 /* Fonts */
 @import url('https://fonts.googleapis.com/css?family=Google+Sans:400,500,600,700,800&display=swap');
@@ -300,6 +310,8 @@ The single hairline tone (`{colors.hairline}` — #e5e5e5) carries every non-acc
 - Body muted (`{colors.body-muted}` on `{colors.canvas}`): **5.74 : 1** — AA passes.
 - Body faint (`{colors.body-faint}` on `{colors.canvas}`): **2.14 : 1** — *fails AA*. Reserved for **decorative micro-copy only** (footer copyright); never for content the reader needs.
 
+**Contrast is not only color (Law 9).** The floors are 4.5:1 for normal body text and 3:1 for large text (≥18px bold or ≥24px regular) — but size contrast, weight contrast, and style contrast carry hierarchy too. **Never lean on color alone** to separate two things (the system already applies this: dark-code-block links use underline + weight, not hue). The classic failure is light-grey-on-white that "looks clean" and can't be read in sunlight or on a cheap panel. And because AI-generated designs repeat the contrast mistakes baked into their training data, **check every generated surface manually** — Stark, the WebAIM contrast checker, or Figma's built-in checker. It takes seconds and prevents a real accessibility failure. See [Law 9](#law-9--contrast-makes-the-path-visible).
+
 ## Typography
 
 ### Font Family
@@ -345,10 +357,139 @@ The single hairline tone (`{colors.hairline}` — #e5e5e5) carries every non-acc
 - **Wide tracking only on micro-uppercase.** `+0.04em` on the topbar brand; `+0.12em` to `+0.14em` on all mono kickers / eyebrow.
 - **Body at 16px / 1.65, not 17px / 1.5.** sgnk.ai's reading pace.
 - **Weight ladder:** 400 / 500 (TOC items only) / 600 / 700 / 800. Weight 500 outside the TOC, and weight 800 outside `h1` / `h2`, are anti-patterns.
-- **Line-height context-specific.** Headings 1.08–1.35 (tight). Body 1.65 (relaxed). Pull-quote 1.55. Code 1.6. Captions 1.4–1.5.
+- **Line-height context-specific.** Headings 1.08–1.35 (tight). Body 1.65 (relaxed). Pull-quote 1.55. Code 1.6. Captions 1.4–1.5. The rule behind the numbers: **leading scales inverse to size** — bigger type, tighter multiplier (see [Law 3](#law-3--line-height-controls-reading-comfort-and-scales-inverse-to-size)).
+- **The values are half the story.** These tokens are *what*; the [Typography Laws](#typography-laws--direction-not-decoration) section is *why* — hierarchy, proximity, leading-by-size, chunking, placement, font-as-voice, the measure, alignment, and contrast. Run the laws as an audit pass on any page, especially an AI-scaffolded one.
 
 ### Note on Font Substitutes
-Google Sans is loaded via the Google Fonts CSS endpoint. For non-Google environments, the closest open replacement is **Plus Jakarta Sans** or **DM Sans** — both on Google Fonts, free-licensed. **Inter** is a passable but looser substitute; tighten display tracking by an additional `-0.005em` when swapping in Inter. Google Sans Code is ungated and needs no substitute.
+Google Sans is loaded via the Google Fonts CSS endpoint. For non-Google environments, the closest open replacement is **Plus Jakarta Sans** or **DM Sans** — both on Google Fonts, free-licensed. **Inter** is a passable but looser substitute; tighten display tracking by an additional `-0.005em` when swapping in Inter. Google Sans Code is ungated and needs no substitute. As **Law 6** below puts it, Inter is the plain grey t-shirt of UI design — it works everywhere and says nothing; sgnk deliberately chooses Google Sans so the type carries a little personality.
+
+## Typography Laws — Direction, Not Decoration
+
+The token tables above give you the *values*. These nine laws give you the *judgment* — why one value beats another in context. Typography here is not the thing you style after the layout is done; **typography is the layout**. Strip the type out of any sgnk surface — every heading, label, button, error, empty state, pricing row — and what is left is colored rectangles. Type is what people actually read, and reading order is a thing you *design*, not a thing that happens to you. The job of type is **direction, not decoration**: tell the eye where to look first, what belongs together, where to pause, what to trust, and where to act.
+
+> **Why this section exists — the AI angle.** Most sgnk pages are now AI-scaffolded (`sgnk-next`, `sgnk-react`, `gvc`, generated landing pages). AI tools produce a whole screen in seconds and most of them look *fine* from a distance — which is exactly the problem. A model returns the **average of what already exists**, and the average of the web is weak hierarchy, generic spacing, unchecked contrast, and the safest, most forgettable font. "Fine" reads as a template; typography is what separates a template from a product someone trusts. **Run these nine laws as an explicit audit pass over anything a model generated** — they are the human-judgment layer the scaffold can't supply.
+
+Each law below carries: the principle, the cognitive reason it holds, the **sgnk rule** (bound to tokens), and an **Audit** check to run against a built page.
+
+### Law 1 — Hierarchy controls attention
+What the eye sees first is a decision, not an accident. Size, weight, and color decide reading order before a single word is read. *(Von Restorff / isolation effect: the brain notices and remembers the element that looks different from its neighbours. Aesthetic-usability effect: a clearly-ranked page is perceived as easier to use before it has been used.)*
+- **sgnk rule.** One element wins per view. The hierarchy ladder is the type scale — `{typography.title-display}` → `{typography.section-heading}` → `{typography.sub-heading}` → `{typography.body}` → muted/faint — plus the single accent `{colors.primary}` for the one thing that should be touched. Make difference *obvious*: a half-step of size or weight reads as a mistake, not a level. Never raise importance with a second color — raise it with size, weight, or the accent.
+- **Audit.** Squint at the screen. If two things fight for first read, or nothing wins, the hierarchy is flat — widen the size/weight gap or pull the accent back to a single target.
+
+### Law 2 — Spacing shows relationship
+Space is the cheapest, most-ignored tool in the system, and it is what tells people *what belongs together*. *(Gestalt proximity: things close together feel related; things far apart feel separate.)* A heading floating equidistant between two paragraphs belongs to neither — pull it toward the one it introduces and the relationship is instantly legible. Nothing else has to change.
+- **sgnk rule.** **Asymmetric spacing is mandatory:** the gap *above* a heading is always larger than the gap *below* it, so the heading binds to the content it owns. This is already encoded — `h2` carries `margin-top: 76px` with only `padding-top: 22px` above its kicker and a tight gap to the body that follows. The same law governs every pair: label↔input, section-title↔content, card padding, the distance from a price to its CTA. If your spacing does not reflect the relationship, the layout is lying to the user — and they will feel it as "messy" or "off" without being able to name it.
+- **Audit.** For every heading and label, measure the space above vs. below. Above must be greater. Equal spacing around a heading is a bug.
+
+### Law 3 — Line height controls reading comfort, and scales *inverse* to size
+Leading is reading comfort. The common ~1.5× rule is right for body and wrong for everything large: a 64px heading at 1.5 puts 96px between lines and the words drift apart like they stopped talking. **As font size goes up, the line-height multiplier comes down.**
+- **sgnk rule.** Body `{typography.body}` at **1.65**; sub-headings ~**1.3**; large display headings **1.08–1.2** (`{typography.title-display}` ships at 1.08, `{typography.section-heading}` at 1.18 — already correct). Letter-spacing follows the same shape: tighten display tracking (`-0.02em` on title/`h2`), leave body at `0`, and **never** tighten small or caption text — it kills legibility immediately. Body line-height never drops below 1.6.
+- **Audit.** Any heading whose lines look detached → multiplier too high for its size. Any body block that feels cramped → below 1.6.
+
+### Law 4 — Chunking controls pace
+People do not read interfaces like novels; they scan, jump, and look for anchors. One giant correct paragraph still fails, because the layout is asking the reader to do unnecessary work. *(Miller's law: working memory holds only a few chunks at once — the exact number is debated, the lesson isn't: don't dump everything at once.)* Chunking is **spacing at the macro scale** — the same instinct that sets the gap between a heading and a paragraph also structures a whole page.
+- **sgnk rule.** Break content into scannable pieces: short paragraphs, real section headings (`§ 0N` with kicker), `{spacing.section}` (64px) air between blocks, the TOC as the page-level chunk map, bullets only when they genuinely help. The 760px single column plus numbered `h2`s is the chunking chassis — *use it*; don't ship a wall of text inside it. This composes with [[sgnk-writer]]: the prose chunks at the sentence level, the design chunks at the block level.
+- **Audit.** Any screen with a paragraph over ~4–5 lines or a section with no internal breaks → re-chunk.
+
+### Law 5 — Placement controls memory
+Readers do not give equal attention across a screen — they read the first thing, skim the middle, and hunt for the decision point. *(Serial-position effect: first and last items in a sequence are remembered best; the middle blurs.)* So *where* a thing sits changes whether it sticks.
+- **sgnk rule.** **Front-load the point, support in the middle, reinforce/act at the end.** The header block already encodes it — eyebrow → iconic title → formal title → subtitle → meta → actions — context first, action last. Apply the same to any pricing card, onboarding screen, or product page: name + price early (context), features in the middle (scan), CTA where the decision happens (end). Do not bury the key takeaway in the middle of a section.
+- **Audit.** Read only the first and last block of each section/card. If they don't carry the context and the action, the placement is fighting attention.
+
+### Law 6 — Font choice is voice
+More fonts is not more design — it is usually more confusion. *(Every extra family is another voice in the room; if the voices aren't playing clearly different roles, the page feels harder for no reason.)* The real pairing principle is **contrast, not category** — "a serif and a sans" is a heuristic, not the rule. You want faces clearly different in structure and personality but sharing an underlying quality (x-height, width, proportion) so they feel like they belong to the same room. Two too-similar fonts are the worst case: the brain registers a difference it can't explain.
+- **sgnk rule.** The system is already at the disciplined end: **one strong family (Google Sans) carrying all prose, plus one mono (Google Sans Code) playing a clearly different role** — code, captions, kickers. That is a contrast pairing by *role*, not a decorative second voice. Do not add a third family. Inter is the plain grey t-shirt — fine, safe, anonymous; sgnk picks Google Sans precisely so the type says something. Hierarchy comes from weight/size/style within the family, never from font-swapping per section.
+- **Audit.** Count families. More than the two sanctioned roles → drift. Two faces that look *almost* the same → the bad pairing; collapse to one.
+
+### Law 7 — Line length controls rhythm (the measure)
+Too wide and the eye struggles to find the next line; too narrow and the line breaks chop the rhythm. The comfortable **measure is 45–75 characters per line, sweet spot 60–65** — roughly **600–700px of content for a 16px body**. For responsive work, think in *measure*, not breakpoints: **lock the measure, let the margins flex.**
+- **sgnk rule + known variance (verified, then fixed).** The reading column is `{spacing.reading-column}` (760px); with 24px gutters the body content width is **712px**. Measured live on `sgnk.ai/harness` (16px Google Sans, canvas glyph metrics), uncapped body paragraphs ran **~100 characters per line** — well above the 45–75 target, because Google Sans is narrower than the "typical" font the 600–700px pixel proxy assumes. **Watch out for `ch`:** it is font-relative (1ch = the width of `0`), and Google Sans's `0` is wide (~10.3px), so a naive `max-width: 70ch` resolves to ~720px and caps *nothing* — verify the rendered character count, never trust the `ch` number. **Resolution (applied):** cap the *paragraph* measure while figures, tables, and code keep the full 760px column — "lock the measure, let the structure breathe":
+
+```css
+/* Law 7 — lock the body measure; structure spans the full column */
+main p, main li { max-width: 60ch; }   /* ≈ 617px ≈ ~88 CPL for Google Sans */
+main p.lead     { max-width: 50ch; }   /* ≈ 611px ≈ ~72 CPL (19px lead)     */
+figure, table, pre, .diagram, .flow { max-width: none; }
+```
+
+`60ch` lands the body at **~88 characters** — a deliberate balance: meaningfully tighter than the old ~100, while keeping the editorial density the reading column is known for (a strict 60–65 ideal would need ~50ch / ~515px, which narrows the column more than the research-page aesthetic wants). The lead, being 19px, lands ~72 CPL — inside the band. If a future surface wants a globally tighter measure, drop the cap toward `50ch` or reduce `{spacing.reading-column}`.
+- **Audit.** Drop a 3-line paragraph on the page and count characters on a full line — *count, don't read the `ch` value.* Target ≤ ~90 for this editorial surface (≤ 75 for a stricter one). Under ~45 → too narrow for body.
+
+### Law 8 — Alignment gives the eye a path
+For any left-to-right language, **left-align body text** — it gives every new line the same starting point, which means faster reading and less fatigue. Centering is not evil; it is for *short* things — a hero headline, a one-line quote, a small emotional block. The moment more than 3–4 lines are centered, both ragged edges force the eye to re-hunt for each line start, and the small cost compounds.
+- **sgnk rule.** Body, headings, readouts, TOC, tables — all left-aligned (the system already is). Center is reserved for short display moments only, never paragraphs. **Consistency is part of the law:** if headings are left-aligned, sub-headings are too; don't center one card because it "feels nice." Each inconsistency is a micro-friction the reader won't consciously notice but will read as *less reliable*. Good typography is a system, and systems only work when they're consistent.
+- **Audit.** Scan for any centered block over 3 lines, or one element aligned against its siblings → fix to the column's default.
+
+### Law 9 — Contrast makes the path visible
+None of the other eight laws matter if the text can't be read — not just on your MacBook, but in sunlight, on a cheap panel, with tired or older eyes. **WCAG floors: 4.5:1 for normal body text, 3:1 for large text (≥18px bold or ≥24px regular).** The classic offender is light-grey-on-white because it "looks clean" — users simply can't read it. And **contrast is not only color:** size contrast, weight contrast, and style contrast all carry hierarchy — never lean on color alone.
+- **sgnk rule.** The measured [Contrast table](#contrast-wcag-aa) is the source of truth: body ink 20.2:1 (AAA), blue links 5.16:1 (AA), `{colors.body-faint}` is decorative-only because it *fails* AA — never use it for content. Inside dark code blocks, links rely on underline + weight, not hue (3.95:1 is AA-Large only). Because AI-generated designs repeat the contrast mistakes baked into their training data, **check every generated surface manually** — Stark, the WebAIM contrast checker, or Figma's built-in checker; it takes seconds and saves a real accessibility failure.
+- **Audit.** Run every text/background pair through a checker. Any body pair under 4.5:1, or any state communicated by color alone, fails.
+
+### Start a screen by asking
+When you (or a model) open a new sgnk surface, do **not** start with "which font looks nice." Start with the questions the nine laws answer, in order:
+
+1. What should the user read **first**? *(hierarchy)*
+2. What **belongs together**? *(spacing / proximity)*
+3. Does the text **breathe** line-to-line? *(line height)*
+4. Where should they **pause**? *(chunking)*
+5. What must they **remember**, and is it at the start or end? *(placement)*
+6. What **voice** should the type carry — and is it doing that with the two sanctioned faces? *(font choice)*
+7. Is the **measure** in the 45–75 band? *(line length)*
+8. Does every line have a predictable **start**? *(alignment)*
+9. Can everyone actually **read it**? *(contrast)*
+
+Done right, typography disappears — the reader just reads, understands, and acts. Done wrong, they feel it immediately: something noisy, something cheap, something harder than it should be. The rules haven't changed in the AI era; the designer applying them with judgment matters more.
+
+## Design Principles — The Judgment Layer
+
+The Typography Laws govern *type*. These principles govern **everything else a designer decides** — composition, flow, motion, copy, systems thinking, and how to work in the AI era without producing the generic average. They are the senior layer: the difference between a page that *looks* fine and a product that *feels* intentional. Each is bound to sgnk and cross-referenced to the relevant Typography Law so nothing is said twice. Run them as an audit alongside the laws — **especially on anything a model scaffolded**, because a generator gives you competent screens and none of this judgment.
+
+> **The one-level-higher test.** Beginners design what they can *see* — a screen, a button, a transition. Seniors design what the screen is *part of* — a flow, a system, a spatial model. Almost every principle below is an instance of thinking one level higher than the artifact in front of you. *(Sources at the end of this section.)*
+
+### A. Judgment over rules
+
+**1. Context before verdict.** There is no "better" without context. The same login screen is right for a consumer app (social buttons up front, fast re-entry) and wrong for a bank (formal, isolated, 2FA — social login *lowers* trust). Before ranking any two options, ask: what is the product, who uses it, on what device, how often, what is the trust threshold? sgnk's own answer is fixed — a research-reading surface for a technical reader who returns to think — which is *why* the chassis is calm and chrome-light. When a new surface (a product UI, a marketing page) doesn't fit that context, re-derive the decision; don't copy the harness reflexively.
+
+**2. Taste is the moat.** AI generates competent layouts instantly, so execution is no longer the edge — judgment is. Taste is not talent; it is exposure. Observe great products, then *reverse-engineer*: why this color, why this radius, why this button here and not there. Over time the brain builds a library of good decisions and better choices become automatic. This whole design system is that library, written down — extend it the same way: study, ask *why*, then encode.
+
+**3. Feel the laws, don't memorize them.** A UX/Gestalt law you can recite is worth less than one you have *felt*. Move elements together until they read as a group (common fate), pull a heading toward its paragraph until the relationship snaps into place (proximity, [Law 2](#law-2--spacing-shows-relationship)) — then break it and watch it fail. Internalized this way, no definition can talk you out of the right call. When extending sgnk, prototype the rule live before committing it to the spec.
+
+**4. Systems, not screens.** A screen is one expression of a problem that lives in many places. A bill row appears in the cart, the receipt, the email, the settings page — so you are not designing a card, you are designing a **master pattern** that must hold across contexts (this is the system's component discipline: one row element, many combinations). Two corollaries: **second-order effects** — every change touches things elsewhere ("if I emphasize this, what am I de-emphasizing?"); and **what you don't design is also design** — the empty, error, and loading states are part of the work, not an afterthought (sgnk already specifies all three — see [Interactive States](#interactive-states)). A senior's mockups always have *more* screens for the same feature, because they designed the system of states, not just the happy path.
+
+**5. Consistency is the work, not a bonus.** A design is a system, and systems only pay off when they're consistent — same spacing, same alignment, same component behaving the same way everywhere. The skill of producing a *repeatable* style (so the 1st, 50th, and 500th asset match) is what separates a directed visual system from a lucky one-off. This is the entire premise of the single-accent, two-typeface, square-corner discipline. Every "but this one looks nicer centered/rounded/in-a-second-blue" is the system leaking.
+
+### B. Composition & flow
+
+**6. Hierarchy across the flow — and emphasis is a budget.** [Law 1](#law-1--hierarchy-controls-attention) ranks attention *within* a view; this ranks it *across a journey*. Visual energy should trend with the job of each step — a storefront runs high-energy (discovery), a product page calms down (decision), a checkout goes quietest of all (trust). Shape cognitive load across screens, not just inside them. And treat **emphasis as a fixed budget**: every bold, color, size bump, or shadow spends from the reader's finite attention. If everything is emphasized, nothing is. The senior move is deciding what *doesn't* stand out — sgnk spends its whole emphasis budget on one accent and one or two type weights.
+- **Audit.** Lay the screens of a flow side by side. Does energy trend with intent, or does every screen shout equally? Count emphasized elements per view; if more than ~3, cut back to neutral.
+
+**7. Eye choreography (movement & flow).** A still layout still *moves* — you choreograph the path. It escalates: (i) literal **direction** (an arrow, a gaze); (ii) **weight-driven** flow (size/contrast set the order with no arrows — the elegant default); (iii) **multiple paths** (a main route plus small side-loops that buy time-on-page); (iv) **implied motion** (repetition, progressive scale, blur, directional pattern); (v) **flow disruption** (a deliberate interruption that forces re-engagement at a key point); (vi) **temporal flow** — the one ~99% of designers miss: controlling *when* the eye arrives and *how long it lingers*. Rhythm = **impact → linger → release** (Apple product pages: hero hits hard, specs slow you down, whitespace lets go). sgnk's long-form pacing is exactly this — lightrail impact, prose linger, 96px closing whitespace release.
+
+**8. Leverage point.** Ask "what is the single most important thing here?" — that is the leverage point. Make it dominate with scale, contrast, position, or isolation, then push everything competing into a supporting role. One clear leverage point per view leads the eye even on a busy layout. On a sgnk page the leverage point is the title (or the one blue CTA); the rest is deliberately recessive chrome so it can win.
+
+**9. Friction & flow.** Friction (tight spacing, an interrupting object) is usually a defect — but *strategic* friction is a tool: it grabs the eye and slows the reader at a point that matters. The rule is zoned: smooth reading zones vs. a deliberate friction zone, never friction smeared everywhere. **Good friction grabs; bad friction loses the message.** sgnk's stance is deliberately **low-friction** — calm reading is the product — so its only sanctioned "disruptions" are the single accent and the one hover-lift. Treat friction like seasoning: a pinch for emphasis, never the dish.
+
+**10. Grids & baseline rhythm.** A grid determines hierarchy (span more columns = more dominance), creates white space, and keeps the eye comfortable. sgnk's grid is intentionally minimal: **one 760px reading column** plus the **8px baseline** ([spacing system](#spacing-system)) that aligns type and components — that *is* the grid for reading surfaces. The richer grid vocabulary (column, modular, manuscript, asymmetric, rule-of-thirds, golden-ratio ≈ 1.618) applies when building **composed surfaces** — the homepage, sub-brand landings, OG cards — where you *may* break the grid deliberately for impact (keep most elements aligned, break one). Golden ratio and rule-of-thirds are *starting points* to nudge proportion, not rigid rules. Baseline tip: relate type sizes by multiples of the base leading (e.g. body 16/lead-ish, headings on the same rhythm) so alignment stays crisp.
+
+**11. Transferability.** A design that only works in one perfect setting is a problem, not a solution. The identity must survive being shrunk to a thumbnail, placed on light *and* dark, and moved across formats (mobile, print, OG card, motion). Test by doing exactly that. sgnk's invariant system (one blue, two faces, square corners, pixel mark) is built for transfer — it is recognizably the same brand on a 320px phone, a printed PDF, and a 1200×630 share card. See [Responsive Behavior](#responsive-behavior) and the [OG card spec](#og--share-card-image-ogpng).
+
+### C. Motion
+
+**12. Motion is spatial logic, not decoration.** The standard advice ("don't animate for its own sake; use it for feedback") is the surface. The senior insight: **motion teaches where things live in the system.** A modal that scales up from the strip you tapped says *I belong to that strip*; a side panel slides from the side because that is where it lives; a confirmation scales from center because it is temporary; you move horizontally across a hierarchy and vertically when going deeper. The best motion is **felt, not noticed** — if a user *remembers* a transition, it probably failed its job. When a sgnk surface needs more than the sanctioned set (hover-lift, progress-fill, smooth-scroll, button-scale), the new motion must *explain spatial relationships*, not perform. And when motion is genuinely interactive, model it as **explicit states + transitions** (a state machine — inputs drive transitions), not one flat timeline; ship it as designer-owned `dot-lottie` rather than hand-coded one-offs. This stays subordinate to the system's calm — motion earns its place by clarifying, never by impressing.
+
+### D. Copy
+
+**13. Copy decides, it doesn't describe.** Most interface text either *describes* ("Transform your workflow", "Continue", "No results found") or *decides* — names the problem the user already feels and takes a position ("Stop losing track of who's doing what", "Yes, delete my account", "Try a broader search — most filters here are strict"). Beginners describe; pros decide. Copy that could sit on five other products without anyone noticing is doing a smaller job. This binds directly to [[sgnk-writer]]: the design system hosts the voice, and the voice is a *point of view*, never neutral filler. Buttons, empty states, and errors are copy decisions, not labels.
+
+### E. The AI-era working method
+
+**14. AI returns the average — judgment is the differentiator.** A model gives you the average of what already exists, and the average of the web is generic. That is why these principles and the [Typography Laws](#typography-laws--direction-not-decoration) exist: they are the judgment a generator can't supply. AI did not kill design; it exposed who was only pushing pixels. The edge is knowing what to keep, what to cut, and what makes a thing feel intentional — i.e. taste (#2) applied on top of the scaffold.
+
+**15. Prompt like a designer.** When you drive `sgnk-next` / `sgnk-react` / `gvc` (or any model) to generate a surface, a vague prompt yields a vague, generic result; a sharp prompt narrows the output to a usable starting point. A strong brief states the **goal** (what the user must accomplish), the **context** (who, what product, what device, what matters in the moment), and the **constraints** (platform, tone, hierarchy, density, brand personality, what to avoid) — and breaks the problem **one layer at a time** ("design the restaurant *card*: name, cuisine, rating, price, offer, big appetizing thumbnail; scannable; optimized for comparison" beats "design a food-delivery app"). For sgnk work, the constraints line is half-written for you: *one blue, Google Sans + Google Sans Code, square corners, hairline borders, 760px column, ~88-char body measure (`60ch`), reading-scaffolding not decoration.*
+
+**16. Then run the audit.** Generation gets you to a draft faster; your judgment takes it from acceptable to on-system. The closing step is always the same pass: the **nine Typography Laws** + the **principles above**, plus the contrast check by tool. "Looks fine" is the trap — fine is the average. The audit is where a sgnk surface stops being a template and becomes the brand.
+
+> **Sources.** Principles distilled from: *9 UI/UX Typography Laws*, *5 UI/UX Design Mistakes That Scream You're a Beginner*, *7 Skills To Get Ahead of 99% UI/UX Designers*, and *Interactive UI/UX Animations (LottieFiles State Machines)* — **Saptarshi Prakash** (@saptarshipr); and *The FULL 2026 Guide To Layout & Composition* — **Satori Graphics**. Adapted to and bound by the sgnk system; where a source's advice (heavy grids, decorative motion, high-friction posters) conflicts with sgnk's calm reading-surface stance, the system's restraint wins and the conflict is noted inline.
 
 ## Layout
 
@@ -356,6 +497,8 @@ Google Sans is loaded via the Google Fonts CSS endpoint. For non-Google environm
 Base 8px. Tokens: `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 18px · `{spacing.lg}` 24px · `{spacing.xl}` 32px · `{spacing.xxl}` 48px · `{spacing.section}` 64px · `{spacing.header-top}` 72px.
 
 **Section heading rhythm:** `margin-top: 76px` on every `h2`. `padding-top: 22px` above the kicker. **Header padding:** `72px 24px 48px`. **Main padding:** `0 24px 96px`.
+
+**Proximity & asymmetric spacing (Law 2).** Space is what tells the reader what belongs together. The non-negotiable rule: **the gap above a heading or label is always larger than the gap below it**, so the heading binds to the content it introduces, not the block before it. The `h2` rhythm above encodes this (76px above, tight below); apply the same asymmetry to every label↔input, section-title↔content, and price↔CTA pair. Equal spacing around a heading is a bug, not a style choice — see [Law 2](#law-2--spacing-shows-relationship).
 
 ### Grid & Container
 - **Reading column:** `760px` max-width.
@@ -1025,6 +1168,19 @@ For form errors specifically, use a `caption-mono` inline beneath the input, in 
 ### Do
 - Use `{colors.primary}` (#1a5cff) as the **only** accent.
 - Run body text at `{typography.body}` (16px / 1.65 / Google Sans / weight 400).
+- Run the nine [Typography Laws](#typography-laws--direction-not-decoration) as an audit pass on every page — **especially anything a model scaffolded**.
+- Keep the body **measure** tight (≤ ~88 chars on this editorial surface); cap paragraphs at `60ch` (lead `50ch`) and let figures/tables/code keep the full column — verify the rendered count, not the `ch` value (Law 7).
+- Make heading spacing **asymmetric** — more space above than below, so the heading binds to what it introduces (Law 2).
+- Tighten line-height as type gets bigger; loosen as it gets smaller — leading scales inverse to size (Law 3).
+- Front-load the point and put the action at the end — context first, decision last (Law 5).
+- Left-align all body, headings, and structural text; reserve centering for short hero/quote blocks only (Law 8).
+- Check every text/background pair against WCAG (4.5:1 body, 3:1 large) with a real tool — never by eye (Law 9).
+- Ask context before judging a design "better" — product, user, device, frequency, trust threshold (Principle 1).
+- Spend the emphasis budget on a few elements; decide what *doesn't* stand out (Principle 6).
+- Give every feature its empty, error, and loading states — design the system, not just the happy path (Principle 4).
+- Write copy that takes a position and names the user's problem; buttons and empty states decide, they don't describe (Principle 13).
+- When motion is added, make it explain spatial relationships (where things live), and keep it felt-not-noticed (Principle 12).
+- Brief AI with goal + context + constraints, one layer at a time; then run the full law + principle audit on the output (Principles 15–16).
 - Use **square corners** (`{rounded.none}`) for every structural element.
 - Reserve the 8px–12px rounding for diagram nodes and figures only.
 - Pair every flowchart with a walk-through readout ("HOW TO READ IT").
@@ -1053,6 +1209,18 @@ For form errors specifically, use a `caption-mono` inline beneath the input, in 
 - Don't put humour in the visual system. Humour lives in the prose.
 - Don't use relative asset paths — Vercel's no-slash URL will break them.
 - Don't skip heading levels (`<h1>` → `<h3>`); it breaks accessibility.
+- Don't let body paragraphs run the full 760px column — that pushes the measure past ~100 chars (Law 7). Cap at `60ch`.
+- Don't space a heading equally above and below — it orphans the heading from its content (Law 2).
+- Don't apply one line-height multiplier to every size — a 1.5× heading drifts apart (Law 3).
+- Don't center paragraphs or any text block over 3–4 lines — ragged starts cost the eye on every line (Law 8).
+- Don't signal hierarchy or state with color alone — size, weight, and style must carry it too (Law 9).
+- Don't ship a model-generated page without the nine-law audit — "looks fine" is the AI-average trap.
+- Don't rank two designs without context — "better" is meaningless until you know the product, user, and trust threshold (Principle 1).
+- Don't emphasize everything — a screen with twelve bold elements has no hierarchy (Principle 6).
+- Don't design only the happy path — missing empty/error/loading states is unfinished work (Principle 4).
+- Don't write neutral, translatable filler copy that could sit on five other products (Principle 13).
+- Don't add motion as polish — if a user remembers the transition, it failed; motion is spatial logic, not decoration (Principle 12).
+- Don't smear friction everywhere — sgnk is a low-friction calm surface; friction is a pinch of seasoning, zoned and deliberate (Principle 9).
 
 ## Responsive Behavior
 
@@ -1167,9 +1335,17 @@ This is the loop: **earn → draft against existing tokens → document → ship
 7. **Document new components.** A new variant goes into this file with its own row in `components:` and a section under "Components."
 8. **Voice stays inseparable.** Visual additions that push toward "app-y" or "marketing-y" territory break the brand because they fight the voice.
 
-## Known Gaps (v1.1)
+## Known Gaps (v1.3)
 
-Resolved in this version:
+New in v1.3:
+- ✅ **Design Principles** — a 16-point judgment layer beyond type: judgment over rules (context-before-verdict, taste, feel-the-laws, systems-not-screens, consistency), composition & flow (hierarchy-across-the-flow, eye choreography, leverage point, friction & flow, grids, transferability), motion-as-spatial-logic, copy-that-decides, and the AI-era method (AI-average, prompt-like-a-designer, run-the-audit). Each bound to sgnk and cross-referenced to the laws, with sources credited.
+
+New in v1.2:
+- ✅ **Typography Laws** — the nine practical rules (hierarchy, proximity, leading-by-size, chunking, placement, font-as-voice, the measure, alignment, contrast) are documented as the judgment layer over the tokens, with per-law audit checks and an explicit AI-scaffold audit pass.
+- ✅ **The measure (Law 7)** — body line-length rule added, with a verified finding (uncapped, the 712px column ran ~100 chars/line) and an operational `60ch`/`50ch` paragraph guardrail (≈ ~88/~72 CPL for Google Sans) in the drop-in CSS. Documents the `ch`-is-font-relative gotcha that makes a naive `70ch` a no-op.
+- ✅ **Harness retrofit applied.** `harness/index.html` now carries the `60ch`/`50ch` guardrail — body verified at ~88 CPL, lead ~72 CPL, figures/tables/code still full-width. New pages from the shell should adopt the same block (sync `sgnk-article-shell.html` when next touched).
+
+Resolved in v1.1:
 - ✅ **Drop-in CSS variables** documented.
 - ✅ **Starter article shell** — `sgnk-article-shell.html` shipped.
 - ✅ **Component HTML snippets** — every component documented with markup.

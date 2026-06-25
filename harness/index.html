@@ -177,6 +177,10 @@
 
   p { margin: 0 0 18px; }
   p + p { margin-top: -4px; }
+  /* Law 7 — lock the body measure (~88 chars ≈ 620px for Google Sans); structure spans the full column */
+  main p, main li { max-width: 60ch; }
+  main p.lead { max-width: 50ch; }
+  figure, table, pre, .diagram, .flow { max-width: none; }
   .lead { font-size: 19px; line-height: 1.6; color: var(--ink); }
   .lead::first-letter {
     float: left; font-size: 58px; line-height: .82; font-weight: 800;
