@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Perccent — DIT Platform (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,600,700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --brand:#0047BD;  --chip:#EBF1FD;  --deep:#003091;
+    --ink:#0A1F44;    --muted:#6B7280; --hint:#9CA3AF;  --grey-btn-text:#374151;
+    --page:#F5F7FA;   --card:#FFFFFF;  --hair:#EEF0F4;  --input:#E5E8EE;
+    --inset:#F8FAFE;  --track:#F1F4F8; --grey-btn:#F4F5F7;
+    --ok:#299959;     --ok-tint:#E7F5EC;  --ok-pill-fg:#136B36; --ok-pill-bg:#EAF6EE;
+    --err:#C9342B;    --err-tint:#FCEBEB; --err-pill-fg:#A41C1C;
+    --warn:#C2772B;   --warn-tint:#FFF4E5;--warn-pill-fg:#8A4B00;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    font-family:'Google Sans','Product Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--page); color:var(--ink); -webkit-font-smoothing:antialiased;
+  }
+  button, input, select, textarea{font-family:inherit;}
+  button{cursor:pointer;}
+  svg{width:16px;height:16px;flex:none;}
+  .material-symbols-rounded{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;line-height:1;letter-spacing:normal;text-transform:none;display:inline-flex;white-space:nowrap;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle;flex:none;}
+  .mi-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;}
+  .app{display:grid; grid-template-columns:232px 1fr 340px; height:100vh; min-width:1200px;}
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{background:#fff; border-right:1px solid var(--hair); display:flex; flex-direction:column; padding:18px 0;}
+  .sidebar .logo{padding:0 20px 18px; }
+  .sidebar .logo img{height:26px;}
+  .nav-item{display:flex; align-items:center; gap:11px; margin:2px 12px; padding:10px 12px; border-radius:12px;
+    font-size:13.5px; font-weight:500; color:var(--muted); cursor:pointer;}
+  .nav-item svg{width:18px; height:18px; flex:none;}
+  .nav-item:hover{background:var(--inset);}
+  .nav-item.on{background:var(--chip); color:var(--brand); font-weight:600;}
+  .nav-spacer{flex:1;}
+  .distributor{margin:12px; padding:12px; border-top:1px solid var(--hair); display:flex; align-items:center; gap:10px;}
+  .distributor .av{width:36px;height:36px;border-radius:999px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;flex:none;}
+  .distributor .meta{flex:1; min-width:0;}
+  .distributor .meta .n{font-size:13px; font-weight:600; color:var(--ink);}
+  .distributor .meta .r{font-size:11px; color:var(--hint); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .distributor .lg{color:var(--hint); background:none; border:none; padding:4px; display:flex;}
+  .distributor .lg svg{width:16px;height:16px;}
+
+  /* ---------- CENTER (topbar + main) ---------- */
+  .center{display:flex; flex-direction:column; min-width:0; height:100vh;}
+  .topbar{height:64px; flex:none; background:#fff; border-bottom:1px solid var(--hair);
+    display:flex; align-items:center; gap:14px; padding:0 22px;}
+  .search{flex:1; max-width:420px; position:relative;}
+  .search svg{position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; color:var(--brand);}
+  .search input{width:100%; border:1px solid var(--hair); border-radius:14px; background:#fff; padding:10px 14px 10px 40px;
+    font-size:14px; color:var(--ink); outline:none;}
+  .search input:focus{border-color:var(--brand);}
+  .topbar-spacer{flex:1;}
+  .demo-btn{display:flex; align-items:center; gap:6px; background:var(--ink); color:#fff; border:none; border-radius:12px;
+    padding:9px 13px; font-size:12.5px; font-weight:600;}
+  .demo-btn svg{width:14px;height:14px;}
+  .btn-primary{background:var(--brand); color:#fff; border:none; border-radius:12px; padding:10px 16px; font-size:13.5px; font-weight:600;
+    display:flex; align-items:center; gap:7px;}
+  .btn-primary svg{width:15px;height:15px;}
+  .btn-primary:active{opacity:.9;}
+  .btn-primary:disabled{background:var(--hint); cursor:default;}
+  .topbar .av{width:34px;height:34px;border-radius:999px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px;}
+
+  .main-scroll{flex:1; min-height:0; overflow-y:auto; padding:24px 26px 60px;}
+  .main-scroll::-webkit-scrollbar{width:8px;} .main-scroll::-webkit-scrollbar-thumb{background:#dfe3ea;border-radius:8px;}
+
+  /* ---------- PHONE COLUMN ---------- */
+  .phonecol{background:#EEF1F6; border-left:1px solid var(--hair); display:flex; flex-direction:column; align-items:center; padding:22px 16px; overflow-y:auto;}
+  .phonecol .cap{font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--hint); display:flex; align-items:center; gap:7px; margin-bottom:14px;}
+  .phonecol .dot{width:8px;height:8px;border-radius:999px;background:var(--hint);}
+  .phonecol .dot.live{background:var(--brand); animation:pulse 1.3s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  .phone-bezel{width:300px; height:620px; background:#111318; border-radius:42px; padding:11px 8px; position:relative; box-shadow:0 24px 50px -20px rgba(10,31,68,.4); flex:none;}
+  .phone-notch{position:absolute; top:20px; left:50%; transform:translateX(-50%); width:96px; height:22px; background:#111318; border-radius:16px; z-index:20;}
+  .phone-screen{background:#fff; border-radius:32px; height:100%; overflow:hidden; position:relative; display:flex; flex-direction:column;}
+  .phone-status{display:flex; align-items:center; justify-content:space-between; padding:13px 20px 2px; font-size:12px; font-weight:600; color:var(--ink); flex:none;}
+  .phone-body{flex:1; min-height:0; overflow-y:auto; position:relative;}
+  .phone-body::-webkit-scrollbar{width:0;}
+  .phone-caption{font-size:11px; color:var(--muted); margin-top:12px; text-align:center; max-width:280px; line-height:1.4;}
+
+  /* ---------- CARDS / PRIMITIVES ---------- */
+  .card{background:#fff; border:1px solid var(--hair); border-radius:16px;}
+  .p16{padding:16px;} .p20{padding:20px;}
+  .kicker{font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:1px; color:var(--hint);}
+  .h2tone{font-size:22px; font-weight:700; letter-spacing:-.3px;}
+  .h2tone .b{color:var(--brand);} .h2tone .n{color:var(--ink);}
+  .muted{color:var(--muted);} .hint{color:var(--hint);}
+  .row{display:flex; align-items:center;}
+  .btn{border:none; border-radius:14px; padding:13px 18px; font-size:14px; font-weight:600; display:inline-flex; align-items:center; justify-content:center; gap:8px;}
+  .btn.primary{background:var(--brand); color:#fff;}
+  .btn.primary:disabled{background:var(--hint); cursor:default;}
+  .btn.primary:active{opacity:.9;}
+  .btn.grey{background:var(--grey-btn); color:var(--grey-btn-text);}
+  .btn.ghost{background:#fff; border:1px solid var(--input); color:var(--brand);}
+  .btn.full{width:100%;}
+  .btn svg{width:16px;height:16px;}
+  .btn.sm{padding:8px 14px; font-size:13px; border-radius:12px;}
+  .link{color:var(--brand); font-weight:600; background:none; border:none; padding:0; font-size:13px;}
+
+  /* pills */
+  .pill{display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:4px 11px; font-size:11.5px; font-weight:600; white-space:nowrap;}
+  .pill .pdot{width:6px;height:6px;border-radius:999px;background:currentColor;}
+  .pill.pulse .pdot{animation:pulse 1.2s infinite;}
+
+  /* KPI */
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .kpi{background:#fff; border:1px solid var(--hair); border-radius:16px; padding:16px 18px;}
+  .kpi .lbl{font-size:11.5px; font-weight:500; text-transform:uppercase; letter-spacing:.6px; color:var(--hint);}
+  .kpi .num{font-size:28px; font-weight:700; color:var(--ink); margin-top:8px;}
+  .kpi .sub{font-size:11px; color:var(--hint); margin-top:2px;}
+  .dit-card{margin-top:14px; background:linear-gradient(135deg,#0047BD,#0038A0); border-radius:16px; padding:20px 22px;
+    display:flex; align-items:center; justify-content:space-between; box-shadow:0 6px 18px rgba(0,48,145,.16);}
+  .dit-card .t{color:#fff;}
+  .dit-card .t .k{font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,.7);}
+  .dit-card .t .m{font-size:17px; font-weight:700; margin-top:4px;}
+  .dit-card .go{background:#fff; color:var(--brand); border:none; border-radius:12px; padding:11px 18px; font-weight:600; font-size:13.5px; display:flex; align-items:center; gap:7px;}
+  .dit-card .go svg{width:15px;height:15px;}
+
+  /* pipeline */
+  .segtabs{display:inline-flex; background:var(--track); border-radius:12px; padding:4px; gap:2px;}
+  .segtabs .s{padding:7px 14px; border-radius:9px; font-size:12.5px; font-weight:500; color:var(--muted); background:none; border:none;}
+  .segtabs .s.on{background:#fff; color:var(--ink); font-weight:600; box-shadow:0 1px 3px rgba(10,31,68,.08);}
+  .ptable{width:100%; border-collapse:collapse; margin-top:8px;}
+  .ptable thead th{font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--hint); text-align:left; padding:12px 12px; border-bottom:1px solid var(--hair);}
+  .ptable tbody td{padding:13px 12px; border-bottom:1px solid var(--hair); font-size:13.5px; color:var(--ink); vertical-align:middle;}
+  .ptable tbody tr:hover{background:var(--inset);}
+  .ptable .nm{font-size:14px; font-weight:600; color:var(--ink);}
+  .ptable .cline{font-size:12.5px; color:var(--muted);}
+  .kebab{background:none; border:none; padding:6px; border-radius:8px; color:var(--hint);}
+  .kebab:hover{background:var(--track);}
+  .kebab svg{width:16px;height:16px;}
+  .datefld{border:1px solid var(--input); border-radius:10px; padding:7px 10px; font-size:12.5px; color:var(--ink); outline:none;}
+  .sortbtn{display:flex; align-items:center; gap:6px; background:#fff; border:1px solid var(--input); border-radius:10px; padding:7px 12px; font-size:12.5px; font-weight:500; color:var(--muted);}
+  .sortbtn svg{width:14px;height:14px;}
+
+  /* ---------- WIZARD ---------- */
+  .wiz-head{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+  .backchip{width:32px;height:32px;border-radius:999px;background:#fff;border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;color:var(--brand);}
+  .backchip svg{width:18px;height:18px;}
+  .name-chip{background:var(--inset); border:1px solid var(--hair); border-radius:999px; padding:5px 12px; font-size:12.5px; font-weight:600; color:var(--ink);}
+  .autosave{margin-left:auto; background:var(--chip); color:var(--brand); border-radius:999px; padding:5px 12px; font-size:11.5px; font-weight:600; display:flex; align-items:center; gap:6px;}
+  .autosave .pdot{width:6px;height:6px;border-radius:999px;background:var(--brand);}
+  .wiz-grid{display:grid; grid-template-columns:270px 1fr; gap:20px; align-items:start;}
+
+  /* rail */
+  .rail{background:#fff; border:1px solid var(--hair); border-radius:16px; padding:16px;}
+  .rail .prog-top{display:flex; align-items:center; justify-content:space-between; font-size:11px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:var(--hint);}
+  .rail .bar{height:5px; background:var(--track); border-radius:999px; margin:8px 0 14px; overflow:hidden;}
+  .rail .bar > i{display:block; height:100%; background:var(--brand); border-radius:999px; transition:width .3s;}
+  .rstep{display:flex; gap:11px; padding:7px 4px; border-radius:10px; cursor:default;}
+  .rstep.clickable{cursor:pointer;} .rstep.clickable:hover{background:var(--inset);}
+  .rstep .circ{width:24px;height:24px;border-radius:999px;flex:none;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;border:1.5px solid var(--input); color:var(--hint); background:#fff;}
+  .rstep.done .circ{background:var(--brand); border-color:var(--brand); color:#fff;}
+  .rstep.active .circ{background:var(--brand); border-color:var(--brand); color:#fff;}
+  .rstep.active{background:var(--chip);}
+  .rstep .circ svg{width:13px;height:13px;}
+  .rstep .lbl{font-size:13px; font-weight:600; color:var(--ink);}
+  .rstep.todo .lbl{color:var(--muted); font-weight:500;}
+  .rstep .cap{font-size:10.5px; color:var(--hint); margin-top:1px;}
+  .rsub{margin-left:34px; border-left:1.5px solid var(--hair); padding-left:0;}
+  .rsub .rsubstep{display:flex; gap:9px; align-items:center; padding:5px 4px 5px 12px; margin-left:-1.5px; border-left:1.5px solid transparent;}
+  .rsub .rsubstep .cdot{width:8px;height:8px;border-radius:999px;background:var(--input);flex:none;}
+  .rsub .rsubstep.done .cdot{background:var(--brand);}
+  .rsub .rsubstep.active{border-left-color:var(--brand);}
+  .rsub .rsubstep.active .cdot{background:var(--brand);}
+  .rsub .rsubstep .lbl{font-size:12px; font-weight:500; color:var(--muted);}
+  .rsub .rsubstep.active .lbl, .rsub .rsubstep.done .lbl{color:var(--ink); font-weight:600;}
+
+  /* step card */
+  .stepcard{background:#fff; border:1px solid var(--hair); border-radius:16px; padding:24px 26px;}
+  .step-eyebrow{font-size:12.5px; font-weight:600; color:var(--brand);}
+  .step-title{font-size:24px; font-weight:700; letter-spacing:-.3px; margin:2px 0 2px;}
+  .step-title .b{color:var(--brand);} .step-title .n{color:var(--ink);}
+  .entered-by{float:right; background:var(--chip); color:var(--brand); border-radius:999px; padding:6px 12px; font-size:11.5px; font-weight:600; display:inline-flex; align-items:center; gap:6px;}
+  .entered-by svg{width:13px;height:13px;}
+  .step-sep{height:1px; background:var(--hair); margin:14px 0 20px;}
+  .twocol{display:grid; grid-template-columns:1fr 1fr; gap:20px 24px;}
+  .colhead{font-size:13px; font-weight:700; color:var(--ink); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--hair);}
+
+  /* fields */
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:14px; font-weight:500; color:var(--ink); margin-bottom:8px;}
+  .field label .req{color:var(--err); margin-left:2px;}
+  .field label .lockicon{width:12px;height:12px;color:var(--hint);vertical-align:-1px;margin-left:4px;}
+  .field input[type=text], .field input[type=email], .field input[type=number], .field input[type=date], .field select, .field textarea{
+    width:100%; border:1px solid var(--input); border-radius:12px; padding:12px 14px; font-size:14.5px; color:var(--ink); background:#fff; outline:none;}
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--brand);}
+  .field input::placeholder{color:var(--hint);}
+  .field input:disabled, .field .locked{background:var(--inset); color:var(--muted); cursor:not-allowed;}
+  .field .locked{display:flex; align-items:center; gap:8px; border:1px solid var(--input); border-radius:12px; padding:12px 14px; font-size:14.5px;}
+  .field .locked svg{width:13px;height:13px;color:var(--hint);}
+  .field .hinttext{font-size:12px; color:var(--brand); margin-top:6px; display:flex; align-items:center; gap:5px;}
+  .field .hinttext svg{width:12px;height:12px;}
+  .field .warntext{font-size:12px; color:var(--warn-pill-fg); margin-top:6px;}
+  .field .errtext{font-size:12px; color:var(--err); font-weight:500; margin-top:6px;}
+  .field input.invalid{border-color:var(--err);}
+  .phone-input{display:flex; gap:10px;}
+  .phone-input .cc{width:64px; text-align:center; border:1px solid var(--input); border-radius:12px; padding:12px 0; font-size:14.5px; color:var(--muted); background:var(--inset);}
+  .phone-input input{flex:1;}
+
+  /* segmented buttons (gender/nationality) */
+  .segbtns{display:flex; gap:8px;}
+  .segbtns .sb{flex:1; text-align:center; border:1px solid var(--input); border-radius:12px; padding:11px 0; font-size:13.5px; font-weight:500; color:var(--muted); background:#fff;}
+  .segbtns .sb.on{border-color:var(--brand); background:var(--chip); color:var(--brand); font-weight:600;}
+
+  /* checkbox / radio */
+  .chk{display:flex; gap:11px; align-items:flex-start; margin-bottom:12px;}
+  .chk .box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--input);flex:none;display:flex;align-items:center;justify-content:center;margin-top:1px;background:#fff;}
+  .chk.on .box{background:var(--brand);border-color:var(--brand);}
+  .chk .box svg{width:13px;height:13px;color:#fff;}
+  .chk .txt{font-size:13px; color:var(--muted); line-height:1.5;}
+  .radio-row{display:flex; align-items:center; justify-content:space-between; border:1px solid var(--input); border-radius:14px; padding:14px 16px; margin-bottom:10px; cursor:pointer;}
+  .radio-row.on{border-color:var(--brand); background:var(--chip);}
+  .radio-row .rlbl{font-size:14px; font-weight:500; color:var(--ink);}
+  .radio-dot{width:20px;height:20px;border-radius:999px;border:2px solid var(--input);display:flex;align-items:center;justify-content:center;}
+  .radio-row.on .radio-dot{border-color:var(--brand);}
+  .radio-row.on .radio-dot::after{content:'';width:10px;height:10px;border-radius:999px;background:var(--brand);}
+
+  /* inset panels */
+  .inset{background:var(--inset); border:1px solid var(--hair); border-radius:16px; padding:18px;}
+  .devotp{background:rgba(10,15,30,.72); color:#fff; border-radius:8px; padding:6px 10px; font-size:11.5px; font-weight:600; display:inline-flex; align-items:center; gap:6px; margin-top:10px;}
+  .devotp svg{width:12px;height:12px;}
+
+  /* OTP boxes */
+  .otpwrap{display:flex; gap:8px;}
+  .otpbox{width:44px;height:52px;border:1px solid var(--input);border-radius:12px;text-align:center;font-size:20px;font-weight:600;color:var(--ink);outline:none;background:#fff;}
+  .otpbox:focus{border-color:var(--brand);}
+  .otpbox.filled{border-color:var(--brand);}
+  .otpbox.err{border-color:var(--err);}
+  .otpbox.sm{width:36px;height:44px;font-size:17px;}
+  .resend{font-size:12.5px; color:var(--muted); margin-top:10px;}
+  .resend b{color:var(--brand);}
+
+  /* footer */
+  .stepfoot{display:flex; align-items:center; justify-content:space-between; margin-top:24px;}
+
+  /* signature upload */
+  .upload{border:1.5px dashed var(--input); border-radius:14px; padding:20px; text-align:center; cursor:pointer; color:var(--muted);}
+  .upload:hover{border-color:var(--brand); background:var(--inset);}
+  .upload svg{width:22px;height:22px;color:var(--brand);}
+  .upload.done{border-style:solid; border-color:var(--ok); background:var(--ok-tint);}
+
+  /* penny drop */
+  .pennychip{display:inline-flex; align-items:center; gap:8px; background:var(--ok-tint); color:var(--ok-pill-fg); border-radius:12px; padding:11px 14px; font-size:13px; font-weight:600;}
+  .pennychip svg{width:16px;height:16px;}
+  .bankchip{display:inline-flex; align-items:center; gap:8px; background:var(--chip); color:var(--brand); border-radius:10px; padding:8px 12px; font-size:12.5px; font-weight:600; margin-top:8px;}
+  .bankchip svg{width:14px;height:14px;}
+
+  /* nominee */
+  .nom-card{border:1px solid var(--hair); border-radius:14px; margin-bottom:12px; overflow:hidden;}
+  .nom-head{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; background:var(--inset); cursor:pointer;}
+  .nom-head .t{font-size:14px; font-weight:600; color:var(--ink);}
+  .minor-badge{background:var(--warn-tint); color:var(--warn-pill-fg); border-radius:999px; padding:2px 9px; font-size:10.5px; font-weight:700; margin-left:8px;}
+  .nom-body{padding:16px;}
+  .alloc-meter{background:var(--inset); border-radius:12px; padding:12px 14px; margin:12px 0; font-size:13px; font-weight:600;}
+  .alloc-meter.ok{color:var(--ok-pill-fg);} .alloc-meter.bad{color:var(--err);}
+  .alloc-bar{height:6px; background:var(--track); border-radius:999px; margin-top:8px; overflow:hidden;}
+  .alloc-bar > i{display:block; height:100%; border-radius:999px; transition:width .3s;}
+  .sebi-banner{background:var(--chip); border:1px solid #CFE0FB; border-radius:12px; padding:13px 15px; font-size:13px; color:var(--ink); line-height:1.5; margin:12px 0; display:flex; gap:9px;}
+  .sebi-banner svg{width:16px;height:16px;color:var(--brand);flex:none;margin-top:1px;}
+  .addmore{width:100%; border:1px dashed var(--input); border-radius:14px; padding:13px; background:#fff; color:var(--brand); font-weight:600; font-size:13.5px; display:flex; align-items:center; justify-content:center; gap:8px;}
+  .addmore:disabled{color:var(--hint); cursor:default;}
+  .addmore svg{width:16px;height:16px;}
+
+  /* review */
+  .rev-sec{border:1px solid var(--hair); border-radius:14px; margin-bottom:12px; overflow:hidden;}
+  .rev-head{display:flex; align-items:center; justify-content:space-between; padding:13px 16px; background:var(--inset);}
+  .rev-head .t{font-size:14px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:8px;}
+  .rev-body{padding:6px 16px 14px;}
+  .rev-row{display:flex; align-items:center; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--hair); gap:12px;}
+  .rev-row:last-child{border-bottom:none;}
+  .rev-row .k{font-size:12.5px; color:var(--muted); flex:none;}
+  .rev-row .v{font-size:13px; color:var(--ink); font-weight:500; text-align:right; flex:1;}
+  .prov{border-radius:999px; padding:2px 9px; font-size:10px; font-weight:600; white-space:nowrap;}
+  .prov.dist{background:var(--track); color:var(--muted);}
+  .prov.inv{background:var(--ok-tint); color:var(--ok-pill-fg);}
+  .prov.sys{background:var(--chip); color:var(--brand);}
+
+  /* checklist (handoff / send status) */
+  .checklist .cl{display:flex; align-items:center; gap:11px; padding:9px 0;}
+  .checklist .cl .ci{width:22px;height:22px;border-radius:999px;flex:none;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--input);background:#fff;}
+  .checklist .cl.done .ci{background:var(--ok); border-color:var(--ok);}
+  .checklist .cl.done .ci svg{width:12px;height:12px;color:#fff;}
+  .checklist .cl.active .ci{border-color:var(--brand);}
+  .checklist .cl.active .ci .spin{width:12px;height:12px;border:2px solid var(--chip);border-top-color:var(--brand);border-radius:999px;animation:spin .8s linear infinite;}
+  .checklist .cl .ct{font-size:13.5px; color:var(--muted);}
+  .checklist .cl.done .ct, .checklist .cl.active .ct{color:var(--ink); font-weight:500;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* modal */
+  .modal-scrim{position:fixed; inset:0; background:rgba(10,15,30,.45); z-index:200; display:flex; align-items:center; justify-content:center; animation:fade .15s;}
+  @keyframes fade{from{opacity:0;} to{opacity:1;}}
+  .modal{background:#fff; border-radius:24px; width:440px; max-width:92%; overflow:hidden; animation:pop .2s cubic-bezier(.2,.8,.2,1);}
+  @keyframes pop{from{transform:scale(.94); opacity:0;} to{transform:scale(1); opacity:1;}}
+  .modal.left{text-align:left;}
+  .notes-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px 12px;}
+  .notes-head .t{font-size:17px;font-weight:700;color:var(--ink);}
+  .notes-x{width:32px;height:32px;border-radius:999px;background:var(--track);border:none;display:flex;align-items:center;justify-content:center;color:var(--muted);}
+  .notes-x:hover{background:var(--hair);}
+  .notes-body{padding:0 22px 22px;max-height:60vh;overflow-y:auto;}
+  .modal .mbody{padding:28px 26px 22px; text-align:center;}
+  .modal .micon{width:66px;height:66px;border-radius:999px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;}
+  .modal .micon svg{width:32px;height:32px;}
+  .modal .mtitle{font-size:20px; font-weight:700; color:var(--ink);}
+  .modal .mmsg{font-size:14px; color:var(--muted); line-height:1.55; margin-top:8px;}
+  .modal .macts{display:flex; flex-direction:column; gap:10px; margin-top:20px;}
+  .modal .demo-strip{background:var(--ink); padding:12px 16px;}
+  .modal .demo-strip .dl{font-size:10.5px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; color:rgba(255,255,255,.6); margin-bottom:8px;}
+  .modal .demo-strip .dbtns{display:flex; flex-wrap:wrap; gap:6px;}
+  .modal .demo-strip .db{background:rgba(255,255,255,.12); color:#fff; border:none; border-radius:8px; padding:6px 10px; font-size:11px; font-weight:500; display:inline-flex; align-items:center;}
+  .modal .demo-strip .db:hover{background:rgba(255,255,255,.22);}
+  .modal .demo-strip .db.on{background:#fff; color:var(--ink); font-weight:600;}
+
+  /* demo panel */
+  .demo-panel{position:fixed; top:60px; right:360px; width:320px; background:var(--ink); color:#fff; border-radius:16px; z-index:210; padding:18px; box-shadow:0 20px 50px rgba(0,0,0,.35);}
+  .demo-panel .dh{font-size:10.5px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:14px;}
+  .demo-panel .sect{font-size:12px; font-weight:600; color:rgba(255,255,255,.85); margin:14px 0 8px;}
+  .demo-panel .opt{display:flex; align-items:center; gap:9px; padding:8px 10px; border-radius:10px; font-size:13px; color:rgba(255,255,255,.9); cursor:pointer;}
+  .demo-panel .opt:hover{background:rgba(255,255,255,.08);}
+  .demo-panel .opt.on{background:rgba(255,255,255,.14); font-weight:600;}
+  .demo-panel .opt .rd{width:16px;height:16px;border-radius:999px;border:2px solid rgba(255,255,255,.4);flex:none;display:flex;align-items:center;justify-content:center;}
+  .demo-panel .opt.on .rd{border-color:#fff;} .demo-panel .opt.on .rd::after{content:'';width:8px;height:8px;border-radius:999px;background:#fff;}
+  .demo-panel .dbtn{width:100%; background:rgba(255,255,255,.12); color:#fff; border:none; border-radius:10px; padding:10px; font-size:13px; font-weight:600; margin-top:8px;}
+  .demo-panel .dbtn:hover{background:rgba(255,255,255,.2);}
+  .demo-panel select{width:100%; background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.2); border-radius:10px; padding:9px; font-size:12.5px; margin-top:4px;}
+
+  /* toast */
+  .toast{position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff; font-size:13px; font-weight:500; padding:13px 20px; border-radius:14px; z-index:300; opacity:0; pointer-events:none; transition:.2s; box-shadow:0 12px 30px rgba(10,31,68,.3); max-width:520px; text-align:center;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* note drawer */
+  .drawer-scrim{position:fixed; inset:0; background:rgba(10,15,30,.35); z-index:220; display:flex; justify-content:flex-end;}
+  .drawer{width:400px; background:#fff; height:100vh; padding:22px; overflow-y:auto; animation:slidein .2s;}
+  @keyframes slidein{from{transform:translateX(30px); opacity:.6;} to{transform:translateX(0); opacity:1;}}
+  .note-item{background:var(--inset); border-radius:12px; padding:12px; margin-bottom:10px; font-size:13px;}
+  .note-item .meta{font-size:11px; color:var(--hint); margin-top:6px;}
+
+  /* ---------- PHONE INNER SCREENS ---------- */
+  .ph-idle{height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:var(--hint); padding:30px; text-align:center;}
+  .ph-idle img{height:22px; opacity:.5;}
+  .ph-idle .t{font-size:13px; color:var(--muted);}
+  .mail{padding:14px;}
+  .mail .from{display:flex; align-items:center; gap:9px; padding-bottom:11px; border-bottom:1px solid var(--hair);}
+  .mail .from .mav{width:34px;height:34px;border-radius:999px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;}
+  .mail .from .fn{font-size:12.5px;font-weight:600;color:var(--ink);}
+  .mail .from .fe{font-size:11px;color:var(--hint);}
+  .mail .subj{font-size:14px;font-weight:600;color:var(--ink);margin:14px 0 4px;}
+  .mail .otpbig{font-size:34px;font-weight:700;letter-spacing:6px;color:var(--brand);text-align:center;margin:22px 0;}
+  .mail .mtxt{font-size:12.5px;color:var(--muted);line-height:1.55;}
+  .sms-wrap{padding:16px 12px;}
+  .sms-hdr{text-align:center;font-size:11.5px;font-weight:600;color:var(--muted);margin-bottom:14px;}
+  .sms{background:#E9E9EB;border-radius:16px;padding:11px 13px;font-size:13px;color:#111;max-width:230px;line-height:1.45;}
+  .sms .lnk{color:var(--brand);}
+  .sms-time{font-size:10px;color:var(--hint);text-align:center;margin:8px 0;}
+  .tap-hint{margin-top:12px;text-align:center;font-size:11px;color:var(--brand);font-weight:600;animation:pulse 1.4s infinite;}
+  .webview{height:100%;display:flex;flex-direction:column;}
+  .wv-bar{background:var(--inset);border-bottom:1px solid var(--hair);padding:8px 12px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:7px;}
+  .wv-bar svg{width:12px;height:12px;}
+  .wv-body{flex:1;min-height:0;overflow-y:auto;padding:16px;}
+  .wv-logo{height:22px;margin-bottom:14px;}
+  .idcard{border-radius:14px;padding:14px;color:#fff;background:linear-gradient(135deg,#0047BD,#0038A0);margin:12px 0;}
+  .idcard .n{font-size:15px;font-weight:700;} .idcard .p{font-size:12px;opacity:.85;margin-top:3px;}
+  .dgl{background:#6C3FC5;} /* digilocker purple */
+  .btn-wv{width:100%;background:var(--brand);color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:600;margin-top:12px;}
+  .btn-wv.purple{background:#6C3FC5;}
+  .rec-btn{width:64px;height:64px;border-radius:999px;background:var(--err);border:4px solid #fff;box-shadow:0 0 0 2px var(--err);margin:14px auto;display:block;}
+  .rec-live{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--err);font-weight:600;font-size:13px;margin:14px 0;}
+  .rec-live .rd{width:10px;height:10px;border-radius:999px;background:var(--err);animation:pulse 1s infinite;}
+  .success-ph{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px;text-align:center;}
+  .success-ph .sc{width:70px;height:70px;border-radius:999px;background:var(--ok);display:flex;align-items:center;justify-content:center;}
+  .success-ph .sc svg{width:34px;height:34px;color:#fff;}
+
+  .flex1{flex:1;} .mt8{margin-top:8px;} .mt12{margin-top:12px;} .mt16{margin-top:16px;} .mt20{margin-top:20px;} .mt24{margin-top:24px;}
+  .gap8{gap:8px;} .between{justify-content:space-between;}
+  .hero-check{width:80px;height:80px;border-radius:999px;background:var(--ok);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+  .hero-check svg{width:40px;height:40px;color:#fff;}
+  .sumchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0;}
+  .sumchip{background:var(--ok-tint);color:var(--ok-pill-fg);border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:6px;}
+  .sumchip svg{width:13px;height:13px;}
+
+  /* ---------- REFER & EARN ---------- */
+  .refer-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .rstat{border-radius:16px; padding:18px 20px; text-align:center;}
+  .rstat .rlbl{font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.6px; color:var(--muted);}
+  .rstat .rnum{font-size:28px; font-weight:700; color:var(--ink); margin-top:8px;}
+  .logtable thead th{font-weight:600;}
+  .earn-pill{background:var(--ok-tint); color:var(--ok-pill-fg); border-radius:999px; padding:3px 10px; font-size:11.5px; font-weight:600;}
+  .pager{display:flex; justify-content:flex-end; gap:6px; margin-top:14px;}
+  .pg{border:1px solid var(--input); background:#fff; color:var(--muted); border-radius:9px; padding:7px 12px; font-size:12.5px; font-weight:500;}
+  .pg.on{background:var(--brand); border-color:var(--brand); color:#fff;}
+  .pg:disabled{opacity:.5; cursor:default;}
+  .pg:not(.on):not(:disabled):hover{background:var(--inset);}
+
+  .qr-card{background:#fff; border:1px solid var(--hair); border-radius:18px; padding:18px; width:300px; text-align:center;}
+  .qr-card-h{display:flex; align-items:center; justify-content:center; gap:8px; font-size:14px; font-weight:700; color:var(--ink); margin-bottom:14px;}
+  .qr-card-h svg{width:16px;height:16px;color:var(--brand);}
+  .qr-box{width:180px; height:180px; margin:0 auto; padding:10px; background:#fff; border:1px solid var(--hair); border-radius:14px;}
+  .qr-box svg{width:100%;height:100%;display:block;}
+  .qr-url{font-size:12px; color:var(--brand); font-weight:600; margin-top:12px; word-break:break-all;}
+
+  /* whatsapp phone */
+  .wa{height:100%; display:flex; flex-direction:column; background:#E5DDD5;}
+  .wa-header{display:flex; align-items:center; gap:9px; background:#075E54; color:#fff; padding:10px 12px;}
+  .wa-header .wa-back{display:flex;} .wa-header .wa-back svg{width:18px;height:18px;color:#fff;}
+  .wa-av{width:32px;height:32px;border-radius:999px;background:#fff;color:#075E54;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;}
+  .wa-name{font-size:13px;font-weight:600;} .wa-status{font-size:10.5px;opacity:.8;}
+  .wa-chat{flex:1;min-height:0;overflow-y:auto;padding:14px 12px;}
+  .wa-msg{background:#DCF8C6;border-radius:12px;padding:8px;max-width:250px;margin-left:auto;box-shadow:0 1px 1px rgba(0,0,0,.1);}
+  .wa-qr{background:#fff;border-radius:8px;padding:10px;position:relative;}
+  .wa-qr svg{width:100%;height:auto;display:block;}
+  .wa-qr-brand{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:#fff;padding:2px 6px;border-radius:4px;box-shadow:0 0 0 3px #fff;}
+  .wa-qr-brand img{height:12px;display:block;}
+  .wa-txt{font-size:12px;color:#111;line-height:1.5;margin-top:8px;}
+  .wa-link{color:#0047BD;text-decoration:underline;cursor:pointer;}
+  .wa-time{font-size:9.5px;color:#667;text-align:right;margin-top:4px;}
+  .refer-tag{display:inline-block;background:var(--chip);color:var(--brand);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600;}
+  .earn-badge{background:var(--ok-tint);color:var(--ok-pill-fg);border-radius:999px;padding:8px 18px;font-size:15px;font-weight:700;}
+
+  /* ---------- INVESTORS / KYC PAGES ---------- */
+  .app.nophone{grid-template-columns:232px 1fr;}
+  .page-head{display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:18px; gap:16px;}
+  .viewtoggle{display:inline-flex; background:var(--track); border-radius:12px; padding:4px; gap:2px; flex:none;}
+  .viewtoggle button{display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:9px; font-size:12.5px; font-weight:500; color:var(--muted); background:none; border:none;}
+  .viewtoggle button svg{width:15px;height:15px;}
+  .viewtoggle button.on{background:#fff; color:var(--ink); font-weight:600; box-shadow:0 1px 3px rgba(10,31,68,.08);}
+  .filterchips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .fchip{border:1px solid var(--input); background:#fff; color:var(--muted); border-radius:999px; padding:7px 13px; font-size:12.5px; font-weight:500;}
+  .fchip:hover{border-color:var(--brand); color:var(--brand);}
+  .fchip.on{border-color:var(--brand); background:var(--chip); color:var(--brand); font-weight:600;}
+  .empty-state{text-align:center; padding:48px; color:var(--hint); font-size:14px;}
+  .inv-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px;}
+  .inv-card{background:#fff; border:1px solid var(--hair); border-radius:16px; padding:16px; display:flex; flex-direction:column;}
+  .ic-top{display:flex; align-items:center; gap:11px; margin-bottom:14px;}
+  .ic-av{width:42px;height:42px;border-radius:999px;background:var(--chip);color:var(--brand);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none;}
+  .ic-id{flex:1;min-width:0;}
+  .ic-name{font-size:15px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ic-sub{font-size:12.5px;color:var(--muted);}
+  .ic-rows{border-top:1px solid var(--hair);padding-top:12px;}
+  .ic-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;gap:10px;}
+  .ic-k{font-size:12px;color:var(--muted);flex:none;}
+  .ic-v{font-size:12.5px;color:var(--ink);font-weight:500;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .ic-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--hair);margin-top:12px;padding-top:12px;}
+  .ko-stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:20px;}
+  .ko-stat{background:#fff;border:1px solid var(--hair);border-radius:14px;padding:14px 16px;}
+  .ko-stat .ks-num{font-size:24px;font-weight:700;color:var(--ink);}
+  .ko-stat .ks-lbl{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.3;}
+  .ko-filters{display:flex;flex-wrap:wrap;gap:24px;}
+  .fgroup{display:flex;align-items:center;gap:12px;}
+  .fgroup .fgl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--hint);flex:none;}
+  .fgroup .filterchips{margin-bottom:0;}
+
+  /* ---------- TOPBAR QUICK TOGGLES ---------- */
+  .qtoggle{display:flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--input); border-radius:11px; padding:8px 11px; font-size:12px; font-weight:600; color:var(--muted);}
+  .qtoggle svg{width:15px;height:15px;}
+  .qtoggle .qst{font-size:9.5px; font-weight:700; letter-spacing:.4px; padding:2px 6px; border-radius:999px; background:var(--track); color:var(--hint);}
+  .qtoggle.on{border-color:var(--brand); color:var(--brand); background:var(--chip);}
+  .qtoggle.on .qst{background:var(--brand); color:#fff;}
+
+  /* ---------- BIG DEMO CONTROLS PANEL ---------- */
+  .dc-scrim{position:fixed; inset:0; background:rgba(10,15,30,.55); z-index:250; display:flex; align-items:center; justify-content:center; animation:fade .15s;}
+  .dc-panel{background:#12172A; color:#fff; border-radius:22px; width:720px; max-width:94%; max-height:88vh; overflow-y:auto; animation:pop .2s cubic-bezier(.2,.8,.2,1);}
+  .dc-panel::-webkit-scrollbar{width:8px;} .dc-panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:8px;}
+  .dc-top{position:sticky; top:0; background:#12172A; padding:22px 24px 14px; border-bottom:1px solid rgba(255,255,255,.08); z-index:2;}
+  .dc-top .row{display:flex;align-items:center;justify-content:space-between;}
+  .dc-title{font-size:18px; font-weight:700;}
+  .dc-sub{font-size:12px; color:rgba(255,255,255,.5); margin-top:4px;}
+  .dc-x{width:34px;height:34px;border-radius:999px;background:rgba(255,255,255,.1);border:none;color:#fff;display:flex;align-items:center;justify-content:center;}
+  .dc-x:hover{background:rgba(255,255,255,.2);}
+  .dc-body{padding:8px 24px 24px;}
+  .dc-sect{border-top:1px solid rgba(255,255,255,.08); padding-top:14px; margin-top:14px;}
+  .dc-sect:first-child{border-top:none;margin-top:4px;}
+  .dc-sect-h{font-size:11px; font-weight:700; letter-spacing:.7px; text-transform:uppercase; color:#7C8BB0; margin-bottom:6px;}
+  .dc-row{display:flex; align-items:center; justify-content:space-between; gap:18px; padding:11px 0;}
+  .dc-l{font-size:13.5px; font-weight:600; color:#fff;}
+  .dc-d{font-size:11.5px; color:rgba(255,255,255,.5); margin-top:2px; line-height:1.4; max-width:400px;}
+  .switch{width:46px;height:27px;border-radius:999px;background:rgba(255,255,255,.2);position:relative;transition:.2s;flex:none;cursor:pointer;border:none;}
+  .switch.on{background:#4C8DFF;}
+  .switch::after{content:'';width:21px;height:21px;border-radius:999px;background:#fff;position:absolute;top:3px;left:3px;transition:.2s;}
+  .switch.on::after{left:22px;}
+  .dc-seg{display:flex;background:rgba(255,255,255,.1);border-radius:10px;padding:3px;flex:none;}
+  .dc-seg button{padding:7px 13px;border-radius:8px;font-size:12px;color:rgba(255,255,255,.7);background:none;border:none;white-space:nowrap;}
+  .dc-seg button.on{background:#fff;color:#12172A;font-weight:600;}
+  .dc-opt{display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:10px; font-size:13px; color:rgba(255,255,255,.9); cursor:pointer;}
+  .dc-opt:hover{background:rgba(255,255,255,.07);}
+  .dc-opt.on{background:rgba(255,255,255,.13); font-weight:600;}
+  .dc-opt .rd{width:16px;height:16px;border-radius:999px;border:2px solid rgba(255,255,255,.4);flex:none;display:flex;align-items:center;justify-content:center;}
+  .dc-opt.on .rd{border-color:#fff;} .dc-opt.on .rd::after{content:'';width:8px;height:8px;border-radius:999px;background:#fff;}
+  .dc-select{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:9px;font-size:12.5px;flex:1;}
+  .dc-btn{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-size:13px;font-weight:600;}
+  .dc-btn:hover{background:rgba(255,255,255,.2);}
+
+  /* ---------- AADHAAR MASKED UI ---------- */
+  .aadhaar-group{display:flex; align-items:center; gap:8px;}
+  .aadhaar-mask{display:flex; align-items:center; gap:6px; border:1px solid var(--input); border-radius:12px; padding:12px 12px; background:var(--inset); color:var(--hint); font-size:15px; letter-spacing:2px; flex:1;}
+  .aadhaar-mask .grp{font-weight:700;}
+  .aadhaar-last{width:96px;}
+  .aadhaar-last input{width:100%; text-align:center; letter-spacing:4px; font-weight:600;}
+
+  /* ---------- GENERATED SIGNATURE ---------- */
+  .sig-gen{border:1px solid var(--input); border-radius:14px; padding:14px 18px; background:var(--inset); display:flex; align-items:center; justify-content:space-between;}
+  .sig-name{font-family:'Dancing Script',cursive; font-size:34px; color:var(--ink); line-height:1;}
+  .sig-tag{font-size:10.5px; color:var(--ok-pill-fg); background:var(--ok-tint); border-radius:999px; padding:3px 9px; font-weight:600;}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="overlay"></div>
+<div class="toast" id="toast"></div>
+<script>
+const LOGO_SRC = "data:image/png;base64,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";
+</script>
+<script>
+/* ============================================================ ICONS */
+const I = {
+  dashboard:'<path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10a1 1 0 0 0 1 1h3v-6h6v6h3a1 1 0 0 0 1-1V10"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  clipboard:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>',
+  orders:'<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+  reports:'<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>',
+  logs:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h8"/>',
+  settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  logout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',
+  search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  slider:'<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>',
+  plus:'<path d="M12 5v14"/><path d="M5 12h14"/>',
+  chevRight:'<path d="m9 18 6-6-6-6"/>',
+  chevLeft:'<path d="m15 18-6-6 6-6"/>',
+  chevDown:'<path d="m6 9 6 6 6-6"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  x:'<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+  phone:'<path d="M13.83 16.57a1 1 0 0 0 1.21-.3l.36-.47A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.47.35a1 1 0 0 0-.29 1.23 14 14 0 0 0 6.39 6.38"/>',
+  trash:'<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+  edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+  eye:'<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+  alert:'<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  info:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
+  landmark:'<line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+  video:'<path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/>',
+  refresh:'<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>',
+  kebab:'<circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/>',
+  sort:'<path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/>',
+  upload:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>',
+  calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  msg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  globe:'<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  pin:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+  gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/>',
+  copy:'<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+  download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+  qr:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20 14v3"/><path d="M14 20h7"/>',
+  mail:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/>',
+};
+const WA_ICON='<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.5 12.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.1-.2.1-.3.2-.4.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4-.1-.1-.3-.2-.6-.3z"/></svg>';
+function ic(name, cls){ return '<svg class="'+(cls||'')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+I[name]+'</svg>'; }
+/* Google Material Symbols (Rounded) — the premium Google icon set */
+function mi(name, opts){ opts=opts||{}; const st=[]; if(opts.size) st.push('font-size:'+opts.size+'px'); if(opts.color) st.push('color:'+opts.color); const cls='material-symbols-rounded'+(opts.fill?' mi-fill':'')+(opts.cls?' '+opts.cls:''); return '<span class="'+cls+'"'+(st.length?' style="'+st.join(';')+'"':'')+'>'+name+'</span>'; }
+
+/* ============================================================ OPTION DATA (from source) */
+const OCCUPATIONS=['Business','Professional','Retired','Housewife','Student','Public Sector','Private Sector','Government Sector','Others'];
+const INCOME_SLABS=['Upto 1 Lakh','Above 1 Lakh Upto 5 Lakh','Above 5 Lakh Upto 10 Lakh','Above 10 Lakh Upto 25 Lakh','Above 25 Lakh Upto 1 Cr','Above 1 Cr'];
+const SOURCE_OF_WEALTH=['Salary','Business','Gift','Ancestral Property','Rental Income','Prize Money','Royalty','Others'];
+const PEP=['Politically Exposed','Politically Related','Not Applicable'];
+const MARITAL=['Married','Unmarried','Others'];
+const TAX_STATUS=['Resident','NRI'];
+const ACCOUNT_TYPE=['Savings','Current'];
+const NATURE=['Residential','Business Location'];
+const PROOF_TYPES=['PAN','Aadhaar','Passport','Driving Licence'];
+const RELATIONSHIPS=['Father','Mother','Court Appointed Legal Guardian','Aunt','Brother In Law','Brother','Daughter','Daughter In Law','Father In Law','Grand Daughter','Grand Father','Grand Mother','Grand Son','Mother In Law','Nephew','Niece','Sister','Sister In Law','Son','Son In Law','Spouse','Uncle','Others'];
+
+/* PAN decision buckets (verbatim copy) */
+const BUCKETS={
+  PROCEED:{icon:'check',tone:'ok',title:'Your KYC is verified',msg:'You are all set to start investing.',primary:'Continue',secondary:null},
+  START_KYC:{icon:'shield',tone:'brand',title:'Complete your KYC',msg:'Your KYC needs to be completed before you can invest. It only takes a few minutes.',primary:'Complete KYC',secondary:'Do it later'},
+  FIX_NAME:{icon:'alert',tone:'warn',title:'Check your name',msg:'The name entered does not match the PAN record. Please go back and enter your name exactly as it appears on your PAN card.',primary:'Edit name',secondary:null},
+  WAIT:{icon:'clock',tone:'warn',title:'KYC under process',msg:'Your KYC is currently under process at the KRA. Please try again later.',primary:'Okay',secondary:null},
+  BLOCKED:{icon:'alert',tone:'err',title:'KYC Deactivated',msg:'Your KYC is deactivated and investments cannot be accepted for this PAN. Please contact support.',primary:'Contact support',secondary:'Retry'},
+  LINK_AADHAAR:{icon:'alert',tone:'warn',title:'Link Aadhaar with PAN',msg:'Your Aadhaar does not appear to be linked with your PAN. Please link them on the government income-tax website, then retry.',primary:'Retry',secondary:'Do it later'},
+};
+const SCENARIOS=[
+  {key:'PROCEED',mi:'check_circle',color:'#3DDC84',label:'KYC Verified → onboarding journey'},
+  {key:'START_KYC',mi:'cancel',color:'#FF6B6B',label:'No KYC found → KYC journey'},
+  {key:'FIX_NAME',mi:'edit',color:'#FFC24B',label:'Name mismatch'},
+  {key:'WAIT',mi:'hourglass_empty',color:'#FFC24B',label:'KYC under process'},
+  {key:'BLOCKED',mi:'block',color:'#FF6B6B',label:'KYC deactivated'},
+  {key:'LINK_AADHAAR',mi:'link',color:'#7FB0FF',label:'Aadhaar not linked'},
+];
+
+/* OTP codes */
+const OTP_EMAIL='412309', OTP_PHONE='734156', OTP_EMAILVERIFY='552104', OTP_DGL='883271', OTP_ESIGN='129004', OTP_REVIEW='917245';
+
+/* ============================================================ SEED DATA */
+function seedInvestors(){
+  return [
+    {id:1,name:'Riya Sharma',mobile:'70000 43989',email:'riya@sharma99.com',pan:'FMKPS****4L',status:'Awaiting Investor',createdAt:'2026-07-02',notes:[],journey:'onboarding',resume:'review',reviewSent:true},
+    {id:2,name:'Piyush Roy',mobile:'90909 05001',email:'piyush.roy@gmail.com',pan:'RTYPB****7H',status:'Completed',createdAt:'2026-06-28',notes:[{t:'Completed via assisted onboarding.',by:'Sagnik Mitra',at:'28 Jun 2026'}],journey:'onboarding',resume:'complete'},
+    {id:3,name:'Arjun Mehta',mobile:'98220 11456',email:'arjun.m@outlook.com',pan:'AZJPM****2K',status:'KYC In Progress',createdAt:'2026-07-04',notes:[],journey:'kyc',resume:'kyc_address'},
+    {id:4,name:'Sneha Kulkarni',mobile:'91675 33208',email:'sneha.k@yahoo.in',pan:'—',status:'Contact Verified',createdAt:'2026-07-05',notes:[],journey:null,resume:'pan'},
+    {id:5,name:'Vikram Nair',mobile:'98450 77012',email:'vikram.nair@gmail.com',pan:'BLQPN****9C',status:'Investment Ready',createdAt:'2026-06-30',notes:[],journey:'onboarding',resume:'complete'},
+    {id:6,name:'Fatima Khan',mobile:'99870 21334',email:'fatima.k@gmail.com',pan:'—',status:'Lost',createdAt:'2026-06-25',notes:[{t:'Not responding to calls. Marked lost.',by:'Sagnik Mitra',at:'01 Jul 2026'}],journey:null,resume:'investor_details'},
+    {id:7,name:'Rohan Das',mobile:'89760 45118',email:'rohan.das@proton.me',pan:'—',status:'Draft',createdAt:'2026-07-06',notes:[],journey:null,resume:'contact'},
+    {id:8,name:'Ananya Iyer',mobile:'90080 66723',email:'ananya.iyer@gmail.com',pan:'GKMPI****1E',status:'Investing',createdAt:'2026-06-20',notes:[{t:'2 active SIPs running.',by:'Sagnik Mitra',at:'20 Jun 2026'}],journey:'onboarding',resume:'complete'},
+  ];
+}
+
+/* pill styling */
+const PILL_STYLE={
+  'Draft':{fg:'var(--hint)',bg:'var(--track)'},
+  'Contact Verified':{fg:'var(--brand)',bg:'var(--chip)'},
+  'KYC In Progress':{fg:'var(--warn-pill-fg)',bg:'var(--warn-tint)'},
+  'Awaiting Investor':{fg:'var(--warn-pill-fg)',bg:'var(--warn-tint)',pulse:true},
+  'Investment Ready':{fg:'var(--ok-pill-fg)',bg:'var(--ok-pill-bg)'},
+  'Investing':{fg:'var(--ok-pill-fg)',bg:'var(--ok-pill-bg)'},
+  'Completed':{fg:'var(--ok-pill-fg)',bg:'var(--ok-pill-bg)'},
+  'Lost':{fg:'var(--err-pill-fg)',bg:'var(--err-tint)'},
+};
+function pillHtml(status){
+  const s=PILL_STYLE[status]||{fg:'var(--muted)',bg:'var(--track)'};
+  return '<span class="pill'+(s.pulse?' pulse':'')+'" style="color:'+s.fg+';background:'+s.bg+'"><span class="pdot"></span>'+status+'</span>';
+}
+const TODO_STATUSES=['Draft','Contact Verified','KYC In Progress','Awaiting Investor'];
+const DONE_STATUSES=['Investment Ready','Completed','Investing'];
+
+/* ============================================================ STATE */
+let state, idSeq;
+function freshData(){
+  return {
+    name:'',email:'',mobile:'',consentBank:true,consentDemo:true,
+    emailVerified:false,phoneVerified:false,
+    pan:'',dob:'',
+    // kyc
+    aadhaar4:'',fatherName:'',gender:'',marital:'',placeOfBirth:'',
+    nature:'',pin:'',addr1:'',addr2:'',city:'',
+    occupation:'',income:'',wealth:'',pep:'Not Applicable',signature:false,
+    dglDone:false,
+    // onboarding
+    obEmailVerified:false,taxStatus:'Resident',bankHolder:'',bankAcc:'',bankAccConfirm:'',ifsc:'',accType:'',pennyVerified:false,
+    nomineeChoice:null, nominees:[],
+  };
+}
+function initState(){
+  idSeq=9;
+  state={
+    route:'dashboard', activeInvestorId:null, navFrom:'dashboard',
+    investors:seedInvestors(),
+    wizard:{journey:null, step:'investor_details', data:freshData(), dirty:false},
+    phone:{mode:'idle', sub:0, otpErr:false, resendLeft:30, resendCount:0, drop:false},
+    demo:{scenario:'PROCEED', panelOpen:false, emailOtp:true, phoneOtp:true, namePos:'investor_details', signature:'upload', bankVerify:true, videoDecl:true},
+    q:'',
+    dash:{tab:'all', sort:'desc', dateFrom:'', dateTo:''},
+    inv:{view:'grid', filter:'all'},
+    ko:{kyc:'all', ob:'all'},
+    modal:null, drawer:null,
+    refer:{ page:1, search:'', scans:21, entered:18, downloads:8, earnings:1600, logs:seedReferLogs() },
+  };
+}
+function seedReferLogs(){
+  return [
+    {date:'04-14-2026',time:'14:52',phone:'XXXXXX3322',earn:''},
+    {date:'04-14-2026',time:'14:51',phone:'XXXXXX9142',earn:''},
+    {date:'04-14-2026',time:'13:05',phone:'XXXXXX0363',earn:''},
+    {date:'04-14-2026',time:'12:59',phone:'XXXXXX4448',earn:'200.00 Rs.'},
+    {date:'04-14-2026',time:'12:38',phone:'XXXXXX5314',earn:'200.00 Rs.'},
+    {date:'04-14-2026',time:'12:18',phone:'XXXXXX4444',earn:''},
+    {date:'04-14-2026',time:'12:14',phone:'XXXXXX4444',earn:'200.00 Rs.'},
+    {date:'04-03-2026',time:'10:39',phone:'XXXXXX5789',earn:''},
+    {date:'04-03-2026',time:'10:39',phone:'XXXXXX1230',earn:''},
+    {date:'03-31-2026',time:'21:54',phone:'XXXXXX4321',earn:'200.00 Rs.'},
+    {date:'03-31-2026',time:'19:12',phone:'XXXXXX8890',earn:''},
+    {date:'03-30-2026',time:'17:44',phone:'XXXXXX2276',earn:'200.00 Rs.'},
+    {date:'03-30-2026',time:'16:20',phone:'XXXXXX6651',earn:''},
+    {date:'03-29-2026',time:'11:08',phone:'XXXXXX3390',earn:'200.00 Rs.'},
+    {date:'03-28-2026',time:'20:33',phone:'XXXXXX7712',earn:''},
+    {date:'03-27-2026',time:'15:59',phone:'XXXXXX4408',earn:'200.00 Rs.'},
+    {date:'03-27-2026',time:'09:41',phone:'XXXXXX9923',earn:''},
+    {date:'03-26-2026',time:'18:02',phone:'XXXXXX1145',earn:'200.00 Rs.'},
+    {date:'03-25-2026',time:'13:27',phone:'XXXXXX6678',earn:''},
+    {date:'03-24-2026',time:'12:50',phone:'XXXXXX2201',earn:''},
+    {date:'03-22-2026',time:'10:15',phone:'XXXXXX5567',earn:''},
+  ];
+}
+const REFER_URL='perccent.app/r/SGNK249811';
+function referWaText(){ return "🎉 Start saving smart with Perccent!\n\nDownload the app using my referral link and open your investment account in minutes — I'll help you every step of the way.\n\n👉 https://"+REFER_URL+"\n\n— Sagnik Mitra · Perccent Distributor (ARN-249811)"; }
+
+/* ============================================================ TOAST */
+let toastTimer;
+function toast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+/* ============================================================ RENDER ROOT */
+function render(){
+  const app=document.getElementById('app');
+  const showPhone = !['investors','kyc_onboarding'].includes(state.route);
+  app.innerHTML=
+    '<div class="app'+(showPhone?'':' nophone')+'">'+
+      renderSidebar()+
+      '<div class="center">'+renderTopbar()+'<div class="main-scroll" id="main">'+renderMain()+'</div></div>'+
+      (showPhone?renderPhoneCol():'')+
+    '</div>';
+  renderOverlay();
+}
+function renderOverlay(){
+  const o=document.getElementById('overlay');
+  let h='';
+  if(state.demo.panelOpen) h+=renderDemoPanel();
+  if(state.modal) h+=renderModal();
+  if(state.drawer) h+=renderDrawer();
+  o.innerHTML=h;
+}
+function patchMain(){ document.getElementById('main').innerHTML=renderMain(); }
+function patchPhone(){ const el=document.getElementById('phonecol'); if(el) el.innerHTML=renderPhoneInner(); }
+
+/* ============================================================ SIDEBAR */
+function renderSidebar(){
+  const items=[['dashboard','Dashboard','dashboard'],['users','Investors','investors'],['shield','KYC & Onboarding','kyc_onboarding'],['gift','Refer & Earn','refer']];
+  const subFlow = state.route==='wizard'||state.route==='view';
+  function isOn(route){
+    if(route==='refer') return state.route==='refer';
+    if(route==='kyc_onboarding') return state.route==='kyc_onboarding';
+    if(route==='investors') return state.route==='investors' || (subFlow&&state.navFrom==='investors');
+    if(route==='dashboard') return state.route==='dashboard' || (subFlow&&state.navFrom!=='investors');
+    return false;
+  }
+  return '<div class="sidebar">'+
+    '<div class="logo"><img src="'+LOGO_SRC+'" alt="Perccent"/></div>'+
+    items.map(([icn,lbl,route])=>'<div class="nav-item'+(isOn(route)?' on':'')+'" onclick="navClick(\''+route+'\')">'+ic(icn)+lbl+'</div>').join('')+
+    '<div class="nav-spacer"></div>'+
+    '<div class="distributor"><div class="av">SM</div><div class="meta"><div class="n">Sagnik Mitra</div><div class="r">ARN-249811 · Distributor</div></div>'+
+      '<button class="lg" onclick="toast(\'Logout — outside this demo\\u2019s scope.\')">'+ic('logout')+'</button></div>'+
+  '</div>';
+}
+function navClick(route){
+  state.activeInvestorId=null;
+  if(route==='dashboard'){ state.route='dashboard'; state.phone.mode='idle'; }
+  else if(route==='investors'){ state.route='investors'; }
+  else if(route==='kyc_onboarding'){ state.route='kyc_onboarding'; }
+  else if(route==='refer'){ state.route='refer'; state.phone.mode='refer_idle'; }
+  render();
+}
+
+/* ============================================================ TOPBAR */
+function renderTopbar(){
+  return '<div class="topbar">'+
+    '<div class="search">'+ic('search')+'<input id="topsearch" placeholder="Search anything — name, email, mobile, PAN, status…" value="'+esc(state.q)+'" oninput="onSearch(this.value)"/></div>'+
+    '<div class="topbar-spacer"></div>'+
+    '<button class="qtoggle'+(state.demo.emailOtp?' on':'')+'" title="Email OTP verification" onclick="quickToggle(\'emailOtp\')">'+ic('mail')+'Email OTP<span class="qst">'+(state.demo.emailOtp?'ON':'OFF')+'</span></button>'+
+    '<button class="qtoggle'+(state.demo.phoneOtp?' on':'')+'" title="Phone OTP verification" onclick="quickToggle(\'phoneOtp\')">'+ic('phone')+'Phone OTP<span class="qst">'+(state.demo.phoneOtp?'ON':'OFF')+'</span></button>'+
+    '<button class="demo-btn" onclick="toggleDemo()">'+ic('slider')+'Demo controls</button>'+
+    '<button class="btn-primary" onclick="createInvestor()">'+ic('plus')+'Create Investor</button>'+
+    '<div class="av">SM</div>'+
+  '</div>';
+}
+function onSearch(v){
+  state.q=v;
+  if(state.route==='dashboard'){ const el=document.getElementById('pipeline'); if(el) el.outerHTML=renderPipeline(); }
+  else if(state.route==='investors'){ const el=document.getElementById('invbody'); if(el) el.outerHTML=renderInvestorsBody(); }
+  else if(state.route==='kyc_onboarding'){ const el=document.getElementById('kobody'); if(el) el.outerHTML=renderKoBody(); }
+}
+/* global fuzzy match across all investor fields */
+function matchesQuery(inv,q){
+  if(!q||!q.trim()) return true;
+  const s=q.toLowerCase();
+  const k=kycStatusOf(inv), o=onboardingStatusOf(inv);
+  const hay=[inv.name,inv.email,inv.mobile,inv.pan,inv.status,inv.journey||'',k.label,o.label,'kyc',(inv.journey==='kyc'?'kyc journey':'onboarding journey')].join(' ').toLowerCase();
+  return hay.includes(s);
+}
+/* derived KYC + onboarding status */
+function kycStatusOf(inv){
+  const s=inv.status;
+  if(['Investment Ready','Investing','Completed'].includes(s)) return {label:'Verified',tone:'ok'};
+  if(inv.journey==='onboarding') return {label:'Verified',tone:'ok'};
+  if(s==='KYC In Progress') return {label:'In Progress',tone:'warn'};
+  if(s==='Awaiting Investor') return {label:'Awaiting Investor',tone:'warn'};
+  if(s==='Lost') return {label:'Not Verified',tone:'err'};
+  return {label:'Not Started',tone:'hint'};
+}
+function onboardingStatusOf(inv){
+  const s=inv.status;
+  if(['Completed','Investing'].includes(s)) return {label:'Completed',tone:'ok'};
+  if(s==='Investment Ready') return {label:'In Progress',tone:'warn'};
+  if(s==='Awaiting Investor') return {label:'In Progress',tone:'warn'};
+  if(s==='Lost') return {label:'Abandoned',tone:'err'};
+  return {label:'Not Started',tone:'hint'};
+}
+function tonePill(o){
+  const map={ok:['var(--ok-pill-fg)','var(--ok-pill-bg)'],warn:['var(--warn-pill-fg)','var(--warn-tint)'],err:['var(--err-pill-fg)','var(--err-tint)'],hint:['var(--hint)','var(--track)'],brand:['var(--brand)','var(--chip)']}[o.tone];
+  return '<span class="pill" style="color:'+map[0]+';background:'+map[1]+'"><span class="pdot"></span>'+o.label+'</span>';
+}
+
+/* ============================================================ MAIN ROUTER */
+function renderMain(){
+  if(state.route==='dashboard') return renderDashboard();
+  if(state.route==='view') return renderViewScreen();
+  if(state.route==='refer') return renderRefer();
+  if(state.route==='investors') return renderInvestors();
+  if(state.route==='kyc_onboarding') return renderKycOnboarding();
+  return renderWizard();
+}
+
+/* ============================================================ INVESTORS DIRECTORY */
+function filterChip(active,key,label,onclick){ return '<button class="fchip'+(active?' on':'')+'" onclick="'+onclick+'">'+label+'</button>'; }
+function investorAction(i){
+  if(['Completed','Investing','Investment Ready'].includes(i.status)) return '<button class="link" onclick="viewInvestor('+i.id+')">View</button>';
+  if(i.status==='Lost') return '<button class="link" onclick="restoreLead('+i.id+')">Restore</button>';
+  return '<button class="link" onclick="resumeInvestor('+i.id+')" style="display:inline-flex;align-items:center;gap:3px;">Resume'+mi('arrow_forward',{size:14})+'</button>';
+}
+function renderInvestors(){
+  const total=state.investors.length;
+  return '<div class="page-head"><div><div class="h2tone"><span class="b">All </span><span class="n">Investors</span></div>'+
+    '<div class="muted" style="font-size:13.5px;margin-top:6px;">'+total+' investors & prospects across all stages. Search or filter to find anyone.</div></div>'+
+    '<div class="viewtoggle"><button class="'+(state.inv.view==='grid'?'on':'')+'" onclick="setInvView(\'grid\')">'+ic('qr')+'Grid</button>'+
+      '<button class="'+(state.inv.view==='list'?'on':'')+'" onclick="setInvView(\'list\')">'+ic('logs')+'List</button></div></div>'+
+    renderInvestorsBody();
+}
+const INV_FILTERS=[['all','All'],['Draft','Draft'],['Contact Verified','Contact Verified'],['KYC In Progress','KYC In Progress'],['Awaiting Investor','Awaiting Investor'],['Investment Ready','Investment Ready'],['Investing','Investing'],['Completed','Completed'],['Lost','Lost']];
+function investorsFiltered(){
+  let list=state.investors.filter(i=>matchesQuery(i,state.q));
+  if(state.inv.filter!=='all') list=list.filter(i=>i.status===state.inv.filter);
+  return list;
+}
+function renderInvestorsBody(){
+  const list=investorsFiltered();
+  const chips=INV_FILTERS.map(f=>{ const c=f[0]==='all'?state.investors.length:state.investors.filter(i=>i.status===f[0]).length; return filterChip(state.inv.filter===f[0],f[0],f[1]+' ('+c+')','setInvFilter(\''+f[0]+'\')'); }).join('');
+  const bodyInner = list.length? (state.inv.view==='grid'? invGrid(list) : invList(list))
+    : '<div class="empty-state">No investors match your search or filter.</div>';
+  return '<div id="invbody"><div class="filterchips">'+chips+'</div>'+bodyInner+'</div>';
+}
+function invGrid(list){
+  return '<div class="inv-grid">'+list.map(i=>{
+    const init=(i.name||'?').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase()||'—';
+    const k=kycStatusOf(i), o=onboardingStatusOf(i);
+    return '<div class="inv-card">'+
+      '<div class="ic-top"><div class="ic-av">'+init+'</div><div class="ic-id"><div class="ic-name">'+(i.name||'<span class="hint">Unnamed lead</span>')+'</div><div class="ic-sub">'+i.mobile+'</div></div>'+pillHtml(i.status)+'</div>'+
+      '<div class="ic-rows"><div class="ic-row"><span class="ic-k">Email</span><span class="ic-v">'+esc(i.email)+'</span></div>'+
+        '<div class="ic-row"><span class="ic-k">PAN</span><span class="ic-v">'+i.pan+'</span></div>'+
+        '<div class="ic-row"><span class="ic-k">KYC</span>'+tonePill(k)+'</div>'+
+        '<div class="ic-row"><span class="ic-k">Onboarding</span>'+tonePill(o)+'</div></div>'+
+      '<div class="ic-foot">'+investorAction(i)+'<button class="kebab" onclick="openKebab(event,'+i.id+')">'+ic('kebab')+'</button></div>'+
+    '</div>';
+  }).join('')+'</div>';
+}
+function invList(list){
+  const rows=list.map(i=>{ const k=kycStatusOf(i),o=onboardingStatusOf(i);
+    return '<tr><td><div class="nm">'+(i.name||'<span class="hint">Unnamed lead</span>')+(i.notes.length?'<span class="notes-chip" onclick="event.stopPropagation();openNotes('+i.id+')" style="font-size:11px;color:var(--hint);margin-left:8px;cursor:pointer;display:inline-flex;align-items:center;gap:3px;">'+mi('sticky_note_2',{size:14})+i.notes.length+'</span>':'')+'</div></td>'+
+      '<td class="cline">'+i.mobile+'</td><td class="cline">'+esc(i.email)+'</td><td class="cline">'+i.pan+'</td>'+
+      '<td>'+pillHtml(i.status)+'</td><td>'+tonePill(k)+'</td><td>'+tonePill(o)+'</td>'+
+      '<td style="text-align:right;white-space:nowrap;">'+investorAction(i)+'<button class="kebab" onclick="openKebab(event,'+i.id+')">'+ic('kebab')+'</button></td></tr>'; }).join('');
+  return '<div class="card p20"><table class="ptable"><thead><tr><th>Investor</th><th>Mobile</th><th>Email</th><th>PAN</th><th>Stage</th><th>KYC</th><th>Onboarding</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+function setInvView(v){ state.inv.view=v; patchMain(); }
+function setInvFilter(f){ state.inv.filter=f; const el=document.getElementById('invbody'); if(el) el.outerHTML=renderInvestorsBody(); }
+
+/* ============================================================ KYC & ONBOARDING */
+function renderKycOnboarding(){
+  const inv=state.investors;
+  const kycVer=inv.filter(i=>kycStatusOf(i).label==='Verified').length;
+  const kycProg=inv.filter(i=>['In Progress','Awaiting Investor'].includes(kycStatusOf(i).label)).length;
+  const kycNot=inv.filter(i=>['Not Started','Not Verified'].includes(kycStatusOf(i).label)).length;
+  const obDone=inv.filter(i=>onboardingStatusOf(i).label==='Completed').length;
+  const obProg=inv.filter(i=>onboardingStatusOf(i).label==='In Progress').length;
+  const obNot=inv.filter(i=>['Not Started','Abandoned'].includes(onboardingStatusOf(i).label)).length;
+  const stats='<div class="ko-stats">'+
+    koStat('KYC Verified',kycVer,'var(--ok)')+koStat('KYC In Progress',kycProg,'var(--warn)')+koStat('KYC Not Started',kycNot,'var(--hint)')+
+    koStat('Onboarding Done',obDone,'var(--ok)')+koStat('Onboarding In Progress',obProg,'var(--warn)')+koStat('Onboarding Pending',obNot,'var(--hint)')+
+  '</div>';
+  return '<div class="h2tone"><span class="b">KYC & </span><span class="n">Onboarding</span></div>'+
+    '<div class="muted" style="font-size:13.5px;margin:6px 0 18px;">KYC and onboarding status for every investor, in one place.</div>'+
+    stats+renderKoBody();
+}
+function koStat(lbl,val,accent){ return '<div class="ko-stat" style="border-left:4px solid '+accent+'"><div class="ks-num">'+val+'</div><div class="ks-lbl">'+lbl+'</div></div>'; }
+const KYC_FILTERS=[['all','All'],['Verified','Verified'],['In Progress','In Progress'],['Awaiting Investor','Awaiting Investor'],['Not Started','Not Started'],['Not Verified','Not Verified']];
+const OB_FILTERS=[['all','All'],['Completed','Completed'],['In Progress','In Progress'],['Not Started','Not Started'],['Abandoned','Abandoned']];
+function koFiltered(){
+  return state.investors.filter(i=>matchesQuery(i,state.q))
+    .filter(i=>state.ko.kyc==='all'||kycStatusOf(i).label===state.ko.kyc)
+    .filter(i=>state.ko.ob==='all'||onboardingStatusOf(i).label===state.ko.ob);
+}
+function renderKoBody(){
+  const list=koFiltered();
+  const kchips=KYC_FILTERS.map(f=>filterChip(state.ko.kyc===f[0],f[0],f[1],'setKoFilter(\'kyc\',\''+f[0]+'\')')).join('');
+  const ochips=OB_FILTERS.map(f=>filterChip(state.ko.ob===f[0],f[0],f[1],'setKoFilter(\'ob\',\''+f[0]+'\')')).join('');
+  const rows= list.length? list.map(i=>{ const k=kycStatusOf(i),o=onboardingStatusOf(i);
+    return '<tr><td><div class="nm">'+(i.name||'<span class="hint">Unnamed lead</span>')+'</div><div class="cline">'+i.mobile+' · '+esc(i.email)+'</div></td>'+
+      '<td class="cline">'+i.pan+'</td>'+
+      '<td>'+tonePill(k)+'</td><td>'+tonePill(o)+'</td>'+
+      '<td>'+pillHtml(i.status)+'</td>'+
+      '<td style="text-align:right;">'+investorAction(i)+'</td></tr>'; }).join('')
+    : '<tr><td colspan="6"><div class="empty-state">No investors match your search or filter.</div></td></tr>';
+  return '<div id="kobody">'+
+    '<div class="ko-filters"><div class="fgroup"><span class="fgl">KYC</span><div class="filterchips">'+kchips+'</div></div>'+
+      '<div class="fgroup"><span class="fgl">Onboarding</span><div class="filterchips">'+ochips+'</div></div></div>'+
+    '<div class="card p20" style="margin-top:14px;"><table class="ptable"><thead><tr><th>Investor</th><th>PAN</th><th>KYC Status</th><th>Onboarding Status</th><th>Stage</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+  '</div>';
+}
+function setKoFilter(which,val){ state.ko[which]=val; const el=document.getElementById('kobody'); if(el) el.outerHTML=renderKoBody(); }
+
+/* ============================================================ REFER & EARN */
+function qrSvg(px){
+  const N=25, cell=px/N;
+  function r(mx,my,mw,mh,c){ return '<rect x="'+(mx*cell).toFixed(2)+'" y="'+(my*cell).toFixed(2)+'" width="'+(mw*cell).toFixed(2)+'" height="'+(mh*cell).toFixed(2)+'" fill="'+c+'"/>'; }
+  function finder(x,y){ return r(x,y,7,7,'#0A1F44')+r(x+1,y+1,5,5,'#fff')+r(x+2,y+2,3,3,'#0A1F44'); }
+  let seed=1337; function rnd(){ seed=(seed*1103515245+12345)&0x7fffffff; return (seed>>16)&1; }
+  let mods='';
+  for(let y=0;y<N;y++) for(let x=0;x<N;x++){
+    const inF=(x<8&&y<8)||(x>N-9&&y<8)||(x<8&&y>N-9);
+    if(inF) continue;
+    if(rnd()) mods+=r(x,y,1,1,'#0A1F44');
+  }
+  return '<svg viewBox="0 0 '+px+' '+px+'" width="'+px+'" height="'+px+'"><rect width="'+px+'" height="'+px+'" fill="#fff"/>'+finder(0,0)+finder(N-7,0)+finder(0,N-7)+mods+'</svg>';
+}
+function referStat(lbl,val,tint,accent){
+  return '<div class="rstat" style="background:'+tint+';border-left:4px solid '+accent+';"><div class="rlbl">'+lbl+'</div><div class="rnum">'+val+'</div></div>';
+}
+function renderRefer(){
+  const rf=state.refer;
+  const stats='<div class="refer-stats">'+
+    referStat('Total Scans',rf.scans,'#EEF4FF','#0047BD')+
+    referStat('Number Entered',rf.entered,'#F1EEFF','#6C3FC5')+
+    referStat('Apps Downloaded',rf.downloads,'#EAF7EE','#299959')+
+    referStat('Total Earnings','₹'+rf.earnings.toLocaleString('en-IN')+'.00','#FFF3E6','#C2772B')+
+  '</div>';
+  return '<div class="h2tone"><span class="n">Refer & </span><span class="b">Earn</span></div>'+
+    '<div class="muted" style="font-size:13.5px;margin:6px 0 20px;">Share your referral QR — earn ₹200 for every investor who installs Perccent and completes onboarding.</div>'+
+    stats+
+    renderReferLogs();
+}
+function renderReferLogs(){
+  const rf=state.refer;
+  let list=rf.logs.slice();
+  if(rf.search.trim()){ const q=rf.search.toLowerCase(); list=list.filter(l=>l.phone.toLowerCase().includes(q)||l.date.includes(q)||l.time.includes(q)); }
+  const per=10, pages=Math.max(1,Math.ceil(list.length/per));
+  if(rf.page>pages) rf.page=pages;
+  const start=(rf.page-1)*per;
+  const pageRows=list.slice(start,start+per);
+  const rows = pageRows.length? pageRows.map(l=>'<tr><td>'+l.date+'</td><td>'+l.time+'</td><td>'+l.phone+'</td><td>'+(l.earn?'<span class="earn-pill">'+l.earn+'</span>':'<span class="hint">—</span>')+'</td></tr>').join('') :
+    '<tr><td colspan="4" style="text-align:center;padding:30px;color:var(--hint);">No matching activity.</td></tr>';
+  let pager='';
+  pager+='<button class="pg" '+(rf.page===1?'disabled':'')+' onclick="referPage('+(rf.page-1)+')">Previous</button>';
+  for(let p=1;p<=pages;p++) pager+='<button class="pg'+(p===rf.page?' on':'')+'" onclick="referPage('+p+')">'+p+'</button>';
+  pager+='<button class="pg" '+(rf.page===pages?'disabled':'')+' onclick="referPage('+(rf.page+1)+')">Next</button>';
+  return '<div class="card p20" id="referlogs" style="margin-top:16px;">'+
+    '<div style="font-size:16px;font-weight:700;margin-bottom:4px;">Activity Logs</div>'+
+    '<div class="muted" style="font-size:12.5px;margin-bottom:14px;">Every scan, number entry and install from your referral QR.</div>'+
+    '<div class="row between" style="margin-bottom:6px;"><div class="muted" style="font-size:12.5px;">Showing '+(list.length?start+1:0)+' to '+Math.min(start+per,list.length)+' of '+list.length+' entries</div>'+
+      '<div class="search" style="max-width:240px;">'+ic('search')+'<input placeholder="Search" value="'+esc(rf.search)+'" oninput="referSearch(this.value)"/></div></div>'+
+    '<table class="ptable logtable"><thead><tr><th>Date</th><th>Time</th><th>Phone No</th><th>Earnings</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<div class="pager">'+pager+'</div>'+
+  '</div>';
+}
+function referPage(p){ const pages=Math.max(1,Math.ceil(referFiltered().length/10)); if(p<1||p>pages) return; state.refer.page=p; document.getElementById('referlogs').outerHTML=renderReferLogs(); }
+function referFiltered(){ const rf=state.refer; if(!rf.search.trim()) return rf.logs; const q=rf.search.toLowerCase(); return rf.logs.filter(l=>l.phone.toLowerCase().includes(q)||l.date.includes(q)||l.time.includes(q)); }
+function referSearch(v){ state.refer.search=v; state.refer.page=1; document.getElementById('referlogs').outerHTML=renderReferLogs(); const inp=document.querySelector('#referlogs .search input'); if(inp){ inp.focus(); inp.setSelectionRange(v.length,v.length); } }
+
+/* share actions */
+function shareWhatsapp(){ state.phone.mode='refer_share'; patchPhone(); toast('WhatsApp message generated with your referral QR.'); }
+function copyReferLink(){ toast('Referral link copied: https://'+REFER_URL); }
+function downloadQr(){ toast('QR code downloaded (demo).'); }
+function referSimInstall(){ state.phone.mode='refer_install'; patchPhone(); }
+function referSimDone(){
+  const rf=state.refer;
+  rf.scans++; rf.entered++; rf.downloads++; rf.earnings+=200;
+  rf.logs.unshift({date:'07-06-2026',time:'09:41',phone:'XXXXXX7788',earn:'200.00 Rs.'});
+  state.phone.mode='refer_done';
+  patchMain(); patchPhone();
+}
+
+/* ============================================================ DASHBOARD */
+function kpiCounts(){
+  const inv=state.investors;
+  const total=inv.length;
+  const notVerified=inv.filter(i=>['Draft','Contact Verified','KYC In Progress','Awaiting Investor'].includes(i.status)).length;
+  const verified=inv.filter(i=>['Investment Ready','Investing','Completed'].includes(i.status)).length;
+  const completed=inv.filter(i=>['Completed','Investing'].includes(i.status)).length;
+  return {total,notVerified,verified,completed};
+}
+function renderDashboard(){
+  const k=kpiCounts();
+  const todoCount=state.investors.filter(i=>TODO_STATUSES.includes(i.status)).length;
+  return '<div class="h2tone"><span class="n">Welcome back, </span><span class="b">Sagnik</span></div>'+
+    '<div class="muted" style="font-size:13.5px;margin:6px 0 20px;">'+todoCount+' investors are awaiting action. Nudge them to keep your pipeline moving.</div>'+
+    '<div class="kpis">'+
+      kpiCard('Total Investors',k.total)+kpiCard('Not Verified',k.notVerified)+
+      kpiCard('Verified',k.verified)+kpiCard('Completed Onboarding',k.completed)+
+    '</div>'+
+    '<div class="dit-card"><div class="t"><div class="k">Create Assisted Onboarding · DIT</div><div class="m">Onboard a new investor on their behalf</div></div>'+
+      '<button class="go" onclick="createInvestor()">Start now'+ic('chevRight')+'</button></div>'+
+    renderPipeline();
+}
+function kpiCard(lbl,num){ return '<div class="kpi"><div class="lbl">'+lbl+'</div><div class="num">'+num+'</div><div class="sub">as of today</div></div>'; }
+
+function filteredInvestors(){
+  let list=state.investors.slice();
+  const d=state.dash;
+  if(d.tab==='todo') list=list.filter(i=>TODO_STATUSES.includes(i.status));
+  else if(d.tab==='completed') list=list.filter(i=>DONE_STATUSES.includes(i.status));
+  else if(d.tab==='lost') list=list.filter(i=>i.status==='Lost');
+  list=list.filter(i=>matchesQuery(i,state.q));
+  if(d.dateFrom) list=list.filter(i=>i.createdAt>=d.dateFrom);
+  if(d.dateTo) list=list.filter(i=>i.createdAt<=d.dateTo);
+  list.sort((a,b)=> d.sort==='asc' ? a.createdAt.localeCompare(b.createdAt) : b.createdAt.localeCompare(a.createdAt));
+  return list;
+}
+function renderPipeline(){
+  const inv=state.investors;
+  const c={all:inv.length,todo:inv.filter(i=>TODO_STATUSES.includes(i.status)).length,completed:inv.filter(i=>DONE_STATUSES.includes(i.status)).length,lost:inv.filter(i=>i.status==='Lost').length};
+  const list=filteredInvestors();
+  const rows = list.length? list.map(rowHtml).join('') :
+    '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--hint);">No investors match your search.</td></tr>';
+  return '<div class="card p20" id="pipeline" style="margin-top:16px;">'+
+    '<div class="row between" style="align-items:flex-start;margin-bottom:14px;">'+
+      '<div><div style="font-size:16px;font-weight:700;">Onboarding Pipeline</div><div class="muted" style="font-size:12.5px;margin-top:2px;">Live status across all your assisted journeys</div></div>'+
+    '</div>'+
+    '<div class="row between" style="flex-wrap:wrap;gap:12px;margin-bottom:6px;">'+
+      '<div class="segtabs">'+
+        tab('all','All ('+c.all+')')+tab('todo','To Do ('+c.todo+')')+tab('completed','Completed ('+c.completed+')')+tab('lost','Lost ('+c.lost+')')+
+      '</div>'+
+      '<div class="row" style="gap:8px;">'+
+        '<input type="date" class="datefld" value="'+state.dash.dateFrom+'" onchange="setDate(\'from\',this.value)" title="From date"/>'+
+        '<input type="date" class="datefld" value="'+state.dash.dateTo+'" onchange="setDate(\'to\',this.value)" title="To date"/>'+
+        '<button class="sortbtn" onclick="toggleSort()">'+ic('sort')+'Newest '+(state.dash.sort==='desc'?mi('arrow_downward',{size:14}):mi('arrow_upward',{size:14}))+'</button>'+
+      '</div>'+
+    '</div>'+
+    '<table class="ptable"><thead><tr><th>Investor</th><th>Mobile Number</th><th>Email ID</th><th>PAN</th><th>Status</th><th></th></tr></thead>'+
+    '<tbody>'+rows+'</tbody></table>'+
+  '</div>';
+}
+function tab(key,lbl){ return '<button class="s'+(state.dash.tab===key?' on':'')+'" onclick="setTab(\''+key+'\')">'+lbl+'</button>'; }
+function setTab(t){ state.dash.tab=t; document.getElementById('pipeline').outerHTML=renderPipeline(); }
+function setDate(which,v){ if(which==='from') state.dash.dateFrom=v; else state.dash.dateTo=v; document.getElementById('pipeline').outerHTML=renderPipeline(); }
+function toggleSort(){ state.dash.sort=state.dash.sort==='desc'?'asc':'desc'; document.getElementById('pipeline').outerHTML=renderPipeline(); }
+function rowHtml(i){
+  let action;
+  if(i.status==='Completed'||i.status==='Investing'||i.status==='Investment Ready') action='<button class="link" onclick="viewInvestor('+i.id+')">View</button>';
+  else if(i.status==='Lost') action='<button class="link" onclick="restoreLead('+i.id+')">Restore lead</button>';
+  else action='<button class="link" onclick="resumeInvestor('+i.id+')" style="display:inline-flex;align-items:center;gap:3px;">Resume'+mi('arrow_forward',{size:14})+'</button>';
+  const notesChip=i.notes.length?'<span class="notes-chip" title="View notes" onclick="event.stopPropagation();openNotes('+i.id+')" style="font-size:11px;color:var(--hint);margin-left:8px;cursor:pointer;display:inline-flex;align-items:center;gap:3px;">'+mi('sticky_note_2',{size:14})+i.notes.length+'</span>':'';
+  return '<tr>'+
+    '<td><div class="nm">'+(i.name||'<span class="hint">Unnamed lead</span>')+notesChip+'</div></td>'+
+    '<td class="cline">'+i.mobile+'</td>'+
+    '<td class="cline">'+i.email+'</td>'+
+    '<td class="cline">'+i.pan+'</td>'+
+    '<td>'+pillHtml(i.status)+'</td>'+
+    '<td style="text-align:right;white-space:nowrap;">'+action+'<button class="kebab" onclick="openKebab(event,'+i.id+')">'+ic('kebab')+'</button></td>'+
+  '</tr>';
+}
+function openKebab(e,id){
+  e.stopPropagation();
+  const inv=state.investors.find(x=>x.id===id);
+  const canLost = inv.status!=='Completed'&&inv.status!=='Investing'&&inv.status!=='Lost';
+  // simple inline menu via modal-lite
+  state.modal={type:'kebab',id,canLost};
+  renderOverlay();
+}
+
+/* ============================================================ DASHBOARD ACTIONS */
+function createInvestor(){
+  state.navFrom = state.route==='investors'?'investors':'dashboard';
+  const inv={id:idSeq++,name:'',mobile:'',email:'',pan:'—',status:'Draft',createdAt:'2026-07-06',notes:[],journey:null,resume:'investor_details'};
+  state.investors.unshift(inv);
+  state.activeInvestorId=inv.id;
+  state.route='wizard';
+  state.wizard={journey:null,step:'investor_details',data:freshData(),dirty:false};
+  state.phone={mode:'idle',sub:0,otpErr:false,resendLeft:30,resendCount:0,drop:false};
+  render();
+}
+function resumeInvestor(id){
+  state.navFrom = state.route==='investors'?'investors':'dashboard';
+  const inv=state.investors.find(x=>x.id===id);
+  state.activeInvestorId=id;
+  state.route='wizard';
+  const data=freshData();
+  prefillFromInvestor(inv,data);
+  state.wizard={journey:inv.journey,step:inv.resume,data,dirty:false};
+  // phone mode restore
+  if(inv.status==='Awaiting Investor'&&inv.reviewSent){ state.phone={mode:'review_flow',sub:0,otpErr:false,resendLeft:30,resendCount:0,drop:false}; }
+  else state.phone={mode:'idle',sub:0,otpErr:false,resendLeft:30,resendCount:0,drop:false};
+  render();
+}
+function prefillFromInvestor(inv,data){
+  data.name=inv.name; data.email=inv.email; data.mobile=inv.mobile.replace(/\s/g,'');
+  if(inv.pan&&inv.pan!=='—') data.pan=inv.pan;
+  data.emailVerified = inv.status!=='Draft';
+  data.phoneVerified = inv.status!=='Draft';
+  if(inv.resume==='kyc_address'||inv.journey==='kyc'){ data.aadhaar4='7093'; data.fatherName='Rajesh Sharma'; data.gender='Male'; data.marital='Married'; data.placeOfBirth='Kolkata'; data.dob='1994-08-12'; }
+  if(inv.status==='KYC In Progress'){ data.dob='1990-03-15'; }
+}
+function viewInvestor(id){ state.navFrom = state.route==='investors'?'investors':'dashboard'; state.activeInvestorId=id; state.route='view'; render(); }
+function restoreLead(id){ const inv=state.investors.find(x=>x.id===id); inv.status='Contact Verified'; toast(inv.name+' restored to To Do.'); render(); }
+
+/* ============================================================ DEMO PANEL */
+function toggleDemo(){ state.demo.panelOpen=!state.demo.panelOpen; renderOverlay(); }
+function quickToggle(key){ state.demo[key]=!state.demo[key]; render(); toast((key==='emailOtp'?'Email':'Phone')+' OTP verification '+(state.demo[key]?'ON':'OFF')); }
+function dcSwitch(key){ return '<button class="switch'+(state.demo[key]?' on':'')+'" onclick="dcToggle(\''+key+'\')"></button>'; }
+function dcToggle(key){ state.demo[key]=!state.demo[key]; renderOverlay(); if(state.route==='wizard') patchMain(); if(state.route==='dashboard'||key==='emailOtp'||key==='phoneOtp'){ /* refresh topbar toggles */ const tb=document.querySelector('.topbar'); if(tb) tb.outerHTML=renderTopbar(); } }
+function dcSeg(key,opts){ return '<div class="dc-seg">'+opts.map(o=>'<button class="'+(state.demo[key]===o[0]?'on':'')+'" onclick="dcSet(\''+key+'\',\''+o[0]+'\')">'+o[1]+'</button>').join('')+'</div>'; }
+function dcSet(key,val){ state.demo[key]=val; renderOverlay(); if(state.route==='wizard') patchMain(); }
+function dcRow(label,desc,control){ return '<div class="dc-row"><div><div class="dc-l">'+label+'</div>'+(desc?'<div class="dc-d">'+desc+'</div>':'')+'</div>'+control+'</div>'; }
+function renderDemoPanel(){
+  const steps=[['investor_details','Investor Details'],['contact','Contact Verification'],['pan','KYC Check (PAN)'],
+    ['kyc_personal','Personal & Additional'],['kyc_address','Address & Compliance'],['kyc_handoff','Digilocker & eSign'],['kyc_verified','KYC Verified'],
+    ['ob_demographic','Demographic & Financial'],['ob_bank','Address & Bank'],['ob_nominee','Nominee'],['review','Review & Send'],['approval','Investor Approval'],['complete','Completion']];
+  const d=state.demo;
+  return '<div class="dc-scrim" onclick="if(event.target===this) toggleDemo()"><div class="dc-panel" onclick="event.stopPropagation()">'+
+    '<div class="dc-top"><div class="row"><div><div class="dc-title">Demo Controls</div><div class="dc-sub">Parameterize the flow — configure what the business team sees, without redesigning.</div></div>'+
+      '<button class="dc-x" onclick="toggleDemo()">'+ic('x')+'</button></div></div>'+
+    '<div class="dc-body">'+
+      '<div class="dc-sect"><div class="dc-sect-h">OTP Verification</div>'+
+        dcRow('Email OTP','Require an OTP to verify the email at contact verification (and the inline email check during onboarding).',dcSwitch('emailOtp'))+
+        dcRow('Phone OTP','Require an OTP to verify the mobile number at contact verification.',dcSwitch('phoneOtp'))+
+        '<div class="dc-d" style="padding:4px 0;">The investor\'s final review OTP (during Send-to-Investor) is always required.</div>'+
+      '</div>'+
+      '<div class="dc-sect"><div class="dc-sect-h">Fields</div>'+
+        dcRow('Name field position','Where the distributor enters the investor\'s name.',dcSeg('namePos',[['investor_details','Investor Details'],['kyc_check','KYC Check'],['both','Both']]))+
+        dcRow('Signature','Upload the investor\'s signature, or auto-generate one from their name (not required for compliance).',dcSeg('signature',[['upload','Upload'],['generate','Generate']]))+
+      '</div>'+
+      '<div class="dc-sect"><div class="dc-sect-h">Steps</div>'+
+        dcRow('Bank verification','Show the ₹0.01 penny-drop bank verification step.',dcSwitch('bankVerify'))+
+        dcRow('Nominee video declaration','Require the SEBI video declaration when the investor opts out of a nominee.',dcSwitch('videoDecl'))+
+      '</div>'+
+      '<div class="dc-sect"><div class="dc-sect-h">PAN check scenario</div>'+
+        SCENARIOS.map(s=>'<div class="dc-opt'+(d.scenario===s.key?' on':'')+'" onclick="setScenario(\''+s.key+'\')"><div class="rd"></div>'+mi(s.mi,{size:19,color:s.color})+'<span style="margin-left:8px;">'+s.label+'</span></div>').join('')+
+      '</div>'+
+      (state.route==='wizard'?'<div class="dc-sect"><div class="dc-sect-h">Navigation</div><div class="dc-row"><div class="dc-l">Skip to step</div><select class="dc-select" onchange="skipToStep(this.value)"><option value="">— jump to —</option>'+steps.map(s=>'<option value="'+s[0]+'">'+s[1]+'</option>').join('')+'</select></div></div>':'')+
+      '<div class="dc-sect"><div class="dc-row"><div><div class="dc-l">Reset demo</div><div class="dc-d">Restore all seed data and settings.</div></div><button class="dc-btn" onclick="resetDemo()" style="display:inline-flex;align-items:center;gap:5px;">'+mi('restart_alt',{size:16})+'Reset</button></div></div>'+
+    '</div></div></div>';
+}
+function setScenario(k){ state.demo.scenario=k; renderOverlay(); toast('Scenario set: '+SCENARIOS.find(s=>s.key===k).label); }
+function skipToStep(s){ if(!s) return; const w=state.wizard; if(['kyc_personal','kyc_address','kyc_handoff','kyc_verified'].includes(s)) w.journey='kyc'; else if(['ob_demographic','ob_bank','ob_nominee','review','approval','complete'].includes(s)&&!w.journey) w.journey='onboarding'; w.step=s; state.demo.panelOpen=false; render(); }
+function resetDemo(){ const keep=state.demo; initState(); state.demo=Object.assign(state.demo,{scenario:keep.scenario,emailOtp:keep.emailOtp,phoneOtp:keep.phoneOtp,namePos:keep.namePos,signature:keep.signature,bankVerify:keep.bankVerify,videoDecl:keep.videoDecl}); render(); toast('Demo reset to seed data.'); }
+
+/* ============================================================ helpers */
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function fmtDob(v){ if(!v) return '—'; if(/^\d{4}-\d{2}-\d{2}$/.test(v)){ const p=v.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; } return v; }
+function activeInv(){ return state.investors.find(x=>x.id===state.activeInvestorId); }
+function setPill(status){ const inv=activeInv(); if(inv) inv.status=status; }
+
+/* placeholder implementations continue in part 2 */
+</script>
+<script>
+/* ============================================================ WIZARD SHELL */
+const ONB_STEPS=[
+  ['investor_details','Investor Details'],['contact','Contact Verification'],['pan','KYC Check'],
+  ['ob_demographic','Demographic & Financial'],['ob_bank','Address & Bank'],['ob_nominee','Nominee'],
+  ['review','Review & Send'],['approval','Investor Approval'],['complete','Completion'],
+];
+const KYC_STEPS=[
+  ['investor_details','Investor Details'],['contact','Contact Verification'],['pan','KYC Verification'],
+  ['kyc_personal','Personal & Additional'],['kyc_address','Address & Compliance'],['kyc_handoff','Digilocker & eSign'],['kyc_verified','KYC Verified'],
+  ['ob_demographic','Demographic & Financial'],['ob_bank','Address & Bank'],['ob_nominee','Nominee'],
+  ['review','Review & Send'],['approval','Investor Approval'],['complete','Completion'],
+];
+const KYC_SUBSTEPS=['kyc_personal','kyc_address','kyc_handoff','kyc_verified'];
+function stepList(){ return state.wizard.journey==='kyc'?KYC_STEPS:ONB_STEPS; }
+function stepIndex(){ const l=stepList(); return l.findIndex(s=>s[0]===state.wizard.step); }
+
+function renderWizard(){
+  const inv=activeInv();
+  const nm=inv&&inv.name?inv.name:'New investor';
+  return '<div class="wiz-head">'+
+    '<button class="backchip" onclick="wizBack()">'+ic('chevLeft')+'</button>'+
+    '<div class="h2tone"><span class="b">Assisted </span><span class="n">Onboarding</span></div>'+
+    '<span class="name-chip">'+esc(nm)+'</span>'+
+    '<span class="autosave"><span class="pdot"></span>All data points are autosaved</span>'+
+  '</div>'+
+  '<div class="wiz-grid"><div>'+renderRail()+'</div><div>'+renderStep()+'</div></div>';
+}
+function wizBack(){
+  if(state.wizard.dirty){ state.modal={type:'confirm_exit'}; renderOverlay(); }
+  else { state.route='dashboard'; state.phone.mode='idle'; render(); }
+}
+function renderRail(){
+  const list=stepList(); const cur=stepIndex();
+  const pct=Math.round((cur/(list.length-1))*100);
+  let html='<div class="rail"><div class="prog-top"><span>Progress</span><span>'+pct+'%</span></div><div class="bar"><i style="width:'+pct+'%"></i></div>';
+  const isKyc=state.wizard.journey==='kyc';
+  list.forEach((s,idx)=>{
+    if(isKyc && KYC_SUBSTEPS.includes(s[0])){
+      // render the nested group under the pan step; handled when we hit 'pan'
+      return;
+    }
+    const done=idx<cur, active=idx===cur;
+    const cls=done?'done':active?'active':'todo';
+    const clickable=done?' clickable':'';
+    const circ=done?'<div class="circ">'+ic('check')+'</div>':'<div class="circ">'+(idx+1)+'</div>';
+    const prov = ['review','approval','complete'].includes(s[0])?'Verified by Investor':'Entered by Distributor';
+    html+='<div class="rstep '+cls+clickable+'"'+(done?' onclick="gotoStep(\''+s[0]+'\')"':'')+'>'+circ+
+      '<div><div class="lbl">'+s[1]+'</div><div class="cap">'+prov+'</div></div></div>';
+    // after the KYC Verification step (pan) in kyc journey, render substeps
+    if(isKyc && s[0]==='pan'){
+      const subActiveIdx=KYC_SUBSTEPS.indexOf(state.wizard.step);
+      html+='<div class="rsub">'+KYC_SUBSTEPS.map((ss,si)=>{
+        const label={'kyc_personal':'Personal Information','kyc_address':'Address & Compliance','kyc_handoff':'Digilocker & eSign','kyc_verified':'KYC Verified'}[ss];
+        const subCur=list.findIndex(x=>x[0]===state.wizard.step);
+        const ssIdx=list.findIndex(x=>x[0]===ss);
+        const sdone=ssIdx<subCur, sactive=ssIdx===subCur;
+        return '<div class="rsubstep '+(sdone?'done':sactive?'active':'')+'"><div class="cdot"></div><div class="lbl">'+label+'</div></div>';
+      }).join('')+'</div>';
+    }
+  });
+  html+='</div>';
+  return html;
+}
+function gotoStep(s){ state.wizard.step=s; patchMain(); }
+
+/* ---- step router ---- */
+function renderStep(){
+  switch(state.wizard.step){
+    case 'investor_details': return stepInvestorDetails();
+    case 'contact': return stepContact();
+    case 'pan': return stepPan();
+    case 'kyc_personal': return stepKycPersonal();
+    case 'kyc_address': return stepKycAddress();
+    case 'kyc_handoff': return stepKycHandoff();
+    case 'kyc_verified': return stepKycVerified();
+    case 'ob_demographic': return stepDemographic();
+    case 'ob_bank': return stepBank();
+    case 'ob_nominee': return stepNominee();
+    case 'review': return stepReview();
+    case 'approval': return stepApproval();
+    case 'complete': return stepComplete();
+  }
+  return '';
+}
+function stepShell(eyebrow,titleB,titleN,body,footer,enteredBy){
+  const eb = enteredBy!==false?'<span class="entered-by">'+ic('lock')+(enteredBy||'Entered by Distributor')+'</span>':'';
+  return '<div class="stepcard">'+eb+'<div class="step-eyebrow">'+eyebrow+'</div>'+
+    '<div class="step-title"><span class="b">'+titleB+'</span> <span class="n">'+titleN+'</span></div>'+
+    '<div class="step-sep"></div>'+body+
+    (footer===false?'':'<div class="stepfoot">'+(footer||defaultFooter())+'</div>')+
+  '</div>';
+}
+function defaultFooter(cont){ return '<button class="btn grey" onclick="wizPrev()">'+ic('chevLeft')+'Previous</button>'+
+  '<button class="btn primary" id="continueBtn" onclick="'+(cont||'wizNext()')+'">Continue'+ic('chevRight')+'</button>'; }
+
+/* field helpers */
+function fld(label,req,inner,hint){ return '<div class="field"><label>'+label+(req?'<span class="req">*</span>':'')+'</label>'+inner+(hint||'')+'</div>'; }
+function txt(id,val,ph,oninput,type){ return '<input type="'+(type||'text')+'" id="'+id+'" value="'+esc(val)+'" placeholder="'+esc(ph||'')+'" oninput="'+(oninput||'')+'"/>'; }
+function dateField(id,val,onchange){ return '<div style="position:relative;"><input type="date" id="'+id+'" value="'+esc(val)+'" max="2008-12-31" onchange="'+(onchange||'')+'" style="padding-right:40px;"/></div>'; }
+function validBankFields(){ const dd=state.wizard.data; return dd.bankHolder.trim()&&/^\d{9,18}$/.test(dd.bankAcc)&&dd.bankAcc===dd.bankAccConfirm&&/^[A-Z]{4}0[A-Z0-9]{6}$/.test(dd.ifsc)&&dd.accType; }
+function lockedFld(label,val,hint){ return '<div class="field"><label>'+label+ic('lock','lockicon')+'</label><div class="locked">'+ic('lock')+esc(val||'—')+'</div>'+(hint?'<div class="hinttext">'+ic('info')+hint+'</div>':'')+'</div>'; }
+function sel(id,val,opts,oninput,ph){ return '<select id="'+id+'" onchange="'+(oninput||'')+'"><option value="">'+(ph||'Select')+'</option>'+opts.map(o=>'<option'+(o===val?' selected':'')+'>'+o+'</option>').join('')+'</select>'; }
+function segbtns(opts,val,onclick){ return '<div class="segbtns">'+opts.map(o=>'<button class="sb'+(o===val?' on':'')+'" onclick="'+onclick+'(\''+o+'\')">'+o+'</button>').join('')+'</div>'; }
+function d(k){ return state.wizard.data[k]; }
+function setD(k,v){ state.wizard.data[k]=v; state.wizard.dirty=true; }
+
+/* ============================================================ STEP 1: INVESTOR DETAILS */
+function showNameHere(where){ const p=state.demo.namePos; if(p==='both') return true; return p===where; }
+function stepInvestorDetails(){
+  const dd=state.wizard.data;
+  const nameField = showNameHere('investor_details')? fld('Investor Name',true,txt('f_name',dd.name,'e.g. Riya Sharma','setD(\'name\',this.value);validateInvestorDetails()')) : '';
+  const body='<div style="max-width:560px;">'+
+    nameField+
+    fld('Email Address',true,txt('f_email',dd.email,'name@email.com','setD(\'email\',this.value);validateInvestorDetails()','email'))+
+    fld('Mobile Number',true,'<div class="phone-input"><div class="cc">+91</div><input type="text" id="f_mobile" value="'+esc(dd.mobile)+'" placeholder="10-digit mobile" oninput="setD(\'mobile\',this.value.replace(/\\\\D/g,\'\').slice(0,10));this.value=d(\'mobile\');validateInvestorDetails()"/></div>')+
+    '<div style="margin-top:8px;">'+
+      consentChk('consentBank',dd.consentBank,'I authorise Perccent to validate my bank details via the penny drop mechanism. An amount of Rs. 0.01 may be credited to your primary bank/UPI ID that is linked to the mobile number shared','Unchecking this will lead to manual entry of your Bank Account Details')+
+      consentChk('consentDemo',dd.consentDemo,'I allow Perccent to fetch my demographic details using my phone number and name from the credit bureaus','Unchecking this will lead to manual entry of your Account Details')+
+    '</div>'+
+  '</div>';
+  return stepShell('Step 1','Investor','Details',body);
+}
+function consentChk(key,on,txt,warn){
+  return '<div class="chk'+(on?' on':'')+'" onclick="toggleConsent(\''+key+'\')"><div class="box">'+(on?ic('check'):'')+'</div>'+
+    '<div class="txt">'+txt+(!on?'<div class="warntext">'+warn+'</div>':'')+'</div></div>';
+}
+function toggleConsent(key){ setD(key,!d(key)); patchMain(); }
+function validInvestorDetails(){ const dd=state.wizard.data; const nameOk = showNameHere('investor_details')? /^[a-zA-Z\s]{3,}$/.test(dd.name.trim()) : true; return nameOk&&/^[^@]+@[^@]+\.[^@]+$/.test(dd.email)&&/^[6-9]\d{9}$/.test(dd.mobile); }
+function validateInvestorDetails(){ const b=document.getElementById('continueBtn'); if(b) b.disabled=!validInvestorDetails(); }
+
+/* ============================================================ STEP 2: CONTACT VERIFICATION */
+function stepContact(){
+  const dd=state.wizard.data;
+  const emailMasked = dd.email? dd.email[0]+'***@'+dd.email.split('@')[1] : 'r***@email.com';
+  const emailPanel = state.demo.emailOtp
+    ? otpPanel('email','Email OTP Verification','We have sent an OTP to '+emailMasked+'. Enter the OTP below to verify.',dd.emailVerified,OTP_EMAIL)
+    : otpPanel('email','Email Verification',null,true,null,false,true);
+  const phoneLocked = state.demo.emailOtp && !dd.emailVerified;
+  const phonePanel = state.demo.phoneOtp
+    ? otpPanel('phone','Phone OTP Verification','We have sent an OTP to +91 '+dd.mobile+'. Enter the OTP below to verify.',dd.phoneVerified,OTP_PHONE,phoneLocked)
+    : otpPanel('phone','Phone Verification',null,true,null,false,true);
+  const body=emailPanel+'<div style="height:14px;"></div>'+phonePanel;
+  return stepShell('Step 2','Contact','Verification',body, defaultFooter()+'', undefined);
+}
+function otpPanel(kind,title,sub,verified,code,locked,skipped){
+  if(verified){
+    const label = skipped? title+' — no OTP required (skipped per demo settings)' : title+' — Verified';
+    return '<div class="inset" style="display:flex;align-items:center;gap:8px;justify-content:center;"><span style="width:22px;height:22px;border-radius:999px;background:var(--ok);color:#fff;display:flex;align-items:center;justify-content:center;">'+ic('check')+'</span><span style="font-size:14px;font-weight:600;color:var(--ok-pill-fg);">'+label+'</span></div>';
+  }
+  const overlay = locked? '<div style="position:absolute;inset:0;background:rgba(248,250,254,.85);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--muted);">Verify email first</div>':'';
+  return '<div class="inset" style="position:relative;">'+
+    '<div style="font-size:15px;font-weight:700;margin-bottom:4px;">'+title+'</div>'+
+    '<div class="muted" style="font-size:13px;line-height:1.5;">'+sub+'</div>'+
+    otpBoxes(kind,6,'sm')+
+    '<div class="devotp">'+ic('alert')+'Demo OTP: '+code+'</div>'+
+    '<div class="resend" id="resend_'+kind+'">'+resendText(kind)+'</div>'+
+    '<button class="btn primary" style="margin-top:14px;" onclick="verifyOtp(\''+kind+'\')">Verify</button>'+
+    overlay+
+  '</div>';
+}
+function otpBoxes(kind,n,sz){
+  let h='<div class="otpwrap" style="margin-top:14px;">';
+  for(let j=0;j<n;j++) h+='<input class="otpbox '+(sz||'')+'" id="otp_'+kind+'_'+j+'" maxlength="1" inputmode="numeric" oninput="otpInput(\''+kind+'\','+j+','+n+',this)" onkeydown="otpKey(event,\''+kind+'\','+j+')"/>';
+  h+='</div>';
+  return h;
+}
+let resendTimers={};
+function resendText(kind){
+  const left=state.phone['resend_'+kind]!=null?state.phone['resend_'+kind]:30;
+  const cnt=state.phone['resendCount_'+kind]||0;
+  if(cnt>=3) return 'Limit reached — try again later.';
+  if(left>0) return "Didn't receive it? Resend code in <b>"+left+"s</b>";
+  return "Didn't receive it? <b onclick=\"doResend('"+kind+"')\" style=\"cursor:pointer\">Resend</b>";
+}
+function startResend(kind){
+  clearInterval(resendTimers[kind]);
+  state.phone['resend_'+kind]=30;
+  resendTimers[kind]=setInterval(()=>{
+    state.phone['resend_'+kind]--;
+    const el=document.getElementById('resend_'+kind);
+    if(el) el.innerHTML=resendText(kind);
+    if(state.phone['resend_'+kind]<=0) clearInterval(resendTimers[kind]);
+  },1000);
+}
+function doResend(kind){
+  const cnt=(state.phone['resendCount_'+kind]||0)+1;
+  state.phone['resendCount_'+kind]=cnt;
+  if(cnt>3){ document.getElementById('resend_'+kind).innerHTML=resendText(kind); return; }
+  startResend(kind);
+  toast('OTP resent.');
+  document.getElementById('resend_'+kind).innerHTML=resendText(kind);
+}
+function otpInput(kind,idx,n,el){
+  el.value=el.value.replace(/\D/g,'');
+  if(el.value){ el.classList.add('filled'); el.classList.remove('err'); if(idx<n-1) document.getElementById('otp_'+kind+'_'+(idx+1)).focus(); }
+  else el.classList.remove('filled');
+}
+function otpKey(e,kind,idx){ if(e.key==='Backspace'&&!e.target.value&&idx>0) document.getElementById('otp_'+kind+'_'+(idx-1)).focus(); }
+function readOtp(kind,n){ let s=''; for(let j=0;j<n;j++){ const el=document.getElementById('otp_'+kind+'_'+j); s+=el?el.value:''; } return s; }
+function verifyOtp(kind){
+  const code=kind==='email'?OTP_EMAIL:OTP_PHONE;
+  const entered=readOtp(kind,6);
+  if(entered===code){
+    setD(kind==='email'?'emailVerified':'phoneVerified',true);
+    if(kind==='email'){ setPill('Contact Verified'); if(state.demo.phoneOtp && !d('phoneVerified')){ state.phone.mode='sms_otp'; startResend('phone'); } else state.phone.mode='idle'; }
+    if(kind==='phone'){ state.phone.mode='idle'; }
+    patchMain(); patchPhone();
+    // enable continue if both
+    setTimeout(()=>{ const b=document.getElementById('continueBtn'); if(b) b.disabled=!(d('emailVerified')&&d('phoneVerified')); },0);
+  } else {
+    for(let j=0;j<6;j++){ const el=document.getElementById('otp_'+kind+'_'+j); if(el) el.classList.add('err'); }
+    // show error
+    const panel=document.getElementById('resend_'+kind);
+    if(panel) panel.innerHTML='<span style="color:var(--err);font-weight:500;">Incorrect OTP. Please try again.</span>';
+  }
+}
+
+/* ============================================================ STEP 3: PAN CHECK */
+function stepPan(){
+  const dd=state.wizard.data;
+  const body='<div class="inset" style="max-width:560px;">'+
+    '<div style="font-size:15px;font-weight:700;margin-bottom:4px;">Enter <span style="color:var(--brand)">PAN Details</span></div>'+
+    '<div class="muted" style="font-size:13px;line-height:1.5;margin-bottom:16px;">Please enter the investor\'s PAN to fetch their KYC status and complete the KYC process with Perccent if not done already.</div>'+
+    fld('Enter your PAN',true,txt('f_pan',dd.pan,'ABCPE1234F','setD(\'pan\',this.value.toUpperCase().slice(0,10));this.value=d(\'pan\');validatePan()'))+
+    (showNameHere('kyc_check')? fld('Name',true,txt('f_panname',dd.name,'Name as per PAN','setD(\'name\',this.value)')) : '')+
+    fld('Date of Birth',true,dateField('f_dob',dd.dob,'setD(\'dob\',this.value)'))+
+    '<button class="btn primary full" id="verifyKycBtn" onclick="runPanCheck()">Verify KYC Status</button>'+
+  '</div>';
+  return stepShell('Step 3','KYC','Verification',body,false);
+}
+function validPan(){ return /^[A-Z]{3}P[A-Z][0-9]{4}[A-Z]$/.test(d('pan'))||/^[A-Z]{5}\*+[0-9][A-Z]$/.test(d('pan')); }
+function validatePan(){ /* live, no-op visual */ }
+function runPanCheck(){
+  const btn=document.getElementById('verifyKycBtn');
+  if(btn){ btn.disabled=true; btn.innerHTML='<span style="display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:999px;animation:spin .8s linear infinite;margin-right:8px;"></span>Checking with KRA…'; }
+  setTimeout(()=>{ state.modal={type:'pan_decision',bucket:state.demo.scenario}; renderOverlay(); },1200);
+}
+
+/* ============================================================ MODALS */
+function renderModal(){
+  const m=state.modal;
+  if(m.type==='pan_decision') return panDecisionModal(m.bucket);
+  if(m.type==='confirm_exit') return confirmExitModal();
+  if(m.type==='kebab') return kebabModal(m);
+  if(m.type==='notes') return notesModal(m.id);
+  if(m.type==='penny_fail') return null;
+  return '';
+}
+function closeModal(){ state.modal=null; renderOverlay(); }
+function panDecisionModal(bucketKey){
+  const b=BUCKETS[bucketKey];
+  const toneColor={ok:'var(--ok)',brand:'var(--brand)',warn:'var(--warn)',err:'var(--err)'}[b.tone];
+  const toneBg={ok:'var(--ok-tint)',brand:'var(--chip)',warn:'var(--warn-tint)',err:'var(--err-tint)'}[b.tone];
+  let acts='<button class="btn primary full" onclick="panAction(\''+bucketKey+'\',\'primary\')">'+b.primary+'</button>';
+  if(b.secondary) acts+='<button class="btn grey full" onclick="panAction(\''+bucketKey+'\',\'secondary\')">'+b.secondary+'</button>';
+  const demoStrip='<div class="demo-strip"><div class="dl">Demo: switch scenario</div><div class="dbtns">'+
+    SCENARIOS.map(s=>'<button class="db'+(s.key===bucketKey?' on':'')+'" onclick="switchPanScenario(\''+s.key+'\')">'+mi(s.mi,{size:15,color:s.color})+'<span style="margin-left:5px;">'+s.key+'</span></button>').join('')+'</div></div>';
+  return '<div class="modal-scrim"><div class="modal">'+
+    '<div class="mbody"><div class="micon" style="background:'+toneBg+';color:'+toneColor+'">'+ic(b.icon)+'</div>'+
+    '<div class="mtitle">'+b.title+'</div><div class="mmsg">'+b.msg+'</div>'+
+    '<div class="macts">'+acts+'</div></div>'+demoStrip+'</div></div>';
+}
+function switchPanScenario(k){ state.demo.scenario=k; state.modal={type:'pan_decision',bucket:k}; renderOverlay(); }
+function panAction(bucketKey,which){
+  state.modal=null;
+  if(bucketKey==='PROCEED'){ state.wizard.journey='onboarding'; state.wizard.step='ob_demographic'; render(); return; }
+  if(bucketKey==='START_KYC'){
+    if(which==='primary'){ state.wizard.journey='kyc'; state.wizard.step='kyc_personal'; render(); }
+    else { setPill('Contact Verified'); backToDash(); }
+    return;
+  }
+  if(bucketKey==='FIX_NAME'){ renderOverlay(); setTimeout(()=>{ const el=document.getElementById('f_panname'); if(el) el.focus(); },50); return; }
+  if(bucketKey==='WAIT'){ setPill('KYC In Progress'); backToDash(); return; }
+  if(bucketKey==='BLOCKED'){ if(which==='primary'){ toast('Support call simulated.'); renderOverlay(); } else { renderOverlay(); } return; }
+  if(bucketKey==='LINK_AADHAAR'){ if(which==='secondary'){ setPill('Contact Verified'); backToDash(); } else { renderOverlay(); toast('Retrying KYC check…'); } return; }
+  renderOverlay();
+}
+function backToDash(){ state.route = state.navFrom==='investors'?'investors':'dashboard'; state.activeInvestorId=null; state.phone.mode='idle'; render(); }
+function confirmExitModal(){
+  return '<div class="modal-scrim"><div class="modal"><div class="mbody">'+
+    '<div class="mtitle">Leave this onboarding?</div><div class="mmsg">Progress is autosaved — you can resume from the dashboard.</div>'+
+    '<div class="macts"><button class="btn grey full" onclick="state.route=\'dashboard\';state.modal=null;state.phone.mode=\'idle\';render()">Leave</button>'+
+    '<button class="btn primary full" onclick="state.modal=null;renderOverlay()">Stay</button></div></div></div></div>';
+}
+function kebabModal(m){
+  const inv=state.investors.find(x=>x.id===m.id);
+  return '<div class="modal-scrim" onclick="state.modal=null;renderOverlay()"><div class="modal" style="width:280px;" onclick="event.stopPropagation()"><div style="padding:12px;">'+
+    (m.canLost?'<button class="nav-item" style="width:100%;margin:0;" onclick="markLost('+m.id+')">'+ic('alert')+'Mark as lost</button>':'')+
+    '<button class="nav-item" style="width:100%;margin:0;" onclick="openNotes('+m.id+')">'+ic('edit')+'Add / view notes</button>'+
+  '</div></div></div>';
+}
+function markLost(id){ const inv=state.investors.find(x=>x.id===id); inv.status='Lost'; state.modal=null; toast(inv.name+' marked as lost.'); render(); }
+function openNotes(id){ state.modal={type:'notes',id}; renderOverlay(); }
+
+/* ============================================================ NOTES MODAL (X + outside click to close) */
+function notesModal(id){
+  const inv=state.investors.find(x=>x.id===id);
+  const notes=inv.notes.length?inv.notes.map(n=>'<div class="note-item">'+esc(n.t)+'<div class="meta">'+esc(n.by)+' · '+esc(n.at)+'</div></div>').join(''):'<div class="muted" style="font-size:13px;padding:6px 0 4px;">No notes yet.</div>';
+  return '<div class="modal-scrim" onclick="if(event.target===this) closeModal()"><div class="modal left" style="width:440px;" onclick="event.stopPropagation()">'+
+    '<div class="notes-head"><div class="t">Notes — '+esc(inv.name)+'</div><button class="notes-x" onclick="closeModal()">'+ic('x')+'</button></div>'+
+    '<div class="notes-body">'+notes+
+      '<textarea id="noteInput" placeholder="Add a note…" style="width:100%;border:1px solid var(--input);border-radius:12px;padding:12px;font-size:13.5px;margin-top:14px;min-height:80px;outline:none;"></textarea>'+
+      '<button class="btn primary full" style="margin-top:10px;" onclick="addNote('+id+')">Add note</button>'+
+    '</div></div></div>';
+}
+function renderDrawer(){ return ''; }
+function addNote(id){
+  const inv=state.investors.find(x=>x.id===id);
+  const v=document.getElementById('noteInput').value.trim();
+  if(!v) return;
+  inv.notes.unshift({t:v,by:'Sagnik Mitra',at:'06 Jul 2026'});
+  renderOverlay();
+  if(state.route==='dashboard'){ const el=document.getElementById('pipeline'); if(el) el.outerHTML=renderPipeline(); }
+  if(state.route==='view') patchMain();
+  toast('Note added.');
+}
+
+/* ============================================================ NAV: prev/next */
+function wizPrev(){ const l=stepList(); const i=stepIndex(); if(i>0){ state.wizard.step=l[i-1][0]; render(); } }
+function wizNext(){
+  const step=state.wizard.step;
+  if(step==='investor_details'){ if(!validInvestorDetails()){ toast('Please complete all fields.'); return; } const inv=activeInv(); if(d('name')) inv.name=d('name'); inv.email=d('email'); inv.mobile=d('mobile').replace(/(\d{5})(\d{5})/,'$1 $2'); setPill('Draft');
+    // apply OTP toggles: channels with OTP off are auto-verified
+    if(!state.demo.emailOtp) setD('emailVerified',true);
+    if(!state.demo.phoneOtp) setD('phoneVerified',true);
+    // pick phone mode: first channel that still needs an OTP
+    if(state.demo.emailOtp && !d('emailVerified')){ state.phone.mode='email_otp'; startResend('email'); }
+    else if(state.demo.phoneOtp && !d('phoneVerified')){ state.phone.mode='sms_otp'; startResend('phone'); }
+    else state.phone.mode='idle';
+    state.wizard.step='contact'; render(); return; }
+  if(step==='contact'){ if(!(d('emailVerified')&&d('phoneVerified'))){ toast('Verify both email and phone.'); return; } setPill('Contact Verified'); state.phone.mode='idle'; state.wizard.step='pan'; render(); return; }
+  if(step==='kyc_personal'){ if(!validKycPersonal()){ toast('Complete all required fields.'); return; } state.wizard.step='kyc_address'; render(); return; }
+  if(step==='kyc_address'){ if(!validKycAddress()){ toast('Complete all required fields.'); return; } state.wizard.step='kyc_handoff'; render(); return; }
+  if(step==='ob_demographic'){ if(!validDemographic()){ toast('Complete all required fields incl. email verification.'); return; } state.wizard.step='ob_bank'; render(); return; }
+  if(step==='ob_bank'){ if(state.demo.bankVerify){ if(!d('pennyVerified')){ toast('Verify the bank account (penny drop) first.'); return; } if(!validBankFields()){ toast('Complete all bank fields (account numbers must match).'); return; } } state.wizard.step='ob_nominee'; render(); return; }
+  if(step==='ob_nominee'){ if(!validNominee()){ toast('Complete nominee details (allocation must total 100%).'); return; } state.wizard.step='review'; render(); return; }
+  // fallthrough
+  const l=stepList(); const i=stepIndex(); if(i<l.length-1){ state.wizard.step=l[i+1][0]; render(); }
+}
+
+/* ============================================================ KYC K1: PERSONAL & ADDITIONAL */
+function stepKycPersonal(){
+  const dd=state.wizard.data;
+  const left='<div class="colhead">Personal</div>'+
+    lockedFld('Full Name',dd.name,'As per PAN record')+
+    lockedFld('Date of Birth',fmtDob(dd.dob),'As per PAN record')+
+    lockedFld('Mobile Number','+91 '+dd.mobile,'As per contact verification')+
+    lockedFld('Email',dd.email,'As per contact verification')+
+    '<div class="field"><label>Aadhaar Number<span class="req">*</span></label>'+
+      '<div class="aadhaar-group"><div class="aadhaar-mask"><span class="grp">••••</span><span class="grp">••••</span></div>'+
+        '<div class="aadhaar-last"><input type="text" id="f_aadhaar" value="'+esc(dd.aadhaar4)+'" placeholder="last 4" inputmode="numeric" oninput="setD(\'aadhaar4\',this.value.replace(/\\\\D/g,\'\').slice(0,4));this.value=d(\'aadhaar4\')"/></div></div>'+
+      '<div class="hinttext">'+ic('info')+'First 8 digits are masked for privacy — enter only the last 4.</div></div>'+
+    fld("Father's Name",true,txt('f_father',dd.fatherName,'e.g. Rajesh Sharma','setD(\'fatherName\',this.value)'))+
+    fld("Father's Name",true,txt('f_father',dd.fatherName,'e.g. Rajesh Sharma','setD(\'fatherName\',this.value)'))+
+    '<div class="field"><label>Geolocation</label><div class="bankchip" style="background:var(--ok-tint);color:var(--ok-pill-fg);">'+ic('pin')+'22.5726, 88.3639 — Kolkata, IN · India-bounds check passed ✓</div>'+
+      '<div class="hinttext">'+ic('info')+'Captured from THIS device — in production this is the distributor\'s location; compliance decision pending.</div></div>';
+  const right='<div class="colhead">Additional</div>'+
+    fld('Gender',true,segbtns(['Male','Female','Other'],dd.gender,'setGender'))+
+    fld('Marital Status',true,sel('f_marital',dd.marital,MARITAL,'setD(\'marital\',this.value)'))+
+    lockedFld('Country of Citizenship','India')+
+    lockedFld('Nationality','Indian')+
+    lockedFld('Country of Birth','India')+
+    fld('Place of Birth',true,txt('f_pob',dd.placeOfBirth,'e.g. Kolkata','setD(\'placeOfBirth\',this.value)'));
+  const body='<div class="twocol"><div>'+left+'</div><div>'+right+'</div></div>';
+  return stepShell('Step 4','Personal &','Additional Information',body);
+}
+function setGender(g){ setD('gender',g); patchMain(); }
+function validKycPersonal(){ const dd=state.wizard.data; return /^\d{4}$/.test(dd.aadhaar4)&&dd.fatherName.trim().length>=2&&dd.gender&&dd.marital&&dd.placeOfBirth.trim().length>=2; }
+
+/* ============================================================ KYC K2: ADDRESS & COMPLIANCE */
+function stepKycAddress(){
+  const dd=state.wizard.data;
+  const left='<div class="colhead">Permanent Address</div>'+
+    fld('Nature of Address',true,sel('f_nature',dd.nature,NATURE,'setD(\'nature\',this.value)'))+
+    fld('PIN Code',true,txt('f_pin',dd.pin,'e.g. 700091','setD(\'pin\',this.value.replace(/\\\\D/g,\'\').slice(0,6));this.value=d(\'pin\');pinLookup()'))+
+    fld('Address Line 1',true,txt('f_addr1',dd.addr1,'Flat / House / Street','setD(\'addr1\',this.value)'))+
+    fld('Address Line 2',false,txt('f_addr2',dd.addr2,'Area / Landmark','setD(\'addr2\',this.value)'))+
+    fld('City',true,txt('f_city',dd.city,'City','setD(\'city\',this.value)'))+
+    lockedFld('Country','India');
+  const right='<div class="colhead">Financial & Compliance</div>'+
+    fld('Occupation',true,sel('f_occ',dd.occupation,OCCUPATIONS,'setD(\'occupation\',this.value)'))+
+    fld('Income Slab',true,sel('f_inc',dd.income,INCOME_SLABS,'setD(\'income\',this.value)'))+
+    fld('Source of Wealth',true,sel('f_wealth',dd.wealth,SOURCE_OF_WEALTH,'setD(\'wealth\',this.value)'))+
+    fld('PEP Status',true,sel('f_pep',dd.pep,PEP,'setD(\'pep\',this.value)'))+
+    '<div class="field"><label>Signature<span class="req">*</span></label>'+signatureControl()+'</div>';
+  const body='<div class="twocol"><div>'+left+'</div><div>'+right+'</div></div>';
+  return stepShell('Step 5','Address &','Compliance',body);
+}
+function signatureControl(){
+  const dd=state.wizard.data; const nm=activeInv()&&activeInv().name?activeInv().name:dd.name||'Investor';
+  if(state.demo.signature==='generate'){
+    if(!dd.signature) return '<div class="upload" onclick="genSig()">'+ic('edit')+'<div style="margin-top:6px;font-size:13px;">Generate a signature from the investor\'s name</div></div>';
+    return '<div class="sig-gen"><span class="sig-name">'+esc(nm)+'</span><span class="sig-tag">Auto-generated ✓</span></div>';
+  }
+  if(dd.signature) return '<div class="upload done">'+ic('check')+' signature_'+(nm.split(' ')[0].toLowerCase()||'investor')+'.png ✓</div>';
+  return '<div class="upload" onclick="uploadSig()">'+ic('upload')+'<div style="margin-top:6px;font-size:13px;">Upload investor\'s signature — PNG/JPG ≤2MB</div></div>';
+}
+function pinLookup(){ if(d('pin').length===6&&!d('city')){ setD('city','Kolkata'); const el=document.getElementById('f_city'); if(el) el.value='Kolkata'; } }
+function uploadSig(){ setD('signature',true); patchMain(); }
+function genSig(){ setD('signature',true); patchMain(); }
+function validKycAddress(){ const dd=state.wizard.data; return dd.nature&&/^\d{6}$/.test(dd.pin)&&dd.addr1.trim()&&dd.city.trim()&&dd.occupation&&dd.income&&dd.wealth&&dd.pep&&dd.signature; }
+
+/* ============================================================ KYC K3: DIGILOCKER & ESIGN HANDOFF */
+function stepKycHandoff(){
+  const dd=state.wizard.data;
+  const inv=activeInv();
+  const sent=state.phone.mode==='digilocker_flow'||dd.dglDone;
+  const steps=[
+    ['Link sent to investor', sent],
+    ['Link opened', state.phone.sub>=1||dd.dglDone],
+    ['DigiLocker authorised', state.phone.sub>=3||dd.dglDone],
+    ['Documents fetched (Aadhaar, address)', state.phone.sub>=4||dd.dglDone],
+    ['eSign OTP verified', state.phone.sub>=6||dd.dglDone],
+    ['KYC submitted to KRA', dd.dglDone],
+  ];
+  const checklist='<div class="checklist">'+steps.map((s,i)=>{
+    const done=s[1]; const active=!done&&(i===0?false:steps[i-1][1]);
+    return '<div class="cl '+(done?'done':active?'active':'')+'"><div class="ci">'+(done?ic('check'):active?'<span class="spin"></span>':'')+'</div><div class="ct">'+s[0]+'</div></div>';
+  }).join('')+'</div>';
+  let body;
+  if(!sent){
+    body='<div style="text-align:center;padding:20px 0;">'+
+      '<div style="width:120px;height:120px;margin:0 auto 18px;border-radius:20px;background:var(--chip);display:flex;align-items:center;justify-content:center;">'+
+        '<svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="var(--brand)" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="11" r="2.5"/><path d="M7 20a5 5 0 0 1 10 0"/><path d="M17 7l2 2 3-3"/></svg>'+
+      '</div>'+
+      '<div style="font-size:15px;font-weight:600;max-width:440px;margin:0 auto;line-height:1.5;">Identity verification and eSign must be completed by the investor on their own device. Send them the secure link.</div>'+
+      '<button class="btn primary" style="margin:20px auto 0;" onclick="sendDglLink()">Send Digilocker & eSign link'+ic('send')+'</button>'+
+    '</div>';
+    setPill('Awaiting Investor');
+  } else if(!dd.dglDone){
+    body='<div class="inset">'+checklist+'</div>'+
+      '<div class="row" style="gap:10px;margin-top:14px;">'+
+        '<button class="link" onclick="toggleDrop()">DEMO: '+(state.phone.drop?'investor drops off ✓':'investor completes')+' ⟷ '+(state.phone.drop?'completes':'drops off')+'</button>'+
+        (state.phone.drop?'<button class="btn ghost sm" onclick="sendReminder()">'+ic('refresh')+'Send reminder</button>':'')+
+      '</div>';
+  } else {
+    body='<div class="inset">'+checklist+'</div>';
+  }
+  return stepShell('Step 6','Digilocker &','eSign','<div style="min-height:200px;">'+body+'</div>',false,'Verified by Investor');
+}
+function sendDglLink(){ state.phone.mode='digilocker_flow'; state.phone.sub=0; state.phone.drop=false; patchMain(); patchPhone(); }
+function toggleDrop(){ state.phone.drop=!state.phone.drop; patchMain(); patchPhone(); }
+function sendReminder(){ toast('Reminder sent to investor.'); state.phone.drop=false; patchPhone(); }
+function dglComplete(){ setD('dglDone',true); state.phone.mode='idle'; state.wizard.step='kyc_verified'; render(); }
+
+/* ============================================================ KYC K4: KYC VERIFIED */
+function stepKycVerified(){
+  const inv=activeInv();
+  const body='<div style="text-align:center;padding:20px 0;">'+
+    '<div class="hero-check">'+ic('check')+'</div>'+
+    '<div style="font-size:22px;font-weight:700;">Your KYC is Verified</div>'+
+    '<div class="muted" style="font-size:14px;margin-top:8px;">'+esc(inv.name)+' · PAN: '+esc(inv.pan!=='—'?inv.pan:'FMKPS****4L')+'</div>'+
+    '<div class="row" style="gap:12px;justify-content:center;margin-top:24px;">'+
+      '<button class="btn grey" onclick="backToDash()">Back to Dashboard</button>'+
+      '<button class="btn primary" onclick="state.wizard.step=\'ob_demographic\';render()">Continue to Onboarding'+ic('chevRight')+'</button>'+
+    '</div></div>';
+  setPill('KYC In Progress');
+  return stepShell('Step 7','KYC','Verified',body,false,'Verified by Investor');
+}
+
+/* ============================================================ O1: DEMOGRAPHIC & FINANCIAL */
+function stepDemographic(){
+  const dd=state.wizard.data;
+  const kyc=state.wizard.journey==='kyc';
+  const prefHint=kyc?'Prefilled from KYC — editable':null;
+  // prefill financial from kyc
+  if(kyc&&!dd._obPrefilled){ dd._obPrefilled=true; }
+  const emailVerified = dd.obEmailVerified || !state.demo.emailOtp;
+  const emailBlock = emailVerified
+    ? '<div class="locked" style="color:var(--ok-pill-fg);background:var(--ok-tint);border-color:var(--ok);">'+ic('check')+esc(dd.email)+(state.demo.emailOtp?' · Verified':' · No OTP required')+'</div>'
+    : '<div class="row" style="gap:8px;"><input type="email" value="'+esc(dd.email)+'" disabled style="flex:1;background:var(--inset);border:1px solid var(--input);border-radius:12px;padding:12px 14px;color:var(--muted);"/><button class="btn ghost sm" onclick="startEmailVerify()">Verify</button></div>'
+      +(state.phone.mode==='email_verify_otp'?emailVerifyInline():'');
+  const left='<div class="colhead">Demographic</div>'+
+    lockedFld('Name',dd.name)+
+    lockedFld('Date of Birth',fmtDob(dd.dob))+
+    lockedFld('PAN',activeInv().pan!=='—'?activeInv().pan:(dd.pan||'FMKPS****4L'))+
+    (kyc?lockedFld('Gender',dd.gender):fld('Gender',true,segbtns(['Male','Female','Other'],dd.gender,'setGender')))+
+    '<div class="field"><label>Email<span class="req">*</span></label>'+emailBlock+'</div>'+
+    fld('Tax Status',true,segbtns(TAX_STATUS,dd.taxStatus,'setTax'))+
+    lockedFld('Country of Birth','India')+
+    fld('Place of Birth',true,txt('f_pob2',dd.placeOfBirth,'e.g. Kolkata','setD(\'placeOfBirth\',this.value)'));
+  const right='<div class="colhead">Financial</div>'+
+    fld('Occupation',true,sel('f_occ2',dd.occupation,OCCUPATIONS,'setD(\'occupation\',this.value)'),prefHint?'<div class="hinttext">'+ic('info')+prefHint+'</div>':'')+
+    fld('Income Slab',true,sel('f_inc2',dd.income,INCOME_SLABS,'setD(\'income\',this.value)'))+
+    fld('Source of Wealth',true,sel('f_wealth2',dd.wealth,SOURCE_OF_WEALTH,'setD(\'wealth\',this.value)'))+
+    fld('PEP Status',true,sel('f_pep2',dd.pep,PEP,'setD(\'pep\',this.value)'));
+  const body='<div class="twocol"><div>'+left+'</div><div>'+right+'</div></div>';
+  return stepShell(kyc?'Step 8':'Step 4','Demographic &','Financial',body);
+}
+function setTax(t){ setD('taxStatus',t); patchMain(); }
+function startEmailVerify(){ state.phone.mode='email_verify_otp'; patchMain(); patchPhone(); }
+function emailVerifyInline(){
+  return '<div class="inset" style="margin-top:10px;padding:14px;"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Enter the 6-digit code sent to '+esc(d('email'))+'</div>'+
+    '<div class="devotp">'+ic('alert')+'Demo OTP: '+OTP_EMAILVERIFY+'</div>'+
+    otpBoxes('ev',6,'sm')+
+    '<button class="btn primary sm" style="margin-top:12px;" onclick="verifyEmailInline()">Verify</button></div>';
+}
+function verifyEmailInline(){
+  if(readOtp('ev',6)===OTP_EMAILVERIFY){ setD('obEmailVerified',true); state.phone.mode='idle'; patchMain(); patchPhone(); toast('Email verified.'); }
+  else { for(let j=0;j<6;j++){ const el=document.getElementById('otp_ev_'+j); if(el) el.classList.add('err'); } }
+}
+function validDemographic(){ const dd=state.wizard.data; const emailOk = dd.obEmailVerified || !state.demo.emailOtp; return emailOk&&dd.gender&&dd.taxStatus&&dd.placeOfBirth&&dd.occupation&&dd.income&&dd.wealth&&dd.pep; }
+
+/* ============================================================ O2: ADDRESS & BANK */
+function stepBank(){
+  const dd=state.wizard.data;
+  const left='<div class="colhead">Permanent Address</div>'+
+    fld('Nature of Address',true,sel('f_nature2',dd.nature||'Residential',NATURE,'setD(\'nature\',this.value)'))+
+    fld('PIN Code',true,txt('f_pin2',dd.pin,'e.g. 700091','setD(\'pin\',this.value.replace(/\\\\D/g,\'\').slice(0,6));this.value=d(\'pin\');pinLookup2()'))+
+    fld('Address Line 1',true,txt('f_addr1b',dd.addr1,'Flat / House / Street','setD(\'addr1\',this.value)'))+
+    fld('Address Line 2',false,txt('f_addr2b',dd.addr2,'Area / Landmark','setD(\'addr2\',this.value)'))+
+    fld('City',true,txt('f_cityb',dd.city,'City','setD(\'city\',this.value)'))+
+    lockedFld('Country','India');
+  const right='<div class="colhead">Bank Details</div>'+
+    fld('Account Holder Name',true,txt('f_holder',dd.bankHolder,'As per bank records','setD(\'bankHolder\',this.value)'))+
+    fld('Account Number',true,txt('f_acc',dd.bankAcc,'9–18 digits','setD(\'bankAcc\',this.value.replace(/\\\\D/g,\'\').slice(0,18));this.value=d(\'bankAcc\')'))+
+    fld('Confirm Account Number',true,txt('f_accc',dd.bankAccConfirm,'Re-enter account number','setD(\'bankAccConfirm\',this.value.replace(/\\\\D/g,\'\').slice(0,18));this.value=d(\'bankAccConfirm\')'))+
+    fld('IFSC Code',true,txt('f_ifsc',dd.ifsc,'e.g. HDFC0001234','setD(\'ifsc\',this.value.toUpperCase().slice(0,11));this.value=d(\'ifsc\');ifscLookup()')+(dd.ifsc.length===11?'<div class="bankchip">'+ic('landmark')+'HDFC Bank — Salt Lake Branch</div>':''))+
+    fld('Account Type',true,sel('f_acctype',dd.accType,ACCOUNT_TYPE,'setD(\'accType\',this.value)'))+
+    (state.demo.bankVerify?'<div class="inset" style="margin-top:6px;">'+pennyPanel()+'</div>':'<div class="hinttext" style="margin-top:4px;">'+ic('info')+'Bank verification (penny drop) is skipped per demo settings.</div>');
+  const body='<div class="twocol"><div>'+left+'</div><div>'+right+'</div></div>';
+  return stepShell(state.wizard.journey==='kyc'?'Step 9':'Step 5','Address &','Bank',body);
+}
+function pinLookup2(){ if(d('pin').length===6&&!d('city')){ setD('city','Kolkata'); const el=document.getElementById('f_cityb'); if(el) el.value='Kolkata'; } }
+function ifscLookup(){ if(d('ifsc').length===11) patchMain(); }
+function pennyPanel(){
+  const dd=state.wizard.data;
+  if(dd.pennyVerified) return '<div class="pennychip">'+ic('check')+'₹0.01 deposited & verified · Ref UTR6621…</div>';
+  if(dd._pennyFail) return '<div style="color:var(--err);font-size:13px;font-weight:600;margin-bottom:8px;">'+ic('alert','')+' Penny drop failed — please recheck account details.</div><button class="btn ghost sm" onclick="runPenny()">'+ic('refresh')+'Retry verification</button>';
+  return '<div style="font-size:13px;font-weight:600;margin-bottom:4px;">Bank Verification</div>'+
+    '<div class="muted" style="font-size:12.5px;margin-bottom:10px;">A ₹0.01 penny drop confirms the account belongs to the investor.</div>'+
+    '<button class="btn primary sm" onclick="runPenny()">Verify account (₹0.01 penny drop)</button>'+
+    '<button class="link" style="margin-left:12px;font-size:12px;" onclick="setD(\'_pennyFail\',true);patchMain()">simulate failure</button>';
+}
+function runPenny(){
+  const dd=state.wizard.data;
+  if(!(dd.bankHolder&&/^\d{9,18}$/.test(dd.bankAcc)&&dd.bankAcc===dd.bankAccConfirm&&/^[A-Z]{4}0[A-Z0-9]{6}$/.test(dd.ifsc)&&dd.accType)){ toast('Complete all bank fields correctly (account numbers must match).'); return; }
+  dd._pennyFail=false;
+  const el=event.target; el.disabled=true; el.innerHTML='<span style="display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:999px;animation:spin .8s linear infinite;margin-right:6px;"></span>Depositing ₹0.01…';
+  setTimeout(()=>{ setD('pennyVerified',true); setPill('Investment Ready'); patchMain(); toast('Bank account verified.'); },1500);
+}
+
+/* ============================================================ O3: NOMINEE */
+function newNominee(){ return {name:'',dob:'',relationship:'',allocation:'',email:'',phone:'',proofType:'',proofNumber:'',sameAddr:true,addr1:'',addr2:'',country:'India',pincode:'',guardianName:'',guardianEmail:'',guardianPhone:'',guardianProofType:'',guardianProofNumber:'',open:true}; }
+function stepNominee(){
+  const dd=state.wizard.data;
+  if(dd.nomineeChoice===null&&dd.nominees.length===0){ /* default: seed one prefilled if not started */ }
+  let body='<div style="max-width:640px;">'+
+    '<div class="radio-row'+(dd.nomineeChoice==='add'?' on':'')+'" onclick="setNomChoice(\'add\')"><span class="rlbl">Add a Nominee</span><span class="radio-dot"></span></div>'+
+    '<div class="radio-row'+(dd.nomineeChoice==='optout'?' on':'')+'" onclick="setNomChoice(\'optout\')"><span class="rlbl">I don\'t want to add a nominee</span><span class="radio-dot"></span></div>';
+  if(dd.nomineeChoice==='optout'){
+    if(state.demo.videoDecl){
+      body+='<div class="sebi-banner">'+ic('info')+'<div>As per SEBI guidelines, a video declaration is required if you choose not to nominate anyone.</div></div>'+
+        '<div class="card p16" style="border-style:dashed;"><div style="font-size:14px;font-weight:600;margin-bottom:8px;">Video declaration (recorded by investor)</div>'+
+        '<div class="muted" style="font-size:13px;line-height:1.6;">The investor will record this during their review:<br/><b style="color:var(--ink)">"I confirm I do not wish to add a nominee for my investments."</b><br/>15–30 seconds · max 50 MB</div></div>';
+    } else {
+      body+='<div class="sebi-banner">'+ic('info')+'<div>Video declaration is skipped per demo settings — the investor will simply confirm the opt-out with their OTP.</div></div>';
+    }
+  }
+  if(dd.nomineeChoice==='add'){
+    const total=dd.nominees.reduce((s,n)=>s+(parseInt(n.allocation)||0),0);
+    body+=dd.nominees.map((n,i)=>nomineeCard(n,i)).join('');
+    body+='<div class="alloc-meter '+(total===100?'ok':'bad')+'">'+(total===100?'Total allocation: 100% ✓':'Total must equal 100% — currently '+total+'%')+
+      '<div class="alloc-bar"><i style="width:'+Math.min(total,100)+'%;background:'+(total===100?'var(--ok)':'var(--err)')+'"></i></div></div>';
+    body+='<button class="addmore" onclick="addNominee()"'+(dd.nominees.length>=3?' disabled':'')+'>'+ic('plus')+(dd.nominees.length>=3?'Maximum 3 nominees':'Add another nominee')+'</button>';
+  }
+  body+='</div>';
+  return stepShell(state.wizard.journey==='kyc'?'Step 10':'Step 6','Nominee','Details',body);
+}
+function setNomChoice(c){ const dd=state.wizard.data; dd.nomineeChoice=c; if(c==='add'&&dd.nominees.length===0){ const n=newNominee(); n.name='Aarav Sharma'; n.relationship='Brother'; n.allocation='100'; n.dob='1996-04-12'; n.email='aarav@email.com'; n.phone='9876543210'; n.proofType='PAN'; n.proofNumber='FMKPS4321L'; dd.nominees=[n]; } setD('nomineeChoice',c); patchMain(); }
+function addNominee(){ const dd=state.wizard.data; if(dd.nominees.length>=3) return; dd.nominees.push(newNominee()); patchMain(); }
+function delNominee(i){ state.wizard.data.nominees.splice(i,1); patchMain(); }
+function nomAge(dob){ if(!dob) return null; const y=new Date(dob); const age=(new Date('2026-07-06')-y)/(365.25*24*3600*1000); return age; }
+function isMinor(n){ const a=nomAge(n.dob); return a!=null&&a<18; }
+function nomineeCard(n,i){
+  const minor=isMinor(n);
+  const inner='<div class="twocol">'+
+    fld('Nominee Name',true,'<input type="text" value="'+esc(n.name)+'" oninput="setNom('+i+',\'name\',this.value)" placeholder="Full name"/>')+
+    fld('Date of Birth',true,'<input type="date" value="'+esc(n.dob)+'" onchange="setNom('+i+',\'dob\',this.value);patchMain()"/>')+
+    fld('Relationship',true,'<select onchange="setNom('+i+',\'relationship\',this.value)"><option value="">Select</option>'+RELATIONSHIPS.map(r=>'<option'+(r===n.relationship?' selected':'')+'>'+r+'</option>').join('')+'</select>')+
+    fld('Allocation %',true,'<input type="number" min="0" max="100" value="'+esc(n.allocation)+'" oninput="setNom('+i+',\'allocation\',this.value);updateAlloc()" placeholder="0–100"/>')+
+  '</div>';
+  let extra;
+  if(minor){
+    extra='<div class="colhead" style="margin-top:8px;">Guardian details</div><div class="twocol">'+
+      fld('Guardian Name',true,'<input type="text" value="'+esc(n.guardianName)+'" oninput="setNom('+i+',\'guardianName\',this.value)"/>')+
+      fld('Guardian Email',true,'<input type="email" value="'+esc(n.guardianEmail)+'" oninput="setNom('+i+',\'guardianEmail\',this.value)"/>')+
+      fld('Guardian Phone',true,'<input type="text" value="'+esc(n.guardianPhone)+'" oninput="setNom('+i+',\'guardianPhone\',this.value)"/>')+
+      fld('Guardian Proof Type',true,'<select onchange="setNom('+i+',\'guardianProofType\',this.value)"><option value="">Select</option>'+PROOF_TYPES.map(p=>'<option'+(p===n.guardianProofType?' selected':'')+'>'+p+'</option>').join('')+'</select>')+
+      fld('Guardian Proof Number',true,'<input type="text" value="'+esc(n.guardianProofNumber)+'" oninput="setNom('+i+',\'guardianProofNumber\',this.value)"/>')+
+    '</div>';
+  } else {
+    extra='<div class="twocol">'+
+      fld('Email',true,'<input type="email" value="'+esc(n.email)+'" oninput="setNom('+i+',\'email\',this.value)"/>')+
+      fld('Phone',true,'<input type="text" value="'+esc(n.phone)+'" oninput="setNom('+i+',\'phone\',this.value)"/>')+
+      fld('Identity Proof Type',true,'<select onchange="setNom('+i+',\'proofType\',this.value)"><option value="">Select</option>'+PROOF_TYPES.map(p=>'<option'+(p===n.proofType?' selected':'')+'>'+p+'</option>').join('')+'</select>')+
+      fld('Identity Proof Number',true,'<input type="text" value="'+esc(n.proofNumber)+'" oninput="setNom('+i+',\'proofNumber\',this.value)"/>')+
+    '</div>'+
+    '<div class="chk'+(n.sameAddr?' on':'')+'" onclick="setNom('+i+',\'sameAddr\',!state.wizard.data.nominees['+i+'].sameAddr);patchMain()"><div class="box">'+(n.sameAddr?ic('check'):'')+'</div><div class="txt">Address same as investor\'s permanent address</div></div>'+
+    (!n.sameAddr?'<div class="twocol">'+fld('Address Line 1',true,'<input type="text" value="'+esc(n.addr1)+'" oninput="setNom('+i+',\'addr1\',this.value)"/>')+fld('PIN Code',true,'<input type="text" value="'+esc(n.pincode)+'" oninput="setNom('+i+',\'pincode\',this.value.replace(/\\\\D/g,\'\').slice(0,6))"/>')+'</div>':'');
+  }
+  return '<div class="nom-card"><div class="nom-head"><div class="t">Nominee '+(i+1)+(n.name?' · '+esc(n.name):'')+(minor?'<span class="minor-badge">MINOR</span>':'')+'</div>'+
+    '<button class="kebab" onclick="delNominee('+i+')">'+ic('trash')+'</button></div>'+
+    '<div class="nom-body">'+inner+extra+'</div></div>';
+}
+function setNom(i,k,v){ state.wizard.data.nominees[i][k]=v; state.wizard.dirty=true; }
+function updateAlloc(){ patchMain(); }
+function validNominee(){
+  const dd=state.wizard.data;
+  if(dd.nomineeChoice==='optout') return true;
+  if(dd.nomineeChoice==='add'){
+    if(!dd.nominees.length) return false;
+    const total=dd.nominees.reduce((s,n)=>s+(parseInt(n.allocation)||0),0);
+    if(total!==100) return false;
+    return dd.nominees.every(n=>n.name&&n.dob&&n.relationship);
+  }
+  return false;
+}
+
+/* ============================================================ REVIEW & SEND */
+function reviewRows(){
+  const dd=state.wizard.data; const inv=activeInv();
+  const secs=[];
+  secs.push(['Investor & Contact',[
+    ['Name',inv.name,'dist'],['Email',dd.email,'inv'],['Mobile','+91 '+dd.mobile,'inv'],
+  ]]);
+  if(state.wizard.journey==='kyc'){
+    secs.push(['KYC',[
+      ['PAN',inv.pan!=='—'?inv.pan:'FMKPS****4L','sys'],["Father's Name",dd.fatherName,'dist'],['Aadhaar','••••'+dd.aadhaar4,'dist'],
+      ['Digilocker','Verified','inv'],['eSign','Signed','inv'],
+    ]]);
+  }
+  secs.push(['Demographic & Financial',[
+    ['Gender',dd.gender,'dist'],['Tax Status',dd.taxStatus,'dist'],['Occupation',dd.occupation,'dist'],['Income Slab',dd.income,'dist'],['Source of Wealth',dd.wealth,'dist'],['PEP',dd.pep,'dist'],
+  ]]);
+  secs.push(['Address & Bank',[
+    ['Address',(dd.addr1||'12 Lake Road')+', '+(dd.city||'Kolkata'),'dist'],['PIN',dd.pin||'700091','dist'],
+    ['Account',dd.bankHolder||inv.name+' · ••••'+((dd.bankAcc||'12345678').slice(-4)),'dist'],['Penny drop','₹0.01 verified','sys'],
+  ]]);
+  if(dd.nomineeChoice==='optout') secs.push(['Nominees',[['Nominee',state.demo.videoDecl?'Opted out — video declaration pending':'Opted out','dist']]]);
+  else secs.push(['Nominees',dd.nominees.map(n=>[n.name||'Nominee',(n.relationship||'')+' · '+(n.allocation||0)+'%','dist'])]);
+  return secs;
+}
+function stepReview(){
+  const inv=activeInv();
+  const sent = inv.status==='Awaiting Investor'&&inv.reviewSent;
+  const secs=reviewRows();
+  const body='<div style="max-width:680px;">'+
+    (sent?'':'<div style="font-size:13.5px;color:var(--muted);margin-bottom:14px;">Review all details before sending to the investor for verification.</div>')+
+    secs.map(([title,rows])=>'<div class="rev-sec"><div class="rev-head"><div class="t">'+title+'</div>'+(sent?'':'<button class="link" onclick="editSection(\''+title+'\')">Edit</button>')+'</div>'+
+      '<div class="rev-body">'+rows.map(r=>'<div class="rev-row"><span class="k">'+r[0]+'</span><span class="v">'+esc(r[1])+'</span><span class="prov '+r[2]+'">'+(r[2]==='dist'?'Entered by Distributor':r[2]==='inv'?'Verified by Investor':'Verified by System')+'</span></div>').join('')+'</div></div>').join('')+
+  '</div>';
+  let footer;
+  if(sent){
+    footer='<div style="width:100%;"><div class="inset"><div style="font-size:14px;font-weight:600;margin-bottom:10px;">Link sent to +91 '+esc(inv.mobile)+' · awaiting investor…</div>'+sendChecklist()+
+      '<div class="row" style="gap:10px;margin-top:12px;"><button class="btn ghost sm" onclick="resendReview()">'+ic('refresh')+'Resend link</button>'+
+      '<button class="link" onclick="toggleDrop()">DEMO: '+(state.phone.drop?'drops off':'completes')+'</button></div></div></div>';
+  } else {
+    footer='<button class="btn grey" onclick="wizPrev()">'+ic('chevLeft')+'Previous</button>'+
+      '<button class="btn primary" onclick="sendToInvestor()">Send to Investor for Verification'+ic('send')+'</button>';
+  }
+  const eb=sent?'Awaiting Investor':'Entered by Distributor';
+  const bodyWithBadge='<span class="entered-by" style="'+(sent?'background:var(--warn-tint);color:var(--warn-pill-fg);':'')+'">'+ic(sent?'clock':'lock')+eb+'</span>'+body;
+  return '<div class="stepcard"><div class="step-eyebrow">'+(state.wizard.journey==='kyc'?'Step 11':'Step 7')+'</div>'+
+    '<div class="step-title"><span class="b">Review &</span> <span class="n">Send</span></div><div class="step-sep"></div>'+
+    bodyWithBadge+'<div class="stepfoot">'+footer+'</div></div>';
+}
+function editSection(title){ const map={'Investor & Contact':'investor_details','KYC':'kyc_personal','Demographic & Financial':'ob_demographic','Address & Bank':'ob_bank','Nominees':'ob_nominee'}; if(map[title]){ state.wizard.step=map[title]; state.wizard._returnReview=true; render(); } }
+function sendChecklist(){
+  const s=state.phone.sub;
+  const steps=[['Link sent',true],['Link opened',s>=1],['Details reviewed',s>=2],['OTP verified',s>=3]];
+  return '<div class="checklist">'+steps.map((st,i)=>{ const done=st[1],active=!done&&(i===0||steps[i-1][1]); return '<div class="cl '+(done?'done':active?'active':'')+'"><div class="ci">'+(done?ic('check'):active?'<span class="spin"></span>':'')+'</div><div class="ct">'+st[0]+'</div></div>'; }).join('')+'</div>';
+}
+function sendToInvestor(){ const inv=activeInv(); inv.reviewSent=true; setPill('Awaiting Investor'); state.phone.mode='review_flow'; state.phone.sub=0; state.phone.drop=false; render(); }
+function resendReview(){ toast('Review link resent.'); state.phone.drop=false; patchPhone(); }
+function reviewComplete(){ state.wizard.step='approval'; state.phone.mode='idle'; render(); }
+
+/* ============================================================ APPROVAL */
+function stepApproval(){
+  const inv=activeInv();
+  const body='<div style="text-align:center;padding:24px 0;">'+
+    '<div class="hero-check">'+ic('check')+'</div>'+
+    '<div style="font-size:20px;font-weight:700;">Investor verified & approved</div>'+
+    '<div class="muted" style="font-size:13.5px;margin-top:8px;">Approved via OTP · +91 '+esc(inv.mobile)+' · just now</div>'+
+    '<div class="prov inv" style="display:inline-block;margin-top:14px;padding:5px 12px;font-size:12px;">All data points confirmed by investor</div>'+
+    '<div style="margin-top:24px;"><button class="btn primary" onclick="state.wizard.step=\'complete\';render()">Continue'+ic('chevRight')+'</button></div>'+
+  '</div>';
+  return stepShell(state.wizard.journey==='kyc'?'Step 12':'Step 8','Investor','Approval',body,false,'Verified by Investor');
+}
+
+/* ============================================================ COMPLETE */
+function stepComplete(){
+  const inv=activeInv();
+  const dd=state.wizard.data;
+  const chips=[];
+  if(state.wizard.journey==='kyc') chips.push('KYC verified');
+  chips.push('Bank verified');
+  chips.push(dd.nomineeChoice==='optout'?'Nominee opted out':'Nominee added');
+  chips.push('Investor approved');
+  const body='<div style="text-align:center;padding:24px 0;">'+
+    '<div class="hero-check">'+ic('check')+'</div>'+
+    '<div style="font-size:22px;font-weight:700;">Onboarding Complete</div>'+
+    '<div class="muted" style="font-size:14px;margin-top:8px;">'+esc(inv.name)+' is ready to invest.</div>'+
+    '<div class="sumchips">'+chips.map(c=>'<span class="sumchip">'+ic('check')+c+'</span>').join('')+'</div>'+
+    '<div class="row" style="gap:12px;justify-content:center;margin-top:8px;">'+
+      '<button class="btn grey" onclick="finishOnboarding()">Back to Dashboard</button>'+
+      '<button class="btn primary" onclick="toast(\'Order placement — outside this demo. Backend already supports InitiatedBy: Distributor on purchase orders.\')">Start first investment</button>'+
+    '</div></div>';
+  return stepShell(state.wizard.journey==='kyc'?'Step 13':'Step 9','Onboarding','Complete',body,false,'Verified by Investor');
+}
+function finishOnboarding(){ setPill('Completed'); const inv=activeInv(); inv.resume='complete'; inv.journey=state.wizard.journey; backToDash(); }
+
+/* ============================================================ VIEW (read-only) */
+function renderViewScreen(){
+  const inv=activeInv();
+  // build a static recap from seed + generic
+  const secs=[
+    ['Investor & Contact',[['Name',inv.name,'dist'],['Email',inv.email,'inv'],['Mobile','+91 '+inv.mobile,'inv'],['PAN',inv.pan,'sys']]],
+    ['KYC',[['KYC Status',inv.status==='Investing'?'Verified':'Verified','sys'],['Digilocker','Verified','inv'],['eSign','Signed','inv']]],
+    ['Bank',[['Account',inv.name+' · ••••4021','dist'],['Penny drop','₹0.01 verified','sys']]],
+    ['Nominees',[['Nominee 1','Spouse · 100%','dist']]],
+  ];
+  const notesCard = '<div class="card p20" style="margin-bottom:16px;"><div class="row between" style="margin-bottom:'+(inv.notes.length?'12px':'0')+';">'+
+      '<div style="font-size:14px;font-weight:700;">Notes</div><button class="btn ghost sm" onclick="openNotes('+inv.id+')">'+ic('edit')+'Add / view</button></div>'+
+      (inv.notes.length?inv.notes.map(n=>'<div class="note-item">'+esc(n.t)+'<div class="meta">'+esc(n.by)+' · '+esc(n.at)+'</div></div>').join(''):'<div class="muted" style="font-size:13px;">No notes yet.</div>')+
+    '</div>';
+  return '<div class="wiz-head"><button class="backchip" onclick="backToDash()">'+ic('chevLeft')+'</button>'+
+    '<div class="h2tone"><span class="b">Investor </span><span class="n">Profile</span></div><span class="name-chip">Read only</span></div>'+
+    '<div style="max-width:760px;">'+
+    notesCard+
+    '<div class="stepcard">'+
+    secs.map(([title,rows])=>'<div class="rev-sec"><div class="rev-head"><div class="t">'+title+'</div></div><div class="rev-body">'+
+      rows.map(r=>'<div class="rev-row"><span class="k">'+r[0]+'</span><span class="v">'+esc(r[1])+'</span><span class="prov '+r[2]+'">'+(r[2]==='dist'?'Entered by Distributor':r[2]==='inv'?'Verified by Investor':'Verified by System')+'</span></div>').join('')+
+      '</div></div>').join('')+
+    '<button class="btn grey" style="margin-top:12px;" onclick="backToDash()">'+ic('chevLeft')+'Back</button>'+
+    '</div></div>';
+}
+
+/* ============================================================ PHONE SIMULATOR */
+function renderPhoneCol(){ return '<div class="phonecol" id="phonecol">'+renderPhoneInner()+'</div>'; }
+function renderPhoneInner(){
+  if(state.route==='refer') return renderReferRight();
+  const live=state.phone.mode!=='idle';
+  const inv=activeInv();
+  const capName=inv&&inv.name?inv.name:'investor';
+  const capMode={idle:'Idle — no action pending',email_otp:'Email OTP delivered',sms_otp:'SMS OTP delivered',email_verify_otp:'Email verification code',digilocker_flow:'Digilocker & eSign in progress',review_flow:'Reviewing & approving'}[state.phone.mode]||'';
+  return '<div class="cap"><span class="dot'+(live?' live':'')+'"></span>Investor\'s phone</div>'+
+    '<div class="phone-bezel"><div class="phone-notch"></div><div class="phone-screen">'+
+      '<div class="phone-status"><span>9:41</span><span>●●●●</span></div>'+
+      '<div class="phone-body">'+phoneScreen()+'</div>'+
+    '</div></div>'+
+    '<div class="phone-caption">'+esc(capName)+' · '+capMode+'</div>';
+}
+function renderReferRight(){
+  const live=state.phone.mode!=='refer_idle';
+  const qrCard='<div class="qr-card">'+
+    '<div class="qr-card-h">'+ic('qr')+'Your Referral QR</div>'+
+    '<div class="qr-box">'+qrSvg(180)+'</div>'+
+    '<div class="qr-url">https://'+REFER_URL+'</div>'+
+    '<button class="btn full" style="background:#25D366;color:#fff;margin-top:12px;" onclick="shareWhatsapp()">'+WA_ICON+'Share on WhatsApp</button>'+
+    '<div class="row" style="gap:8px;margin-top:8px;"><button class="btn ghost sm" style="flex:1;" onclick="copyReferLink()">'+ic('copy')+'Copy link</button>'+
+      '<button class="btn ghost sm" style="flex:1;" onclick="downloadQr()">'+ic('download')+'Save QR</button></div>'+
+  '</div>';
+  const capMode={refer_idle:'Waiting to share',refer_share:'Referral message sent',refer_install:'Installing Perccent',refer_done:'Installed · you earned ₹200'}[state.phone.mode]||'';
+  return '<div class="cap"><span class="dot'+(live?' live':'')+'"></span>Prospect\'s phone</div>'+
+    qrCard+
+    '<div class="phone-bezel" style="margin-top:18px;"><div class="phone-notch"></div><div class="phone-screen">'+
+      '<div class="phone-status"><span>9:41</span><span>●●●●</span></div>'+
+      '<div class="phone-body">'+referPhoneScreen()+'</div>'+
+    '</div></div>'+
+    '<div class="phone-caption">Prospect · '+capMode+'</div>';
+}
+function referPhoneScreen(){
+  const m=state.phone.mode;
+  if(m==='refer_idle') return '<div class="ph-idle"><img src="'+LOGO_SRC+'"/><div class="t">Share your QR to preview<br/>the referral flow</div></div>';
+  if(m==='refer_share') return phReferWhatsapp();
+  if(m==='refer_install') return phReferInstall();
+  if(m==='refer_done') return phReferDone();
+  return '';
+}
+function phReferWhatsapp(){
+  return '<div class="wa">'+
+    '<div class="wa-header"><span class="wa-back">'+ic('chevLeft')+'</span><div class="wa-av">SM</div><div><div class="wa-name">Sagnik Mitra</div><div class="wa-status">Perccent Distributor</div></div></div>'+
+    '<div class="wa-chat">'+
+      '<div class="wa-msg">'+
+        '<div class="wa-qr">'+qrSvg(150)+'<div class="wa-qr-brand"><img src="'+LOGO_SRC+'"/></div></div>'+
+        '<div class="wa-txt">🎉 Start saving smart with <b>Perccent</b>!<br/><br/>Download the app using my referral link and open your investment account in minutes — I\'ll help you every step of the way.<br/><br/>👉 <span class="wa-link" onclick="referSimInstall()">https://'+REFER_URL+'</span><br/><br/>— Sagnik Mitra · Perccent Distributor (ARN-249811)</div>'+
+        '<div class="wa-time">9:41 AM ✓✓</div>'+
+      '</div>'+
+      '<div class="tap-hint" onclick="referSimInstall()">'+mi('touch_app',{size:15})+' Tap the link to install</div>'+
+    '</div>'+
+  '</div>';
+}
+function phReferInstall(){
+  return '<div class="webview"><div class="wv-bar">'+ic('lock')+REFER_URL+'</div><div class="wv-body" style="text-align:center;">'+
+    '<div style="width:74px;height:74px;border-radius:18px;background:var(--chip);display:flex;align-items:center;justify-content:center;margin:8px auto 12px;"><img src="'+LOGO_SRC+'" style="height:26px;"/></div>'+
+    '<div style="font-size:17px;font-weight:700;">Perccent — Easy Saving App</div>'+
+    '<div style="font-size:12px;color:var(--muted);margin:4px 0 2px;">Mutual Funds · SIP · Goals</div>'+
+    '<div style="font-size:12px;color:var(--ok-pill-fg);font-weight:600;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:4px;">'+mi('star',{size:15,color:'#F5A623',fill:true})+'4.8 · 1Cr+ downloads</div>'+
+    '<div class="refer-tag">Referred by Sagnik Mitra</div>'+
+    '<button class="btn-wv" style="margin-top:14px;" onclick="referSimDone()">'+ic('download','')+' Install</button>'+
+  '</div></div>';
+}
+function phReferDone(){
+  return '<div class="success-ph"><div class="sc">'+ic('check')+'</div><div style="font-size:17px;font-weight:700;">App installed</div>'+
+    '<div class="muted" style="font-size:13px;line-height:1.5;">The prospect installed Perccent via your QR.</div>'+
+    '<div class="earn-badge">You earned ₹200</div>'+
+    '<button class="btn-wv" style="max-width:200px;margin-top:6px;" onclick="state.phone.mode=\'refer_idle\';patchPhone()">Done</button></div>';
+}
+function phoneScreen(){
+  switch(state.phone.mode){
+    case 'idle': return '<div class="ph-idle"><img src="'+LOGO_SRC+'"/><div class="t">No investor action right now</div></div>';
+    case 'email_otp': return phMail('Your Perccent verification code',OTP_EMAIL,'Use this code to verify your email with your distributor.');
+    case 'sms_otp': return phSms('PERCNT',OTP_PHONE+' is your Perccent OTP. Valid for 10 minutes. Do not share.');
+    case 'email_verify_otp': return phMail('Verify your email',OTP_EMAILVERIFY,'Enter this code to confirm your email address.');
+    case 'digilocker_flow': return phDigilocker();
+    case 'review_flow': return phReview();
+  }
+  return '';
+}
+function phMail(subj,code,txt){
+  return '<div class="mail"><div class="from"><div class="mav">P</div><div><div class="fn">Perccent</div><div class="fe">no-reply@perccent.com</div></div></div>'+
+    '<div class="subj">'+subj+'</div><div class="otpbig">'+code.replace(/(\d{3})(\d{3})/,'$1 $2')+'</div><div class="mtxt">'+txt+'</div></div>';
+}
+function phSms(from,body,tapFn,tapLabel){
+  const linkified=body.replace(/(https:\/\/[^\s]+)/,'<span class="lnk">$1</span>');
+  return '<div class="sms-wrap"><div class="sms-hdr">'+from+'</div><div class="sms-time">Today 9:41 AM</div>'+
+    '<div class="sms">'+linkified+'</div>'+
+    (tapFn?'<div class="tap-hint" onclick="'+tapFn+'" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;">'+mi('touch_app',{size:15})+'Tap the link</div>':'')+'</div>';
+}
+/* --- Digilocker flow (sub 0..7) --- */
+function phDigilocker(){
+  const s=state.phone.sub;
+  if(state.phone.drop&&s===0){
+    return '<div class="sms-wrap"><div class="sms-hdr">PERCNT</div><div class="sms-time">Today 9:41 AM</div>'+
+      '<div class="sms">Complete your KYC verification with Perccent: <span class="lnk">https://percc.nt/k/riya7</span> — link valid 24h</div>'+
+      '<div class="phone-caption" style="color:var(--warn-pill-fg);margin-top:16px;">Investor hasn\'t opened the link yet…</div></div>';
+  }
+  if(s===0) return '<div class="sms-wrap"><div class="sms-hdr">PERCNT</div><div class="sms-time">Today 9:41 AM</div>'+
+    '<div class="sms">Complete your KYC verification with Perccent: <span class="lnk">https://percc.nt/k/riya7</span> — link valid 24h</div>'+
+    '<div class="tap-hint" onclick="dglNext()" style="display:flex;align-items:center;justify-content:center;gap:5px;">'+mi('touch_app',{size:15})+'Tap the link</div></div>';
+  if(s===1) return '<div class="webview"><div class="wv-bar">'+ic('lock')+'percc.nt/k/riya7</div><div class="wv-body">'+
+    '<img class="wv-logo" src="'+LOGO_SRC+'"/><div style="font-size:16px;font-weight:700;margin-bottom:4px;">Verify your identity with <span style="color:#6C3FC5">DigiLocker</span></div>'+
+    '<div class="idcard"><div class="n">'+esc((activeInv()||{}).name||'Riya Sharma')+'</div><div class="p">PAN: '+esc((activeInv()||{}).pan||'FMKPS****4L')+'</div></div>'+
+    '<button class="btn-wv purple" onclick="dglNext()">Continue to DigiLocker</button></div></div>';
+  if(s===2) return '<div class="webview"><div class="wv-bar">'+ic('lock')+'digilocker.gov.in</div><div class="wv-body dgl-body">'+
+    '<div style="font-size:16px;font-weight:700;color:#6C3FC5;margin-bottom:12px;">DigiLocker</div>'+
+    '<div style="font-size:13px;color:var(--muted);margin-bottom:12px;">Perccent requests access to:</div>'+
+    '<div class="chk on" style="pointer-events:none"><div class="box" style="background:#6C3FC5;border-color:#6C3FC5">'+ic('check')+'</div><div class="txt" style="color:var(--ink)">Aadhaar (e-KYC)</div></div>'+
+    '<div class="chk on" style="pointer-events:none"><div class="box" style="background:#6C3FC5;border-color:#6C3FC5">'+ic('check')+'</div><div class="txt" style="color:var(--ink)">Address proof</div></div>'+
+    '<div class="field" style="margin-top:12px;"><label>Aadhaar Number</label><div class="locked">••••••••7093</div></div>'+
+    '<button class="btn-wv purple" onclick="dglNext()">Get OTP</button></div></div>';
+  if(s===3) return dglOtpScreen('Enter DigiLocker OTP',OTP_DGL,'dglNext','Allow');
+  if(s===4) return phSuccess('Documents shared ✓','Aadhaar e-KYC & address proof shared with Perccent.','dglNext','Continue to eSign');
+  if(s===5) return '<div class="webview"><div class="wv-bar">'+ic('lock')+'esign.perccent.com</div><div class="wv-body">'+
+    '<img class="wv-logo" src="'+LOGO_SRC+'"/><div style="font-size:16px;font-weight:700;margin-bottom:8px;">Sign your KYC application</div>'+
+    '<div style="font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:12px;">eSign with Aadhaar to submit your KYC to the KRA.</div>'+
+    '<button class="btn-wv" onclick="dglNext()">eSign with Aadhaar</button></div></div>';
+  if(s===6) return dglOtpScreen('Enter eSign OTP',OTP_ESIGN,'dglNext','Sign');
+  if(s>=7) return phSuccess('KYC submitted ✓','You can close this window. Your KYC is now with the KRA.','dglComplete','Done');
+  return '';
+}
+function dglOtpScreen(title,code,nextFn,btnLabel){
+  return '<div class="webview"><div class="wv-bar">'+ic('lock')+'secure verification</div><div class="wv-body">'+
+    '<div style="font-size:15px;font-weight:700;margin-bottom:10px;">'+title+'</div>'+
+    '<div class="sms" style="margin-bottom:14px;">'+code+' is your OTP for Perccent verification.</div>'+
+    '<div class="otpwrap" style="justify-content:center;">'+[0,1,2,3,4,5].map(j=>'<input class="otpbox sm" value="'+code[j]+'" readonly style="border-color:var(--brand)"/>').join('')+'</div>'+
+    '<button class="btn-wv'+(title.includes('DigiLocker')?' purple':'')+'" style="margin-top:14px;" onclick="'+nextFn+'()">'+btnLabel+'</button></div></div>';
+}
+function phSuccess(title,sub,nextFn,btnLabel){
+  return '<div class="success-ph"><div class="sc">'+ic('check')+'</div><div style="font-size:17px;font-weight:700;">'+title+'</div>'+
+    '<div class="muted" style="font-size:13px;line-height:1.5;">'+sub+'</div>'+
+    (nextFn?'<button class="btn-wv" style="max-width:200px;margin-top:8px;" onclick="'+nextFn+'()">'+btnLabel+'</button>':'')+'</div>';
+}
+function dglNext(){ state.phone.sub++; patchPhone(); patchMain(); }
+
+/* --- Review flow (sub 0..4) --- */
+function phReview(){
+  const s=state.phone.sub; const inv=activeInv(); const dd=state.wizard.data;
+  const needVideo = dd.nomineeChoice==='optout' && state.demo.videoDecl;
+  if(state.phone.drop&&s===0){
+    return '<div class="sms-wrap"><div class="sms-hdr">PERCNT</div><div class="sms-time">Today 9:41 AM</div>'+
+      '<div class="sms">Please verify your details for your Perccent account: <span class="lnk">https://percc.nt/r/riya7</span></div>'+
+      '<div class="phone-caption" style="color:var(--warn-pill-fg);margin-top:16px;">Investor hasn\'t opened the link yet…</div></div>';
+  }
+  if(s===0) return '<div class="sms-wrap"><div class="sms-hdr">PERCNT</div><div class="sms-time">Today 9:41 AM</div>'+
+    '<div class="sms">Please verify your details for your Perccent account: <span class="lnk">https://percc.nt/r/riya7</span></div>'+
+    '<div class="tap-hint" onclick="revNext()" style="display:flex;align-items:center;justify-content:center;gap:5px;">'+mi('touch_app',{size:15})+'Tap the link</div></div>';
+  if(s===1){
+    const rows=[['Name',inv?inv.name:'Riya Sharma'],['Mobile','+91 '+(inv?inv.mobile:'')],['Email',dd.email||'riya@sharma99.com'],['PAN',inv?inv.pan:'FMKPS****4L'],['Bank','••••'+((dd.bankAcc||'12344021').slice(-4))]];
+    return '<div class="webview"><div class="wv-bar">'+ic('lock')+'percc.nt/r/riya7</div><div class="wv-body">'+
+      '<img class="wv-logo" src="'+LOGO_SRC+'"/><div style="font-size:15px;font-weight:700;">Hi '+esc((inv?inv.name:'Riya').split(' ')[0])+', please review</div>'+
+      '<div style="font-size:12px;color:var(--muted);margin:2px 0 12px;">the details your distributor Sagnik entered</div>'+
+      rows.map(r=>'<div class="rev-row"><span class="k">'+r[0]+'</span><span class="v">'+esc(r[1])+'</span></div>').join('')+
+      (needVideo?'<div class="card p16" style="margin-top:14px;border-style:dashed;text-align:center;"><div style="font-size:13px;font-weight:600;margin-bottom:6px;">Video declaration required</div>'+
+        '<div style="font-size:12px;color:var(--muted);line-height:1.5;">Record: "I confirm I do not wish to add a nominee for my investments."</div>'+
+        (dd._videoRecorded?'<div style="color:var(--ok-pill-fg);font-weight:600;margin-top:10px;font-size:13px;">'+ic('check','')+' Recorded 0:18 ✓ (2.1 MB)</div>':'<button class="rec-btn" onclick="recordVideo()"></button>')+'</div>':'')+
+      '<div class="chk'+(dd._reviewConfirm?' on':'')+'" style="margin-top:14px;" onclick="setD(\'_reviewConfirm\',!d(\'_reviewConfirm\'));patchPhone()"><div class="box">'+(dd._reviewConfirm?ic('check'):'')+'</div><div class="txt">I confirm all details are correct</div></div>'+
+      '<button class="btn-wv" onclick="revConfirm()"'+((needVideo&&!dd._videoRecorded)||!dd._reviewConfirm?' disabled style="opacity:.5"':'')+'>Confirm with OTP</button></div></div>';
+  }
+  if(s===2) return '<div class="webview"><div class="wv-bar">'+ic('lock')+'percc.nt/r/riya7</div><div class="wv-body">'+
+    '<div style="font-size:15px;font-weight:700;margin-bottom:10px;">Enter confirmation OTP</div>'+
+    '<div class="sms" style="margin-bottom:14px;">'+OTP_REVIEW+' is your Perccent confirmation OTP.</div>'+
+    '<div class="otpwrap" style="justify-content:center;">'+[0,1,2,3,4,5].map(j=>'<input class="otpbox sm" value="'+OTP_REVIEW[j]+'" readonly style="border-color:var(--brand)"/>').join('')+'</div>'+
+    '<button class="btn-wv" style="margin-top:14px;" onclick="revNext()">Verify</button></div></div>';
+  if(s>=3) return '<div class="success-ph"><div class="sc">'+ic('check')+'</div><div style="font-size:17px;font-weight:700;">All set, '+esc((inv?inv.name:'Riya').split(' ')[0])+'!</div>'+
+    '<div class="muted" style="font-size:13px;">Your onboarding is complete.</div>'+
+    '<button class="btn-wv" style="max-width:200px;margin-top:8px;" onclick="reviewComplete()">Done</button></div>';
+  return '';
+}
+function recordVideo(){ setD('_videoRecorded',true); patchPhone(); }
+function revNext(){ state.phone.sub++; patchPhone(); patchMain(); }
+function revConfirm(){ const dd=state.wizard.data; const needVideo=dd.nomineeChoice==='optout'&&state.demo.videoDecl; if((needVideo&&!dd._videoRecorded)||!dd._reviewConfirm) return; state.phone.sub=2; patchPhone(); }
+
+/* ============================================================ INIT */
+initState();
+render();
+</script>
+</body>
+</html>
