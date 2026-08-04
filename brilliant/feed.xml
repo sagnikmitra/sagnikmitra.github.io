@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>The Brilliant Employee</title>
+  <link>https://sgnk.ai/brilliant</link>
+  <description>One person, one AI employee, and the workplace built around him so the work can be trusted.</description>
+  <language>en</language>
+  <lastBuildDate>Tue, 04 Aug 2026 19:47:27 +0000</lastBuildDate>
+    <item>
+      <title>The employee I never interviewed</title>
+      <link>https://sgnk.ai/brilliant/never-interviewed</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/never-interviewed</guid>
+      <description>You cannot vet an AI worker the way you vet a person. So I stopped trying, and built the workplace around him instead.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
+</channel></rss>

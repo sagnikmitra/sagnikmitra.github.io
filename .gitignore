@@ -2,3 +2,8 @@
 
 # SGNK continuity snapshots (local working memory)
 .sgnk/
+
+# Editor and OS noise
+.claude/
+.DS_Store
+**/.DS_Store

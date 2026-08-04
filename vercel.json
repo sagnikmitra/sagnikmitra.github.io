@@ -1,4 +1,22 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/brilliant/01",
+      "destination": "/brilliant/never-interviewed",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/brilliant/(.*)/deck.pdf",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        }
+      ]
+    }
+  ]
 }
