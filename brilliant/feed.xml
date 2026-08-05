@@ -4,7 +4,70 @@
   <link>https://sgnk.ai/brilliant</link>
   <description>One person, one AI employee, and the workplace built around him so the work can be trusted.</description>
   <language>en</language>
-  <lastBuildDate>Tue, 04 Aug 2026 20:05:13 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 05 Aug 2026 00:30:06 +0000</lastBuildDate>
+    <item>
+      <title>The Loop That Would Learn Backwards</title>
+      <link>https://sgnk.ai/brilliant/loop-learned-backwards</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/loop-learned-backwards</guid>
+      <description>A learning loop is not proven by the fact that it learns. It is proven by the direction. Mine had the sign the wrong way round.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>The Lethal Trifecta</title>
+      <link>https://sgnk.ai/brilliant/lethal-trifecta</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/lethal-trifecta</guid>
+      <description>Reading untrusted pages, sending messages, and holding private files are each safe alone. Together they are an exfiltration pipe.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>The Ledger: one line per task, forever</title>
+      <link>https://sgnk.ai/brilliant/one-line-ledger</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/one-line-ledger</guid>
+      <description>Every finished task appends a line to a file the model never writes to itself. Without it, an improvement claim is a memory of feeling faster.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>The Scorekeeper With an Eraser</title>
+      <link>https://sgnk.ai/brilliant/scorekeeper-eraser</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/scorekeeper-eraser</guid>
+      <description>My scoreboard read 79.3%. A prior in the reporting script was discarding one model's successes before the arithmetic ran.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Failure Arrives in the Same Tone as Success</title>
+      <link>https://sgnk.ai/brilliant/silent-failure</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/silent-failure</guid>
+      <description>Sixteen nightly backups were dead and nothing reported it, because a job that does nothing and a job that works print the same quiet output.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Worse Than a Coin Flip</title>
+      <link>https://sgnk.ai/brilliant/worse-than-random</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/worse-than-random</guid>
+      <description>I ran my router against a benchmark I did not write. It scored worse than choosing at random, and I published the number.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>The Homework That Was Impossible</title>
+      <link>https://sgnk.ai/brilliant/impossible-homework</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/impossible-homework</guid>
+      <description>A queue reported nothing waiting, which is the same string a healthy queue prints. Two correct components had starved the pool to nothing.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>My gate recommends the cheap model 89% of the time. It ran 0.2% of the time.</title>
+      <link>https://sgnk.ai/brilliant/cheap-model-gate</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/cheap-model-gate</guid>
+      <description>My triage step sizes nine tasks in ten to the cheapest model. I quoted that for five weeks as what my system did. It is not.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>The Leak Was in the AI's Own Chat Logs</title>
+      <link>https://sgnk.ai/brilliant/leaked-chat-logs</link>
+      <guid isPermaLink="true">https://sgnk.ai/brilliant/leaked-chat-logs</guid>
+      <description>My audit agent reported leaked tokens at a named path. The path had never existed. Dismissing it there would have been the mistake.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>The employee I never interviewed</title>
       <link>https://sgnk.ai/brilliant/never-interviewed</link>
