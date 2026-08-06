@@ -1,0 +1,674 @@
+<!doctype html>
+<!--
+  sgnk Article Shell · v1.0
+  The minimum viable sgnk Writes / research-page starter.
+  Drop in. Replace the {{PLACEHOLDERS}}. Ship.
+
+  Canonical reference: sgnk.ai/harness
+  Design system: ./sgnk-design-system.md
+  Voice: ~/.claude/skills/sgnk-writer
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{{ICONIC_TITLE}} — {{TAGLINE_SHORT}} · sgnk</title>
+<meta name="description" content="{{META_DESCRIPTION_120_TO_160_CHARS}}" />
+<meta name="author" content="Sagnik Mitra" />
+<meta name="theme-color" content="#1a5cff" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{ICONIC_TITLE}} — {{TAGLINE_SHORT}}" />
+<meta property="og:description" content="{{OG_DESCRIPTION}}" />
+<meta property="og:url" content="https://sgnk.ai/{{SLUG}}" />
+<meta property="og:site_name" content="sgnk.ai" />
+<meta property="og:image" content="https://sgnk.ai/{{SLUG}}/og.png" />
+<meta property="article:author" content="Sagnik Mitra" />
+<meta property="article:published_time" content="{{YYYY-MM-DD}}" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ICONIC_TITLE}} — {{TAGLINE_SHORT}}" />
+<meta name="twitter:description" content="{{TWITTER_DESCRIPTION}}" />
+<meta name="twitter:image" content="https://sgnk.ai/{{SLUG}}/og.png" />
+
+<!-- JSON-LD: Research article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "{{FORMAL_TITLE}}",
+  "alternativeHeadline": "{{ICONIC_TITLE}}",
+  "author": { "@type": "Person", "name": "Sagnik Mitra", "url": "https://sgnk.ai", "email": "sagnik@sgnk.ai" },
+  "datePublished": "{{YYYY-MM-DD}}",
+  "publisher": { "@type": "Organization", "name": "sgnk Writes", "url": "https://sgnk.ai" },
+  "url": "https://sgnk.ai/{{SLUG}}",
+  "image": "https://sgnk.ai/{{SLUG}}/og.png"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,600,700,800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+
+<style>
+  /* ============================================================
+     sgnk Design System — drop-in CSS
+     Tokens mirror sgnk-design-system.md exactly.
+     ============================================================ */
+  :root {
+    /* Color */
+    --blue: #1a5cff;
+    --blue-soft: #e8efff;
+    --ink: #0a0a0a;
+    --ink-soft: #3a3a3a;
+    --grey: #6b6b6b;
+    --grey-soft: #b8b8b8;
+    --grey-bg: #f5f5f5;
+    --grey-line: #e5e5e5;
+    --code-bg: #0a0a0a;
+    --code-fg: #e8efff;
+    --canvas: #ffffff;
+
+    /* Layout */
+    --max: 760px;
+
+    /* Spacing */
+    --gap-xxs: 4px;
+    --gap-xs: 8px;
+    --gap-sm: 12px;
+    --gap-md: 18px;
+    --gap-lg: 24px;
+    --gap-xl: 32px;
+    --gap-xxl: 48px;
+    --gap-section: 64px;
+    --gap-header-top: 72px;
+
+    /* Radius */
+    --r-none: 0;
+    --r-sm: 2px;
+    --r-md: 8px;
+    --r-lg: 12px;
+    --r-pill: 9999px;
+
+    /* Motion */
+    --t-micro: .15s ease;
+    --t-ui: .2s ease;
+    --t-node: .13s ease;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    margin: 0;
+    font-family: 'Google Sans', 'Product Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--canvas);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  ::selection { background: var(--blue); color: var(--canvas); }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: var(--r-sm); }
+
+  a { color: var(--blue); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color var(--t-micro); }
+  a:hover { border-bottom-color: var(--blue); }
+
+  /* Skip-to-content (a11y) */
+  .skip-link {
+    position: absolute; top: -40px; left: 0; background: var(--ink); color: var(--canvas);
+    padding: 8px 16px; z-index: 100; font-size: 13px; font-weight: 600;
+  }
+  .skip-link:focus { top: 0; }
+
+  /* Reading progress */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: var(--blue); z-index: 60; transition: width .08s linear;
+  }
+
+  /* Top bar */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 28px;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    border-bottom: 1px solid var(--grey-line);
+    transition: box-shadow var(--t-ui), border-color var(--t-ui);
+  }
+  .topbar.scrolled { box-shadow: 0 4px 24px rgba(10,10,10,.06); border-bottom-color: transparent; }
+  .topbar a { color: var(--ink); font-size: 14px; font-weight: 600; letter-spacing: .02em; border-bottom: none; }
+  .topbar a:hover { color: var(--blue); }
+  .topbar .brand { font-family: 'Google Sans', sans-serif; font-size: 22px; letter-spacing: .04em; font-weight: 700; }
+  .topbar .brand b { color: var(--blue); }
+  .topbar .brand-group { display: flex; align-items: baseline; gap: 14px; }
+  .topbar .tagline {
+    font-size: 15px; font-weight: 600; letter-spacing: .01em; color: var(--ink-soft);
+    padding-left: 14px; border-left: 1px solid var(--grey-line);
+  }
+  .topbar .tagline b { color: var(--blue); font-weight: 600; }
+  .topbar nav { display: flex; gap: 24px; align-items: center; }
+  .topbar .logo-link { display: inline-flex; align-items: center; border-bottom: none; }
+  .topbar .logo-link img { height: 26px; width: auto; display: block; transition: opacity var(--t-micro); }
+  .topbar .logo-link:hover img { opacity: .6; }
+  @media (max-width: 820px) { .topbar .tagline { display: none; } .topbar { padding: 12px 22px; } }
+  @media (max-width: 640px) { .topbar .logo-link img { height: 22px; } .topbar .brand { font-size: 20px; } }
+
+  /* Hero */
+  .hero-img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--grey-line); }
+
+  /* Header */
+  header.paper { max-width: var(--max); margin: 0 auto; padding: var(--gap-header-top) var(--gap-lg) var(--gap-xxl); }
+  .eyebrow {
+    font-family: 'Google Sans', sans-serif; font-size: 12px; letter-spacing: .14em;
+    color: var(--blue); text-transform: uppercase; margin-bottom: var(--gap-lg); font-weight: 600;
+  }
+  h1.title {
+    font-size: clamp(32px, 5vw, 52px); line-height: 1.08; letter-spacing: -.02em;
+    font-weight: 800; margin: 0 0 16px;
+  }
+  .formal-title {
+    font-size: 19px; font-weight: 600; color: var(--ink); line-height: 1.35;
+    letter-spacing: -.01em; max-width: 640px; margin: 0 0 22px;
+    padding-left: 16px; border-left: 3px solid var(--blue);
+  }
+  .formal-title .kicker {
+    display: block; font-family: 'Google Sans Code', monospace;
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue);
+    font-weight: 600; margin-bottom: 7px;
+  }
+  .subtitle { font-size: 18px; color: var(--ink-soft); margin: 0 0 36px; max-width: 620px; line-height: 1.5; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: var(--gap-md); font-size: 13px; color: var(--grey);
+    border-top: 1px solid var(--grey-line); border-bottom: 1px solid var(--grey-line);
+    padding: var(--gap-md) 0; margin-bottom: var(--gap-lg);
+  }
+  .meta div span { color: var(--ink); font-weight: 600; }
+  .meta b { color: var(--ink); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--gap-xs);
+    padding: 9px 16px; font-size: 13px; font-weight: 600;
+    border: 1px solid var(--ink); background: var(--canvas); color: var(--ink);
+    border-radius: var(--r-none); cursor: pointer; transition: all var(--t-micro);
+    font-family: inherit;
+  }
+  .btn:hover { background: var(--ink); color: var(--canvas); }
+  .btn.primary { background: var(--blue); color: var(--canvas); border-color: var(--blue); }
+  .btn.primary:hover { background: var(--ink); border-color: var(--ink); }
+
+  /* Main column */
+  main { max-width: var(--max); margin: 0 auto; padding: 0 var(--gap-lg) 96px; }
+
+  /* Section heading */
+  h2 {
+    font-size: 30px; line-height: 1.18; letter-spacing: -.02em; font-weight: 800;
+    margin: 76px 0 20px; padding-top: 22px; border-top: 1px solid var(--grey-line);
+  }
+  h2 .num {
+    font-family: 'Google Sans Code', monospace; font-size: 12px; color: var(--blue);
+    display: flex; align-items: center; gap: 10px; margin-bottom: 16px; letter-spacing: .12em;
+    font-weight: 600; text-transform: uppercase;
+  }
+  h2 .num::before { content: ""; width: 24px; height: 2px; background: var(--blue); display: inline-block; flex: none; }
+  h3 { font-size: 18px; font-weight: 700; margin: 36px 0 10px; letter-spacing: -.005em; }
+  h3 .num { font-family: 'Google Sans Code', monospace; font-size: 13px; color: var(--blue); margin-right: 8px; font-weight: 500; }
+
+  p { margin: 0 0 18px; }
+  p + p { margin-top: -4px; }
+  ul, ol { padding-left: 22px; margin: 0 0 18px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--blue); }
+  strong { font-weight: 700; color: var(--ink); }
+  em { color: var(--ink-soft); }
+
+  /* Lead with drop-cap */
+  .lead { font-size: 19px; line-height: 1.6; color: var(--ink); }
+  .lead::first-letter {
+    float: left; font-size: 58px; line-height: .82; font-weight: 800;
+    padding: 4px 12px 0 0; color: var(--blue);
+  }
+
+  /* Pull-quote */
+  .pull {
+    border-left: 4px solid var(--blue); background: var(--blue-soft);
+    padding: 22px 28px; margin: 28px 0; font-size: 17px; line-height: 1.55;
+  }
+  .pull .label {
+    font-family: 'Google Sans', sans-serif; font-size: 11px; letter-spacing: .14em;
+    color: var(--blue); text-transform: uppercase; display: block; margin-bottom: 6px; font-weight: 600;
+  }
+
+  /* Walk-through readout (How to read it) */
+  .readout {
+    font-size: 14.5px; color: var(--ink-soft); line-height: 1.62;
+    border-left: 3px solid var(--blue); padding: 4px 0 4px 18px; margin: -14px 0 28px;
+  }
+  .readout .lbl {
+    font-family: 'Google Sans Code', monospace;
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue);
+    display: block; margin-bottom: 7px; font-weight: 600;
+  }
+  .readout b { color: var(--ink); font-weight: 700; }
+  .readout code { font-size: .9em; }
+
+  /* Code */
+  pre {
+    background: var(--code-bg); color: var(--code-fg);
+    padding: 20px 22px; margin: 18px 0; overflow-x: auto;
+    font-family: 'Google Sans Code', monospace; font-size: 13px; line-height: 1.6;
+    border-left: 4px solid var(--blue);
+  }
+  code {
+    font-family: 'Google Sans Code', monospace; font-size: 0.92em;
+    background: var(--grey-bg); padding: 2px 6px; border-radius: var(--r-sm);
+  }
+  pre code { background: none; padding: 0; color: inherit; font-size: 13px; }
+
+  /* Figure: code/listing */
+  figure.code .caption {
+    font-size: 12px; color: var(--grey); margin-top: -10px; margin-bottom: 24px;
+    font-family: 'Google Sans Code', monospace;
+  }
+  figure.code .caption b { color: var(--ink); }
+
+  /* Figure: diagram */
+  figure.diagram {
+    margin: 32px 0; padding: 34px 24px; background: var(--grey-bg);
+    border: 1px solid var(--grey-line); border-radius: var(--r-lg);
+  }
+  figure.diagram .caption {
+    font-size: 12px; color: var(--grey); margin-top: 20px;
+    font-family: 'Google Sans Code', monospace; text-align: center;
+  }
+  figure.diagram .caption b { color: var(--ink); }
+  .flow {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center;
+    font-family: 'Google Sans Code', monospace; font-size: 12px;
+  }
+  .node {
+    background: var(--canvas); border: 1px solid var(--ink); padding: 10px 14px;
+    text-align: center; min-width: 120px; border-radius: var(--r-md);
+    box-shadow: 0 1px 3px rgba(10,10,10,.06);
+    transition: transform var(--t-node), box-shadow var(--t-node);
+  }
+  .node:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26,92,255,.14); }
+  .node.blue { border-color: var(--blue); color: var(--blue); box-shadow: 0 1px 3px rgba(26,92,255,.12); }
+  .node.alt { background: var(--ink); color: var(--canvas); border-color: var(--ink); }
+  .arrow { color: var(--blue); font-weight: 700; font-size: 18px; line-height: 1; }
+  .flow-grid { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; }
+  .flow-grid .node { min-width: 0; }
+  .flow-grid .sep { color: var(--blue); font-weight: 700; font-size: 16px; padding: 0 2px; }
+  .flow-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 22px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--grey-line); vertical-align: top; }
+  th {
+    font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--ink); border-bottom: 2px solid var(--ink); background: var(--canvas);
+  }
+  tbody tr:hover { background: var(--blue-soft); }
+  caption {
+    caption-side: bottom; padding-top: 12px; font-size: 12px; color: var(--grey);
+    font-family: 'Google Sans Code', monospace; text-align: left;
+  }
+  caption b { color: var(--ink); }
+
+  /* TOC */
+  .toc {
+    background: var(--grey-bg); padding: 28px 28px; margin: 32px 0 48px;
+    border-left: 4px solid var(--blue);
+  }
+  .toc h4 {
+    font-family: 'Google Sans Code', monospace; font-size: 12px; letter-spacing: .14em;
+    color: var(--blue); text-transform: uppercase; margin: 0 0 14px; font-weight: 600;
+  }
+  .toc ol { columns: 2; column-gap: 32px; padding-left: 20px; margin: 0; font-size: 14px; }
+  .toc li { break-inside: avoid; margin-bottom: 6px; }
+  .toc a { color: var(--ink); transition: color var(--t-micro); border-bottom: none; }
+  .toc a:hover { color: var(--blue); }
+  .toc li.active a { color: var(--blue); font-weight: 700; }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+
+  /* References */
+  .refs { font-size: 14px; }
+  .refs ol { padding-left: 28px; }
+  .refs li { margin-bottom: 12px; }
+  .refs a { word-break: break-all; }
+
+  /* Paper link */
+  .paperlink {
+    display: inline-block; font-size: 13px; color: var(--blue); font-weight: 600;
+    margin: 4px 0 22px; border-bottom: 1px dashed var(--blue);
+  }
+  .paperlink:hover { border-bottom-style: solid; }
+
+  /* Cite block */
+  .cite-block {
+    background: var(--ink); color: var(--blue-soft); padding: 22px 24px;
+    font-family: 'Google Sans Code', monospace; font-size: 12px; line-height: 1.7;
+    position: relative; margin: 18px 0; white-space: pre; overflow-x: auto;
+  }
+  .cite-block .copy {
+    position: absolute; top: 14px; right: 14px;
+    background: var(--blue); color: var(--canvas); border: none;
+    padding: 6px 12px; font-family: inherit; font-size: 11px; cursor: pointer; letter-spacing: .04em;
+  }
+  .cite-block .copy:hover { background: var(--canvas); color: var(--ink); }
+
+  /* State chip (when a piece needs metadata signal) */
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Google Sans Code', monospace; font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase; font-weight: 600; color: var(--blue);
+    padding: 4px 10px; border: 1px solid var(--blue); background: var(--canvas);
+    border-radius: var(--r-none);
+  }
+  .chip.muted { color: var(--grey); border-color: var(--grey-line); }
+  .chip.solid { background: var(--blue); color: var(--canvas); }
+
+  /* Back to top */
+  .to-top {
+    position: fixed; bottom: 28px; right: 28px; z-index: 40;
+    width: 44px; height: 44px; border-radius: var(--r-pill);
+    background: var(--ink); color: var(--canvas);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; cursor: pointer; border: none;
+    box-shadow: 0 6px 20px rgba(10,10,10,.18);
+    opacity: 0; transform: translateY(12px); pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease, background var(--t-micro);
+  }
+  .to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .to-top:hover { background: var(--blue); }
+  @media (max-width: 640px) { .to-top { bottom: 18px; right: 18px; width: 40px; height: 40px; } }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--grey-line); margin-top: 80px; padding: 48px 24px;
+    text-align: center; color: var(--grey); font-size: 13px;
+  }
+  footer .brand {
+    font-family: 'Google Sans', sans-serif; font-size: 24px; color: var(--ink); margin-bottom: 16px;
+    letter-spacing: .04em; font-weight: 700;
+  }
+  footer .brand b { color: var(--blue); }
+  footer nav { display: flex; gap: 22px; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+  footer nav a { color: var(--ink-soft); font-weight: 500; }
+  footer .small {
+    font-family: 'Google Sans Code', monospace; font-size: 11px; color: var(--grey-soft); margin-top: 24px;
+  }
+
+  /* Tablet */
+  @media (max-width: 820px) {
+    main { padding: 0 22px 80px; }
+    header.paper { padding: 60px 22px 40px; }
+    h1.title { font-size: clamp(30px, 6vw, 44px); }
+    .formal-title { font-size: 17px; }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    html, body { overflow-x: hidden; }
+    main { padding: 0 18px 64px; }
+    header.paper { padding: 44px 18px 32px; }
+    h1.title { font-size: 32px; line-height: 1.12; }
+    .formal-title { font-size: 15px; padding-left: 12px; }
+    .subtitle { font-size: 16px; }
+    .lead { font-size: 17px; }
+    .lead::first-letter { font-size: 48px; padding-right: 10px; }
+    .meta { gap: 12px 18px; font-size: 12px; padding: 14px 0; }
+    .actions { gap: 8px; }
+    .btn { padding: 9px 13px; font-size: 12px; }
+    h2 { font-size: 24px; margin: 56px 0 16px; padding-top: 18px; }
+    h2 .num { font-size: 11px; margin-bottom: 12px; }
+    h3 { font-size: 17px; margin-top: 28px; }
+    figure.diagram { padding: 22px 14px; margin: 26px 0; }
+    .flow, .flow-row { gap: 8px; }
+    .node { min-width: 0; max-width: 100%; padding: 9px 11px; font-size: 11px; }
+    .flow-grid { gap: 4px; }
+    .flow-grid .sep { font-size: 14px; padding: 0; }
+    figure.diagram .caption { font-size: 11px; margin-top: 14px; }
+    pre { font-size: 11.5px; padding: 16px 16px; line-height: 1.55; margin: 14px 0; }
+    table { font-size: 13px; }
+    th, td { padding: 10px 11px; }
+    th { font-size: 11px; }
+    .toc { padding: 22px 20px; margin: 28px 0 40px; }
+    .toc ol { font-size: 13px; padding-left: 18px; }
+    .cite-block { font-size: 11px; padding: 56px 16px 16px; line-height: 1.65; }
+    .cite-block .copy { top: 10px; right: 10px; padding: 5px 11px; font-size: 10px; }
+    .pull { padding: 18px 20px; font-size: 15.5px; margin: 22px 0; }
+    .paperlink { font-size: 12.5px; word-break: break-word; line-height: 1.5; }
+    .readout { font-size: 13.5px; padding-left: 14px; margin: -10px 0 22px; }
+    .readout .lbl { font-size: 9.5px; }
+    .refs { font-size: 13px; }
+  }
+
+  /* Print */
+  @media print {
+    .topbar, .progress, .to-top, .actions, .cite-block .copy { display: none; }
+    body { color: #000; font-size: 11pt; line-height: 1.5; }
+    a { color: #000; border-bottom: none; }
+    a[href]::after { content: " (" attr(href) ") "; font-size: 9pt; color: #555; }
+    main { max-width: 100%; padding: 0; }
+    h2 { page-break-after: avoid; border-top: 1pt solid #888; }
+    .pull, figure.diagram { page-break-inside: avoid; border: 1pt solid #888; background: #fff; }
+    pre { background: #fff; color: #000; border: 1pt solid #888; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="progress" id="progress"></div>
+<button class="to-top" id="toTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="brand-group">
+    <a class="brand" href="/"><b>sgnk</b>.ai</a>
+    <span class="tagline">Craft. <b>Harness.</b> Deploy.</span>
+  </div>
+  <nav>
+    <a class="logo-link" href="https://sgnk.ai" aria-label="sgnk.ai"><img src="/sgnk.png" alt="sgnk" /></a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<img class="hero-img" src="/sgnk-lightrail.png" alt="sagnik → sgnk · ai" />
+
+<!-- HEADER -->
+<header class="paper">
+  <div class="eyebrow">sgnk Writes · {{YEAR}}</div>
+  <h1 class="title">{{ICONIC_TITLE}}.</h1>
+  <p class="formal-title">
+    <span class="kicker">The piece</span>
+    {{FORMAL_TITLE}}
+  </p>
+  <p class="subtitle">
+    {{SUBTITLE_ONE_PARAGRAPH_INTRO}}
+  </p>
+
+  <div class="meta">
+    <div><span>Author</span> Sagnik Mitra <b>· sgnk</b></div>
+    <div><span>Published</span> {{MONTH_YEAR}}</div>
+    <div><span>Reading time</span> ~{{N}} min</div>
+    <div><span>Status</span> {{Original research | Field notes | Reflection}}</div>
+  </div>
+
+  <div class="actions">
+    <!-- Optional primary action: download PDF, sign up, etc. -->
+    <!-- <a href="/{{SLUG}}/paper.pdf" class="btn primary" download>↓ Download the full paper (PDF)</a> -->
+    <a href="#cite" class="btn">⌘ Cite this work</a>
+    <a href="#s1" class="btn">→ Start reading</a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main id="main">
+
+<!-- TOC -->
+<div class="toc">
+  <h4>What's inside</h4>
+  <ol>
+    <li><a href="#s1">{{SECTION_1_LABEL}}</a></li>
+    <li><a href="#s2">{{SECTION_2_LABEL}}</a></li>
+    <li><a href="#s3">{{SECTION_3_LABEL}}</a></li>
+    <!-- ... more sections ... -->
+    <li><a href="#refs">References</a></li>
+    <li><a href="#cite">How to cite</a></li>
+  </ol>
+</div>
+
+<!-- SECTION 1 -->
+<h2 id="s1"><span class="num">§ 01</span>{{SECTION_1_HEADING}}.</h2>
+<p class="lead">
+  {{LEAD_PARAGRAPH — first letter becomes a 58px blue drop-cap; only used on §01.}}
+</p>
+<p>
+  {{REGULAR_BODY_PARAGRAPH}}
+</p>
+
+<div class="pull">
+  <span class="label">The one idea to hold on to</span>
+  {{ONE_SENTENCE_THESIS}}
+</div>
+
+<!-- SECTION 2 — diagram pattern -->
+<h2 id="s2"><span class="num">§ 02</span>{{SECTION_2_HEADING}}.</h2>
+<p>{{INTRO_PARAGRAPH_BEFORE_THE_DIAGRAM}}</p>
+
+<figure class="diagram">
+  <div class="flow flow-grid">
+    <div class="node">{{Step 1}}</div>
+    <span class="sep">→</span>
+    <div class="node blue">{{Step 2 emphasized}}</div>
+    <span class="sep">→</span>
+    <div class="node alt">{{Step 3 critical/gate}}</div>
+    <span class="sep">→</span>
+    <div class="node">{{Step 4}}</div>
+  </div>
+  <div class="caption"><b>Figure 1.</b> {{ONE_LINE_FIGURE_CAPTION}}</div>
+</figure>
+
+<div class="readout">
+  <span class="lbl">How to read it</span>
+  {{WALK_THROUGH_NARRATION — explain the diagram in plain language, in voice.
+  Use <b>bold</b> for the key nouns.}}
+</div>
+
+<a class="paperlink" href="/{{SLUG}}/paper.pdf#page=N">→ the full version (paper, §N)</a>
+
+<!-- SECTION 3 — code listing pattern -->
+<h2 id="s3"><span class="num">§ 03</span>{{SECTION_3_HEADING}}.</h2>
+
+<figure class="code">
+<pre><code>{{CODE_BLOCK_BODY}}</code></pre>
+<div class="caption"><b>Listing 1.</b> {{ONE_LINE_LISTING_CAPTION}}</div>
+</figure>
+
+<!-- REFERENCES -->
+<h2 id="refs"><span class="num">§ References</span>Where this comes from.</h2>
+<div class="refs">
+  <ol>
+    <li id="ref1">{{Author, Year. <em>Title</em>. <a href="...">URL</a>}}</li>
+    <li id="ref2">{{...}}</li>
+  </ol>
+</div>
+
+<!-- CITE -->
+<h2 id="cite"><span class="num">§ Cite</span>How to cite this work.</h2>
+<p>If this informed your thinking, you can cite it as:</p>
+
+<div class="cite-block" id="bibtex">@misc{mitra{{YEAR}}{{SLUG}},
+  author       = {Mitra, Sagnik},
+  title        = {{{FORMAL_TITLE}}},
+  year         = {{{YEAR}}},
+  month        = {{{MONTH}}},
+  howpublished = {\url{https://sgnk.ai/{{SLUG}}}},
+  note         = {sgnk Writes}
+}<button class="copy" onclick="copyCite(this)">Copy BibTeX</button></div>
+
+<p style="margin-top: 24px;"><strong>Plain text:</strong></p>
+<div class="cite-block" id="plaintext">Mitra, Sagnik. ({{YEAR}}). {{FORMAL_TITLE}}. sgnk Writes.
+https://sgnk.ai/{{SLUG}}<button class="copy" onclick="copyCite(this)">Copy</button></div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="brand"><b>sgnk</b>.ai</div>
+  <div>Craft. Harness. Deploy.</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/{{SLUG}}">{{ICONIC_TITLE}}</a>
+    <a href="mailto:sagnik@sgnk.ai">sagnik@sgnk.ai</a>
+  </nav>
+  <div class="small">© {{YEAR}} Sagnik Mitra · sgnk · all rights reserved</div>
+</footer>
+
+<script>
+  function copyCite(btn) {
+    const block = btn.parentElement;
+    const text = block.innerText.replace(btn.innerText, '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      const original = btn.innerText;
+      btn.innerText = '✓ Copied';
+      btn.style.background = '#fff';
+      btn.style.color = '#000';
+      setTimeout(() => {
+        btn.innerText = original;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 1600);
+    });
+  }
+
+  // Reading progress + topbar lift + back-to-top
+  (function () {
+    const progress = document.getElementById('progress');
+    const topbar = document.querySelector('.topbar');
+    const toTop = document.getElementById('toTop');
+    function onScroll() {
+      const h = document.documentElement;
+      const top = window.scrollY || window.pageYOffset || h.scrollTop || 0;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (top / max) * 100 : 0;
+      if (progress) progress.style.width = pct + '%';
+      if (topbar) topbar.classList.toggle('scrolled', top > 8);
+      if (toTop) toTop.classList.toggle('show', top > 700);
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    if (toTop) toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  })();
+
+  // Active section highlight in the TOC
+  (function () {
+    const links = {};
+    document.querySelectorAll('.toc a[href^="#"]').forEach((a) => {
+      links[a.getAttribute('href').slice(1)] = a.closest('li');
+    });
+    const sections = document.querySelectorAll('main h2[id]');
+    if (!('IntersectionObserver' in window) || !sections.length) return;
+    const seen = new Set();
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) seen.add(e.target.id); else seen.delete(e.target.id); });
+      let current = null;
+      sections.forEach((s) => { if (seen.has(s.id) && !current) current = s.id; });
+      Object.values(links).forEach((li) => li && li.classList.remove('active'));
+      if (current && links[current]) links[current].classList.add('active');
+    }, { rootMargin: '-80px 0px -70% 0px', threshold: 0 });
+    sections.forEach((s) => obs.observe(s));
+  })();
+</script>
+
+</body>
+</html>

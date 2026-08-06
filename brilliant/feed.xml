@@ -4,75 +4,75 @@
   <link>https://sgnk.ai/brilliant</link>
   <description>One person, one automation system, and the workplace built around it so the work can be trusted.</description>
   <language>en</language>
-  <lastBuildDate>Thu, 06 Aug 2026 16:47:30 +0000</lastBuildDate>
+  <lastBuildDate>Thu, 06 Aug 2026 17:44:25 +0000</lastBuildDate>
     <item>
-      <title>The Loop That Would Learn Backwards</title>
+      <title>My Learning Loop Had a Sign Error. It Would Have Rewarded Failure With More Work</title>
       <link>https://sgnk.ai/brilliant/loop-learned-backwards</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/loop-learned-backwards</guid>
-      <description>Nothing that learns gets wired to live behaviour until I have swept it while unarmed. This one came back pointing the wrong way.</description>
+      <description>A weighted term inverted an escalation rule. A controlled sweep found it before the loop was ever connected to live behaviour. A unit test could not have.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>My Injection Gate Has Never Caught an Attack. I Kept It Anyway.</title>
+      <title>My Security Gate Has Caught 34 False Alarms and Zero Attacks. I Kept It Anyway</title>
       <link>https://sgnk.ai/brilliant/lethal-trifecta</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/lethal-trifecta</guid>
-      <description>My injection gate has flagged 34 things inside real sessions and not one was an attack. The false alarm bill, including the day it locked me out.</description>
+      <description>A guard against prompt injection, measured on a real machine. All 34 flags were ordinary reading. Six sessions lost their outbound tools mid-run, and one of them was mine.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>The Ledger: one line per task, forever</title>
+      <title>My Task Log Records What the AI Spent. Two Extra Fields Record Whether It Was Worth It</title>
       <link>https://sgnk.ai/brilliant/one-line-ledger</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/one-line-ledger</guid>
-      <description>Cost columns price a task. Two other fields judge it: what the model picker put forward against what actually ran, and whether the human kept the work.</description>
+      <description>Cost and latency price a task. They cannot say whether the money bought anything. Two fields can, and no instrumentation standard carries the second one.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>The Scorekeeper With an Eraser</title>
+      <title>A Hardcoded 4 in My Reporting Tool Erased Every Win the Expensive Model Earned</title>
       <link>https://sgnk.ai/brilliant/scorekeeper-eraser</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/scorekeeper-eraser</guid>
-      <description>A standing rule stopped a typed 79.3% three sentences before publication. Re-derived, the same pool read 86.4%, and neither figure was quotable.</description>
+      <description>One program seeded each model differently. The other assumed they were identical. The subtraction clamped to zero, so every report showed no wins at all.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>Failure Arrives in the Same Tone as Success</title>
+      <title>Every Nightly Backup Was Dead. I Still Cannot Tell You How Many There Were</title>
       <link>https://sgnk.ai/brilliant/silent-failure</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/silent-failure</guid>
-      <description>I cannot tell you how many nightly backups were dead, and I am the person who wrote the incident down. Every job died before it could log a word.</description>
+      <description>Scheduled jobs died at startup under a macOS permission wall, before writing a line. With no logs, three of my own records disagree on the count and nothing can settle it.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>Worse Than a Coin Flip</title>
+      <title>My Model Router Picked the Same Model 5,000 Times Out of 5,000</title>
       <link>https://sgnk.ai/brilliant/worse-than-random</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/worse-than-random</guid>
-      <description>I ran my router against a benchmark I did not write. It handed all 5,000 rows to the same model, and every tuning setting I had argued over changed nothing.</description>
+      <description>Thirty days of my own tests said the router worked. The first benchmark I did not write showed it had stopped choosing. The cause was a good rule with nothing to feed it.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>The Homework That Was Impossible</title>
+      <title>My Review Queue Reported Zero Remaining. An Analytics Job Had Eaten It</title>
       <link>https://sgnk.ai/brilliant/impossible-homework</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/impossible-homework</guid>
-      <description>A standard safeguard, built correctly, sat unenforceable for days. The queue feeding it printed the same zero whether it was finished or starved.</description>
+      <description>A queue printed zero unadjudicated for days. That is what a finished queue prints and what a starved one prints. Telling them apart needs a counter the queue does not own.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>89% of tasks size to the cheapest model. The honest number is the other one.</title>
+      <title>My Router Recommended the Cheap Model 89% of the Time. The Expensive One Ran Anyway</title>
       <link>https://sgnk.ai/brilliant/cheap-model-gate</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/cheap-model-gate</guid>
-      <description>My triage step sizes nine tasks in ten to the cheapest model. That reads as corner-cutting. It is the design, and the number that proves it is a different one.</description>
+      <description>A triage step sized 89% of tasks to the cheapest model. I quoted it as a cost result for five weeks. Joining it against the execution log showed the advice was followed twice in 816 runs.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>It Scrubs the Copy It Sends, Not the Copy It Keeps</title>
+      <title>My AI Security Scanner Reported a Leak in a File That Does Not Exist</title>
       <link>https://sgnk.ai/brilliant/leaked-chat-logs</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/leaked-chat-logs</guid>
-      <description>Known token patterns are redacted before a session is uploaded. The copy left on your own disk is plaintext, and the request to scrub it was closed as not planned.</description>
+      <description>An AI subagent reported leaked GitHub tokens at a path with no file. The address was invented and the credential type was not. How to tell those apart by counting.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
     <item>
-      <title>The employee I never interviewed</title>
+      <title>I Told My AI Agents Not to Commit to Git. They Did It Anyway, So I Stopped Using Words</title>
       <link>https://sgnk.ai/brilliant/never-interviewed</link>
       <guid isPermaLink="true">https://sgnk.ai/brilliant/never-interviewed</guid>
-      <description>You cannot vet an AI worker the way you vet a person. So I stopped trying, and built the workplace around him instead.</description>
+      <description>A rule written into a prompt is advice that competes with everything else in the context. A program on the tool boundary is a control. Six of mine sit there, and four can refuse.</description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 +0000</pubDate>
     </item>
 </channel></rss>

@@ -1,0 +1,2784 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "sgnk-design-system.md",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1",
+      "id": "sgnk_design_system_md",
+      "community": 0,
+      "norm_label": "sgnk-design-system.md"
+    },
+    {
+      "label": "Overview",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L93",
+      "id": "sagnikmitra_github_io_sgnk_design_system_overview",
+      "community": 0,
+      "norm_label": "overview"
+    },
+    {
+      "label": "Contents",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L112",
+      "id": "sagnikmitra_github_io_sgnk_design_system_contents",
+      "community": 0,
+      "norm_label": "contents"
+    },
+    {
+      "label": "Drop-in CSS",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L135",
+      "id": "sagnikmitra_github_io_sgnk_design_system_drop_in_css",
+      "community": 10,
+      "norm_label": "drop-in css"
+    },
+    {
+      "label": "code:css (:root {)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L139",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_1",
+      "community": 10,
+      "norm_label": "code:css (:root {)"
+    },
+    {
+      "label": "Tailwind config (optional)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L208",
+      "id": "sagnikmitra_github_io_sgnk_design_system_tailwind_config_optional",
+      "community": 10,
+      "norm_label": "tailwind config (optional)"
+    },
+    {
+      "label": "code:js (// tailwind.config.js)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L212",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_2",
+      "community": 10,
+      "norm_label": "code:js (// tailwind.config.js)"
+    },
+    {
+      "label": "Starter Article Shell",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L233",
+      "id": "sagnikmitra_github_io_sgnk_design_system_starter_article_shell",
+      "community": 0,
+      "norm_label": "starter article shell"
+    },
+    {
+      "label": "code:bash (# From sagnikmitra.github.io repo root.)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L239",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_3",
+      "community": 0,
+      "norm_label": "code:bash (# from sagnikmitra.github.io repo root.)"
+    },
+    {
+      "label": "Minimum Viable Post Checklist",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L250",
+      "id": "sagnikmitra_github_io_sgnk_design_system_minimum_viable_post_checklist",
+      "community": 0,
+      "norm_label": "minimum viable post checklist"
+    },
+    {
+      "label": "Colors",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L275",
+      "id": "sagnikmitra_github_io_sgnk_design_system_colors",
+      "community": 4,
+      "norm_label": "colors"
+    },
+    {
+      "label": "Brand & Accent",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L279",
+      "id": "sagnikmitra_github_io_sgnk_design_system_brand_accent",
+      "community": 4,
+      "norm_label": "brand & accent"
+    },
+    {
+      "label": "Surface",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L284",
+      "id": "sagnikmitra_github_io_sgnk_design_system_surface",
+      "community": 4,
+      "norm_label": "surface"
+    },
+    {
+      "label": "Text",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L291",
+      "id": "sagnikmitra_github_io_sgnk_design_system_text",
+      "community": 4,
+      "norm_label": "text"
+    },
+    {
+      "label": "Hairlines & Borders",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L299",
+      "id": "sagnikmitra_github_io_sgnk_design_system_hairlines_borders",
+      "community": 4,
+      "norm_label": "hairlines & borders"
+    },
+    {
+      "label": "Brand Gradient",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L302",
+      "id": "sagnikmitra_github_io_sgnk_design_system_brand_gradient",
+      "community": 4,
+      "norm_label": "brand gradient"
+    },
+    {
+      "label": "Contrast (WCAG AA)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L305",
+      "id": "sagnikmitra_github_io_sgnk_design_system_contrast_wcag_aa",
+      "community": 4,
+      "norm_label": "contrast (wcag aa)"
+    },
+    {
+      "label": "Typography",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L315",
+      "id": "sagnikmitra_github_io_sgnk_design_system_typography",
+      "community": 9,
+      "norm_label": "typography"
+    },
+    {
+      "label": "Font Family",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L317",
+      "id": "sagnikmitra_github_io_sgnk_design_system_font_family",
+      "community": 9,
+      "norm_label": "font family"
+    },
+    {
+      "label": "Hierarchy",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L322",
+      "id": "sagnikmitra_github_io_sgnk_design_system_hierarchy",
+      "community": 9,
+      "norm_label": "hierarchy"
+    },
+    {
+      "label": "Principles",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L352",
+      "id": "sagnikmitra_github_io_sgnk_design_system_principles",
+      "community": 9,
+      "norm_label": "principles"
+    },
+    {
+      "label": "Note on Font Substitutes",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L363",
+      "id": "sagnikmitra_github_io_sgnk_design_system_note_on_font_substitutes",
+      "community": 9,
+      "norm_label": "note on font substitutes"
+    },
+    {
+      "label": "Typography Laws \u2014 Direction, Not Decoration",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L366",
+      "id": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "community": 1,
+      "norm_label": "typography laws \u2014 direction, not decoration"
+    },
+    {
+      "label": "Law 1 \u2014 Hierarchy controls attention",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L374",
+      "id": "sagnikmitra_github_io_sgnk_design_system_law_1_hierarchy_controls_attention",
+      "community": 1,
+      "norm_label": "law 1 \u2014 hierarchy controls attention"
+    },
+    {
+      "label": "Law 2 \u2014 Spacing shows relationship",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L379",
+      "id": "sagnikmitra_github_io_sgnk_design_system_law_2_spacing_shows_relationship",
+      "community": 1,
+      "norm_label": "law 2 \u2014 spacing shows relationship"
+    },
+    {
+      "label": "Law 3 \u2014 Line height controls reading comfort, and scales *inverse* to size",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L384",
+      "id": "sagnikmitra_github_io_sgnk_design_system_law_3_line_height_controls_reading_comfort_and_scales_inverse_to_size",
+      "community": 1,
+      "norm_label": "law 3 \u2014 line height controls reading comfort, and scales *inverse* to size"
+    },
+    {
+      "label": "Law 4 \u2014 Chunking controls pace",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L389",
+      "id": "sagnikmitra_github_io_sgnk_design_system_law_4_chunking_controls_pace",
+      "community": 1,
+      "norm_label": "law 4 \u2014 chunking controls pace"
+    },
+    {
+      "label": "Law 5 \u2014 Placement controls memory",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L394",
+      "id": "sagnikmitra_github_io_sgnk_design_system_law_5_placement_controls_memory",
+      "community": 1,
+      "norm_label": "law 5 \u2014 placement controls memory"
+    },
+    {
+      "label": "Law 6 \u2014 Font choice is voice",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L399",
+      "id": "sagnikmitra_github_io_sgnk_design_system_law_6_font_choice_is_voice",
+      "community": 1,
+      "norm_label": "law 6 \u2014 font choice is voice"
+    },
+    {
+      "label": "Law 7 \u2014 Line length controls rhythm (the measure)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L404",
+      "id": "sagnikmitra_github_io_sgnk_design_system_law_7_line_length_controls_rhythm_the_measure",
+      "community": 1,
+      "norm_label": "law 7 \u2014 line length controls rhythm (the measure)"
+    },
+    {
+      "label": "code:css (/* Law 7 \u2014 lock the body measure; structure spans the full c)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L408",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_4",
+      "community": 1,
+      "norm_label": "code:css (/* law 7 \u2014 lock the body measure; structure spans the full c)"
+    },
+    {
+      "label": "Law 8 \u2014 Alignment gives the eye a path",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L418",
+      "id": "sagnikmitra_github_io_sgnk_design_system_law_8_alignment_gives_the_eye_a_path",
+      "community": 1,
+      "norm_label": "law 8 \u2014 alignment gives the eye a path"
+    },
+    {
+      "label": "Law 9 \u2014 Contrast makes the path visible",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L423",
+      "id": "sagnikmitra_github_io_sgnk_design_system_law_9_contrast_makes_the_path_visible",
+      "community": 1,
+      "norm_label": "law 9 \u2014 contrast makes the path visible"
+    },
+    {
+      "label": "Start a screen by asking",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L428",
+      "id": "sagnikmitra_github_io_sgnk_design_system_start_a_screen_by_asking",
+      "community": 1,
+      "norm_label": "start a screen by asking"
+    },
+    {
+      "label": "Design Principles \u2014 The Judgment Layer",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L443",
+      "id": "sagnikmitra_github_io_sgnk_design_system_design_principles_the_judgment_layer",
+      "community": 8,
+      "norm_label": "design principles \u2014 the judgment layer"
+    },
+    {
+      "label": "A. Judgment over rules",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L449",
+      "id": "sagnikmitra_github_io_sgnk_design_system_a_judgment_over_rules",
+      "community": 8,
+      "norm_label": "a. judgment over rules"
+    },
+    {
+      "label": "B. Composition & flow",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L461",
+      "id": "sagnikmitra_github_io_sgnk_design_system_b_composition_flow",
+      "community": 8,
+      "norm_label": "b. composition & flow"
+    },
+    {
+      "label": "C. Motion",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L476",
+      "id": "sagnikmitra_github_io_sgnk_design_system_c_motion",
+      "community": 8,
+      "norm_label": "c. motion"
+    },
+    {
+      "label": "D. Copy",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L480",
+      "id": "sagnikmitra_github_io_sgnk_design_system_d_copy",
+      "community": 8,
+      "norm_label": "d. copy"
+    },
+    {
+      "label": "E. The AI-era working method",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L484",
+      "id": "sagnikmitra_github_io_sgnk_design_system_e_the_ai_era_working_method",
+      "community": 8,
+      "norm_label": "e. the ai-era working method"
+    },
+    {
+      "label": "Layout",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L494",
+      "id": "sagnikmitra_github_io_sgnk_design_system_layout",
+      "community": 11,
+      "norm_label": "layout"
+    },
+    {
+      "label": "Spacing System",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L496",
+      "id": "sagnikmitra_github_io_sgnk_design_system_spacing_system",
+      "community": 11,
+      "norm_label": "spacing system"
+    },
+    {
+      "label": "Grid & Container",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L503",
+      "id": "sagnikmitra_github_io_sgnk_design_system_grid_container",
+      "community": 11,
+      "norm_label": "grid & container"
+    },
+    {
+      "label": "Whitespace Philosophy",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L509",
+      "id": "sagnikmitra_github_io_sgnk_design_system_whitespace_philosophy",
+      "community": 11,
+      "norm_label": "whitespace philosophy"
+    },
+    {
+      "label": "Elevation & Depth",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L512",
+      "id": "sagnikmitra_github_io_sgnk_design_system_elevation_depth",
+      "community": 0,
+      "norm_label": "elevation & depth"
+    },
+    {
+      "label": "Shapes",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L527",
+      "id": "sagnikmitra_github_io_sgnk_design_system_shapes",
+      "community": 0,
+      "norm_label": "shapes"
+    },
+    {
+      "label": "Brand Assets",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L538",
+      "id": "sagnikmitra_github_io_sgnk_design_system_brand_assets",
+      "community": 0,
+      "norm_label": "brand assets"
+    },
+    {
+      "label": "Components",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L555",
+      "id": "sagnikmitra_github_io_sgnk_design_system_components",
+      "community": 5,
+      "norm_label": "components"
+    },
+    {
+      "label": "Reading Progress Bar",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L559",
+      "id": "sagnikmitra_github_io_sgnk_design_system_reading_progress_bar",
+      "community": 32,
+      "norm_label": "reading progress bar"
+    },
+    {
+      "label": "code:html (<div class=\"progress\" id=\"progress\"></div>)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L563",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_5",
+      "community": 32,
+      "norm_label": "code:html (<div class=\"progress\" id=\"progress\"></div>)"
+    },
+    {
+      "label": "Top Navigation",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L567",
+      "id": "sagnikmitra_github_io_sgnk_design_system_top_navigation",
+      "community": 23,
+      "norm_label": "top navigation"
+    },
+    {
+      "label": "code:html (<div class=\"topbar\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L571",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_6",
+      "community": 23,
+      "norm_label": "code:html (<div class=\"topbar\">)"
+    },
+    {
+      "label": "Hero Lightrail Image",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L585",
+      "id": "sagnikmitra_github_io_sgnk_design_system_hero_lightrail_image",
+      "community": 33,
+      "norm_label": "hero lightrail image"
+    },
+    {
+      "label": "code:html (<img class=\"hero-img\" src=\"/sgnk-lightrail.png\" alt=\"sagnik )",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L589",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_7",
+      "community": 33,
+      "norm_label": "code:html (<img class=\"hero-img\" src=\"/sgnk-lightrail.png\" alt=\"sagnik )"
+    },
+    {
+      "label": "Header Paper",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L593",
+      "id": "sagnikmitra_github_io_sgnk_design_system_header_paper",
+      "community": 15,
+      "norm_label": "header paper"
+    },
+    {
+      "label": "code:html (<header class=\"paper\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L597",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_8",
+      "community": 15,
+      "norm_label": "code:html (<header class=\"paper\">)"
+    },
+    {
+      "label": "Lead Paragraph (with drop-cap)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L624",
+      "id": "sagnikmitra_github_io_sgnk_design_system_lead_paragraph_with_drop_cap",
+      "community": 30,
+      "norm_label": "lead paragraph (with drop-cap)"
+    },
+    {
+      "label": "code:html (<p class=\"lead\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L628",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_9",
+      "community": 30,
+      "norm_label": "code:html (<p class=\"lead\">)"
+    },
+    {
+      "label": "Section Heading (`h2`)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L634",
+      "id": "sagnikmitra_github_io_sgnk_design_system_section_heading_h2",
+      "community": 14,
+      "norm_label": "section heading (`h2`)"
+    },
+    {
+      "label": "code:html (<h2 id=\"s1\"><span class=\"num\">\u00a7 01</span>More agents do not )",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L638",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_10",
+      "community": 14,
+      "norm_label": "code:html (<h2 id=\"s1\"><span class=\"num\">\u00a7 01</span>more agents do not )"
+    },
+    {
+      "label": "Sub-Heading (`h3`)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L642",
+      "id": "sagnikmitra_github_io_sgnk_design_system_sub_heading_h3",
+      "community": 31,
+      "norm_label": "sub-heading (`h3`)"
+    },
+    {
+      "label": "code:html (<h3><span class=\"num\">4.1</span> Control Plane</h3>)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L646",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_11",
+      "community": 31,
+      "norm_label": "code:html (<h3><span class=\"num\">4.1</span> control plane</h3>)"
+    },
+    {
+      "label": "Pull-Quote (`.pull`)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L650",
+      "id": "sagnikmitra_github_io_sgnk_design_system_pull_quote_pull",
+      "community": 21,
+      "norm_label": "pull-quote (`.pull`)"
+    },
+    {
+      "label": "code:html (<div class=\"pull\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L654",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_12",
+      "community": 21,
+      "norm_label": "code:html (<div class=\"pull\">)"
+    },
+    {
+      "label": "Walk-through Readout (\"How to read it\")",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L662",
+      "id": "sagnikmitra_github_io_sgnk_design_system_walk_through_readout_how_to_read_it",
+      "community": 19,
+      "norm_label": "walk-through readout (\"how to read it\")"
+    },
+    {
+      "label": "code:html (<div class=\"readout\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L666",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_13",
+      "community": 19,
+      "norm_label": "code:html (<div class=\"readout\">)"
+    },
+    {
+      "label": "Code Block (`<pre>`)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L675",
+      "id": "sagnikmitra_github_io_sgnk_design_system_code_block_pre",
+      "community": 22,
+      "norm_label": "code block (`<pre>`)"
+    },
+    {
+      "label": "code:html (<figure class=\"code\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L679",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_14",
+      "community": 22,
+      "norm_label": "code:html (<figure class=\"code\">)"
+    },
+    {
+      "label": "Inline Code",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L692",
+      "id": "sagnikmitra_github_io_sgnk_design_system_inline_code",
+      "community": 18,
+      "norm_label": "inline code"
+    },
+    {
+      "label": "code:html (<p>A verifier that cannot call <code>payment_execute</code> )",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L696",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_15",
+      "community": 18,
+      "norm_label": "code:html (<p>a verifier that cannot call <code>payment_execute</code> )"
+    },
+    {
+      "label": "Figure: Diagram",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L700",
+      "id": "sagnikmitra_github_io_sgnk_design_system_figure_diagram",
+      "community": 17,
+      "norm_label": "figure: diagram"
+    },
+    {
+      "label": "code:html (<figure class=\"diagram\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L704",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_16",
+      "community": 17,
+      "norm_label": "code:html (<figure class=\"diagram\">)"
+    },
+    {
+      "label": "Diagram Node",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L719",
+      "id": "sagnikmitra_github_io_sgnk_design_system_diagram_node",
+      "community": 27,
+      "norm_label": "diagram node"
+    },
+    {
+      "label": "code:html (<div class=\"node\">Default node (white, ink border)</div>)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L723",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_17",
+      "community": 27,
+      "norm_label": "code:html (<div class=\"node\">default node (white, ink border)</div>)"
+    },
+    {
+      "label": "Diagram Connectors",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L729",
+      "id": "sagnikmitra_github_io_sgnk_design_system_diagram_connectors",
+      "community": 16,
+      "norm_label": "diagram connectors"
+    },
+    {
+      "label": "code:html (<!-- Inside .flow-grid (horizontal) -->)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L733",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_18",
+      "community": 16,
+      "norm_label": "code:html (<!-- inside .flow-grid (horizontal) -->)"
+    },
+    {
+      "label": "Diagram Layouts",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L742",
+      "id": "sagnikmitra_github_io_sgnk_design_system_diagram_layouts",
+      "community": 24,
+      "norm_label": "diagram layouts"
+    },
+    {
+      "label": "code:html (<!-- Horizontal pipeline -->)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L746",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_19",
+      "community": 24,
+      "norm_label": "code:html (<!-- horizontal pipeline -->)"
+    },
+    {
+      "label": "Table",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L769",
+      "id": "sagnikmitra_github_io_sgnk_design_system_table",
+      "community": 5,
+      "norm_label": "table"
+    },
+    {
+      "label": "code:html (<table>)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L771",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_20",
+      "community": 5,
+      "norm_label": "code:html (<table>)"
+    },
+    {
+      "label": "Table of Contents",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L784",
+      "id": "sagnikmitra_github_io_sgnk_design_system_table_of_contents",
+      "community": 29,
+      "norm_label": "table of contents"
+    },
+    {
+      "label": "code:html (<div class=\"toc\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L786",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_21",
+      "community": 29,
+      "norm_label": "code:html (<div class=\"toc\">)"
+    },
+    {
+      "label": "Paper Deep-Link (`.paperlink`)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L798",
+      "id": "sagnikmitra_github_io_sgnk_design_system_paper_deep_link_paperlink",
+      "community": 28,
+      "norm_label": "paper deep-link (`.paperlink`)"
+    },
+    {
+      "label": "code:html (<a class=\"paperlink\" href=\"/harness/paper.pdf#page=4\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L802",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_22",
+      "community": 28,
+      "norm_label": "code:html (<a class=\"paperlink\" href=\"/harness/paper.pdf#page=4\">)"
+    },
+    {
+      "label": "References",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L808",
+      "id": "sagnikmitra_github_io_sgnk_design_system_references",
+      "community": 13,
+      "norm_label": "references"
+    },
+    {
+      "label": "code:html (<div class=\"refs\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L810",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_23",
+      "community": 13,
+      "norm_label": "code:html (<div class=\"refs\">)"
+    },
+    {
+      "label": "code:html (<p>NIST treats AI risk as a lifecycle problem [<a href=\"#ref)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L823",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_24",
+      "community": 13,
+      "norm_label": "code:html (<p>nist treats ai risk as a lifecycle problem [<a href=\"#ref)"
+    },
+    {
+      "label": "Cite Block",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L827",
+      "id": "sagnikmitra_github_io_sgnk_design_system_cite_block",
+      "community": 26,
+      "norm_label": "cite block"
+    },
+    {
+      "label": "code:html (<div class=\"cite-block\" id=\"bibtex\">@misc{mitra2026harnessin)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L831",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_25",
+      "community": 26,
+      "norm_label": "code:html (<div class=\"cite-block\" id=\"bibtex\">@misc{mitra2026harnessin)"
+    },
+    {
+      "label": "Buttons",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L844",
+      "id": "sagnikmitra_github_io_sgnk_design_system_buttons",
+      "community": 25,
+      "norm_label": "buttons"
+    },
+    {
+      "label": "code:html (<a href=\"#\" class=\"btn primary\">\u2193 Download the paper (PDF)</)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L846",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_26",
+      "community": 25,
+      "norm_label": "code:html (<a href=\"#\" class=\"btn primary\">\u2193 download the paper (pdf)</)"
+    },
+    {
+      "label": "Back to Top",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L852",
+      "id": "sagnikmitra_github_io_sgnk_design_system_back_to_top",
+      "community": 5,
+      "norm_label": "back to top"
+    },
+    {
+      "label": "code:html (<button class=\"to-top\" id=\"toTop\" aria-label=\"Back to top\" t)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L854",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_27",
+      "community": 5,
+      "norm_label": "code:html (<button class=\"to-top\" id=\"totop\" aria-label=\"back to top\" t)"
+    },
+    {
+      "label": "Footer",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L860",
+      "id": "sagnikmitra_github_io_sgnk_design_system_footer",
+      "community": 20,
+      "norm_label": "footer"
+    },
+    {
+      "label": "code:html (<footer>)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L862",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_28",
+      "community": 20,
+      "norm_label": "code:html (<footer>)"
+    },
+    {
+      "label": "Skip-to-Content Link",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L875",
+      "id": "sagnikmitra_github_io_sgnk_design_system_skip_to_content_link",
+      "community": 5,
+      "norm_label": "skip-to-content link"
+    },
+    {
+      "label": "code:html (<a class=\"skip-link\" href=\"#main\">Skip to content</a>)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L877",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_29",
+      "community": 5,
+      "norm_label": "code:html (<a class=\"skip-link\" href=\"#main\">skip to content</a>)"
+    },
+    {
+      "label": "State Chips",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L883",
+      "id": "sagnikmitra_github_io_sgnk_design_system_state_chips",
+      "community": 0,
+      "norm_label": "state chips"
+    },
+    {
+      "label": "code:html (<span class=\"chip\">Updated</span>           <!-- default: bl)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L887",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_30",
+      "community": 0,
+      "norm_label": "code:html (<span class=\"chip\">updated</span>           <!-- default: bl)"
+    },
+    {
+      "label": "Sub-brand Variants",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L895",
+      "id": "sagnikmitra_github_io_sgnk_design_system_sub_brand_variants",
+      "community": 0,
+      "norm_label": "sub-brand variants"
+    },
+    {
+      "label": "Information Architecture",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L912",
+      "id": "sagnikmitra_github_io_sgnk_design_system_information_architecture",
+      "community": 0,
+      "norm_label": "information architecture"
+    },
+    {
+      "label": "Accessibility",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L932",
+      "id": "sagnikmitra_github_io_sgnk_design_system_accessibility",
+      "community": 2,
+      "norm_label": "accessibility"
+    },
+    {
+      "label": "Focus",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L936",
+      "id": "sagnikmitra_github_io_sgnk_design_system_focus",
+      "community": 2,
+      "norm_label": "focus"
+    },
+    {
+      "label": "code:css (:focus-visible {)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L940",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_31",
+      "community": 2,
+      "norm_label": "code:css (:focus-visible {)"
+    },
+    {
+      "label": "Skip Link",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L948",
+      "id": "sagnikmitra_github_io_sgnk_design_system_skip_link",
+      "community": 2,
+      "norm_label": "skip link"
+    },
+    {
+      "label": "code:html (<a class=\"skip-link\" href=\"#main\">Skip to content</a>)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L952",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_32",
+      "community": 2,
+      "norm_label": "code:html (<a class=\"skip-link\" href=\"#main\">skip to content</a>)"
+    },
+    {
+      "label": "Semantic HTML",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L958",
+      "id": "sagnikmitra_github_io_sgnk_design_system_semantic_html",
+      "community": 2,
+      "norm_label": "semantic html"
+    },
+    {
+      "label": "Tab Order",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L968",
+      "id": "sagnikmitra_github_io_sgnk_design_system_tab_order",
+      "community": 2,
+      "norm_label": "tab order"
+    },
+    {
+      "label": "Contrast",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L982",
+      "id": "sagnikmitra_github_io_sgnk_design_system_contrast",
+      "community": 2,
+      "norm_label": "contrast"
+    },
+    {
+      "label": "Motion",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L986",
+      "id": "sagnikmitra_github_io_sgnk_design_system_motion",
+      "community": 2,
+      "norm_label": "motion"
+    },
+    {
+      "label": "code:css (@media (prefers-reduced-motion: reduce) {)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L990",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_33",
+      "community": 2,
+      "norm_label": "code:css (@media (prefers-reduced-motion: reduce) {)"
+    },
+    {
+      "label": "ARIA",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1000",
+      "id": "sagnikmitra_github_io_sgnk_design_system_aria",
+      "community": 2,
+      "norm_label": "aria"
+    },
+    {
+      "label": "SEO, OG & Structured Data",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1008",
+      "id": "sagnikmitra_github_io_sgnk_design_system_seo_og_structured_data",
+      "community": 6,
+      "norm_label": "seo, og & structured data"
+    },
+    {
+      "label": "Required `<head>` meta",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1012",
+      "id": "sagnikmitra_github_io_sgnk_design_system_required_head_meta",
+      "community": 6,
+      "norm_label": "required `<head>` meta"
+    },
+    {
+      "label": "code:html (<title>{ICONIC_TITLE} \u2014 {SUBTITLE} \u00b7 sgnk</title>)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1014",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_34",
+      "community": 6,
+      "norm_label": "code:html (<title>{iconic_title} \u2014 {subtitle} \u00b7 sgnk</title>)"
+    },
+    {
+      "label": "JSON-LD structured data",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1037",
+      "id": "sagnikmitra_github_io_sgnk_design_system_json_ld_structured_data",
+      "community": 6,
+      "norm_label": "json-ld structured data"
+    },
+    {
+      "label": "code:html (<script type=\"application/ld+json\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1041",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_35",
+      "community": 6,
+      "norm_label": "code:html (<script type=\"application/ld+json\">)"
+    },
+    {
+      "label": "OG / Share Card Image (`og.png`)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1066",
+      "id": "sagnikmitra_github_io_sgnk_design_system_og_share_card_image_og_png",
+      "community": 6,
+      "norm_label": "og / share card image (`og.png`)"
+    },
+    {
+      "label": "Sitemap",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1084",
+      "id": "sagnikmitra_github_io_sgnk_design_system_sitemap",
+      "community": 6,
+      "norm_label": "sitemap"
+    },
+    {
+      "label": "Print Stylesheet",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1088",
+      "id": "sagnikmitra_github_io_sgnk_design_system_print_stylesheet",
+      "community": 0,
+      "norm_label": "print stylesheet"
+    },
+    {
+      "label": "code:css (@media print {)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1092",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_36",
+      "community": 0,
+      "norm_label": "code:css (@media print {)"
+    },
+    {
+      "label": "Interactive States",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1118",
+      "id": "sagnikmitra_github_io_sgnk_design_system_interactive_states",
+      "community": 7,
+      "norm_label": "interactive states"
+    },
+    {
+      "label": "Loading",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1122",
+      "id": "sagnikmitra_github_io_sgnk_design_system_loading",
+      "community": 7,
+      "norm_label": "loading"
+    },
+    {
+      "label": "code:css (.skeleton {)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1126",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_37",
+      "community": 7,
+      "norm_label": "code:css (.skeleton {)"
+    },
+    {
+      "label": "Empty",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1142",
+      "id": "sagnikmitra_github_io_sgnk_design_system_empty",
+      "community": 7,
+      "norm_label": "empty"
+    },
+    {
+      "label": "code:html (<div class=\"empty\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1146",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_38",
+      "community": 7,
+      "norm_label": "code:html (<div class=\"empty\">)"
+    },
+    {
+      "label": "Error",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1153",
+      "id": "sagnikmitra_github_io_sgnk_design_system_error",
+      "community": 7,
+      "norm_label": "error"
+    },
+    {
+      "label": "code:html (<div class=\"readout\" style=\"border-left-color: var(--ink);\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1157",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_39",
+      "community": 7,
+      "norm_label": "code:html (<div class=\"readout\" style=\"border-left-color: var(--ink);\">)"
+    },
+    {
+      "label": "Do's and Don'ts",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1166",
+      "id": "sagnikmitra_github_io_sgnk_design_system_do_s_and_don_ts",
+      "community": 0,
+      "norm_label": "do's and don'ts"
+    },
+    {
+      "label": "Do",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1168",
+      "id": "sagnikmitra_github_io_sgnk_design_system_do",
+      "community": 0,
+      "norm_label": "do"
+    },
+    {
+      "label": "Don't",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1198",
+      "id": "sagnikmitra_github_io_sgnk_design_system_don_t",
+      "community": 0,
+      "norm_label": "don't"
+    },
+    {
+      "label": "Responsive Behavior",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1225",
+      "id": "sagnikmitra_github_io_sgnk_design_system_responsive_behavior",
+      "community": 12,
+      "norm_label": "responsive behavior"
+    },
+    {
+      "label": "Breakpoints",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1227",
+      "id": "sagnikmitra_github_io_sgnk_design_system_breakpoints",
+      "community": 12,
+      "norm_label": "breakpoints"
+    },
+    {
+      "label": "Mobile rule-set (\u2264 640px)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1240",
+      "id": "sagnikmitra_github_io_sgnk_design_system_mobile_rule_set_640px",
+      "community": 12,
+      "norm_label": "mobile rule-set (\u2264 640px)"
+    },
+    {
+      "label": "Touch Targets",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1255",
+      "id": "sagnikmitra_github_io_sgnk_design_system_touch_targets",
+      "community": 12,
+      "norm_label": "touch targets"
+    },
+    {
+      "label": "Voice & Visual Pairing",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1261",
+      "id": "sagnikmitra_github_io_sgnk_design_system_voice_visual_pairing",
+      "community": 0,
+      "norm_label": "voice & visual pairing"
+    },
+    {
+      "label": "Extending the System: A Worked Example",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1267",
+      "id": "sagnikmitra_github_io_sgnk_design_system_extending_the_system_a_worked_example",
+      "community": 3,
+      "norm_label": "extending the system: a worked example"
+    },
+    {
+      "label": "Step 1: Could existing components carry the role?",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1271",
+      "id": "sagnikmitra_github_io_sgnk_design_system_step_1_could_existing_components_carry_the_role",
+      "community": 3,
+      "norm_label": "step 1: could existing components carry the role?"
+    },
+    {
+      "label": "Step 2: Draft the component against the system",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1280",
+      "id": "sagnikmitra_github_io_sgnk_design_system_step_2_draft_the_component_against_the_system",
+      "community": 3,
+      "norm_label": "step 2: draft the component against the system"
+    },
+    {
+      "label": "code:html (<sup><a class=\"fn-marker\" href=\"#fn1\" id=\"fnref1\">[\u20201]</a></)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1286",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_40",
+      "community": 3,
+      "norm_label": "code:html (<sup><a class=\"fn-marker\" href=\"#fn1\" id=\"fnref1\">[\u20201]</a></)"
+    },
+    {
+      "label": "code:css (.fn-marker {)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1290",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_41",
+      "community": 3,
+      "norm_label": "code:css (.fn-marker {)"
+    },
+    {
+      "label": "code:html (<div class=\"footnotes\" id=\"footnotes\">)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1303",
+      "id": "sagnikmitra_github_io_sgnk_design_system_codeblock_42",
+      "community": 3,
+      "norm_label": "code:html (<div class=\"footnotes\" id=\"footnotes\">)"
+    },
+    {
+      "label": "Step 3: Document it in this file",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1317",
+      "id": "sagnikmitra_github_io_sgnk_design_system_step_3_document_it_in_this_file",
+      "community": 3,
+      "norm_label": "step 3: document it in this file"
+    },
+    {
+      "label": "Step 4: Use it in the wild and refine",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1321",
+      "id": "sagnikmitra_github_io_sgnk_design_system_step_4_use_it_in_the_wild_and_refine",
+      "community": 3,
+      "norm_label": "step 4: use it in the wild and refine"
+    },
+    {
+      "label": "Iteration Guide",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1327",
+      "id": "sagnikmitra_github_io_sgnk_design_system_iteration_guide",
+      "community": 0,
+      "norm_label": "iteration guide"
+    },
+    {
+      "label": "Known Gaps (v1.3)",
+      "file_type": "document",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1338",
+      "id": "sagnikmitra_github_io_sgnk_design_system_known_gaps_v1_3",
+      "community": 0,
+      "norm_label": "known gaps (v1.3)"
+    },
+    {
+      "label": "AGENTS.md",
+      "file_type": "document",
+      "source_file": "AGENTS.md",
+      "source_location": "L1",
+      "id": "agents_md",
+      "community": 34,
+      "norm_label": "agents.md"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_overview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L112",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_contents"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_drop_in_css"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L233",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_starter_article_shell"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L250",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_minimum_viable_post_checklist"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L275",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L315",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_typography"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L366",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L443",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_design_principles_the_judgment_layer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L494",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_layout"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L512",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_elevation_depth"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L527",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_shapes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L538",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_brand_assets"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L555",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_components"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L883",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_state_chips"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L895",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_sub_brand_variants"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L912",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_information_architecture"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L932",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_accessibility"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1008",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_seo_og_structured_data"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1088",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_print_stylesheet"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1118",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_interactive_states"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1166",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_do_s_and_don_ts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1225",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_responsive_behavior"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1261",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_voice_visual_pairing"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1267",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_extending_the_system_a_worked_example"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1327",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_iteration_guide"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1338",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sgnk_design_system_md",
+      "target": "sagnikmitra_github_io_sgnk_design_system_known_gaps_v1_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L139",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_drop_in_css",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L208",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_drop_in_css",
+      "target": "sagnikmitra_github_io_sgnk_design_system_tailwind_config_optional"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L212",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_tailwind_config_optional",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L239",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_starter_article_shell",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L279",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_colors",
+      "target": "sagnikmitra_github_io_sgnk_design_system_brand_accent"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L284",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_colors",
+      "target": "sagnikmitra_github_io_sgnk_design_system_surface"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L291",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_colors",
+      "target": "sagnikmitra_github_io_sgnk_design_system_text"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L299",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_colors",
+      "target": "sagnikmitra_github_io_sgnk_design_system_hairlines_borders"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L302",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_colors",
+      "target": "sagnikmitra_github_io_sgnk_design_system_brand_gradient"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L305",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_colors",
+      "target": "sagnikmitra_github_io_sgnk_design_system_contrast_wcag_aa"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L317",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography",
+      "target": "sagnikmitra_github_io_sgnk_design_system_font_family"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L322",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography",
+      "target": "sagnikmitra_github_io_sgnk_design_system_hierarchy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L352",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography",
+      "target": "sagnikmitra_github_io_sgnk_design_system_principles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L363",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography",
+      "target": "sagnikmitra_github_io_sgnk_design_system_note_on_font_substitutes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L374",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_law_1_hierarchy_controls_attention"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L379",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_law_2_spacing_shows_relationship"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L384",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_law_3_line_height_controls_reading_comfort_and_scales_inverse_to_size"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L389",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_law_4_chunking_controls_pace"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L394",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_law_5_placement_controls_memory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L399",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_law_6_font_choice_is_voice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L404",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_law_7_line_length_controls_rhythm_the_measure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L418",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_law_8_alignment_gives_the_eye_a_path"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L423",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_law_9_contrast_makes_the_path_visible"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L428",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_typography_laws_direction_not_decoration",
+      "target": "sagnikmitra_github_io_sgnk_design_system_start_a_screen_by_asking"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L408",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_law_7_line_length_controls_rhythm_the_measure",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_4"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L449",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_design_principles_the_judgment_layer",
+      "target": "sagnikmitra_github_io_sgnk_design_system_a_judgment_over_rules"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L461",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_design_principles_the_judgment_layer",
+      "target": "sagnikmitra_github_io_sgnk_design_system_b_composition_flow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L476",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_design_principles_the_judgment_layer",
+      "target": "sagnikmitra_github_io_sgnk_design_system_c_motion"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L480",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_design_principles_the_judgment_layer",
+      "target": "sagnikmitra_github_io_sgnk_design_system_d_copy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L484",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_design_principles_the_judgment_layer",
+      "target": "sagnikmitra_github_io_sgnk_design_system_e_the_ai_era_working_method"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L496",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_layout",
+      "target": "sagnikmitra_github_io_sgnk_design_system_spacing_system"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L503",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_layout",
+      "target": "sagnikmitra_github_io_sgnk_design_system_grid_container"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L509",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_layout",
+      "target": "sagnikmitra_github_io_sgnk_design_system_whitespace_philosophy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L559",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_reading_progress_bar"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L567",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_top_navigation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L585",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_hero_lightrail_image"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L593",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_header_paper"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L624",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_lead_paragraph_with_drop_cap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L634",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_section_heading_h2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L642",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_sub_heading_h3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L650",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_pull_quote_pull"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L662",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_walk_through_readout_how_to_read_it"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L675",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_code_block_pre"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L692",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_inline_code"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L700",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_figure_diagram"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L719",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_diagram_node"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L729",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_diagram_connectors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L742",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_diagram_layouts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L769",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_table"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L784",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_table_of_contents"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L798",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_paper_deep_link_paperlink"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L808",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_references"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L827",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_cite_block"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L844",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_buttons"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L852",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_back_to_top"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L860",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_footer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L875",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_components",
+      "target": "sagnikmitra_github_io_sgnk_design_system_skip_to_content_link"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L563",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_reading_progress_bar",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_5"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L571",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_top_navigation",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_6"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L589",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_hero_lightrail_image",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_7"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L597",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_header_paper",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_8"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L628",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_lead_paragraph_with_drop_cap",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_9"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L638",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_section_heading_h2",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_10"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L646",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_sub_heading_h3",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_11"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L654",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_pull_quote_pull",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_12"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L666",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_walk_through_readout_how_to_read_it",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_13"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L679",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_code_block_pre",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_14"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L696",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_inline_code",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_15"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L704",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_figure_diagram",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_16"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L723",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_diagram_node",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_17"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L733",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_diagram_connectors",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_18"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L746",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_diagram_layouts",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_19"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L771",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_table",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_20"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L786",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_table_of_contents",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_21"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L802",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_paper_deep_link_paperlink",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_22"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L810",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_references",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_23"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L823",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_references",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_24"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L831",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_cite_block",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_25"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L846",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_buttons",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_26"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L854",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_back_to_top",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_27"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L862",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_footer",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_28"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L877",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_skip_to_content_link",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_29"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L887",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_state_chips",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_30"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L936",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_accessibility",
+      "target": "sagnikmitra_github_io_sgnk_design_system_focus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L948",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_accessibility",
+      "target": "sagnikmitra_github_io_sgnk_design_system_skip_link"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L958",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_accessibility",
+      "target": "sagnikmitra_github_io_sgnk_design_system_semantic_html"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L968",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_accessibility",
+      "target": "sagnikmitra_github_io_sgnk_design_system_tab_order"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L982",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_accessibility",
+      "target": "sagnikmitra_github_io_sgnk_design_system_contrast"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L986",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_accessibility",
+      "target": "sagnikmitra_github_io_sgnk_design_system_motion"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1000",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_accessibility",
+      "target": "sagnikmitra_github_io_sgnk_design_system_aria"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L940",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_focus",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_31"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L952",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_skip_link",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_32"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L990",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_motion",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_33"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1012",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_seo_og_structured_data",
+      "target": "sagnikmitra_github_io_sgnk_design_system_required_head_meta"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1037",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_seo_og_structured_data",
+      "target": "sagnikmitra_github_io_sgnk_design_system_json_ld_structured_data"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1066",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_seo_og_structured_data",
+      "target": "sagnikmitra_github_io_sgnk_design_system_og_share_card_image_og_png"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1084",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_seo_og_structured_data",
+      "target": "sagnikmitra_github_io_sgnk_design_system_sitemap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1014",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_required_head_meta",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_34"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1041",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_json_ld_structured_data",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_35"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1092",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_print_stylesheet",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_36"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1122",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_interactive_states",
+      "target": "sagnikmitra_github_io_sgnk_design_system_loading"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1142",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_interactive_states",
+      "target": "sagnikmitra_github_io_sgnk_design_system_empty"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1153",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_interactive_states",
+      "target": "sagnikmitra_github_io_sgnk_design_system_error"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1126",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_loading",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_37"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1146",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_empty",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_38"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1157",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_error",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_39"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1168",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_do_s_and_don_ts",
+      "target": "sagnikmitra_github_io_sgnk_design_system_do"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1198",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_do_s_and_don_ts",
+      "target": "sagnikmitra_github_io_sgnk_design_system_don_t"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1227",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_responsive_behavior",
+      "target": "sagnikmitra_github_io_sgnk_design_system_breakpoints"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1240",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_responsive_behavior",
+      "target": "sagnikmitra_github_io_sgnk_design_system_mobile_rule_set_640px"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1255",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_responsive_behavior",
+      "target": "sagnikmitra_github_io_sgnk_design_system_touch_targets"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_extending_the_system_a_worked_example",
+      "target": "sagnikmitra_github_io_sgnk_design_system_step_1_could_existing_components_carry_the_role"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1280",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_extending_the_system_a_worked_example",
+      "target": "sagnikmitra_github_io_sgnk_design_system_step_2_draft_the_component_against_the_system"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1317",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_extending_the_system_a_worked_example",
+      "target": "sagnikmitra_github_io_sgnk_design_system_step_3_document_it_in_this_file"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1321",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_extending_the_system_a_worked_example",
+      "target": "sagnikmitra_github_io_sgnk_design_system_step_4_use_it_in_the_wild_and_refine"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1286",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_step_2_draft_the_component_against_the_system",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_40"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1290",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_step_2_draft_the_component_against_the_system",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_41"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "sgnk-design-system.md",
+      "source_location": "L1303",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sagnikmitra_github_io_sgnk_design_system_step_2_draft_the_component_against_the_system",
+      "target": "sagnikmitra_github_io_sgnk_design_system_codeblock_42"
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "ed5bec4f2710d574f76f29b0b473ba5b231d038d"
+}
