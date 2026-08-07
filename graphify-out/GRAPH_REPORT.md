@@ -1,7 +1,7 @@
-# Graph Report - sagnikmitra.github.io  (2026-08-06)
+# Graph Report - sagnikmitra.github.io  (2026-08-07)
 
 ## Corpus Check
-- 2 files · ~425,328 words
+- 2 files · ~505,195 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ed5bec4f`
+- Built from commit: `9050b56b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -89,7 +89,7 @@ Nodes (7): Brand & Accent, Brand Gradient, Colors, Contrast (WCAG AA), Hairlines
 
 ### Community 5 - "Community 5"
 Cohesion: 0.29
-Nodes (7): Back to Top, code:html (<table>), code:html (<button class="to-top" id="toTop" aria-label="Back to top" t), code:html (<a class="skip-link" href="#main">Skip to content</a>), Components, Skip-to-Content Link, Table
+Nodes (7): code:html (<div class="node">Default node (white, ink border)</div>), code:html (<!-- Horizontal pipeline -->), code:html (<div class="toc">), Components, Diagram Layouts, Diagram Node, Table of Contents
 
 ### Community 6 - "Community 6"
 Cohesion: 0.29
