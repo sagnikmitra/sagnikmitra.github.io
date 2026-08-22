@@ -1,0 +1,268 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Decisions — the questions an AI should ask you back</title>
+<meta name="description" content="A working demo of the Decisions half of a human-to-AI communication framework. Twelve real product decisions an agent made on its own, surfaced as answerable questions with costs, evidence and a recommendation.">
+<link rel="canonical" href="https://sgnk.ai/decisions">
+<meta property="og:title" content="Decisions — the questions an AI should ask you back">
+<meta property="og:description" content="Twelve decisions an agent took without being told, turned into questions a non-technical person can answer. Exports JSON and markdown you hand straight back.">
+<meta property="og:type" content="website">
+<script>(()=>{const r=document.documentElement,K="sgnk-theme";const q=new URLSearchParams(location.search).get("theme");const t=q||localStorage.getItem(K);if(t==="dark")r.dataset.t="dark";addEventListener("DOMContentLoaded",()=>{const b=document.getElementById("tt");if(!b)return;b.onclick=()=>{const d=r.dataset.t==="dark";if(d){delete r.dataset.t;localStorage.setItem(K,"light");}else{r.dataset.t="dark";localStorage.setItem(K,"dark");}};});})();</script>
+<link rel="stylesheet" href="/framework/base.css">
+<style>
+.hero{padding:52px 0 30px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(30px,4.6vw,52px);max-width:20ch}
+.hero .lede{font-size:clamp(17px,2vw,21px);color:var(--ink2);max-width:60ch;margin-top:18px;line-height:1.5}
+.hero .meta{margin-top:22px;display:flex;gap:26px;flex-wrap:wrap}
+.hero .meta div{font-size:13px;color:var(--mute)}
+.hero .meta b{display:block;font-family:MosvitaBE;font-size:25px;color:var(--ink);letter-spacing:-.02em}
+.bar{position:sticky;top:57px;background:var(--bg);border-bottom:1px solid var(--line);z-index:30;padding:11px 0}
+.bar .in{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.prog{flex:1;min-width:150px;height:5px;background:var(--line2);position:relative;overflow:hidden}
+.prog i{position:absolute;inset:0 auto 0 0;background:var(--blue);width:0;transition:width .3s}
+.cnt{font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+main{padding:34px 0}
+.cat{margin:52px 0 20px;padding-bottom:9px;border-bottom:2px solid var(--ink)}
+.cat h2{font-size:22px}
+.cat:first-child{margin-top:0}
+.q{border:1px solid var(--line);margin-bottom:26px;background:var(--bg)}
+.q.done{border-color:var(--blue)}
+.qh{padding:20px 22px;border-bottom:1px solid var(--line2)}
+.qtop{display:flex;gap:9px;align-items:center;margin-bottom:11px;flex-wrap:wrap}
+.id{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:.06em}
+.w{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border:1px solid}
+.w.critical{color:var(--crit);border-color:var(--crit)}
+.w.high{color:var(--high);border-color:var(--high)}
+.w.medium{color:var(--med);border-color:var(--med)}
+.ok{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--blue);letter-spacing:.06em}
+.q h3{font-size:20.5px;line-height:1.3;max-width:64ch}
+.lede{margin-top:9px;color:var(--mute);font-size:14.5px;font-style:italic}
+.body{padding:6px 22px 20px}
+.sec{margin-top:19px}
+.sec>.tag{display:block;margin-bottom:5px}
+.sec p{font-size:14.6px;line-height:1.62;color:var(--ink2);max-width:74ch}
+.ev{margin-top:19px;border:1px solid var(--line2);background:var(--wash);padding:15px 17px}
+.ev+.ev{margin-top:11px}
+.ev h4{font-family:MosvitaSBE,sans-serif;font-size:12.5px;letter-spacing:.01em;margin-bottom:10px;color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:13.2px}
+th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--mute);padding:5px 9px 5px 0;border-bottom:1px solid var(--line);font-weight:400}
+td{padding:6px 9px 6px 0;border-bottom:1px solid var(--line2);color:var(--ink2);vertical-align:top}
+td:first-child{color:var(--ink)}
+.st{display:flex;gap:13px;padding:7px 0;border-bottom:1px solid var(--line2);font-size:13.2px;align-items:baseline}
+.st:last-child{border:0}
+.st b{font-family:MosvitaBE;font-size:17px;min-width:62px;letter-spacing:-.01em}
+.st span{color:var(--ink2)}
+.st em{color:var(--mute);font-style:normal;font-size:12.4px;margin-left:auto;text-align:right}
+.ev p{font-size:13.6px;color:var(--ink2);line-height:1.6}
+.opts{margin-top:24px}
+.opt{display:flex;gap:13px;padding:13px 15px;border:1px solid var(--line);margin-bottom:8px;cursor:pointer;
+  align-items:flex-start;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--ink)}
+.opt.sel{border-color:var(--blue);background:var(--bluebg);border-width:1.5px}
+.opt>span:last-child{flex:1}
+.opt .k{font-family:var(--mono);font-size:11px;width:19px;height:19px;border:1px solid var(--line);
+  display:grid;place-items:center;flex:none;margin-top:2px;text-transform:uppercase}
+.opt.sel .k{background:var(--blue);border-color:var(--blue);color:#fff}
+.opt .l{font-size:14.4px;line-height:1.45;color:var(--ink)}
+.opt .l{display:block}
+.opt .im{display:block;font-size:12.9px;color:var(--mute);margin-top:5px;line-height:1.5}
+.opt .rc{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;color:var(--blue);
+  border:1px solid var(--blue);padding:1px 5px;margin-left:7px;white-space:nowrap;text-transform:uppercase}
+.rec{margin-top:13px;padding:13px 15px;border-left:2.5px solid var(--blue);background:var(--bluebg)}
+.rec .tag{color:var(--blue)}
+.rec p{font-size:13.6px;color:var(--ink2);margin-top:5px;line-height:1.58}
+.extra{margin-top:9px;display:flex;gap:8px;flex-wrap:wrap}
+.extra button{font-family:inherit;font-size:12.4px;padding:7px 12px;border:1px dashed var(--line);
+  background:none;color:var(--mute);cursor:pointer}
+.extra button:hover{border-color:var(--ink);color:var(--ink)}
+.extra button.on{border-style:solid;border-color:var(--blue);color:var(--blue)}
+textarea{width:100%;margin-top:9px;padding:11px 13px;border:1px solid var(--line);background:var(--bg);
+  color:var(--ink);font-family:inherit;font-size:13.8px;line-height:1.55;resize:vertical;min-height:74px}
+textarea:focus{outline:none;border-color:var(--blue)}
+.hide{display:none}
+.done-note{margin-top:44px;padding:24px;border:1px solid var(--blue);background:var(--bluebg)}
+.done-note h3{font-size:18px;margin-bottom:8px}
+.done-note p{font-size:14.4px;color:var(--ink2);max-width:70ch}
+@media(max-width:640px){.hero{padding:34px 0 24px}.body,.qh{padding-left:15px;padding-right:15px}
+  .st em{margin-left:0;display:block;text-align:left}.st{flex-wrap:wrap}}
+</style></head><body>
+
+<header><div class="wrap hd">
+  <span class="mark">sgnk<span class="tld">.ai</span></span>
+  <nav class="nav"><a href="/decisions" class="on">Decisions</a><a href="/flow">Flow</a></nav>
+  <span class="sp"></span>
+  <button class="tt" id="tt" aria-label="Switch theme" title="Switch theme"><svg class="su" viewBox="0 -960 960 960" aria-hidden="true"><path d="M579-380.76q41-40.77 41-99Q620-538 579.24-579q-40.77-41-99-41Q422-620 381-579.24q-41 40.77-41 99Q340-422 380.76-381q40.77 41 99 41Q538-340 579-380.76ZM338.5-338.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM70-450q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32Q57.25-510 70-510h100q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H70Zm720 0q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h100q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H790ZM458.5-768.63Q450-777.25 450-790v-100q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v100q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63Zm0 720Q450-57.25 450-70v-100q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v100q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63ZM240-678l-57-56q-9-9-8.63-21.6.37-12.61 8.53-21.5 8.89-8.9 21.5-8.9 12.6 0 21.6 9l56 57q8 9 8 21t-8 20.5q-8 8.5-20.5 8.5t-21.5-8Zm494 495-56-57q-8-9-8-21.38 0-12.37 8.5-20.62 8.5-9 20.5-9t21 9l57 56q9 9 8.63 21.6-.37 12.61-8.53 21.5-8.89 8.9-21.5 8.9-12.6 0-21.6-9Zm-56-495q-9-9-9-21t9-21l56-57q9-9 21.6-8.63 12.61.37 21.5 8.53 8.9 8.89 8.9 21.5 0 12.6-9 21.6l-57 56q-8 8-20.36 8-12.37 0-21.64-8ZM182.9-182.9q-8.9-8.89-8.9-21.5 0-12.6 9-21.6l57-56q8.8-9 20.9-9 12.1 0 20.71 9 9.39 9 9.39 21t-9 21l-56 57q-9 9-21.6 8.63-12.61-.37-21.5-8.53ZM480-480Z"/></svg><svg class="mo" viewBox="0 -960 960 960" aria-hidden="true"><path d="M480-120q-150 0-255-105T120-480q0-135 79.5-229T408-830q20-5 34-1t22 15q8 10 7.5 25t-8.5 35q-9 23-14 47t-5 49q0 90 63 153t153 63q25 0 48.5-4.5T754-461q22-8 38-7t26 9q10 8 13 23t-2 36q-27 121-121 200.5T480-120Zm0-60q109 0 190-67.5T771-406q-25 11-53.5 16.5T660-384q-115 0-195.5-80.5T384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Zm-4-297Z"/></svg></button>
+  <button class="btn" id="reset">Reset</button>
+  <button class="btn pri" id="exp">Export answers</button>
+</div></header>
+
+<div class="wrap">
+<section class="hero">
+  <span class="tag">A working demo · the communication framework</span>
+  <h1>The questions an AI should ask you back</h1>
+  <p class="lede">An agent built a SIP tracker. Then it wrote down every call it had made
+    that nobody told it to make, and asked. Each question carries what the system does today,
+    why it does that, what it costs, and a recommendation with its reasoning. You answer.
+    It exports a JSON and a markdown you hand straight back.</p>
+  <div class="meta">
+    <div><b>12</b> decisions taken unasked</div>
+    <div><b>44</b> options, each with its cost</div>
+    <div><b>17</b> evidence blocks</div>
+    <div><b>0</b> lines of code you need to read</div>
+  </div>
+</section>
+</div>
+
+<div class="bar"><div class="wrap in">
+  <span class="cnt" id="cnt">0 of 12 answered</span>
+  <div class="prog"><i id="pi"></i></div>
+  <span class="cnt" id="dif"></span>
+</div></div>
+
+<main class="wrap"><div id="app"></div>
+  <div class="done-note" id="dn" style="display:none">
+    <h3>That is the whole loop.</h3>
+    <p>Every answer above now has a recorded decision, a chosen option, and a reason.
+      Export it, hand the markdown back to your agent, and the flow diagram updates with each rule
+      pointing at the question that produced it. <a href="/flow">See what that looks like.</a></p>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  A demo of the Decisions half of a human-to-AI communication framework, part of sgnkai.
+  The SIP tracker, its numbers and its failures are synthetic and self-consistent.
+  Answers are stored in your browser only. <a href="/flow">Flow</a>
+</div></footer>
+
+<script src="/framework/data.js"></script>
+<script>
+const S = JSON.parse(localStorage.getItem("sgnk-dec") || '{"a":{},"n":{},"o":{}}');
+const save = () => localStorage.setItem("sgnk-dec", JSON.stringify(S));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function evBlock(e){
+  if(e.type==="table") return `<div class=ev><h4>${esc(e.title)}</h4><table><thead><tr>${
+    e.cols.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${
+    e.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  if(e.type==="stat") return `<div class=ev><h4>${esc(e.title)}</h4>${
+    e.items.map(([a,b,c])=>`<div class=st><b>${esc(b)}</b><span>${esc(a)}</span><em>${esc(c||"")}</em></div>`).join("")}</div>`;
+  return `<div class=ev><h4>${esc(e.title)}</h4><p>${esc(e.body)}</p></div>`;
+}
+
+function render(){
+  const app = document.getElementById("app");
+  const cats = [...new Set(QUESTIONS.map(q=>q.cat))];
+  app.innerHTML = cats.map(c=>`<div class=cat><h2>${esc(c)}</h2></div>` +
+    QUESTIONS.filter(q=>q.cat===c).map(q=>{
+      const sel = S.a[q.id];
+      const answered = sel!=null;
+      return `<article class="q ${answered?"done":""}" id="q-${q.id}">
+        <div class=qh>
+          <div class=qtop><span class=id>${q.id}</span>
+            <span class="w ${q.weight}">${q.weight}</span>
+            <span class=tag>${esc(q.sub)}</span>
+            ${answered?'<span class=ok>ANSWERED</span>':''}</div>
+          <h3>${esc(q.q)}</h3><p class=lede>${esc(q.lede)}</p></div>
+        <div class=body>
+          <div class=sec><span class=tag>What the system does today</span><p>${esc(q.now)}</p></div>
+          <div class=sec><span class=tag>Why it does that</span><p>${esc(q.why)}</p></div>
+          <div class=sec><span class=tag>Why it matters</span><p>${esc(q.problem)}</p></div>
+          ${(q.evidence||[]).map(evBlock).join("")}
+          <div class=opts>${q.options.map(o=>`
+            <div class="opt ${sel===o.k?"sel":""}" data-q="${q.id}" data-k="${o.k}">
+              <span class=k>${o.k}</span>
+              <span><span class=l>${esc(o.label)}${o.k===q.rec?'<span class=rc>recommended</span>':''}</span>
+              <span class=im>${esc(o.impact)}</span></span></div>`).join("")}
+          </div>
+          <div class=rec><span class=tag>Why ${String(q.rec).toUpperCase()} is recommended</span><p>${esc(q.recCase)}</p></div>
+          <div class=extra>
+            <button data-act=own data-q="${q.id}" class="${sel==="own"?"on":""}">Write my own answer</button>
+            <button data-act=defer data-q="${q.id}" class="${sel==="?"?"on":""}">Undecided, defer to ${String(q.rec).toUpperCase()}</button>
+            <button data-act=note data-q="${q.id}" class="${S.n[q.id]?"on":""}">Add a note</button>
+          </div>
+          <textarea class="own ${sel==="own"?"":"hide"}" data-q="${q.id}"
+            placeholder="Your own answer, in your words.">${esc(S.o[q.id]||"")}</textarea>
+          <textarea class="note ${S.n[q.id]?"":"hide"}" data-q="${q.id}"
+            placeholder="Anything the options do not cover.">${esc(S.n[q.id]||"")}</textarea>
+        </div></article>`;
+    }).join("")).join("");
+  tick();
+}
+
+function tick(){
+  const n = QUESTIONS.filter(q=>S.a[q.id]!=null).length;
+  document.getElementById("cnt").textContent = `${n} of ${QUESTIONS.length} answered`;
+  document.getElementById("pi").style.width = (n/QUESTIONS.length*100)+"%";
+  const d = QUESTIONS.filter(q=>S.a[q.id]&&S.a[q.id]!=="?"&&S.a[q.id]!=="own"&&S.a[q.id]!==q.rec).length;
+  document.getElementById("dif").textContent = d ? `${d} differ from the recommendation` : "";
+  document.getElementById("dn").style.display = n===QUESTIONS.length ? "block" : "none";
+}
+
+document.addEventListener("click", e=>{
+  const o = e.target.closest(".opt");
+  if(o){ S.a[o.dataset.q] = o.dataset.k; save(); render();
+         document.getElementById("q-"+o.dataset.q).scrollIntoView({block:"nearest"}); return; }
+  const b = e.target.closest("[data-act]");
+  if(b){ const q=b.dataset.q;
+    if(b.dataset.act==="own"){ S.a[q] = S.a[q]==="own" ? undefined : "own"; if(S.a[q]===undefined) delete S.a[q]; }
+    if(b.dataset.act==="defer"){ S.a[q] = S.a[q]==="?" ? undefined : "?"; if(S.a[q]===undefined) delete S.a[q]; }
+    if(b.dataset.act==="note"){ const t=document.querySelector(`textarea.note[data-q="${q}"]`);
+      t.classList.toggle("hide"); b.classList.toggle("on"); if(!t.classList.contains("hide")) t.focus(); return; }
+    save(); render(); document.getElementById("q-"+q).scrollIntoView({block:"nearest"}); }
+});
+document.addEventListener("input", e=>{
+  const t=e.target; if(t.tagName!=="TEXTAREA") return;
+  if(t.classList.contains("own")) S.o[t.dataset.q]=t.value; else S.n[t.dataset.q]=t.value;
+  save();
+});
+document.getElementById("reset").onclick = ()=>{
+  if(!confirm("Clear every answer on this demo?")) return;
+  localStorage.removeItem("sgnk-dec"); S.a={}; S.n={}; S.o={}; render();
+};
+
+function payload(){
+  return { savedAt:new Date().toISOString(), demo:"sgnk.ai/decisions — SIP tracker",
+    counts:{ total:QUESTIONS.length,
+      answered:QUESTIONS.filter(q=>S.a[q.id]!=null).length,
+      ownAnswer:QUESTIONS.filter(q=>S.a[q.id]==="own").length,
+      deferred:QUESTIONS.filter(q=>S.a[q.id]==="?").length,
+      differsFromRecommendation:QUESTIONS.filter(q=>S.a[q.id]&&!["?","own"].includes(S.a[q.id])&&S.a[q.id]!==q.rec).length },
+    responses: QUESTIONS.map(q=>{
+      const k=S.a[q.id], o=q.options.find(x=>x.k===k), r=q.options.find(x=>x.k===q.rec);
+      const status = k==null?"unanswered":k==="?"?"deferred-to-recommendation":k==="own"?"own-answer":"answered";
+      return { id:q.id, category:q.cat, weight:q.weight, question:q.q, status,
+        choice:k??null, choiceLabel:o?o.label:null,
+        recommended:q.rec, recommendedLabel:r?r.label:null,
+        // null, never false, when there is nothing to compare. An unanswered
+        // question is not a disagreement.
+        agreesWithRecommendation: (status==="unanswered")?null:(status==="deferred-to-recommendation")?true:(status==="own-answer")?false:k===q.rec,
+        ownAnswer:(S.o[q.id]||"").trim()||null, note:(S.n[q.id]||"").trim()||null };
+    })};
+}
+function markdown(){
+  const L=["# SIP tracker — decisions","",`Answered ${QUESTIONS.filter(q=>S.a[q.id]!=null).length} of ${QUESTIONS.length}.`,
+    "","Hand this back to the agent and say: these are the calls, update the build and the flow.",""];
+  [...new Set(QUESTIONS.map(q=>q.cat))].forEach(c=>{
+    const qs=QUESTIONS.filter(q=>q.cat===c && S.a[q.id]!=null); if(!qs.length) return;
+    L.push(`## ${c}`,"");
+    qs.forEach(q=>{ const k=S.a[q.id], o=q.options.find(x=>x.k===k), r=q.options.find(x=>x.k===q.rec);
+      L.push(`### ${q.id}. ${q.q}`);
+      if(k==="?") L.push(`**UNDECIDED, deferring to ${q.rec.toUpperCase()}: ${r?r.label:""}**`);
+      else if(k==="own"){ L.push(`**OWN ANSWER, none of the options:**`,"",(S.o[q.id]||"(blank)").split("\n").map(l=>"> "+l).join("\n"));
+        L.push("",`_(the recommendation was ${q.rec.toUpperCase()}, not taken)_`); }
+      else L.push(`**${k.toUpperCase()} — ${o?o.label:""}**  (${k===q.rec?"matches the recommendation":"DIFFERS, recommendation was "+q.rec.toUpperCase()})`);
+      if(S.n[q.id]) L.push("",`Note: ${S.n[q.id]}`);
+      L.push(""); });
+  });
+  const un=QUESTIONS.filter(q=>S.a[q.id]==null);
+  if(un.length){ L.push("## Still unanswered",""); un.forEach(q=>L.push(`- ${q.id} (${q.weight}) — ${q.q}`)); }
+  return L.join("\n");
+}
+const dl=(n,c,t)=>{const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([c],{type:t}));a.download=n;a.click();URL.revokeObjectURL(a.href);};
+document.getElementById("exp").onclick = ()=>{
+  dl("sip-decisions.json", JSON.stringify(payload(),null,2), "application/json");
+  setTimeout(()=>dl("sip-decisions.md", markdown(), "text/markdown"), 120);
+};
+render();
+</script></body></html>

@@ -1,0 +1,189 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flow — the system as a board, and every rule names its decision</title>
+<meta name="description" content="A working demo of the Flow half of a human-to-AI communication framework. The whole system as a Kanban board, chronologically. Click any card for the sequence, the edge cases and the failure modes. Every step names the decision that created it.">
+<link rel="canonical" href="https://sgnk.ai/flow">
+<meta property="og:title" content="Flow — the system as a board, and every rule names its decision">
+<meta property="og:description" content="Twenty steps, six phases, five lanes. Every one traces back to the answer that produced it, so nobody has to say I think we decided that.">
+<meta property="og:type" content="website">
+<script>(()=>{const r=document.documentElement,K="sgnk-theme";const q=new URLSearchParams(location.search).get("theme");const t=q||localStorage.getItem(K);if(t==="dark")r.dataset.t="dark";addEventListener("DOMContentLoaded",()=>{const b=document.getElementById("tt");if(!b)return;b.onclick=()=>{const d=r.dataset.t==="dark";if(d){delete r.dataset.t;localStorage.setItem(K,"light");}else{r.dataset.t="dark";localStorage.setItem(K,"dark");}};});})();</script>
+<link rel="stylesheet" href="/framework/base.css">
+<style>
+.hero{padding:52px 0 30px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(29px,4.4vw,50px);max-width:21ch}
+.hero .lede{font-size:clamp(17px,2vw,21px);color:var(--ink2);max-width:62ch;margin-top:18px;line-height:1.5}
+.hero .meta{margin-top:22px;display:flex;gap:26px;flex-wrap:wrap}
+.hero .meta div{font-size:13px;color:var(--mute)}
+.hero .meta b{display:block;font-family:MosvitaBE;font-size:25px;color:var(--ink);letter-spacing:-.02em}
+.legend{display:flex;gap:7px;flex-wrap:wrap;padding:15px 0;border-bottom:1px solid var(--line);
+  position:sticky;top:57px;background:var(--bg);z-index:30}
+.lg{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;
+  padding:3px 8px;border:1px solid var(--line);color:var(--mute);cursor:pointer;user-select:none}
+.lg.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.board{display:flex;gap:16px;overflow-x:auto;padding:26px 0 34px;scroll-snap-type:x proximity}
+.col{flex:0 0 306px;scroll-snap-align:start}
+.ch{padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:13px}
+.ch .t{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+.ch h2{font-size:17px;margin-top:5px}
+.ch p{font-size:12.4px;color:var(--mute);margin-top:4px;line-height:1.45}
+.card{border:1px solid var(--line);padding:12px 14px;margin-bottom:9px;cursor:pointer;background:var(--bg);
+  transition:border-color .12s,transform .12s}
+.card:hover{border-color:var(--blue);transform:translateX(2px)}
+.card .top{display:flex;gap:6px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.lane{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;
+  padding:1.5px 6px;border:1px solid var(--line);color:var(--mute)}
+.kind{font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+.kind.alarm,.kind.hard{color:var(--crit)}
+.kind.gate{color:var(--high)}
+.card h3{font-size:14.6px;line-height:1.32;font-family:MosvitaSBE,sans-serif;letter-spacing:0}
+.card .d{font-size:12.6px;color:var(--ink2);margin-top:6px;line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card .src{margin-top:9px;padding-top:8px;border-top:1px dashed var(--line);
+  font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:.04em}
+.card.dim{opacity:.24}
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,10,10,.5);opacity:0;pointer-events:none;
+  transition:opacity .2s;z-index:60}
+.scrim.on{opacity:1;pointer-events:auto}
+.dr{position:fixed;top:0;right:0;bottom:0;width:min(620px,100%);background:var(--bg);
+  border-left:1px solid var(--line);transform:translateX(100%);transition:transform .26s cubic-bezier(.4,0,.2,1);
+  z-index:61;overflow-y:auto}
+.dr.on{transform:none}
+.drh{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:20px 26px 16px}
+.drh .top{display:flex;gap:7px;align-items:center;margin-bottom:9px;flex-wrap:wrap}
+.drh h2{font-size:22px;line-height:1.25;max-width:30ch}
+.x{margin-left:auto;font-family:inherit;font-size:20px;line-height:1;background:none;border:0;
+  color:var(--mute);cursor:pointer;padding:2px 6px}
+.x:hover{color:var(--ink)}
+.drb{padding:22px 26px 60px}
+.blk{margin-bottom:26px}
+.blk>.tag{display:block;margin-bottom:8px}
+.blk p{font-size:14.4px;color:var(--ink2);line-height:1.62}
+.imp{border-left:2.5px solid var(--blue);background:var(--bluebg);padding:12px 15px}
+.imp p{color:var(--ink);font-size:14.6px}
+ol.proc{list-style:none;counter-reset:s}
+ol.proc li{counter-increment:s;position:relative;padding:0 0 11px 33px;font-size:14.2px;
+  color:var(--ink2);line-height:1.55}
+ol.proc li:before{content:counter(s);position:absolute;left:0;top:1px;width:21px;height:21px;
+  border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:10.5px;color:var(--mute)}
+ul.cs{list-style:none}
+ul.cs li{padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.8px;color:var(--ink2);line-height:1.55}
+ul.cs li:last-child{border:0}
+ul.cs li b{color:var(--ink);font-family:MosvitaSBE,sans-serif;font-weight:600}
+ul.fl li{border-left:2px solid var(--crit);padding-left:12px;margin-bottom:10px;border-bottom:0}
+.srcbig{font-family:var(--mono);font-size:11.5px;color:var(--blue);border:1px solid var(--blue);
+  padding:9px 12px;letter-spacing:.03em}
+.lk{display:flex;gap:6px;flex-wrap:wrap}
+.lk button{font-family:inherit;font-size:12.4px;padding:6px 11px;border:1px solid var(--line);
+  background:none;color:var(--ink2);cursor:pointer;text-align:left}
+.lk button:hover{border-color:var(--blue);color:var(--blue)}
+@media(max-width:640px){.hero{padding:34px 0 24px}.col{flex-basis:270px}.drb,.drh{padding-left:17px;padding-right:17px}}
+</style></head><body>
+
+<header><div class="wrap hd">
+  <span class="mark">sgnk<span class="tld">.ai</span></span>
+  <nav class="nav"><a href="/decisions">Decisions</a><a href="/flow" class="on">Flow</a></nav>
+  <span class="sp"></span>
+  <button class="tt" id="tt" aria-label="Switch theme" title="Switch theme"><svg class="su" viewBox="0 -960 960 960" aria-hidden="true"><path d="M579-380.76q41-40.77 41-99Q620-538 579.24-579q-40.77-41-99-41Q422-620 381-579.24q-41 40.77-41 99Q340-422 380.76-381q40.77 41 99 41Q538-340 579-380.76ZM338.5-338.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM70-450q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32Q57.25-510 70-510h100q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H70Zm720 0q-12.75 0-21.37-8.68-8.63-8.67-8.63-21.5 0-12.82 8.63-21.32 8.62-8.5 21.37-8.5h100q12.75 0 21.38 8.68 8.62 8.67 8.62 21.5 0 12.82-8.62 21.32-8.63 8.5-21.38 8.5H790ZM458.5-768.63Q450-777.25 450-790v-100q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v100q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63Zm0 720Q450-57.25 450-70v-100q0-12.75 8.68-21.38 8.67-8.62 21.5-8.62 12.82 0 21.32 8.62 8.5 8.63 8.5 21.38v100q0 12.75-8.68 21.37-8.67 8.63-21.5 8.63-12.82 0-21.32-8.63ZM240-678l-57-56q-9-9-8.63-21.6.37-12.61 8.53-21.5 8.89-8.9 21.5-8.9 12.6 0 21.6 9l56 57q8 9 8 21t-8 20.5q-8 8.5-20.5 8.5t-21.5-8Zm494 495-56-57q-8-9-8-21.38 0-12.37 8.5-20.62 8.5-9 20.5-9t21 9l57 56q9 9 8.63 21.6-.37 12.61-8.53 21.5-8.89 8.9-21.5 8.9-12.6 0-21.6-9Zm-56-495q-9-9-9-21t9-21l56-57q9-9 21.6-8.63 12.61.37 21.5 8.53 8.9 8.89 8.9 21.5 0 12.6-9 21.6l-57 56q-8 8-20.36 8-12.37 0-21.64-8ZM182.9-182.9q-8.9-8.89-8.9-21.5 0-12.6 9-21.6l57-56q8.8-9 20.9-9 12.1 0 20.71 9 9.39 9 9.39 21t-9 21l-56 57q-9 9-21.6 8.63-12.61-.37-21.5-8.53ZM480-480Z"/></svg><svg class="mo" viewBox="0 -960 960 960" aria-hidden="true"><path d="M480-120q-150 0-255-105T120-480q0-135 79.5-229T408-830q20-5 34-1t22 15q8 10 7.5 25t-8.5 35q-9 23-14 47t-5 49q0 90 63 153t153 63q25 0 48.5-4.5T754-461q22-8 38-7t26 9q10 8 13 23t-2 36q-27 121-121 200.5T480-120Zm0-60q109 0 190-67.5T771-406q-25 11-53.5 16.5T660-384q-115 0-195.5-80.5T384-660q0-24 5-51.5t18-62.5q-98 27-162.5 109.5T180-480q0 125 87.5 212.5T480-180Zm-4-297Z"/></svg></button>
+  <a class="btn" href="/decisions">Answer the questions</a>
+</div></header>
+
+<div class="wrap">
+<section class="hero">
+  <span class="tag">A working demo · the communication framework</span>
+  <h1>The system as a board, and every rule names its decision</h1>
+  <p class="lede">The same SIP tracker, drawn as what it actually does, in order, from two days
+    before the money moves to the month-end report. Click any card and the drawer opens with the
+    real sequence, the edge cases, and what each failure costs. Every step carries the id of the
+    question whose answer created it.</p>
+  <div class="meta">
+    <div><b>20</b> steps</div>
+    <div><b>6</b> phases, in order</div>
+    <div><b>5</b> lanes</div>
+    <div><b>20/20</b> name their decision</div>
+  </div>
+</section>
+<div class="legend" id="lg"></div>
+<div class="board" id="board"></div>
+</div>
+
+<footer><div class="wrap">
+  A demo of the Flow half of a human-to-AI communication framework, part of sgnkai.
+  The SIP tracker, its numbers and its failures are synthetic and self-consistent.
+  <a href="/decisions">Decisions</a>
+</div></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="dr" id="dr" role="dialog" aria-modal="true" aria-labelledby="drt"></aside>
+
+<script src="/framework/data.js"></script>
+<script>
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const STEPS = Object.fromEntries(PHASES.flatMap(p=>p.steps.map(s=>[s.id,{...s,phase:p}])));
+let filter = null;
+
+document.getElementById("lg").innerHTML =
+  `<span class="lg on" data-l="">All lanes</span>` +
+  Object.entries(LANES).map(([k,v])=>`<span class=lg data-l="${k}">${esc(v.name)}</span>`).join("");
+
+function board(){
+  document.getElementById("board").innerHTML = PHASES.map(p=>`
+    <div class=col>
+      <div class=ch><div class=t>${esc(p.time)}</div><h2>${esc(p.title)}</h2><p>${esc(p.sub)}</p></div>
+      ${p.steps.map(s=>`
+        <article class="card ${filter&&s.lane!==filter?"dim":""}" data-id="${s.id}">
+          <div class=top><span class=lane>${esc(LANES[s.lane].name)}</span>
+            ${s.kind?`<span class="kind ${s.kind}">${esc(s.kind)}</span>`:""}</div>
+          <h3>${esc(s.t)}</h3><p class=d>${esc(s.d)}</p>
+          <div class=src>from ${esc(s.src)}</div>
+        </article>`).join("")}
+    </div>`).join("");
+}
+
+function open(id){
+  const s = STEPS[id], d = DETAIL[id] || {};
+  document.getElementById("dr").innerHTML = `
+    <div class=drh><div class=top>
+      <span class=lane>${esc(LANES[s.lane].name)}</span>
+      ${s.kind?`<span class="kind ${s.kind}">${esc(s.kind)}</span>`:""}
+      <span class=tag>${esc(s.phase.title)} · ${esc(s.phase.time)}</span>
+      <button class=x aria-label=Close>&times;</button></div>
+      <h2 id=drt>${esc(s.t)}</h2></div>
+    <div class=drb>
+      ${d.impact?`<div class="blk imp"><span class=tag>Why this step matters</span><p>${esc(d.impact)}</p></div>`:""}
+      <div class=blk><span class=tag>What it does</span><p>${esc(s.d)}</p></div>
+      ${d.proc?`<div class=blk><span class=tag>The actual sequence</span>
+        <ol class=proc>${d.proc.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`:""}
+      ${d.cases?`<div class=blk><span class=tag>Branches and edge cases</span>
+        <ul class=cs>${d.cases.map(x=>{const [a,b]=x.split(" -> ");
+          return `<li><b>${esc(a)}</b>${b?" → "+esc(b):""}</li>`;}).join("")}</ul></div>`:""}
+      ${d.fail?`<div class=blk><span class=tag>Failure modes, and what each costs</span>
+        <ul class="cs fl">${d.fail.map(x=>{const [a,b]=x.split(" -> ");
+          return `<li><b>${esc(a)}</b>${b?" → "+esc(b):""}</li>`;}).join("")}</ul></div>`:""}
+      <div class=blk><span class=tag>The decision that created this rule</span>
+        <div class=srcbig>${esc(s.src)}</div></div>
+      ${d.links&&d.links.length?`<div class=blk><span class=tag>Related steps</span>
+        <div class=lk>${d.links.map(l=>STEPS[l]?`<button data-go="${l}">${esc(STEPS[l].t)}</button>`:"").join("")}</div></div>`:""}
+    </div>`;
+  document.getElementById("dr").classList.add("on");
+  document.getElementById("scrim").classList.add("on");
+  document.getElementById("dr").scrollTop = 0;
+  history.replaceState(null,"","#"+id);
+}
+function close(){
+  document.getElementById("dr").classList.remove("on");
+  document.getElementById("scrim").classList.remove("on");
+  history.replaceState(null,"",location.pathname);
+}
+document.addEventListener("click", e=>{
+  const c=e.target.closest(".card"); if(c) return open(c.dataset.id);
+  const g=e.target.closest("[data-go]"); if(g) return open(g.dataset.go);
+  if(e.target.closest(".x") || e.target.id==="scrim") return close();
+  const l=e.target.closest(".lg");
+  if(l){ filter = l.dataset.l || null;
+    document.querySelectorAll(".lg").forEach(x=>x.classList.toggle("on",x===l)); board(); }
+});
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") close(); });
+board();
+if(location.hash && STEPS[location.hash.slice(1)]) open(location.hash.slice(1));
+</script></body></html>
