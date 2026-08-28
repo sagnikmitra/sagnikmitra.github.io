@@ -68,7 +68,7 @@ section.blk>.sub{margin-top:12px;color:var(--ink2);font-size:15.5px;max-width:72
 .chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .chip:hover{border-color:var(--ink)}
 .atl{margin-top:20px;border:1px solid var(--line)}
-.arow{display:grid;grid-template-columns:1.4fr 2.6fr 118px 130px;gap:0;border-bottom:1px solid var(--line2);
+.arow{display:grid;grid-template-columns:1.3fr 2.4fr 168px 148px;gap:0;border-bottom:1px solid var(--line2);
   align-items:start;cursor:pointer;transition:background .1s}
 .arow:last-child{border-bottom:0}
 .arow:hover{background:var(--wash)}
@@ -78,7 +78,7 @@ section.blk>.sub{margin-top:12px;color:var(--ink2);font-size:15.5px;max-width:72
 .ahead:hover{background:var(--wash)}
 .aname{font-family:MosvitaSBE,sans-serif;font-size:14.6px;color:var(--ink)}
 .awhat{font-size:13.6px;color:var(--ink2);line-height:1.55}
-.pill{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;
+.pill{font-family:var(--mono);font-size:9.5px;max-width:100%;overflow-wrap:anywhere;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;
   border:1px solid;display:inline-block;white-space:nowrap}
 .pill.strong{color:#1a7a3c;border-color:#1a7a3c}
 .pill.moderate{color:var(--blue);border-color:var(--blue)}
@@ -116,6 +116,25 @@ section.blk>.sub{margin-top:12px;color:var(--ink2);font-size:15.5px;max-width:72
 .warn{margin-top:22px;border-left:3px solid var(--crit);background:var(--wash);
   padding:16px 20px;font-size:14px;line-height:1.6;color:var(--ink2);max-width:78ch}
 .warn b{color:var(--ink);font-family:MosvitaSBE,sans-serif}
+.loop{margin-top:26px;border:1px solid var(--line)}
+.lp{display:grid;grid-template-columns:64px 150px 1fr;gap:0;align-items:start;
+  border-bottom:1px solid var(--line2)}
+.lp.last{border-bottom:0}
+.lp>*{padding:15px 16px}
+.lpn{font-family:var(--mono);font-size:12px;color:var(--blue);letter-spacing:.08em}
+.lp b{font-family:MosvitaBE,sans-serif;font-size:16px}
+.lp span:last-child{font-size:13.6px;color:var(--ink2);line-height:1.55}
+@media(max-width:820px){.lp{grid-template-columns:56px 1fr}.lp span:last-child{grid-column:2}}
+.ship{margin-top:24px;border:1px solid var(--line)}
+.sh{border-bottom:1px solid var(--line2);padding:17px 19px}
+.sh:last-child{border-bottom:0}
+.sh b{font-family:MosvitaSBE,sans-serif;font-size:15px;display:block;margin-bottom:5px}
+.sh p{font-size:13.7px;color:var(--ink2);line-height:1.58}
+.sh .ev{margin-top:8px;font-size:12.6px;color:var(--mute);border-left:2px solid var(--line);
+  padding-left:11px;line-height:1.5}
+.pill.present{color:#1a7a3c;border-color:#1a7a3c}
+.pill.partial{color:var(--high);border-color:var(--high)}
+.pill.absent{color:var(--crit);border-color:var(--crit)}
 /* built */
 .built{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:26px;border:1px solid var(--line)}
 @media(max-width:820px){.built{grid-template-columns:1fr}}
@@ -237,6 +256,12 @@ section.blk>.sub{margin-top:12px;color:var(--ink2);font-size:15.5px;max-width:72
     the part a model can regenerate and a file path is not. It does the opposite. This is every compaction
     event on this machine, paired with the context it replaced, matched on the set of distinct anchors so a
     path repeated forty times still counts once.</p>
+  <p class="note">Worth saying plainly: summarisers dropping named entities is not a new discovery.
+    It is documented in the abstractive summarisation literature back to at least 2021
+    (arXiv 2102.09130 on entity level factual consistency, 2307.02570 on named entity omission, and
+    2503.19114 on information preservation in prompt compression, all three opened and checked).
+    What I could not find published is that effect measured on agent context compaction, on a live
+    corpus, against an ordinary prose baseline. The effect is old. The setting is the part I am adding.</p>
   <div class="anch" id="anch"></div>
   <p class="note" id="anchnote"></p>
   <div class="thr">
@@ -264,6 +289,54 @@ section.blk>.sub{margin-top:12px;color:var(--ink2);font-size:15.5px;max-width:72
   <div class="filters" id="filters"></div>
   <div class="atl" id="atl"></div>
   <p class="note" id="atlnote"></p>
+</section>
+
+<section class="blk" id="mechblk">
+  <h2>The mechanism, end to end</h2>
+  <p class="sub">Three skills, because a fast save and a permanent record are different artifacts and one
+    tool doing both would do neither. The loop runs continuously; the handover runs once, when you are
+    leaving for good.</p>
+  <div class="loop">
+    <div class="lp"><span class="lpn">01</span><b>work</b>
+      <span>the transcript accumulates on disk, append only, never rewritten</span></div>
+    <div class="lp"><span class="lpn">02</span><b>snapshot</b>
+      <span>writes the working memory down: a deterministic manifest plus seven cards, and mines every
+      transcript that touched the repo for the model's own compaction summaries</span></div>
+    <div class="lp"><span class="lpn">03</span><b>the boundary</b>
+      <span>compaction fires, or the limit hits, or the account switches. The PreCompact hook now records
+      the transcript line offset, which is an exact address into what was just dropped</span></div>
+    <div class="lp"><span class="lpn">04</span><b>recall</b>
+      <span>loads it on the other side and computes what actually drifted while you were gone: commits
+      since, branch changes, dirty files, services down</span></div>
+    <div class="lp last"><span class="lpn">05</span><b>handover</b>
+      <span>the slow one. Strictly chronological, no skim, eleven mandatory sweeps over everything a
+      session walk cannot see. For leaving an account permanently</span></div>
+  </div>
+  <p class="note">The design rests on one measured result. Bhabra 2007 found a durable written artifact
+    retains <b>99% of information across five serial handovers, against 2.5% for re-narration</b>. That is
+    the whole argument for never building a snapshot from a previous snapshot, and the miner already
+    rebuilds from source transcripts every time.</p>
+</section>
+
+<section class="blk" id="payloadblk">
+  <h2>What a complete handover should carry</h2>
+  <p class="sub">Derived by reading the formal protocols that had to specify this properly, A2A task
+    objects, LangGraph checkpoints and the Letta agent file, alongside the clinical handoff literature.
+    Then checked, field by field, against what my own skills actually emit. Click a row.</p>
+  <div class="filters" id="pfilters"></div>
+  <div class="atl" id="payl"></div>
+  <p class="note" id="paynote"></p>
+</section>
+
+<section class="blk" id="shipblk">
+  <h2>What the research changed, and what is now live</h2>
+  <p class="sub">Five changes, all applied and verified. Each one is here because something was measured
+    or opened, not because it sounded right.</p>
+  <div class="ship" id="ship"></div>
+  <p class="note">One of these nearly did not happen. Editing the skill source did not make the hook live:
+    the harness invokes a promoted copy elsewhere, so the edit verified clean and fired nothing. The
+    system doctor caught it as a drift failure. Verifying that a write landed is not the same as
+    verifying that the thing which runs is the thing you wrote.</p>
 </section>
 
 <section class="blk">
@@ -423,6 +496,38 @@ function drawFilters(){
   $$("#filters .chip").forEach(c=>c.onclick=()=>{filt=c.dataset.k;drawFilters();drawAtlas();});
 }
 drawFilters();drawAtlas();
+/* ---- payload spec ---- */
+if (MEM.payload) {
+  let pf="all";
+  const draw=()=>{
+    const rows=MEM.payload.filter(r=>pf==="all"||r.state===pf);
+    $("#payl").innerHTML=`<div class="arow ahead"><div>Field</div><div>Why it belongs</div>
+        <div>In my skills</div><div></div></div>`+
+      rows.map((r,i)=>`<div class="arow" data-i="${i}">
+        <div class="aname">${r.field}</div>
+        <div class="awhat">${r.why}</div>
+        <div><span class="pill ${r.state}">${r.state}</span></div>
+        <div></div>
+        <div class="exp"><b>Source.</b> ${r.src}</div>
+      </div>`).join("");
+    $$("#payl .arow[data-i]").forEach(x=>x.onclick=()=>x.classList.toggle("open"));
+  };
+  const opts=[["all","Everything"],["absent","Missing"],["partial","Partial"],["present","Present"]];
+  const drawF=()=>{
+    $("#pfilters").innerHTML=`<span class="tag">Filter</span>`+opts.map(([k,l])=>
+      `<button class="chip ${k===pf?"on":""}" data-k="${k}">${l}</button>`).join("");
+    $$("#pfilters .chip").forEach(c=>c.onclick=()=>{pf=c.dataset.k;drawF();draw();});
+  };
+  drawF();draw();
+  const n=k=>MEM.payload.filter(r=>r.state===k).length;
+  $("#paynote").textContent=`Twenty three fields. ${n("present")} present, ${n("partial")} partial, `+
+    `${n("absent")} absent. The absent ones are the backlog, and five of them are now closed.`;
+}
+/* ---- shipped ---- */
+if (MEM.shipped) {
+  $("#ship").innerHTML=MEM.shipped.map(x=>
+    `<div class="sh"><b>${x.n}</b><p>${x.what}</p><div class="ev">${x.ev}</div></div>`).join("");
+}
 $("#capnote").textContent=`Measured on ${MEM.measured_on} on ${MEM.machine}. `+
   `The transcript file count moves while you work, so treat it as a reading, not a constant.`;
 </script>

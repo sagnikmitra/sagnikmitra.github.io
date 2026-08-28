@@ -582,3 +582,171 @@ MEM.atlas = [
   ]
  }
 ];
+MEM.payload = [
+ {
+  "field": "format_version",
+  "state": "present",
+  "why": "Lets the reader refuse or migrate a payload it cannot parse instead of half-parsing it. LangGraph is the only schema in the corpus that versions its payload AND ships a conformance package (validate/report); Letta lists schema mig",
+  "src": "LangGraph checkpoint base module (source_code, OPENED): Checkpoint TypedDict field `v: int`, 'Currently 1'"
+ },
+ {
+  "field": "snapshot_id + engagement/context_id",
+  "state": "partial",
+  "why": "A2A separates the per-task id from a server-owned context_id that logically groups MANY tasks and messages into one conversational session; agents MUST reject a message whose contextId mismatches the referenced task. sgnk has per-",
+  "src": "A2A a2a.proto Task.context_id (vendor_primary_doc/proto, OPENED)"
+ },
+ {
+  "field": "parents[] + fork marker",
+  "state": "absent",
+  "why": "Snapshots form a DAG, not a line. Resuming an older snapshot after a newer one exists is a fork and should be recorded as one. This is LR#69's overwrite problem stated structurally, and MRCR is the evidence that near-identical ite",
+  "src": "LangGraph CheckpointMetadata.parents and source:'fork' (source_code, OPENED, note: these live on CheckpointMetadata, NO"
+ },
+ {
+  "field": "capture_reason enum",
+  "state": "present",
+  "why": "A snapshot taken because the user said 'I am leaving' is a different artifact from one a SessionEnd hook produced, and recall should weight them differently. LangGraph encodes exactly this as source: input|loop|update|fork.",
+  "src": "LangGraph CheckpointMetadata.source (source_code, OPENED); sgnk-pointers.sh kind tags manual/auto/eod/milestone"
+ },
+ {
+  "field": "lifecycle state enum per open item",
+  "state": "absent",
+  "why": "A2A's TaskState has 8 real states (a 9th is UNSPECIFIED). Three are the ones a resuming agent most needs and a done/not-done boolean destroys: INPUT_REQUIRED and AUTH_REQUIRED, which the proto itself calls 'interrupted' states (bl",
+  "src": "A2A a2a.proto enum TaskState (OPENED)"
+ },
+ {
+  "field": "artifacts[] held separately from history[]",
+  "state": "partial",
+  "why": "A2A makes deliverables a first-class repeated field distinct from conversation and its own spec disclaims transcript reliability for streamed updates ('Messages MUST NOT be considered a reliable delivery mechanism for critical inf",
+  "src": "A2A a2a.proto Task.artifacts (field 4) vs Task.history (field 5), plus docs/specification.md (OPENED)"
+ },
+ {
+  "field": "pending / uncommitted work",
+  "state": "partial",
+  "why": "Work started and not committed is the most dangerous resume category and is exactly what a git-drift computation misses, because an in-flight edit never written to disk leaves no diff. LangGraph is the only schema modelling unfini",
+  "src": "LangGraph CheckpointTuple.pending_writes, a NamedTuple, not the Checkpoint TypedDict (source_code, OPENED)"
+ },
+ {
+  "field": "in_context flag per captured item",
+  "state": "absent",
+  "why": "Letta's .af records, per message, whether it was inside the context window at export. sgnk mines what fell OUT (compaction summaries) but marks nothing as having been IN at capture time, so a receiver cannot distinguish material t",
+  "src": "Letta agent-file README state table (vendor_primary_doc, OPENED)"
+ },
+ {
+  "field": "tool/skill set with definitions, plus the MCP ",
+  "state": "partial",
+  "why": ".af requires tools as complete definitions including source code AND JSON schema, and lists 'tool rules' (sequencing constraints) as a separate field. MCP retired protocol-level sessions in revision 2026-07-28 and instructs server",
+  "src": "Letta .af component table (OPENED); MCP Streamable HTTP spec 2026-07-28 + the GA post (vendor_primary_doc, OPENED)"
+ },
+ {
+  "field": "environment and config, secrets NULLED with po",
+  "state": "present",
+  "why": "An independent party specifying portability landed on 'secrets are set to null on export' as a format requirement, which is LR#46 arrived at from outside. SlotGuard adds the better mechanism: format-preserving synthetic substituti",
+  "src": "Letta .af (OPENED); SlotGuard arXiv 2607.17147 abstract + repo README (OPENED, ICML 2026 workshop, author-reported on pl"
+ },
+ {
+  "field": "per-item origin label {tool_output | git | mod",
+  "state": "absent",
+  "why": "The dominant integrity risk is a wrong fact written once, and content screening cannot catch it: a four-stage pipeline reaching 0.832 recall on indirect prompt injection rejected 0 of 360 poisoned memories, because separating a fa",
+  "src": "arXiv 2608.21230 (preprint, full text OPENED); Agent Data Injection arXiv 2607.05120 (abstract only)"
+ },
+ {
+  "field": "top-line severity verdict",
+  "state": "partial",
+  "why": "I-PASS's first slot is Illness severity, a committed one-line assessment before any narrative. It is the element that requires the sender to ADJUDICATE rather than enumerate, and an LLM handover generator has the same bias a resi",
+  "src": "I-PASS, Starmer et al. NEJM 2014 (peer_reviewed, abstract OPENED via eutils)"
+ },
+ {
+  "field": "action list with owner and THE single next act",
+  "state": "present",
+  "why": "I-PASS 'A'. This is the one slot sgnk does best, 00-KEY mandates one concrete next step, a runnable REPLAY block, and OPEN file:line anchors.",
+  "src": "I-PASS (OPENED); sgnk-snapshot references/card-authoring.md"
+ },
+ {
+  "field": "contingency block, 'if X fails, do Y'",
+  "state": "absent",
+  "why": "I-PASS 'S' is situation awareness AND contingency planning, and it is the element AI handoff documents most consistently omit: they record what happened, never what to do when the next thing breaks. grep for contingency across all",
+  "src": "I-PASS element list (OPENED)"
+ },
+ {
+  "field": "tried-and-rejected / do-not-relitigate list",
+  "state": "absent",
+  "why": "MAST names Step repetition as an empirically recurring failure mode, and step repetition is what a resuming agent does when the payload records what was DONE but not what was already tried and deliberately abandoned. Existing sgnk",
+  "src": "MAST arXiv 2503.13657v3 (preprint, full text mode names OPENED; note kappa 0.88 belongs to the 150-trace taxonomy set, n"
+ },
+ {
+  "field": "explicit negatives, what was NOT investigated",
+  "state": "partial",
+  "why": "The strongest single argument in the whole corpus for writing absence down as present text: transformer attention cannot attend to a gap, because an absence corresponds to no key. Claude-3.7-Sonnet scored 69.6% F1 at ~5K tokens de",
+  "src": "AbsenceBench arXiv 2506.11440 (preprint, abstract OPENED); sgnk-handover SKILL.md S10/S11"
+ },
+ {
+  "field": "receiver read-back, diffed against recomputed ",
+  "state": "absent",
+  "why": "WHO Solution 3 prescribes read-back verbatim and I-PASS's fifth slot is Synthesis by receiver. The asymmetry that makes it MORE necessary here: a clinical receiver can interrupt and ask; a receiving AI session reads a static file,",
+  "src": "WHO Patient Safety Solutions vol.1 no.3 (PDF OPENED); I-PASS (OPENED); Slipstream arXiv 2605.08580v1 (full text OPENED)"
+ },
+ {
+  "field": "live-recomputed drift for EVERY actionable ide",
+  "state": "partial",
+  "why": "Snapshot cards are Agent-Data-Injection-shaped: they are metadata (paths, SHAs, project refs, backend ids) the receiver treats as trusted because 'my own harness wrote it'. A wrong project ref does not need to say 'run this' to ca",
+  "src": "Agent Data Injection arXiv 2607.05120 (abstract OPENED; names Claude Code among affected agents, abstract-level claim, "
+ },
+ {
+  "field": "literal anchors, exact paths, SHAs, branch na",
+  "state": "present",
+  "why": "NoLiMa removes lexical overlap between query and target and effective length collapses: GPT-4o 128K claimed to 8K, Claude 3.5 Sonnet 200K to 4K, Gemini 1.5 Pro 2M to 2K. Paraphrasing an identifier is the specific act that destroys",
+  "src": "NoLiMa arXiv 2502.05167 (peer_reviewed ICML 2025, table OPENED); Paritok-4B IdentR (preprint, full HTML OPENED)"
+ },
+ {
+  "field": "declared size budget, measured and enforced",
+  "state": "absent",
+  "why": "Letta renders chars_current and chars_limit INSIDE the block the model reads, and the enforcement is a real character limit on the block. Claude Code loads only the first 200 lines or 25KB of MEMORY.md and content past that 'is no",
+  "src": "Letta memory-blocks docs (OPENED); Claude Code memory + context-window docs (vendor_primary_doc, OPENED); aider/repomap."
+ },
+ {
+  "field": "placement contract, load-bearing material fir",
+  "state": "partial",
+  "why": "Position is a first-class variable, not formatting. Lost in the Middle measured GPT-3.5-Turbo dropping by more than 20% on gold-document position alone, with mid-context placement scoring BELOW the 56.1% closed-book baseline in th",
+  "src": "Lost in the Middle arXiv 2307.03172v3, TACL (peer_reviewed, full HTML OPENED); Claude Code context-window docs (OPENED)"
+ },
+ {
+  "field": "per-artifact integrity hash + a supersede/tomb",
+  "state": "absent",
+  "why": "Two independent reasons. Selective repair of a KNOWN-bad memory succeeded only 56.1% of the time among successfully poisoned cases in MemSecBench, with the largest difference against matched Native configurations at 41.3 points, ",
+  "src": "MemSecBench arXiv 2607.27080 (abstract only, 56.1% is among successfully poisoned cases, and the authors call the 41.3 "
+ },
+ {
+  "field": "cumulative cross-session mutation ledger",
+  "state": "partial",
+  "why": "Per-session review sees each session's diff; nobody reviews the accumulation. In the persistent-state control setting, gradual attacks distributed across PRs evaded the weakest standard diff monitor 93% of the time (>=65% generali",
+  "src": "Distributed Attacks in Persistent-State AI Control arXiv 2607.02514v2 (abstract OPENED); local LR#48"
+ }
+];
+
+MEM.shipped = [
+ {
+  "n": "Severity verdict, before the narrative",
+  "what": "STABLE, FRAGILE or BROKEN, plus blast radius and the single most dangerous misconception a skim could produce. It is the one slot that forces the sender to judge rather than enumerate.",
+  "ev": "I-PASS first element. Starmer, NEJM 2014, 9 hospitals, 10,740 admissions. Prospective pre-post, not randomised."
+ },
+ {
+  "n": "Contingencies on the top three actions",
+  "what": "Not just what is dangerous, but what to do when it fires. Naming a trap is half the job; the other half is what survives contact.",
+  "ev": "I-PASS situation-awareness element. Absent from every AI handoff format I read."
+ },
+ {
+  "n": "The un-capped mining path",
+  "what": "The skill told you never to accept the 220 line cap, then pointed you at the capped card. It now documents the override.",
+  "ev": "Measured: the cap discards 172,425 characters across 11 of 223 summaries on this machine."
+ },
+ {
+  "n": "PreCompact records the boundary",
+  "what": "The hook fires on every compaction and used to write nothing. It now saves the transcript line offset, which is an exact address into what was just dropped.",
+  "ev": "10,070 snapshot journal entries existed, none at compaction time, against 223 compaction events."
+ },
+ {
+  "n": "Identifier presence gate",
+  "what": "Extracts every path, SHA and branch the session provably touched, checks the emitted cards, and refuses to publish if any are missing.",
+  "ev": "Motivated by the local finding that anchors survive compaction at half the rate of prose. Proven to fail before being trusted to pass."
+ }
+];
